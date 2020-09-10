@@ -22,7 +22,7 @@ Vector3 Particle::getVelocity() const
 	return velocity;
 }
 
-void Particle::setVelocity(const Vector3& position)
+void Particle::setVelocity(const Vector3& velocity)
 {
 	this->velocity = velocity;
 }
@@ -39,7 +39,7 @@ Vector3 Particle::getAcceleration() const
 	return acceleration;
 }
 
-void Particle::setAcceleration(const Vector3& position)
+void Particle::setAcceleration(const Vector3& acceleration)
 {
 	this->acceleration = acceleration;
 }
@@ -77,7 +77,7 @@ float Particle::getMass() const
 		return std::numeric_limits<float>::max();
 	}
 	else {
-		return 1.0 / inverseMass;
+		return 1.0f / inverseMass;
 	}
 }
 
@@ -87,7 +87,7 @@ void Particle::setMass(const float mass)
 		return;
 	}
 	else {
-		inverseMass = 1.0 / mass;
+		inverseMass = 1.0f / mass;
 	}
 }
 

@@ -1,12 +1,16 @@
 #include <iostream>
-#include "Vector3.h"
+#include "Particle.h"
 
 int main(int argc, const char* argv[])
 {
-	Vector3 v1(2,3,1);
-	Vector3 v2(4, 1, 0);
-	std::cout << v1.scalarProduct(v2) << std::endl;
-	std::cout << v1.x << std::endl;
-	std::cout << v1.y << std::endl;
-	std::cout << v1.z << std::endl;
+	Particle p1;
+	p1.setMass(10);
+	p1.setPosition(100, 10, 50);
+	p1.setVelocity(0, 0, 0);
+	p1.setDamping(0.999);
+	p1.setAcceleration(0, -10, 0);
+	while (true) {
+		p1.integrate(60);
+		std::cout << "x = " << p1.getPosition().x << ", y = " << p1.getPosition().y << ", z = " << p1.getPosition().z << std::endl;
+	}
 }

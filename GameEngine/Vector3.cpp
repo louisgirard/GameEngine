@@ -29,7 +29,7 @@ void Vector3::normalize()
 {
 	float magnitude = this->magnitude();
 	if (magnitude > 0) {
-		*this *= (1.0 / magnitude);
+		*this *= (1.0f / magnitude);
 	}
 }
 

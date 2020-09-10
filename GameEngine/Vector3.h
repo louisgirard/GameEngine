@@ -1,5 +1,6 @@
 #pragma once
 #include <cmath>
+#include <string>
 
 /* Holds a vector in three dimensions */
 class Vector3

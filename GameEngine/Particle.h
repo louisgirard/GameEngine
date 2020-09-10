@@ -31,14 +31,14 @@ public:
 	Vector3 getVelocity() const;
 
 	/* Sets the velocity of the particle */
-	void setVelocity(const Vector3& position);
+	void setVelocity(const Vector3& velocity);
 	void setVelocity(const float x, const float y, const float z);
 
 	/* Returns the acceleration of the particle */
 	Vector3 getAcceleration() const;
 
 	/* Sets the acceleration of the particle */
-	void setAcceleration(const Vector3& position);
+	void setAcceleration(const Vector3& acceleration);
 	void setAcceleration(const float x, const float y, const float z);
 
 	/* Returns the damping */
