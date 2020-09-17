@@ -2,6 +2,14 @@
 
 
 namespace PhysicEngine {
+	Particle::Particle()
+	{
+		setMass(1);
+		_position = *new Vector3(0,0,0);
+		_velocity = *new Vector3(0, 0, 0);
+		_acceleration = *new Vector3(0, -10, 0);
+		_damping = 0.999;
+	}
 
 	Particle::Particle(float p_mass, Vector3 p_position, Vector3 p_velocity, Vector3 p_acceleration, float p_damping)
 	{

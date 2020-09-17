@@ -9,7 +9,7 @@ namespace Games {
 		class ShooterGame : public GameBase
 		{
 		protected :
-			Particle _particle;
+			PhysicEngine::Particle _particle;
 
 			virtual void initGame();
 

@@ -19,7 +19,7 @@ namespace Games {
 
 		void ShooterGame::update(double p_dt) {
 			_particle.integrate(p_dt);
-			std::cout << "x = " << _particle.getPosition().x << ", y = " << _particle.getPosition().y << ", z = " << _particle.getPosition().z << std::endl;
+			std::cout << "x = " << _particle.getPosition()._x << ", y = " << _particle.getPosition()._y << ", z = " << _particle.getPosition()._z << std::endl;
 		}
 		
 	}
