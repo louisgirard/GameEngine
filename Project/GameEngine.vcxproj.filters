@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="GameEngine">
+      <UniqueIdentifier>{1dedb17d-dbc2-43c8-ba5d-0ed86f350871}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GraphicEngine">
+      <UniqueIdentifier>{ae4908c3-f4bd-44fe-9d68-d83a8e2e60b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GraphicEngine\Header Files">
+      <UniqueIdentifier>{6e673c1e-ef18-4596-b1f3-1142abb51efc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GraphicEngine\Source Files">
+      <UniqueIdentifier>{6de445c7-a085-403e-9ea9-7bfb69baaea7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\PhysicEngine">
+      <UniqueIdentifier>{ba3018c5-f61d-4cca-a7e5-239e81852c2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\PhysicEngine\Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="GameEngine\PhysicEngine\Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="GameEngine\Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="GameEngine\Resource Files\Shaders">
+      <UniqueIdentifier>{3be6760c-1336-48aa-b641-634a050269a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Games">
+      <UniqueIdentifier>{0e8fa3ca-d013-43c7-bd65-b66355ae26a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Games\Header Files">
+      <UniqueIdentifier>{07306967-7980-4294-8d62-01b8a4ea3ab3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Games\Source Files">
+      <UniqueIdentifier>{492a2316-0732-4110-b93e-593e7c8e0c66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Games\Game1">
+      <UniqueIdentifier>{50f32bd2-2590-4b15-8c05-d9e242928fdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Games\Game1\Header Files">
+      <UniqueIdentifier>{ea58d897-df7e-4385-b39e-b6f84b4cebeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Games\Game1\Source Files">
+      <UniqueIdentifier>{dc76dd95-909f-475c-96df-efe269870f85}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\GameEngine\PhysicEngine\Src\Particle.cpp">
+      <Filter>GameEngine\PhysicEngine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\PhysicEngine\Src\Vector3.cpp">
+      <Filter>GameEngine\PhysicEngine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\Games\Src\GameSelection.cpp">
+      <Filter>GameEngine\Games\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\Main.cpp">
+      <Filter>GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\Games\Src\GameBase.cpp">
+      <Filter>GameEngine\Games\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\Games\Src\GameConfiguration.cpp">
+      <Filter>GameEngine\Games\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\Games\Game1\Source\ShooterGame.cpp">
+      <Filter>GameEngine\Games\Game1\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\PhysicEngine\Src\Projectile.cpp">
+      <Filter>GameEngine\PhysicEngine\Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\Particle.h">
+      <Filter>GameEngine\PhysicEngine\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\Vector3.h">
+      <Filter>GameEngine\PhysicEngine\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\Games\Header\GameBase.h">
+      <Filter>GameEngine\Games\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\Games\Header\GameSelection.h">
+      <Filter>GameEngine\Games\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\Games\Header\GameConfiguration.h">
+      <Filter>GameEngine\Games\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\Games\Game1\Header\ShooterGame.h">
+      <Filter>GameEngine\Games\Game1\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\Projectile.h">
+      <Filter>GameEngine\PhysicEngine\Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
