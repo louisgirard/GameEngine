@@ -34,9 +34,11 @@ namespace Games
 
 			onClose([this]() {	
 				// We destroy the current window
-				glutDestroyWindow(_windowID) ;
+				//glutDestroyWindow(_windowID) ;
 				// We destroy the menus
 				delete _mainMenu ;
+				//Force reinit glut
+				s_glutInitialized = false;
 			} ) ;
 		}
 	}
