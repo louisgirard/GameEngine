@@ -51,12 +51,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\GameEngine\PhysicEngine\Src\Particle.cpp">
-      <Filter>GameEngine\PhysicEngine\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\GameEngine\PhysicEngine\Src\Vector3.cpp">
-      <Filter>GameEngine\PhysicEngine\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\GameEngine\Games\Src\GameSelection.cpp">
       <Filter>GameEngine\Games\Source Files</Filter>
     </ClCompile>
@@ -75,14 +69,20 @@
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\Projectile.cpp">
       <Filter>GameEngine\PhysicEngine\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\GameEngine\PhysicEngine\Src\Particle.cpp">
+      <Filter>GameEngine\PhysicEngine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\PhysicEngine\Src\Vector3.cpp">
+      <Filter>GameEngine\PhysicEngine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\Games\Src\KeyboardStatus.cpp">
+      <Filter>GameEngine\Games\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\Games\Src\GameMenu.cpp">
+      <Filter>GameEngine\Games\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\GameEngine\PhysicEngine\Header\Particle.h">
-      <Filter>GameEngine\PhysicEngine\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\GameEngine\PhysicEngine\Header\Vector3.h">
-      <Filter>GameEngine\PhysicEngine\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\GameEngine\Games\Header\GameBase.h">
       <Filter>GameEngine\Games\Header Files</Filter>
     </ClInclude>
@@ -97,6 +97,21 @@
     </ClInclude>
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\Projectile.h">
       <Filter>GameEngine\PhysicEngine\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\Particle.h">
+      <Filter>GameEngine\PhysicEngine\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\Vector3.h">
+      <Filter>GameEngine\PhysicEngine\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\Games\Header\DefaultConfig.h">
+      <Filter>GameEngine\Games\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\Games\Header\KeyboardStatus.h">
+      <Filter>GameEngine\Games\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\Games\Header\GameMenu.h">
+      <Filter>GameEngine\Games\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

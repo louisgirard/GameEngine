@@ -22,7 +22,9 @@
     <ClCompile Include="..\GameEngine\Games\Game1\Source\ShooterGame.cpp" />
     <ClCompile Include="..\GameEngine\Games\Src\GameBase.cpp" />
     <ClCompile Include="..\GameEngine\Games\Src\GameConfiguration.cpp" />
+    <ClCompile Include="..\GameEngine\Games\Src\GameMenu.cpp" />
     <ClCompile Include="..\GameEngine\Games\Src\GameSelection.cpp" />
+    <ClCompile Include="..\GameEngine\Games\Src\KeyboardStatus.cpp" />
     <ClCompile Include="..\GameEngine\Main.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\Particle.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\Projectile.cpp" />
@@ -30,9 +32,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\GameEngine\Games\Game1\Header\ShooterGame.h" />
+    <ClInclude Include="..\GameEngine\Games\Header\DefaultConfig.h" />
     <ClInclude Include="..\GameEngine\Games\Header\GameBase.h" />
     <ClInclude Include="..\GameEngine\Games\Header\GameConfiguration.h" />
+    <ClInclude Include="..\GameEngine\Games\Header\GameMenu.h" />
     <ClInclude Include="..\GameEngine\Games\Header\GameSelection.h" />
+    <ClInclude Include="..\GameEngine\Games\Header\KeyboardStatus.h" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\Particle.h" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\Projectile.h" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\Vector3.h" />
@@ -140,12 +145,16 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)/../GameEngine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)/../GameEngine;$(GameEngineDep)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\;$(GameEngineDep)/lib/$(Configuration)/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32sd.lib;soil.lib;glfw3dll.lib;glew32d.lib;freeglut_staticd.lib;freeglutd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -156,13 +165,17 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)/../GameEngine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)/../GameEngine;$(GameEngineDep)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\;$(GameEngineDep)/lib/$(Configuration)/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>freeglut.lib;freeglut_static.lib;glew32.lib;glew32s.lib;glfw3dll.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

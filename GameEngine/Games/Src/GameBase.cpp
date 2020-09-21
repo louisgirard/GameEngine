@@ -1,19 +1,57 @@
 #include <Games/Header/GameBase.h>
 
-
 namespace Games
 {
 	GameBase* GameBase::s_activeInstance = nullptr;
+	bool GameBase::s_glutInitialized = false;
+	bool GameBase::s_glewInitialized = false;
 
-	GameBase::GameBase(GameConfiguration const& p_configuration):_dt(0.0),_lastFrameTime(), _running(false) {
+	GameBase::GameBase():_configuration(),_dt(0.0),_lastFrameTime(), _running(false) {
 
+		initGameConfig();
 		//We only want one game to run at a time
 		if (s_activeInstance != nullptr) {
 			std::cout << "ERROR : you are trying to launch an instance of a game while another is already running " << std::endl;
 			exit(-1);
 		}
+		s_activeInstance = this;
+		if (_configuration.graphicEnabled()) {
+			//if glut is not initialized the game can't be launched
+			if (!s_glutInitialized)
+			{
+				::std::cerr << "You can't create a instane of GameBase before initiating GLUT with Games::GameBase" << ::std::endl;
+				exit(-1);
+			}
+			createGameWindow();
+			//Initialize Open GL related library
+			initializeGlew();
+			initializeOpenGL();
+			//Register function that will be use in glut window
+			registerGLUTCallback();
 
+			_mainMenu = new GameMenu("Main menu");
+			_mainMenu->activate(GLUT_RIGHT_BUTTON);
+
+			onClose([this]() {	
+				// We destroy the current window
+				glutDestroyWindow(_windowID) ;
+				// We destroy the menus
+				delete _mainMenu ;
+			} ) ;
+		}
 	}
+
+	GameBase* GameBase::getActiveApplication()
+	{
+		return s_activeInstance;
+	}
+
+	const GameConfiguration& GameBase::getConfiguration() const
+	{
+		return _configuration;
+	}
+
+	GameMenu* GameBase::getMenu(){ return _mainMenu; }
 
 	GameBase::~GameBase() {
 		//As this instance die there is no more running instance
@@ -26,6 +64,7 @@ namespace Games
 		_lastFrameTime = std::chrono::steady_clock::now();
 
 		if (!_configuration.graphicEnabled()) {
+			std::cout << "Launch console thread" << std::endl;
 			_running = true;
 			std::thread run (&GameBase::runGameInConsole, this);
 
@@ -38,6 +77,27 @@ namespace Games
 			}
 			run.join();
 		}
+		else {
+			//launch GLUT main loop
+			glutMainLoop();
+		}
+	}
+
+	void GameBase::quit()
+	{
+		// We ask to leave the main loop
+		glutLeaveMainLoop();
+		// Forces re-intialization of GLUT
+		s_glutInitialized = false;
+	}
+
+	void GameBase::onClose(::std::function<void()> const& function)
+	{
+		_onCloseFunctions.push_back(function);
+	}
+
+	double  GameBase::getDt() const {
+		return _dt;
 	}
 
 	double GameBase::computeDt() {
@@ -48,224 +108,160 @@ namespace Games
 	}
 
 	void GameBase::displayLastFrame() {
+		// Get time passed between current and past frame
 		_dt = computeDt();
-		update(_dt);
+		
+		// Clears frame and z buffers
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		// Reinit frame transformation
+		glLoadIdentity();
+		// Update Game Physic
+		updatePhysic(_dt);
+		// Update Game Frame
+		updateFrame(_dt);
+		// We ensure that no shader program is binded (Apparently could cause some issue
+		glUseProgram(0);
+		// Swaps rendering buffers, display this frame and prepare for the next
+		glutSwapBuffers();
+		// Asks for redisplay, which mean that in next iteration of the Glut main loop the displayCallback will be called
+		glutPostRedisplay();
 	}
 
 	void GameBase::runGameInConsole() {
 		while (_running)
 		{
 			_dt = computeDt();
-			update(_dt);
+			updatePhysic(_dt);
 		}
 	}
 
 	/*
-	bool Base::s_initialized = false;
-	Base* Base::s_activeInstance = NULL;
-
-	Base::Base(Configuration const& configuration = Configuration()) : m_configuration(configuration), m_lastTime(0), m_drawFPS(false)
-	{
-		if (s_activeInstance != NULL)
-		{
-			::std::cerr << "Exactly one instance of Application::Base can be created in your program" << ::std::endl;
-			exit(-1);
+	* Needs to call this function before creating a game 
+	*/
+	void GameBase::initializeGLUT(int& p_argc, char** p_argv) {
+		if (!s_glutInitialized) {
+			//from GLUT Library, freeglut file
+			//Init connexion between GLUT and Windows
+			glutInit(&p_argc, p_argv);
+			//Tell GLUT to return from the main loop when the window is closed 
+			glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE,GLUT_ACTION_GLUTMAINLOOP_RETURNS);
+			s_glutInitialized = true;
 		}
-		s_activeInstance = this;
-		if (!s_initialized)
-		{
-			::std::cerr << "You must call Application::Base::initializeGLUT before creating any instance of Application::Base" << ::std::endl;
-			exit(-1);
-		}
-		createWindow();
-		initializeOpenGL();
-		registerCallbacks();
-		m_mainMenu = new Menu("Main menu");
-		m_fpsMenu = new Menu("Show FPS");
-		m_fpsMenu->addItem("True", [this]() { drawFPS(true); });
-		m_fpsMenu->addItem("False", [this]() { drawFPS(false); });
-		m_mainMenu->addSubMenu(m_fpsMenu);
-		m_mainMenu->activate(GLUT_RIGHT_BUTTON);
-
-		//onClose([this]() 
-		//{	// We destroy the current window
-		//	glutDestroyWindow(m_windowId) ;
-		//	// We destroy the menus
-		//	delete m_fpsMenu ;
-		//	delete m_mainMenu ;
-		//} ) ;
 	}
-
-	Base::~Base()
-	{
-		// No more active instance
-		s_activeInstance = NULL;
-	}
-
-	void Base::initializeGLUT(int& argc, char** argv)
-	{
-		if (!s_initialized)
-		{
-			// GLUT initialization
-			glutInit(&argc, argv);
-			//glutInitContextVersion(3,0);
-			//glutInitContextFlags(GLUT_FORWARD_COMPATIBLE);
-			//glutInitContextProfile(GLUT_CORE_PROFILE);
-			glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
-			s_initialized = true;
+	
+	void GameBase::initializeGlew() {
+		if (!s_glewInitialized) {
+			GLenum stateResult = glewInit();
+			if (GLEW_OK != stateResult)
+			{
+				//Problem: glewInit failed, something is seriously wrong. 
+				::std::cerr << "Failed to initializeGLUT GLEW: " << glewGetErrorString(stateResult) << ::std::endl;
+				exit(-1);
+			}
+			s_glewInitialized = true;
 		}
 	}
 
-	void Base::createWindow()
-	{
-		glutInitWindowSize(m_configuration.width, m_configuration.height);
-		//glutSetOption(GLUT_MULTISAMPLE, 4);
-		glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH); // | GLUT_MULTISAMPLE); // GLUT_MULTISAMPLE enables antialiasing
-		m_windowId = glutCreateWindow(m_configuration.m_windowName.c_str());
-		// Initializes GLEW after the creation of a rendering context (mandatory...)
-		initializeGLEW();
-		// FPS constraint (does not work under Linux)
-		//wglSwapIntervalEXT(m_configuration.m_fps) ;
-	}
-
-	void Base::initializeOpenGL()
-	{
-		// Default Open GL initialization
+	void GameBase::initializeOpenGL() {
+		
+		//Is not done once cause this parameter could be overwrite during a games to fit needs
 		glEnable(GL_DEPTH_TEST); // Enables depth buffer
 		glShadeModel(GL_SMOOTH); // Enables smooth shading model
 		glEnable(GL_LIGHTING); // Enables lights
-		//glDisable(GL_CULL_FACE) ; // disables back face culling
 		glEnable(GL_CULL_FACE); // enables back face culling
-		glCullFace(GL_BACK);
-		glFrontFace(GL_CCW);
-		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-		glEnable(GL_NORMALIZE);
+		glCullFace(GL_BACK); // Specifies culling side (here back side)
+		glFrontFace(GL_CCW); // Specifies polygon front face (here counter clock wise) 
+		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST); // Specifies that the interpolation when correcting perspective should use the highest quality method
+		glEnable(GL_NORMALIZE); // Enable normalizing normal vector automatically
 		glLoadIdentity();
 	}
 
-	void Base::reshape(GLint width, GLint height)
-	{
-		// Updates the view port size
-		glViewport(0, 0, width, height);
-		// Changes the projection
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		gluPerspective(m_configuration.m_fovy, (float)width / height, m_configuration.m_nearPlane, m_configuration.m_farPlane);
-		glMatrixMode(GL_MODELVIEW);
-		// Updates the configuration
-		m_configuration.width = width;
-		m_configuration.height = height;
+	void GameBase::createGameWindow() {
+		//from GLUT, freeglut class
+		//Initialize a window of dimension given in the configuration variable
+		glutInitWindowSize(_configuration.getWindowWidth(), _configuration.getWindowHeight());
+		//Init a window displaying 
+		glutInitDisplayMode(_configuration.getDisplayMode());
+		//Create a window, get its ID and set its name from configuration
+		_windowID = glutCreateWindow(_configuration.getName().c_str());
 	}
 
-	void Base::run()
-	{
-		// Runs user initializations
-		initializeRendering();
-
-		m_lastFrameTime = ::tbb::tick_count::now();
-		// Calls the glut main loop
-		glutMainLoop();
-	}
-
-	void Base::display()
-	{
-		::tbb::tick_count newTime = ::tbb::tick_count::now();
-		m_dt = (newTime - m_lastFrameTime).seconds();
-		m_lastFrameTime = newTime;
-
-		// Clears frame and z buffers
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		// Reinitializes transformations
-		glLoadIdentity();
-		// Calls the main rendering function
-		render(m_dt);
-		// We ensure that no shader program is binded (I noticed some crashes with intel drivers...)
-		glUseProgram(0);
-		// Optionaly draw the FPS
-		if (m_drawFPS)
-		{
-			HelperGl::Text::getStream() << "FPS: " << (unsigned int)(1.0 / m_dt) << ::std::endl;
-			HelperGl::Text::getStream() << "Time: " << (unsigned int)(m_dt * 10000) / 10.0 << "ms" << ::std::endl;
-		}
-		HelperGl::Text::display(12, 24, HelperGl::Color(0.0, 1.0, 0.0));
-		// Swaps rendering buffers
-		glutSwapBuffers();
-		// Asks for redisplay
-		glutPostRedisplay();
-
-	}
-
-	void Base::registerCallbacks()
-	{
+	void GameBase::registerGLUTCallback() {
+		//Register function used to display a frame
 		glutDisplayFunc(displayCallback);
+		//Register function used when the user reshape the game window
 		glutReshapeFunc(reshapeCallback);
-		glutKeyboardFunc(keyboardCallback);
-		glutKeyboardUpFunc(keyboardUpCallback);
+		//Register function to track keyboard and mouse event in the game
+		glutKeyboardFunc(keyboardCallback); // function called when a key has been pressed 
+		glutKeyboardUpFunc(keyboardUpCallback); // function called when a key has been released
 		glutMouseFunc(mouseCallback);
 		glutPassiveMotionFunc(mousePassiveMotionCallback);
+		//Register function called when the game is closed
 		glutCloseFunc(closeCallback);
 	}
 
-	void Base::mousePassiveMotionCallback(int x, int y)
+	void GameBase::displayCallback()
 	{
-		s_activeInstance->mousePassiveMotion(x, y);
+		s_activeInstance->displayLastFrame();
 	}
 
-	void Base::mouseMotionCallback(int x, int y)
-	{
-		s_activeInstance->mouseMotion(x, y);
-	}
-
-	void Base::mouseCallback(int button, int state, int x, int y)
-	{
-		s_activeInstance->mouse(button, state, x, y);
-	}
-
-	void Base::keyboardCallback(unsigned char key, int x, int y)
-	{
-		s_activeInstance->keyPressed(key, x, y);
-	}
-
-	void Base::reshapeCallback(GLint width, GLint height)
+	void GameBase::reshapeCallback(GLint width, GLint height)
 	{
 		s_activeInstance->reshape(width, height);
 	}
 
-	void Base::displayCallback()
+	void GameBase::keyboardCallback(unsigned char key, int x, int y)
 	{
-		s_activeInstance->display();
+		s_activeInstance->keyPressed(key, x, y);
 	}
 
-	void Base::initializeGLEW()
-	{
-		static bool initialized = false;
-		if (!initialized)
-		{
-			// GLEW initialization
-			GLenum err = glewInit();
-			if (GLEW_OK != err)
-			{
-				Problem: glewInit failed, something is seriously wrong.
-				::std::cerr << "Failed to initializeGLUT GLEW: " << glewGetErrorString(err) << ::std::endl;
-				exit(-1);
-			}
-			initialized = true;
-		}
-	}
-
-	void Base::closeCallback()
-	{
-		for (unsigned int cpt = 0; cpt < s_activeInstance->m_onCloseFunctions.size(); ++cpt)
-		{
-			s_activeInstance->m_onCloseFunctions[cpt]();
-		}
-	}
-
-	void Base::keyboardUpCallback(unsigned char key, int x, int y)
+	void GameBase::keyboardUpCallback(unsigned char key, int x, int y)
 	{
 		s_activeInstance->keyReleased(key, x, y);
 	}
-	*/
 
+	void GameBase::mouseCallback(int button, int state, int x, int y)
+	{
+		s_activeInstance->mouse(button, state, x, y);
+	}
 
+	void GameBase::mouseMotionCallback(int x, int y)
+	{
+		s_activeInstance->mouseMotion(x, y);
+	}
+
+	void GameBase::mousePassiveMotionCallback(int x, int y)
+	{
+		s_activeInstance->mousePassiveMotion(x, y);
+	}
+
+	void GameBase::closeCallback()
+	{
+		for (unsigned int cpt = 0; cpt < s_activeInstance->_onCloseFunctions.size(); ++cpt)
+		{
+			s_activeInstance->_onCloseFunctions[cpt]();
+		}
+	}
+
+	void GameBase::reshape(GLint width, GLint height)
+	{
+		// Updates the view port size
+		glViewport(0, 0, width, height);
+		// Update Projection Matrix
+		glMatrixMode(GL_PROJECTION); //Specifies the subsequent operation will affect the projection matrix
+		glLoadIdentity(); // Replace current projection matrix by an identity matrix
+		gluPerspective(_configuration.getFOV(), (float)width / height, _configuration.getNearPlane(), _configuration.getFarPlane()); //Create a new perspective projection matrix from our configuration frustum
+		glMatrixMode(GL_MODELVIEW); //We come back to model matrix
+		// Updates the configuration
+		_configuration.setWindowDimension(width, height); 
+	}
+	
+	void GameBase::keyPressed(unsigned char key, int x, int y) {
+		_keyboard.press(key);
+	}
+
+	void GameBase::keyReleased(unsigned char key, int x, int y)
+	{
+		_keyboard.release(key);
+	}
 }
