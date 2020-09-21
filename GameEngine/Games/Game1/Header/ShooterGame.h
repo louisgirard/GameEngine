@@ -2,14 +2,14 @@
 #define _GAME1_SHOOTER_H
 
 #include <Games/Header/GameBase.h>
-#include <PhysicEngine/Header/Particle.h>
+#include <PhysicEngine/Header/Projectile.h>
 
 namespace Games {
 	namespace Game1 {
 		class ShooterGame : public GameBase
 		{
 		protected :
-			PhysicEngine::Particle _particle;
+			PhysicEngine::Projectile _projectile;
 
 			virtual void initGame();
 
