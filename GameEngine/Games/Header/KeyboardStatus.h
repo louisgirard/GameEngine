@@ -2,6 +2,7 @@
 #define _Games_KeaboardStatus_H
 
 #include <vector>
+#include <iostream>
 
 namespace Games {
 	class KeyboardStatus
@@ -11,24 +12,13 @@ namespace Games {
 
 	public:
 
-		KeyboardStatus()
-			: _keyStatus(256, false)
-		{}
+		KeyboardStatus();
 
-		bool isPressed(unsigned char key) const
-		{
-			return _keyStatus[key];
-		}
+		bool isPressed(unsigned char key) const;
 
-		void press(unsigned char key)
-		{
-			_keyStatus[key] = true;
-		}
+		void press(unsigned char key);
 
-		void release(unsigned char key)
-		{
-			_keyStatus[key] = false;
-		}
+		void release(unsigned char key);
 
 	};
 }

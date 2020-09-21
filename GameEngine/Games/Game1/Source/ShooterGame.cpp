@@ -13,6 +13,10 @@ namespace Games {
 			_particle.setAcceleration(0, -10, 0);
 		}
 
+		void ShooterGame::handleInput() {
+			GameBase::handleInput();
+		}
+
 		void ShooterGame::updatePhysic(double p_dt) {
 			_particle.integrate((float)p_dt);
 			std::cout << "x = " << _particle.getPosition()._x << ", y = " << _particle.getPosition()._y << ", z = " << _particle.getPosition()._z << std::endl;

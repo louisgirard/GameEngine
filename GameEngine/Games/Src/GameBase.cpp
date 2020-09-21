@@ -117,6 +117,8 @@ namespace Games
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		// Reinit frame transformation
 		glLoadIdentity();
+		// Get Input event for this frame
+		handleInput();
 		// Update Game Physic
 		updatePhysic(_dt);
 		// Update Game Frame
@@ -134,6 +136,15 @@ namespace Games
 		{
 			_dt = computeDt();
 			updatePhysic(_dt);
+		}
+	}
+
+	void GameBase::handleInput() {
+		// If we press escape, we close this game
+		// ie: 27 is the unsigned char value of escape but if you want to use a more common letter
+		// for instance e you could use _keyboard.isPressed('e').
+		if (_keyboard.isPressed(27)) {
+			quit();
 		}
 	}
 

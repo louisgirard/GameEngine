@@ -13,6 +13,8 @@ namespace Games {
 
 			virtual void initGame();
 
+			virtual void handleInput();
+
 			virtual void updatePhysic(double p_dt);
 
 			void virtual updateFrame(double p_dt);

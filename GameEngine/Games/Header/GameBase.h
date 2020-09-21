@@ -90,6 +90,8 @@ namespace Games {
 
 		void virtual initGame() = 0;
 
+		void virtual handleInput();
+
 		void virtual updatePhysic(double p_dt) = 0;
 
 		void virtual updateFrame(double p_dt) = 0;
