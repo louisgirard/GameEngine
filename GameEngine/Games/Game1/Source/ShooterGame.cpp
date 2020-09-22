@@ -10,29 +10,38 @@ namespace Games {
 		void ShooterGame::handleInput() {
 			GameBase::handleInput();
 			if (_keyboard.isPressed('1')) {
-				_projectile.changeType(PhysicEngine::Projectile::Types::Bullet);
+				_currentType = PhysicEngine::CParticle::Types::Bullet;
 			}
 			else if (_keyboard.isPressed('2')) {
-				_projectile.changeType(PhysicEngine::Projectile::Types::Canonball);
+				_currentType = PhysicEngine::CParticle::Types::Canonball;
 			}
 			else if (_keyboard.isPressed('3')) {
-				_projectile.changeType(PhysicEngine::Projectile::Types::Laser);
+				_currentType = PhysicEngine::CParticle::Types::Laser;
 			}
 			else if (_keyboard.isPressed('4')) {
-				_projectile.changeType(PhysicEngine::Projectile::Types::Fireball);
+				_currentType = PhysicEngine::CParticle::Types::Fireball;
 			}
 			else if (_keyboard.isPressed('s')) {
-				_projectile.launch();
+				if (!_shootingButtonPressed) {
+					_projectiles.push_back(std::make_shared<PhysicEngine::CParticle>(_currentType));
+					_shootingButtonPressed = true;
+				}
+			}
+			else if (_shootingButtonPressed) {
+				_shootingButtonPressed = false;
 			}
 		}
 
 		void ShooterGame::updatePhysic(double p_dt) {
-			_projectile.move((float)p_dt);
-			std::cout << "x = " << _projectile.getPosition()._x << ", y = " << _projectile.getPosition()._y << ", z = " << _projectile.getPosition()._z << std::endl;
+			for(int i = 0; i<_projectiles.size(); i++)
+			{
+				_projectiles[i]->update(p_dt);
+				std::cout << "x = " << _projectiles[i]->getPosition()._x << ", y = " << _projectiles[i]->getPosition()._y << ", z = " << _projectiles[i]->getPosition()._z << std::endl;
+			}
 		}
 
 		void ShooterGame::updateFrame(double p_dt) {
-			_projectile.draw();
+			//_projectile.draw();
 		}
 		
 	}
