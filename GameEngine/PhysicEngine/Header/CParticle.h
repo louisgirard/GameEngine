@@ -1,31 +1,22 @@
 #pragma once
-
-#include <limits>
-#include <PhysicEngine/Header/Vector3.h>
+#include <PhysicEngine\Header\Vector3.h>
+#include <PhysicEngine\Header\AParticle.h>
+#include <GraphicEngine\Header\PParticle.h>
+#include <memory>
 
 namespace PhysicEngine {
-	class Particle
+	class CParticle
 	{
 	private:
-		/* Holds the position of the particle */
-		Vector3 _position;
-
-		/* Holds the velocity of the particle */
-		Vector3 _velocity;
-
-		/* Holds the acceleration of the particle */
-		Vector3 _acceleration;
-
-		/* Holds the damping applied to linear motion */
-		float _damping;
-
-		/* Holds the inverse of the mass of the particle */
-		float _inverseMass;
+		std::shared_ptr<AParticle> _abstraction;
+		std::shared_ptr<PParticle> _presentation;
 
 	public:
-		Particle();
+		/* Different types of projectile */
+		enum class Types { Bullet, Canonball, Laser, Fireball };
 
-		Particle(float p_mass, Vector3 p_position, Vector3 p_velocity, Vector3 p_acceleration, float p_damping);
+		CParticle(float p_mass, Vector3 p_position, Vector3 p_velocity, Vector3 p_acceleration, float p_damping, Vector3 p_color, float size);
+		CParticle(Types p_type);
 
 		/* Returns the position of the particle */
 		Vector3 getPosition() const;
@@ -45,7 +36,7 @@ namespace PhysicEngine {
 		Vector3 getAcceleration() const;
 
 		/* Sets the acceleration of the particle */
-		void setAcceleration(const Vector3& acceleration);
+		void setAcceleration(const Vector3& p_acceleration);
 		void setAcceleration(const float p_x, const float p_y, const float p_z);
 
 		/* Returns the damping */
@@ -68,7 +59,11 @@ namespace PhysicEngine {
 
 		/* Integrate the particle */
 		void integrate(float p_time);
+
+		/*Draw the particle*/
+		void draw();
+
+		/*Update the position of the particle both in the abstraction and the presentation*/
+		void update(double p_dt);
 	};
 }
-
-
