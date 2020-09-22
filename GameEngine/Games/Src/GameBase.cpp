@@ -187,6 +187,8 @@ namespace Games
 		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST); // Specifies that the interpolation when correcting perspective should use the highest quality method
 		glEnable(GL_NORMALIZE); // Enable normalizing normal vector automatically
 		glLoadIdentity();
+
+		glEnable(GL_COLOR_MATERIAL);
 	}
 
 	void GameBase::createGameWindow() {

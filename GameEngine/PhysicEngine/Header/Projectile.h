@@ -22,8 +22,8 @@ namespace PhysicEngine {
 		/* Launch projectile */
 		void launch();
 
-		/* Integrate the particle */
-		void integrate(float p_dt);
+		/* Move the projectile */
+		void move(float p_dt);
 
 		/* Draw the projectile */
 		void draw();
@@ -42,8 +42,5 @@ namespace PhysicEngine {
 
 		/* Sets the particle parameters according to the type of projectile */
 		void setParticle();
-
-		/* Draw a cube */
-		void drawCube();
 	};
 }
