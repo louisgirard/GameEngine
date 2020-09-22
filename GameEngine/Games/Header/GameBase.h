@@ -92,7 +92,9 @@ namespace Games {
 
 		void virtual handleInput();
 
-		void virtual update(double p_dt) = 0;
+		void virtual updatePhysic(double p_dt) = 0;
+
+		void virtual updateFrame() = 0;
 
 		virtual void reshape(GLint width, GLint height);
 

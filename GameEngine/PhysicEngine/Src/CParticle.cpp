@@ -91,13 +91,12 @@ namespace PhysicEngine {
 	{
 		_abstraction->integrate(p_time);
 	}
-	void CParticle::draw()
+	void CParticle::updateFrame()
 	{
 		_presentation->draw(_abstraction->getPosition());
 	}
-	void CParticle::update(double p_dt)
+	void CParticle::updatePhysic(double p_dt)
 	{
 		_abstraction->integrate(p_dt);
-		draw();
 	}
 }

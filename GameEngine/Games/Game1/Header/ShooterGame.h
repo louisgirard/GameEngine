@@ -30,7 +30,12 @@ namespace Games {
 			Updates the positions of the particles
 			@param p_dt the time ellapsed since the last update
 			*/
-			virtual void update(double p_dt);
+			virtual void updatePhysic(double p_dt);
+
+			/*
+			Updates the visual representations of the particles
+			*/
+			virtual void updateFrame();
 
 		public :
 			ShooterGame();

@@ -40,14 +40,21 @@ namespace Games {
 			}
 		}
 
-		void ShooterGame::update(double p_dt) {
+		void ShooterGame::updatePhysic(double p_dt) {
 
 			//going through every particle in the scene and updating their positions
 			for(int i = 0; i<_projectiles.size(); i++)
 			{
-				_projectiles[i]->update(p_dt);
+				_projectiles[i]->updatePhysic(p_dt);
 				//the positions of the particles are printed in the console
 				std::cout<< "index = "<< i << ", x = " << _projectiles[i]->getPosition()._x << ", y = " << _projectiles[i]->getPosition()._y << ", z = " << _projectiles[i]->getPosition()._z << std::endl;
+			}
+		}
+
+		void ShooterGame::updateFrame() {
+			for (int i = 0; i < _projectiles.size(); i++)
+			{
+				_projectiles[i]->updateFrame();
 			}
 		}
 		

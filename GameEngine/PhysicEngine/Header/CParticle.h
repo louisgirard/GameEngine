@@ -112,12 +112,12 @@ namespace PhysicEngine {
 		*/
 		void integrate(double p_time);
 
-		/*Draw the particle*/
-		void draw();
+		/*Updates the visual representation of the particle*/
+		void updateFrame();
 
-		/*Update the position of the particle both in the abstraction and the presentation
+		/*Update the position of the particle in the abstraction
 		@param p_time the ellapsed time since the last update
 		*/
-		void update(double p_dt);
+		void updatePhysic(double p_dt);
 	};
 }
