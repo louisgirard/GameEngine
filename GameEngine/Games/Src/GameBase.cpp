@@ -119,10 +119,8 @@ namespace Games
 		glLoadIdentity();
 		// Get Input event for this frame
 		handleInput();
-		// Update Game Physic
-		updatePhysic(_dt);
-		// Update Game Frame
-		updateFrame(_dt);
+		// Update Game
+		update(_dt);
 		// We ensure that no shader program is binded (Apparently could cause some issue
 		glUseProgram(0);
 		// Swaps rendering buffers, display this frame and prepare for the next
@@ -135,7 +133,7 @@ namespace Games
 		while (_running)
 		{
 			_dt = computeDt();
-			updatePhysic(_dt);
+			update(_dt);
 		}
 	}
 

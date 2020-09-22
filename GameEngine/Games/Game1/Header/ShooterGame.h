@@ -9,7 +9,16 @@ namespace Games {
 		class ShooterGame : public GameBase
 		{
 		protected :
+			/*
+			Vector containing the particles currently in game
+			*/
 			std::vector<std::shared_ptr<PhysicEngine::CParticle>> _projectiles;
+
+			/*
+			Determines if the shooting button is currently pressed (a new particle is only
+			created once per key press)
+			*/
+			bool _shootingButtonPressed = false;
 
 			PhysicEngine::CParticle::Types _currentType = PhysicEngine::CParticle::Types::Bullet;
 
@@ -17,11 +26,11 @@ namespace Games {
 
 			virtual void handleInput();
 
-			virtual void updatePhysic(double p_dt);
-
-			void virtual updateFrame(double p_dt);
-
-			bool _shootingButtonPressed = false;
+			/*
+			Updates the positions of the particles
+			@param p_dt the time ellapsed since the last update
+			*/
+			virtual void update(double p_dt);
 
 		public :
 			ShooterGame();

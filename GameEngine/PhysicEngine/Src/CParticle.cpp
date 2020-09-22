@@ -87,7 +87,7 @@ namespace PhysicEngine {
 	{
 		_abstraction->setMass(p_mass);
 	}
-	void CParticle::integrate(float p_time)
+	void CParticle::integrate(double p_time)
 	{
 		_abstraction->integrate(p_time);
 	}

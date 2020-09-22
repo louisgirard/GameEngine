@@ -25,9 +25,10 @@
     <ClCompile Include="..\GameEngine\Games\Src\GameMenu.cpp" />
     <ClCompile Include="..\GameEngine\Games\Src\GameSelection.cpp" />
     <ClCompile Include="..\GameEngine\Games\Src\KeyboardStatus.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\Src\PParticle.cpp" />
     <ClCompile Include="..\GameEngine\Main.cpp" />
-    <ClCompile Include="..\GameEngine\PhysicEngine\Src\Particle.cpp" />
-    <ClCompile Include="..\GameEngine\PhysicEngine\Src\Projectile.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\Src\AParticle.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\Src\CParticle.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -38,8 +39,9 @@
     <ClInclude Include="..\GameEngine\Games\Header\GameMenu.h" />
     <ClInclude Include="..\GameEngine\Games\Header\GameSelection.h" />
     <ClInclude Include="..\GameEngine\Games\Header\KeyboardStatus.h" />
-    <ClInclude Include="..\GameEngine\PhysicEngine\Header\Particle.h" />
-    <ClInclude Include="..\GameEngine\PhysicEngine\Header\Projectile.h" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\Header\PParticle.h" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\AParticle.h" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\CParticle.h" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\Vector3.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

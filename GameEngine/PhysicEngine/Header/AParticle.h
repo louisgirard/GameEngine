@@ -21,48 +21,81 @@ namespace PhysicEngine {
 		float _inverseMass;
 
 	public:
+		/*Constructor*/
 		AParticle(float p_mass, Vector3 p_position, Vector3 p_velocity, Vector3 p_acceleration, float p_damping);
 
-		/* Returns the position of the particle */
+		/*@return the position of the particle */
 		Vector3 getPosition() const;
 
-		/* Sets the position of the particle */
+		/* Sets the position of the particle
+		@param p_position the position to which the particle must be set
+		*/
 		void setPosition(const Vector3& p_position);
+
+		/* Sets the position of the particle
+		@param p_x the new x of the particle
+		@param p_y the new y of the particle
+		@param p_z the new z of the particle
+		*/
 		void setPosition(const float p_x, const float p_y, const float p_z);
 
-		/* Returns the velocity of the particle */
+		/*@return the velocity of the particle */
 		Vector3 getVelocity() const;
 
-		/* Sets the velocity of the particle */
+		/* Sets the velocity of the particle
+		@param p_velocity the velocity at which the particle must be set
+		*/
 		void setVelocity(const Vector3& p_velocity);
+
+		/* Sets the velocity of the particle
+		@param p_x the new x of the velocity
+		@param p_y the new y of the velocity
+		@param p_z the new z of the velocity
+		*/
 		void setVelocity(const float p_x, const float p_y, const float p_z);
 
-		/* Returns the acceleration of the particle */
+		/*@return the acceleration of the particle */
 		Vector3 getAcceleration() const;
 
-		/* Sets the acceleration of the particle */
-		void setAcceleration(const Vector3& acceleration);
+		/* Sets the acceleration of the particle
+		@param p_acceleration the velocity at which the particle must be set
+		*/
+		void setAcceleration(const Vector3& p_acceleration);
+
+		/* Sets the acceleration of the particle
+		@param p_x the new x of the acceleration
+		@param p_y the new y of the acceleration
+		@param p_z the new z of the acceleration
+		*/
 		void setAcceleration(const float p_x, const float p_y, const float p_z);
 
-		/* Returns the damping */
+		/*@return the damping */
 		float getDamping() const;
 
-		/* Sets the damping */
+		/* Sets the damping
+		@param p_damping the new damping
+		*/
 		void setDamping(const float p_damping);
 
-		/* Returns the inverse of the mass of the particle */
+		/*@return the inverse of the mass of the particle */
 		float getInverseMass() const;
 
-		/* Sets the inverse of the mass of the particle */
+		/* Sets the inverse of the mass of the particle
+		@param p_inverseMass the new inverse mass of the particle
+		*/
 		void setInverseMass(const float p_inverseMass);
 
-		/* Returns the mass of the particle */
+		/*@return the mass of the particle */
 		float getMass() const;
 
-		/* Sets the mass of the particle */
+		/* Sets the mass of the particle
+		@param p_mass the new mass of the particle
+		*/
 		void setMass(const float p_mass);
 
-		/* Integrate the particle */
+		/* Computes the new velocity and position of the particle
+		@param p_time the ellapsed time since the last update
+		*/
 		void integrate(double p_time);
 	};
 }
