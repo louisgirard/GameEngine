@@ -1,6 +1,5 @@
 #include <iostream>
 #include <cstdlib>
-#include <PhysicEngine/Header/Particle.h>
 #include <Games/Header/GameSelection.h>
 #include <Games/Header/GameBase.h>
 #include <Games/Game1/Header/ShooterGame.h>
