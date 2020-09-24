@@ -20,10 +20,13 @@ namespace Games {
 			*/
 			bool _shootingButtonPressed = false;
 
+			/* Holds the type of particle selected */
 			PhysicEngine::CParticle::Types _currentType = PhysicEngine::CParticle::Types::Bullet;
 
+			/* Initializes the game */
 			virtual void initGame();
 
+			/* Handles user inputs */
 			virtual void handleInput();
 
 			/*
@@ -38,6 +41,7 @@ namespace Games {
 			virtual void updateFrame();
 
 		public :
+			/* Default constructor */
 			ShooterGame();
 		};
 

@@ -19,49 +19,73 @@ namespace PhysicEngine {
 		/* Default constructor */
 		Vector3();
 
-		/* Explicit constructor */
-		Vector3(float x, float y, float z);
+		/* Explicit constructor 
+		* @param p_x x position of the vector
+		* @param p_y y position of the vector
+		* @param p_z z position of the vector
+		*/
+		Vector3(float p_x, float p_y, float p_z);
 
 		/* Flips all the components */
 		void invert();
 
-		/* Returns the magnitude */
+		/* @return the magnitude */
 		float magnitude() const;
 
-		/* Returns the squared magnitude */
+		/* @return the squared magnitude */
 		float squaredMagnitude() const;
 
 		/* Turns a vector into a unit vector*/
 		void normalize();
 
-		/* Multiplies a vector by a scalar */
+		/* Multiplies a vector by a scalar 
+		* @param p_value value of the scalar
+		*/
 		void operator*= (const float p_value);
 
-		/* Returns a vector multiplied by a scalar */
+		/* @return a vector multiplied by a scalar
+		* @param p_value value of the scalar
+		*/
 		Vector3 operator*(const float p_value) const;
 
-		/* Adds a vector to this vector */
+		/* Adds a vector to this vector
+		* @param p_vector value of the vector
+		*/
 		void operator+=(const Vector3& p_vector);
 
-		/* Returns a vector added with this vector */
+		/* @return a vector added with this vector
+		* @param p_vector value of the vector
+		*/
 		Vector3 operator+(const Vector3& p_vector) const;
 
-		/* Substracts a vector to this vector */
+		/* Substracts a vector to this vector
+		* @param p_vector value of the vector
+		*/
 		void operator-=(const Vector3& p_vector);
 
-		/* Returns a vector subtracted with this vector */
+		/* @returns a vector subtracted with this vector
+		* @param p_vector value of the vector
+		*/
 		Vector3 operator-(const Vector3& p_vector) const;
 
-		/* Returns a vector multiplied with this vector */
+		/* @return a vector multiplied with this vector
+		* @param p_vector value of the vector
+		*/
 		Vector3 componentProduct(const Vector3& p_vector) const;
 
-		/* Multiplies a vector with this vector */
+		/* Multiplies a vector with this vector
+		* @param p_vector value of the vector
+		*/
 		void componentProductUpdate(const Vector3& p_vector);
 
-		/* Returns the scalar product with this vector */
+		/* Returns the scalar product with this vector
+		* @param p_vector value of the vector
+		*/
 		float scalarProduct(const Vector3& p_vector) const;
 
-		/* Returns the vector product with this vector */
+		/* @return the vector product with this vector
+		* @param p_vector value of the vector
+		*/
 		Vector3 vectorProduct(const Vector3& p_vector) const;
 	};
 }
