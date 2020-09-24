@@ -12,7 +12,9 @@ namespace Games {
 			std::cout << "Choose your game (0-" << ((int)s_gameFactories.size() - 1) << ") : ";
 			int selection;
 			std::cin >> selection;
-			if (selection >= -1 && selection < s_gameFactories.size()) return selection;
+			if (selection > -1 && selection < (int)s_gameFactories.size()) return selection;
+			else if (selection >= (int)s_gameFactories.size()) std::cout << "This game has not been created yet" << std::endl;
+			else return -1;
 		}
 	}
 

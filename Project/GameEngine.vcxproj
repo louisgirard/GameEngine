@@ -38,6 +38,7 @@
     <ClInclude Include="..\GameEngine\Games\Header\GameConfiguration.h" />
     <ClInclude Include="..\GameEngine\Games\Header\GameMenu.h" />
     <ClInclude Include="..\GameEngine\Games\Header\GameSelection.h" />
+    <ClInclude Include="..\GameEngine\Games\Header\KeyAction.h" />
     <ClInclude Include="..\GameEngine\Games\Header\KeyboardStatus.h" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Header\PParticle.h" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\AParticle.h" />

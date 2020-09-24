@@ -5,26 +5,23 @@ namespace Games {
 		
 		ShooterGame::ShooterGame():GameBase() {}
 
-		void ShooterGame::initGame() {}
+		void ShooterGame::initGame() {
+			// 1- Binding Keys
+			_keyboard.bindActionToKey(KeyAction::MAINACTION, 's');
+			// 2 - We create a sub menu for choosing a weapon
+			Games::GameMenu* weaponMenu = new Games::GameMenu("Weapon Pocket");
+			weaponMenu->addItem("Pistol", [this]() {_currentType = PhysicEngine::CParticle::Types::Bullet;});
+			weaponMenu->addItem("Canon", [this]() {_currentType = PhysicEngine::CParticle::Types::Canonball; });
+			weaponMenu->addItem("Laser Gun", [this]() {_currentType = PhysicEngine::CParticle::Types::Laser; });
+			weaponMenu->addItem("Fireball Gun", [this]() {_currentType = PhysicEngine::CParticle::Types::Fireball; });
+			getMenu()->addSubMenu(weaponMenu);
+		}
 
 		void ShooterGame::handleInput() {
 			GameBase::handleInput();
-			//if one the keys 1 through 4 is pressed, the type of launched particle is changed
-			if (_keyboard.isPressed('1')) {
-				_currentType = PhysicEngine::CParticle::Types::Bullet;
-			}
-			else if (_keyboard.isPressed('2')) {
-				_currentType = PhysicEngine::CParticle::Types::Canonball;
-			}
-			else if (_keyboard.isPressed('3')) {
-				_currentType = PhysicEngine::CParticle::Types::Laser;
-			}
-			else if (_keyboard.isPressed('4')) {
-				_currentType = PhysicEngine::CParticle::Types::Fireball;
-			}
 
 			//if the s key is pressed, a particle is launched
-			if (_keyboard.isPressed('s')) {
+			if (_keyboard.isPressed(KeyAction::MAINACTION)) {
 				//check to see if it's the first frame where the key is pressed
 				//this avoids sending multiple particles per key press
 				if (!_shootingButtonPressed) {

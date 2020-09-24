@@ -14,7 +14,7 @@
 #include <Games/Header/GameConfiguration.h>
 #include <Games/Header/KeyboardStatus.h>
 #include <Games/Header/GameMenu.h>
-
+#include <Games/Header/KeyAction.h>
 
 
 #define NANO_TO_SECOND 0.000000001;
@@ -70,21 +70,12 @@ namespace Games {
 
 		int _windowID;
 		GameConfiguration _configuration;
-		/// \brief Functions that should be called when the window closes.
+		/// Functions that should be called when the window closes.
 		::std::vector<::std::function<void()> > _onCloseFunctions;
 
 		KeyboardStatus _keyboard;
 
 		GameMenu* _mainMenu;
-
-		/*
-		/// \brief Frame per second
-		float m_fps;
-		/// \brief	true to draw FPS.
-		bool m_drawFPS;
-		/// \brief	The FPS menu.
-		Menu * m_fpsMenu;
-		*/
 
 		void virtual initGameConfig() {}
 

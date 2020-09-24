@@ -32,6 +32,8 @@ namespace Games
 			_mainMenu = new GameMenu("Main menu");
 			_mainMenu->activate(GLUT_RIGHT_BUTTON);
 
+			_keyboard.bindActionToKey(KeyAction::QUIT, 27);
+
 			onClose([this]() {	
 				// We destroy the current window
 				//glutDestroyWindow(_windowID) ;
@@ -40,6 +42,7 @@ namespace Games
 				//Force reinit glut
 				s_glutInitialized = false;
 			} ) ;
+			
 		}
 	}
 
@@ -143,7 +146,7 @@ namespace Games
 		// If we press escape, we close this game
 		// ie: 27 is the unsigned char value of escape but if you want to use a more common letter
 		// for instance e you could use _keyboard.isPressed('e').
-		if (_keyboard.isPressed(27)) {
+		if (_keyboard.isPressed(KeyAction::QUIT)) {
 			quit();
 		}
 	}

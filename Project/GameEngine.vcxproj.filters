@@ -119,5 +119,8 @@
     <ClInclude Include="..\GameEngine\GraphicEngine\Header\PParticle.h">
       <Filter>GameEngine\GraphicEngine\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\GameEngine\Games\Header\KeyAction.h">
+      <Filter>GameEngine\Games\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
