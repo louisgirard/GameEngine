@@ -1,4 +1,5 @@
-#include <PhysicEngine/Header/CParticle.h>
+#include <PhysicEngine/Header/CParticle.hpp>
+
 namespace PhysicEngine {
 	CParticle::CParticle(float p_mass, Vector3 p_position, Vector3 p_velocity, Vector3 p_acceleration, float p_damping, Vector3 p_color, float p_size)
 	{

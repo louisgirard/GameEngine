@@ -9,4 +9,3 @@ public:
 };
 
 #endif // !_Games_KeyAction_H
-

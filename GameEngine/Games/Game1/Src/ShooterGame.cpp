@@ -1,16 +1,16 @@
-#include <Games/Game1/Header/ShooterGame.h>
+#include <Games/Game1/Header/ShooterGame.hpp>
 
 namespace Games {
 	namespace Game1 {
-		
-		ShooterGame::ShooterGame():GameBase() {}
+
+		ShooterGame::ShooterGame() :GameBase() {}
 
 		void ShooterGame::initGame() {
 			// 1- Binding Keys
 			_keyboard.bindActionToKey(KeyAction::MAINACTION, 's');
 			// 2 - We create a sub menu for choosing a weapon
 			Games::GameMenu* weaponMenu = new Games::GameMenu("Weapon Pocket");
-			weaponMenu->addItem("Pistol", [this]() {_currentType = PhysicEngine::CParticle::Types::Bullet;});
+			weaponMenu->addItem("Pistol", [this]() {_currentType = PhysicEngine::CParticle::Types::Bullet; });
 			weaponMenu->addItem("Canon", [this]() {_currentType = PhysicEngine::CParticle::Types::Canonball; });
 			weaponMenu->addItem("Laser Gun", [this]() {_currentType = PhysicEngine::CParticle::Types::Laser; });
 			weaponMenu->addItem("Fireball Gun", [this]() {_currentType = PhysicEngine::CParticle::Types::Fireball; });
@@ -40,11 +40,11 @@ namespace Games {
 		void ShooterGame::updatePhysic(double p_dt) {
 
 			//going through every particle in the scene and updating their positions
-			for(int i = 0; i<_projectiles.size(); i++)
+			for (int i = 0; i < _projectiles.size(); i++)
 			{
 				_projectiles[i]->updatePhysic(p_dt);
 				//the positions of the particles are printed in the console
-				std::cout<< "index = "<< i << ", x = " << _projectiles[i]->getPosition()._x << ", y = " << _projectiles[i]->getPosition()._y << ", z = " << _projectiles[i]->getPosition()._z << std::endl;
+				std::cout << "index = " << i << ", x = " << _projectiles[i]->getPosition()._x << ", y = " << _projectiles[i]->getPosition()._y << ", z = " << _projectiles[i]->getPosition()._z << std::endl;
 			}
 		}
 
@@ -54,6 +54,6 @@ namespace Games {
 				_projectiles[i]->updateFrame();
 			}
 		}
-		
+
 	}
 }

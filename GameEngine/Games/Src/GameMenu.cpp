@@ -1,4 +1,4 @@
-#include <Games/Header/GameMenu.h>
+#include <Games/Header/GameMenu.hpp>
 
 namespace Games {
 	std::vector<std::function<void()>> GameMenu::_menuCallbacks;

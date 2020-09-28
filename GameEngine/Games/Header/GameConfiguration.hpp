@@ -1,12 +1,11 @@
 #ifndef _Games_GameConfiguration_H
 #define _Games_GameConfiguration_H
 
-#include <Games/Header/DefaultConfig.h>
+#include <Games/Header/DefaultConfig.hpp>
 #include <GL/freeglut.h>
 #include <string>
 
 namespace Games {
-
 	typedef enum { FpsMax = 0, Fps60 = 1, Fps30 = 2 } FPS;
 
 	class GameConfiguration

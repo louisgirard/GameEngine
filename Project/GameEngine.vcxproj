@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\GameEngine\Games\Game1\Source\ShooterGame.cpp" />
+    <ClCompile Include="..\GameEngine\Games\Game1\Src\ShooterGame.cpp" />
     <ClCompile Include="..\GameEngine\Games\Src\GameBase.cpp" />
     <ClCompile Include="..\GameEngine\Games\Src\GameConfiguration.cpp" />
     <ClCompile Include="..\GameEngine\Games\Src\GameMenu.cpp" />
@@ -32,18 +32,18 @@
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\GameEngine\Games\Game1\Header\ShooterGame.h" />
-    <ClInclude Include="..\GameEngine\Games\Header\DefaultConfig.h" />
-    <ClInclude Include="..\GameEngine\Games\Header\GameBase.h" />
-    <ClInclude Include="..\GameEngine\Games\Header\GameConfiguration.h" />
-    <ClInclude Include="..\GameEngine\Games\Header\GameMenu.h" />
-    <ClInclude Include="..\GameEngine\Games\Header\GameSelection.h" />
-    <ClInclude Include="..\GameEngine\Games\Header\KeyAction.h" />
-    <ClInclude Include="..\GameEngine\Games\Header\KeyboardStatus.h" />
-    <ClInclude Include="..\GameEngine\GraphicEngine\Header\PParticle.h" />
-    <ClInclude Include="..\GameEngine\PhysicEngine\Header\AParticle.h" />
-    <ClInclude Include="..\GameEngine\PhysicEngine\Header\CParticle.h" />
-    <ClInclude Include="..\GameEngine\PhysicEngine\Header\Vector3.h" />
+    <ClInclude Include="..\GameEngine\Games\Game1\Header\ShooterGame.hpp" />
+    <ClInclude Include="..\GameEngine\Games\Header\DefaultConfig.hpp" />
+    <ClInclude Include="..\GameEngine\Games\Header\GameBase.hpp" />
+    <ClInclude Include="..\GameEngine\Games\Header\GameConfiguration.hpp" />
+    <ClInclude Include="..\GameEngine\Games\Header\GameMenu.hpp" />
+    <ClInclude Include="..\GameEngine\Games\Header\GameSelection.hpp" />
+    <ClInclude Include="..\GameEngine\Games\Header\KeyAction.hpp" />
+    <ClInclude Include="..\GameEngine\Games\Header\KeyboardStatus.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\Header\PParticle.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\AParticle.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\CParticle.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\Vector3.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

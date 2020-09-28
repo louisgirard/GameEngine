@@ -1,5 +1,4 @@
-#include <PhysicEngine/Header/Vector3.h>
-
+#include <PhysicEngine/Header/Vector3.hpp>
 
 namespace PhysicEngine {
 	Vector3::Vector3() : _x(0), _y(0), _z(0)

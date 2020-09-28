@@ -1,7 +1,6 @@
-#include <Games/Header/GameConfiguration.h>
+#include <Games/Header/GameConfiguration.hpp>
 
 namespace Games {
-
 	GameConfiguration::GameConfiguration() : _name("Game"), _useGraphics(true), _fpsRate(FPS::FpsMax),
 		_glutDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE),
 		_windowWidth(s_defaultWindowWidth), _windowHeight(s_defaultWindowHeight),

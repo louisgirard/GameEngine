@@ -1,11 +1,10 @@
-#include <Games/Header/KeyboardStatus.h>
-
+#include <Games/Header/KeyboardStatus.hpp>
 
 namespace Games {
 
-
 	KeyboardStatus::KeyboardStatus(): _keyStatus(256, false)
-	{}
+	{
+	}
 
 	bool KeyboardStatus::isPressed(unsigned char key) const
 	{

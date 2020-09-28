@@ -1,8 +1,8 @@
 #ifndef _GAME1_SHOOTER_H
 #define _GAME1_SHOOTER_H
 
-#include <Games/Header/GameBase.h>
-#include <PhysicEngine/Header/CParticle.h>
+#include <Games/Header/GameBase.hpp>
+#include <PhysicEngine/Header/CParticle.hpp>
 
 namespace Games {
 	namespace Game1 {

@@ -5,12 +5,11 @@
 #include <functional>
 #include <string>
 #include <type_traits>
-#include <Games/Header/GameBase.h>
+#include <Games/Header/GameBase.hpp>
 #include <iostream>
 
 namespace Games
 {
-
 	class GameSelection
 	{
 	private:

@@ -1,5 +1,4 @@
-#include <Games/Header/GameSelection.h>
-
+#include <Games/Header/GameSelection.hpp>
 
 namespace Games {
 

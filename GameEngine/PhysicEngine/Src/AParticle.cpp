@@ -1,4 +1,5 @@
-#include <PhysicEngine/Header/AParticle.h>
+#include <PhysicEngine/Header/AParticle.hpp>
+
 namespace PhysicEngine {
 
 	AParticle::AParticle(float p_mass, Vector3 p_position, Vector3 p_velocity, Vector3 p_acceleration, float p_damping) {

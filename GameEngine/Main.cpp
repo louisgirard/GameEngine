@@ -1,8 +1,8 @@
 #include <iostream>
 #include <cstdlib>
-#include <Games/Header/GameSelection.h>
-#include <Games/Header/GameBase.h>
-#include <Games/Game1/Header/ShooterGame.h>
+#include <Games/Header/GameSelection.hpp>
+#include <Games/Header/GameBase.hpp>
+#include <Games/Game1/Header/ShooterGame.hpp>
 
 namespace std
 {

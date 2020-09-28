@@ -1,5 +1,6 @@
-#include <GraphicEngine/Header/PParticle.h>
-#include <GL\freeglut_std.h>
+#include <GraphicEngine/Header/PParticle.hpp>
+#include <GL/freeglut_std.h>
+
 namespace PhysicEngine {
 	PParticle::PParticle(Vector3 p_color, float p_size)
 	{

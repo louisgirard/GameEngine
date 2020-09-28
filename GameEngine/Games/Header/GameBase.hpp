@@ -11,11 +11,10 @@
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 
-#include <Games/Header/GameConfiguration.h>
-#include <Games/Header/KeyboardStatus.h>
-#include <Games/Header/GameMenu.h>
-#include <Games/Header/KeyAction.h>
-
+#include <Games/Header/GameConfiguration.hpp>
+#include <Games/Header/KeyboardStatus.hpp>
+#include <Games/Header/GameMenu.hpp>
+#include <Games/Header/KeyAction.hpp>
 
 #define NANO_TO_SECOND 0.000000001;
 

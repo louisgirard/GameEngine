@@ -6,10 +6,9 @@
 #include <map>
 #include <string>
 
-#include <Games/Header/KeyAction.h>
+#include <Games/Header/KeyAction.hpp>
 
 namespace Games {
-
 	class KeyboardStatus
 	{
 	protected:

@@ -1,7 +1,7 @@
 #pragma once
-#include <PhysicEngine\Header\Vector3.h>
-#include <PhysicEngine\Header\AParticle.h>
-#include <GraphicEngine\Header\PParticle.h>
+#include <PhysicEngine/Header/Vector3.hpp>
+#include <PhysicEngine/Header/AParticle.hpp>
+#include <GraphicEngine/Header/PParticle.hpp>
 #include <memory>
 
 namespace PhysicEngine {

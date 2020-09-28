@@ -1,4 +1,4 @@
-#include <Games/Header/GameBase.h>
+#include <Games/Header/GameBase.hpp>
 
 namespace Games
 {
