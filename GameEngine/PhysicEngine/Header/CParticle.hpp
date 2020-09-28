@@ -36,7 +36,7 @@ namespace PhysicEngine {
 		/*Construction by giving a predetermined type of particle
 		@param p_type the type of particle to be created
 		*/
-		CParticle(Types p_type);
+		CParticle(Types p_type, Vector3 p_position, Vector3 p_launchDirection);
 
 		/*@return the position of the particle */
 		Vector3 getPosition() const;

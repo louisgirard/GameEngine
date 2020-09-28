@@ -15,6 +15,8 @@
 #include <Games/Header/KeyboardStatus.hpp>
 #include <Games/Header/GameMenu.hpp>
 #include <Games/Header/KeyAction.hpp>
+#include <GraphicEngine/Header/Camera.hpp>
+#include <PhysicEngine/Header/MathConstant.hpp>
 
 #define NANO_TO_SECOND 0.000000001;
 
@@ -55,6 +57,10 @@ namespace Games {
 
 		static void keyboardUpCallback(unsigned char key, int x, int y);
 
+		static void keyboardSpecialCallback(int key, int x, int y);
+
+		static void keyboardSpecialUpCallback(int key, int x, int y);
+
 		static void mouseCallback(int button, int state, int x, int y);
 
 		static void mouseMotionCallback(int x, int y);
@@ -76,6 +82,9 @@ namespace Games {
 
 		GameMenu* _mainMenu;
 
+		GraphicEngine::Camera _camera;
+		float _cameraSpeed, _cameraRotationSpeed;
+
 		void virtual initGameConfig() {}
 
 		void virtual initGame() = 0;
@@ -84,13 +93,17 @@ namespace Games {
 
 		void virtual updatePhysic(double p_dt) = 0;
 
-		void virtual updateFrame() = 0;
+		void virtual updateFrame();
 
 		virtual void reshape(GLint width, GLint height);
 
 		virtual void keyPressed(unsigned char key, int x, int y);
 
 		virtual void keyReleased(unsigned char key, int x, int y);
+
+		virtual void specialKeyPressed(unsigned char key, int x, int y);
+
+		virtual void specialKeyReleased(unsigned char key, int x, int y);
 
 		virtual void mouse(int button, int state, int x, int y) {}
 

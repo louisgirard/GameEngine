@@ -18,7 +18,7 @@ namespace PhysicEngine {
 	void PParticle::draw(Vector3 p_position)
 	{
 		glColor3f(_color._x, _color._y, _color._z);
-		glLoadIdentity();
+		//glLoadIdentity();
 		glTranslatef(p_position._x, p_position._y, p_position._z);
 		glutWireSphere(_size, 20, 16);
 	}

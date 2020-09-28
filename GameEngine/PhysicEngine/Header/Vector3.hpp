@@ -2,6 +2,8 @@
 #include <cmath>
 #include <string>
 
+#include <glm/glm.hpp>
+
 namespace PhysicEngine {
 	/* Holds a vector in three dimensions */
 	class Vector3
@@ -15,6 +17,11 @@ namespace PhysicEngine {
 
 		/* Holds the value along the z axis */
 		float _z;
+
+		static Vector3 zero;
+		static Vector3 front;
+		static Vector3 right;
+		static Vector3 up;
 
 		/* Default constructor */
 		Vector3();
@@ -87,6 +94,8 @@ namespace PhysicEngine {
 		* @param p_vector value of the vector
 		*/
 		Vector3 vectorProduct(const Vector3& p_vector) const;
+
+		static Vector3 convertGlm(const glm::vec3& p_vec);
 	};
 }
 

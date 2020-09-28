@@ -3,6 +3,7 @@
 
 #include <Games/Header/GameBase.hpp>
 #include <PhysicEngine/Header/CParticle.hpp>
+#include <PhysicEngine/Header/Vector3.hpp>
 
 namespace Games {
 	namespace Game1 {

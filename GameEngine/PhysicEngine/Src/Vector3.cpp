@@ -1,6 +1,11 @@
 #include <PhysicEngine/Header/Vector3.hpp>
 
 namespace PhysicEngine {
+	Vector3 Vector3::zero(0, 0, 0);
+	Vector3 Vector3::front(0,0,-1);
+	Vector3 Vector3::right(1,0,0);
+	Vector3 Vector3::up(1,0,0);
+
 	Vector3::Vector3() : _x(0), _y(0), _z(0)
 	{
 	}
@@ -92,6 +97,10 @@ namespace PhysicEngine {
 		return Vector3(_y * p_vector._z - _z * p_vector._y,
 			_z * p_vector._x - _x * p_vector._z,
 			_x * p_vector._y - _y * p_vector._x);
+	}
+
+	Vector3 Vector3::convertGlm(const glm::vec3& p_vec) {
+		return Vector3(p_vec.x, p_vec.y, p_vec.z);
 	}
 
 }

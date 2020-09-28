@@ -15,6 +15,9 @@ namespace Games {
 		::std::vector<bool> _keyStatus;
 		::std::map<int, unsigned char> _keyBinding;
 
+		::std::map<int, bool> _specialKeyStatus;
+		::std::map<int, int> _specialKeyBinding;
+
 	public:
 
 		KeyboardStatus();
@@ -25,7 +28,15 @@ namespace Games {
 
 		void release(unsigned char p_key);
 
+		bool isSpecialKeyPressed(int p_key) const;
+
+		void pressSpecialKey(int p_key);
+
+		void releaseSpecialKey(int p_key);
+
 		void bindActionToKey(int p_action, unsigned char p_key);
+
+		void bindActionToSpecialKey(int p_action, int p_key);
 
 		bool isPressed(int p_action) const;
 

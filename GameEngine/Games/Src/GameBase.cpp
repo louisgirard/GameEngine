@@ -32,7 +32,25 @@ namespace Games
 			_mainMenu = new GameMenu("Main menu");
 			_mainMenu->activate(GLUT_RIGHT_BUTTON);
 
+			//Bind basic key
 			_keyboard.bindActionToKey(KeyAction::QUIT, 27);
+
+			_keyboard.bindActionToSpecialKey(KeyAction::MOVEFRONT, GLUT_KEY_UP);
+			_keyboard.bindActionToSpecialKey(KeyAction::MOVEBACK, GLUT_KEY_DOWN);
+			_keyboard.bindActionToSpecialKey(KeyAction::MOVERIGHT, GLUT_KEY_RIGHT);
+			_keyboard.bindActionToSpecialKey(KeyAction::MOVELEFT, GLUT_KEY_LEFT);
+			_keyboard.bindActionToKey(KeyAction::MOVEUP, 'a');
+			_keyboard.bindActionToKey(KeyAction::MOVEDOWN, 'e');
+
+			_keyboard.bindActionToKey(KeyAction::ROTATERIGHT, 'd');
+			_keyboard.bindActionToKey(KeyAction::ROTATELEFT, 'q');
+			_keyboard.bindActionToKey(KeyAction::ROTATEUP, 'z');
+			_keyboard.bindActionToKey(KeyAction::ROTATEDOWN, 's');
+
+			//Init Camera
+			_camera.setPosition(glm::vec3(0.0f, 0.0f, 0.5f));
+			_cameraSpeed = 10.0f;
+			_cameraRotationSpeed = (float)(PhysicEngine::PI / 5.0);
 
 			onClose([this]() {	
 				// We destroy the current window
@@ -143,12 +161,41 @@ namespace Games
 	}
 
 	void GameBase::handleInput() {
+
+		glm::vec3 xAxis(1.0, 0.0, 0.0);
+		glm::vec3 yAxis(0.0, 1.0, 0.0);
+
 		// If we press escape, we close this game
 		// ie: 27 is the unsigned char value of escape but if you want to use a more common letter
 		// for instance e you could use _keyboard.isPressed('e').
 		if (_keyboard.isPressed(KeyAction::QUIT)) {
 			quit();
 		}
+
+		//Key Related to Translation Movement
+		if (_keyboard.isPressed(KeyAction::MOVEFRONT)) {_camera.translateFront(_cameraSpeed * _dt); }
+		if (_keyboard.isPressed(KeyAction::MOVEBACK)) {_camera.translateFront(-_cameraSpeed * _dt); }
+		if (_keyboard.isPressed(KeyAction::MOVERIGHT)) { _camera.translateRight(_cameraSpeed * _dt); }
+		if (_keyboard.isPressed(KeyAction::MOVELEFT)) { _camera.translateRight(-_cameraSpeed * _dt); }
+		if (_keyboard.isPressed(KeyAction::MOVEUP)) { _camera.translateUp(_cameraSpeed * _dt); }
+		if (_keyboard.isPressed(KeyAction::MOVEDOWN)) { _camera.translateUp(-_cameraSpeed * _dt); }
+
+		//Key Related to Rotation Movement
+		if (_keyboard.isPressed(KeyAction::ROTATELEFT)) { _camera.rotateLocal(yAxis, _cameraRotationSpeed * _dt); }
+		if (_keyboard.isPressed(KeyAction::ROTATERIGHT)) { _camera.rotateLocal(yAxis, -_cameraRotationSpeed * _dt); }
+		if (_keyboard.isPressed(KeyAction::ROTATEUP)) { _camera.rotateLocal(xAxis, _cameraRotationSpeed * _dt); }
+		if (_keyboard.isPressed(KeyAction::ROTATEDOWN)) { _camera.rotateLocal(xAxis, -_cameraRotationSpeed * _dt); }
+	}
+
+	void GameBase::updateFrame() {
+		// 1 - Update Camera
+		// For now 
+		glm::vec3 up = _camera.up();
+		glm::vec3 position = _camera.getPosition();
+		glm::vec3 referencePoint = position + _camera.lookingAt();
+
+		glMatrixMode(GL_MODELVIEW);
+		glMultMatrixf(&(_camera.getInverseTransform()[0][0]));
 	}
 
 	/*
@@ -212,10 +259,14 @@ namespace Games
 		//Register function to track keyboard and mouse event in the game
 		glutKeyboardFunc(keyboardCallback); // function called when a key has been pressed 
 		glutKeyboardUpFunc(keyboardUpCallback); // function called when a key has been released
+		glutSpecialFunc(keyboardSpecialCallback); // Function called for special key
+		glutSpecialUpFunc(keyboardSpecialUpCallback);
 		glutMouseFunc(mouseCallback);
 		glutPassiveMotionFunc(mousePassiveMotionCallback);
 		//Register function called when the game is closed
 		glutCloseFunc(closeCallback);
+
+		
 	}
 
 	void GameBase::displayCallback()
@@ -236,6 +287,16 @@ namespace Games
 	void GameBase::keyboardUpCallback(unsigned char key, int x, int y)
 	{
 		s_activeInstance->keyReleased(key, x, y);
+	}
+
+	void GameBase::keyboardSpecialCallback(int key, int x, int y)
+	{
+		s_activeInstance->specialKeyPressed(key, x, y);
+	}
+
+	void GameBase::keyboardSpecialUpCallback(int key, int x, int y)
+	{
+		s_activeInstance->specialKeyReleased(key, x, y);
 	}
 
 	void GameBase::mouseCallback(int button, int state, int x, int y)
@@ -282,4 +343,15 @@ namespace Games
 	{
 		_keyboard.release(key);
 	}
+
+	void GameBase::specialKeyPressed(unsigned char key, int x, int y) 
+	{
+		_keyboard.pressSpecialKey(key);
+	}
+
+	void GameBase::specialKeyReleased(unsigned char key, int x, int y) 
+	{
+		_keyboard.releaseSpecialKey(key);
+	}
+
 }

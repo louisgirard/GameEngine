@@ -84,6 +84,9 @@
     <ClCompile Include="..\GameEngine\Games\Game1\Src\ShooterGame.cpp">
       <Filter>GameEngine\Games\Game1\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\Src\Camera.cpp">
+      <Filter>GameEngine\GraphicEngine\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\GameEngine\Games\Game1\Header\ShooterGame.hpp">
@@ -120,6 +123,12 @@
       <Filter>GameEngine\PhysicEngine\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\Vector3.hpp">
+      <Filter>GameEngine\PhysicEngine\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\Header\Camera.hpp">
+      <Filter>GameEngine\GraphicEngine\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\MathConstant.hpp">
       <Filter>GameEngine\PhysicEngine\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

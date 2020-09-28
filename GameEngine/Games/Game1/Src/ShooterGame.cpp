@@ -7,7 +7,7 @@ namespace Games {
 
 		void ShooterGame::initGame() {
 			// 1- Binding Keys
-			_keyboard.bindActionToKey(KeyAction::MAINACTION, 's');
+			_keyboard.bindActionToKey(KeyAction::MAINACTION, 13);
 			// 2 - We create a sub menu for choosing a weapon
 			Games::GameMenu* weaponMenu = new Games::GameMenu("Weapon Pocket");
 			weaponMenu->addItem("Pistol", [this]() {_currentType = PhysicEngine::CParticle::Types::Bullet; });
@@ -26,7 +26,7 @@ namespace Games {
 				//this avoids sending multiple particles per key press
 				if (!_shootingButtonPressed) {
 					//adding a new particle to the scene
-					_projectiles.push_back(std::make_shared<PhysicEngine::CParticle>(_currentType));
+					_projectiles.push_back(std::make_shared<PhysicEngine::CParticle>(_currentType, PhysicEngine::Vector3::convertGlm(_camera.getPosition()), PhysicEngine::Vector3::convertGlm(_camera.lookingAt())));
 					_shootingButtonPressed = true;
 				}
 			}
@@ -49,9 +49,12 @@ namespace Games {
 		}
 
 		void ShooterGame::updateFrame() {
+			GameBase::updateFrame();
 			for (int i = 0; i < _projectiles.size(); i++)
 			{
+				glPushMatrix();
 				_projectiles[i]->updateFrame();
+				glPopMatrix();
 			}
 		}
 
