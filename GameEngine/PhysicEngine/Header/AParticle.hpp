@@ -1,5 +1,6 @@
 #pragma once
 #include <PhysicEngine/Header/Vector3.hpp>
+#include <limits>
 
 namespace PhysicEngine {
 	class AParticle
