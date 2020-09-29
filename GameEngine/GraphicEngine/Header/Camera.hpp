@@ -12,7 +12,6 @@ namespace GraphicEngine {
 		/// \brief	The camera position.
 		glm::vec3 _position;
 
-	public :
 	public:
 
 		Camera();

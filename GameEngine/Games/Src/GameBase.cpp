@@ -48,7 +48,7 @@ namespace Games
 			//Init Camera
 			_camera.setPosition(glm::vec3(0.0f, 0.0f, 0.5f));
 			_cameraSpeed = 10.0f;
-			_cameraRotationSpeed = (float)(PhysicEngine::PI / 5.0);
+			_cameraRotationSpeed = (float)(PhysicEngine::PI / 20.0);
 
 			onClose([this]() {	
 				// We destroy the current window
@@ -349,5 +349,17 @@ namespace Games
 	{
 		_keyboard.releaseSpecialKey(key);
 	}
+
+	void GameBase::mousePassiveMotion(int x, int y) {
+		glm::vec3 xAxis(1.0, 0.0, 0.0);
+		glm::vec3 yAxis(0.0, 1.0, 0.0);
+
+		_camera.rotateLocal(yAxis, -(x- _configuration.getWindowWidth() / 2)*_cameraRotationSpeed * _dt);
+		_camera.rotateLocal(xAxis, -(y - _configuration.getWindowHeight() / 2) * _cameraRotationSpeed * _dt);
+		_mouse.setX(x);
+		_mouse.setY(y);
+		glutWarpPointer(_configuration.getWindowWidth() / 2, _configuration.getWindowHeight() / 2);
+	}
+
 
 }

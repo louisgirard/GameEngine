@@ -25,6 +25,7 @@
     <ClCompile Include="..\GameEngine\Games\Src\GameMenu.cpp" />
     <ClCompile Include="..\GameEngine\Games\Src\GameSelection.cpp" />
     <ClCompile Include="..\GameEngine\Games\Src\KeyboardStatus.cpp" />
+    <ClCompile Include="..\GameEngine\Games\Src\MouseStatus.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Src\Camera.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Src\PParticle.cpp" />
     <ClCompile Include="..\GameEngine\Main.cpp" />
@@ -41,6 +42,7 @@
     <ClInclude Include="..\GameEngine\Games\Header\GameSelection.hpp" />
     <ClInclude Include="..\GameEngine\Games\Header\KeyAction.hpp" />
     <ClInclude Include="..\GameEngine\Games\Header\KeyboardStatus.hpp" />
+    <ClInclude Include="..\GameEngine\Games\Header\MouseStatus.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Header\Camera.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Header\PParticle.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\AParticle.hpp" />

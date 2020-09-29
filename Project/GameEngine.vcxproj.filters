@@ -87,6 +87,9 @@
     <ClCompile Include="..\GameEngine\GraphicEngine\Src\Camera.cpp">
       <Filter>GameEngine\GraphicEngine\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\GameEngine\Games\Src\MouseStatus.cpp">
+      <Filter>GameEngine\Games\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\GameEngine\Games\Game1\Header\ShooterGame.hpp">
@@ -130,6 +133,9 @@
     </ClInclude>
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\MathConstant.hpp">
       <Filter>GameEngine\PhysicEngine\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\Games\Header\MouseStatus.hpp">
+      <Filter>GameEngine\Games\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
