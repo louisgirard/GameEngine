@@ -245,6 +245,8 @@ namespace Games
 		glutInitDisplayMode(_configuration.getDisplayMode());
 		//Create a window, get its ID and set its name from configuration
 		_windowID = glutCreateWindow(_configuration.getName().c_str());
+		//Change cursor so that we don't see it
+		glutSetCursor(GLUT_CURSOR_NONE);
 	}
 
 	void GameBase::registerGLUTCallback() {
