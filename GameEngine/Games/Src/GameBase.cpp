@@ -39,8 +39,6 @@ namespace Games
 			_keyboard.bindActionToSpecialKey(KeyAction::MOVEBACK, GLUT_KEY_DOWN);
 			_keyboard.bindActionToSpecialKey(KeyAction::MOVERIGHT, GLUT_KEY_RIGHT);
 			_keyboard.bindActionToSpecialKey(KeyAction::MOVELEFT, GLUT_KEY_LEFT);
-			_keyboard.bindActionToKey(KeyAction::MOVEUP, 'a');
-			_keyboard.bindActionToKey(KeyAction::MOVEDOWN, 'e');
 
 			_keyboard.bindActionToKey(KeyAction::ROTATERIGHT, 'd');
 			_keyboard.bindActionToKey(KeyAction::ROTATELEFT, 'q');
@@ -177,8 +175,6 @@ namespace Games
 		if (_keyboard.isPressed(KeyAction::MOVEBACK)) {_camera.translateFront(-_cameraSpeed * _dt); }
 		if (_keyboard.isPressed(KeyAction::MOVERIGHT)) { _camera.translateRight(_cameraSpeed * _dt); }
 		if (_keyboard.isPressed(KeyAction::MOVELEFT)) { _camera.translateRight(-_cameraSpeed * _dt); }
-		if (_keyboard.isPressed(KeyAction::MOVEUP)) { _camera.translateUp(_cameraSpeed * _dt); }
-		if (_keyboard.isPressed(KeyAction::MOVEDOWN)) { _camera.translateUp(-_cameraSpeed * _dt); }
 
 		//Key Related to Rotation Movement
 		if (_keyboard.isPressed(KeyAction::ROTATELEFT)) { _camera.rotateLocal(yAxis, _cameraRotationSpeed * _dt); }
