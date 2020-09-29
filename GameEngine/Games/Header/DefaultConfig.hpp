@@ -3,14 +3,19 @@
 
 #include <GL/freeglut.h>
 
+
+/**
+* File used to define default options for a games such as graphic option 
+* or any other that might seems usefull to keep as a default variable 
+**/
 namespace Games {
 	
-	static int s_defaultWindowWidth = 400;
-	static int s_defaultWindowHeight = 400;
+	static const int DEFAULT_WINDOW_WIDTH = 400;
+	static const int DEFAULT_WINDOW_HEIGHT = 400;
 
-	static GLfloat s_defaultFOV = 65.0f;
-	static GLfloat s_defaultNearPlane = 0.01f;
-	static GLfloat s_defaultFarPlane = 1000.0f;
+	static const GLfloat DEFAULT_FOV = 65.0f;
+	static const GLfloat DEFAULT_NEAR_PLANE = 0.01f;
+	static const GLfloat DEFAULT_FAR_PLANE = 1000.0f;
 }
 
 #endif // !_Games_DefaultConfig_

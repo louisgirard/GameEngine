@@ -3,6 +3,7 @@
 
 class KeyAction {
 public:
+	//Main Action
 	static const int QUIT = 0;
 	static const int MAINACTION = 1;
 
@@ -19,9 +20,6 @@ public:
 	static const int ROTATEDOWN = 9;
 	static const int ROTATELEFT = 10;
 	static const int ROTATERIGHT = 11;
-	
-	
-
 };
 
 #endif // !_Games_KeyAction_H

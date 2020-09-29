@@ -7,7 +7,7 @@ namespace PhysicEngine {
 		_presentation = std::make_shared<PParticle>(p_color, p_size);
 	}
 
-	CParticle::CParticle(Types p_type, Vector3 p_position= Vector3::zero,Vector3 p_launchDirection = Vector3::front) {
+	CParticle::CParticle(Types p_type, Vector3 p_position= Vector3::ZERO,Vector3 p_launchDirection = Vector3::FRONT) {
 		switch (p_type) {
 		case Types::Bullet:
 			_abstraction = std::make_shared<AParticle>(1, p_position, p_launchDirection * 80, *new Vector3(0., -10., 0.), 0.999);

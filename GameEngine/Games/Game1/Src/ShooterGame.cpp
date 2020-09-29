@@ -3,18 +3,22 @@
 namespace Games {
 	namespace Game1 {
 
-		ShooterGame::ShooterGame() :GameBase() {}
+		ShooterGame::ShooterGame() :GameBase() , _weaponMenu(new Games::GameMenu("Weapon Pocket")) {}
+
+		ShooterGame::~ShooterGame(){
+			GameBase::~GameBase();
+			delete _weaponMenu;
+		}
 
 		void ShooterGame::initGame() {
 			// 1- Binding Keys
 			_keyboard.bindActionToKey(KeyAction::MAINACTION, 13);
 			// 2 - We create a sub menu for choosing a weapon
-			Games::GameMenu* weaponMenu = new Games::GameMenu("Weapon Pocket");
-			weaponMenu->addItem("Pistol", [this]() {_currentType = PhysicEngine::CParticle::Types::Bullet; });
-			weaponMenu->addItem("Canon", [this]() {_currentType = PhysicEngine::CParticle::Types::Canonball; });
-			weaponMenu->addItem("Laser Gun", [this]() {_currentType = PhysicEngine::CParticle::Types::Laser; });
-			weaponMenu->addItem("Fireball Gun", [this]() {_currentType = PhysicEngine::CParticle::Types::Fireball; });
-			getMenu()->addSubMenu(weaponMenu);
+			_weaponMenu->addItem("Pistol", [this]() {_currentType = PhysicEngine::CParticle::Types::Bullet; });
+			_weaponMenu->addItem("Canon", [this]() {_currentType = PhysicEngine::CParticle::Types::Canonball; });
+			_weaponMenu->addItem("Laser Gun", [this]() {_currentType = PhysicEngine::CParticle::Types::Laser; });
+			_weaponMenu->addItem("Fireball Gun", [this]() {_currentType = PhysicEngine::CParticle::Types::Fireball; });
+			getMenu()->addSubMenu(_weaponMenu);
 		}
 
 		void ShooterGame::handleInput() {
@@ -52,6 +56,7 @@ namespace Games {
 			GameBase::updateFrame();
 			for (int i = 0; i < _projectiles.size(); i++)
 			{
+				//Push the view matrix so that the transformation only apply to the particule
 				glPushMatrix();
 				_projectiles[i]->updateFrame();
 				glPopMatrix();

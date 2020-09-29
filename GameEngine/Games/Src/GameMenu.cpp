@@ -27,16 +27,16 @@ namespace Games {
 		_menuCallbacks[p_selected]();
 	}
 
-	void GameMenu::activate(int button)
+	void GameMenu::activate(int p_button)
 	{
 		//We verify that the button being attached comes from the mouse
-		assert((button == GLUT_LEFT_BUTTON) || (button == GLUT_MIDDLE_BUTTON) | (button == GLUT_RIGHT_BUTTON));
+		assert((p_button == GLUT_LEFT_BUTTON) || (p_button == GLUT_MIDDLE_BUTTON) | (p_button == GLUT_RIGHT_BUTTON));
 		//Unlink from current button if there is any
 		deactivate();
 		//Set current Menu as this in GLUT
 		bind();
 		//link the button from the menu in GLUT
-		glutAttachMenu(button);
+		glutAttachMenu(p_button);
 	}
 
 	void GameMenu::deactivate()
@@ -49,23 +49,23 @@ namespace Games {
 		}
 	}
 
-	void GameMenu::addItem(::std::string const& name, const ::std::function<void()>& callback)
+	void GameMenu::addItem(::std::string const& p_name, const ::std::function<void()>& p_callback)
 	{
 		//Set id for this item as the one who will be needed to call it from the vector
 		int id = _menuCallbacks.size();
 		//Add this item to the menu's vector of item
-		_menuCallbacks.push_back(callback);
+		_menuCallbacks.push_back(p_callback);
 		//Set current Menu in GLUT as this one
 		bind();
 		//Add this item in GLUT for display and link purpose
-		glutAddMenuEntry(name.c_str(), id);
+		glutAddMenuEntry(p_name.c_str(), id);
 	}
 
-	void GameMenu::addSubMenu(GameMenu* menu)
+	void GameMenu::addSubMenu(GameMenu* p_menu)
 	{
 		//Set current Menu in GLUT as this one
 		bind();
 		//Add sub menu to this menu in GLUT
-		glutAddSubMenu(menu->_title.c_str(), menu->_menuId);
+		glutAddSubMenu(p_menu->_title.c_str(), p_menu->_menuId);
 	}
 }

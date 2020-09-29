@@ -1,6 +1,8 @@
 #include <Games/Header/MouseStatus.hpp>
 
 namespace Games {
+
+#pragma region GETTERS
 	int MouseStatus::getX()
 	{
 		return _x;
@@ -9,6 +11,9 @@ namespace Games {
 	{
 		return _y;
 	}
+#pragma endregion
+
+#pragma region SETTERS
 	void MouseStatus::setX(int p_x)
 	{
 		_x = p_x;
@@ -17,4 +22,5 @@ namespace Games {
 	{
 		_y = p_y;
 	}
+#pragma endregion
 }

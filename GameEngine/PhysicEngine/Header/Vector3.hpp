@@ -18,10 +18,10 @@ namespace PhysicEngine {
 		/* Holds the value along the z axis */
 		float _z;
 
-		static Vector3 zero;
-		static Vector3 front;
-		static Vector3 right;
-		static Vector3 up;
+		static const Vector3 ZERO;
+		static const Vector3 FRONT;
+		static const Vector3 RIGHT;
+		static const Vector3 UP;
 
 		/* Default constructor */
 		Vector3();

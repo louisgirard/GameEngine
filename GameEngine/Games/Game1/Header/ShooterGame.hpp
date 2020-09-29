@@ -24,6 +24,9 @@ namespace Games {
 			/* Holds the type of particle selected */
 			PhysicEngine::CParticle::Types _currentType = PhysicEngine::CParticle::Types::Bullet;
 
+			/* Menu used to choose a weapon */
+			Games::GameMenu* _weaponMenu;
+
 			/* Initializes the game */
 			virtual void initGame();
 
@@ -44,6 +47,9 @@ namespace Games {
 		public :
 			/* Default constructor */
 			ShooterGame();
+
+			/*Destructor*/
+			~ShooterGame();
 		};
 
 	}

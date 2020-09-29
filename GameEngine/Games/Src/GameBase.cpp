@@ -61,10 +61,28 @@ namespace Games
 			
 		}
 	}
+	
+	GameBase::~GameBase() {
+		//As this instance die there is no more running instance
+		s_activeInstance = nullptr;
+	}
+
+	double GameBase::computeDt() {
+		std::chrono::steady_clock::time_point current = std::chrono::steady_clock::now();
+		double dt = std::chrono::duration_cast<std::chrono::nanoseconds> (current - _lastFrameTime).count() * NANO_TO_SECOND;
+		_lastFrameTime = current;
+		return dt;
+	}
+
+#pragma region GETTERS
 
 	GameBase* GameBase::getActiveApplication()
 	{
 		return s_activeInstance;
+	}
+	
+	double  GameBase::getDt() const {
+		return _dt;
 	}
 
 	const GameConfiguration& GameBase::getConfiguration() const
@@ -72,13 +90,11 @@ namespace Games
 		return _configuration;
 	}
 
-	GameMenu* GameBase::getMenu(){ return _mainMenu; }
+	GameMenu* GameBase::getMenu() { return _mainMenu; }
 
-	GameBase::~GameBase() {
-		//As this instance die there is no more running instance
-		s_activeInstance = nullptr;
-	}
+#pragma endregion
 
+#pragma region EXTERNAL_ACTION
 	void GameBase::launch() {
 		initGame();
 
@@ -87,7 +103,7 @@ namespace Games
 		if (!_configuration.graphicEnabled()) {
 			std::cout << "Launch console thread" << std::endl;
 			_running = true;
-			std::thread run (&GameBase::runGameInConsole, this);
+			std::thread run(&GameBase::runGameInConsole, this);
 
 			while (_running) {
 				char command;
@@ -112,26 +128,17 @@ namespace Games
 		s_glutInitialized = false;
 	}
 
-	void GameBase::onClose(::std::function<void()> const& function)
+	void GameBase::onClose(::std::function<void()> const& p_function)
 	{
-		_onCloseFunctions.push_back(function);
+		_onCloseFunctions.push_back(p_function);
 	}
+#pragma endregion
 
-	double  GameBase::getDt() const {
-		return _dt;
-	}
-
-	double GameBase::computeDt() {
-		std::chrono::steady_clock::time_point current = std::chrono::steady_clock::now();
-		double dt = std::chrono::duration_cast<std::chrono::nanoseconds> (current - _lastFrameTime).count() * NANO_TO_SECOND;
-		_lastFrameTime = current;
-		return dt;
-	}
-
+#pragma region GAME_MAIN_LOOP
 	void GameBase::displayLastFrame() {
 		// Get time passed between current and past frame
 		_dt = computeDt();
-		
+
 		// Clears frame and z buffers
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		// Reinit frame transformation
@@ -157,45 +164,11 @@ namespace Games
 			updatePhysic(_dt);
 		}
 	}
+#pragma endregion
 
-	void GameBase::handleInput() {
-
-		glm::vec3 xAxis(1.0, 0.0, 0.0);
-		glm::vec3 yAxis(0.0, 1.0, 0.0);
-
-		// If we press escape, we close this game
-		// ie: 27 is the unsigned char value of escape but if you want to use a more common letter
-		// for instance e you could use _keyboard.isPressed('e').
-		if (_keyboard.isPressed(KeyAction::QUIT)) {
-			quit();
-		}
-
-		//Key Related to Translation Movement
-		if (_keyboard.isPressed(KeyAction::MOVEFRONT)) {_camera.translateFront(_cameraSpeed * _dt); }
-		if (_keyboard.isPressed(KeyAction::MOVEBACK)) {_camera.translateFront(-_cameraSpeed * _dt); }
-		if (_keyboard.isPressed(KeyAction::MOVERIGHT)) { _camera.translateRight(_cameraSpeed * _dt); }
-		if (_keyboard.isPressed(KeyAction::MOVELEFT)) { _camera.translateRight(-_cameraSpeed * _dt); }
-
-		//Key Related to Rotation Movement
-		if (_keyboard.isPressed(KeyAction::ROTATELEFT)) { _camera.rotateLocal(yAxis, _cameraRotationSpeed * _dt); }
-		if (_keyboard.isPressed(KeyAction::ROTATERIGHT)) { _camera.rotateLocal(yAxis, -_cameraRotationSpeed * _dt); }
-		if (_keyboard.isPressed(KeyAction::ROTATEUP)) { _camera.rotateLocal(xAxis, _cameraRotationSpeed * _dt); }
-		if (_keyboard.isPressed(KeyAction::ROTATEDOWN)) { _camera.rotateLocal(xAxis, -_cameraRotationSpeed * _dt); }
-	}
-
-	void GameBase::updateFrame() {
-		// 1 - Update Camera
-		// For now 
-		glm::vec3 up = _camera.up();
-		glm::vec3 position = _camera.getPosition();
-		glm::vec3 referencePoint = position + _camera.lookingAt();
-
-		glMatrixMode(GL_MODELVIEW);
-		glMultMatrixf(&(_camera.getInverseTransform()[0][0]));
-	}
-
+#pragma region GAME_INITIALISATION
 	/*
-	* Needs to call this function before creating a game 
+	* Needs to call this function before creating a game
 	*/
 	void GameBase::initializeGLUT(int& p_argc, char** p_argv) {
 		if (!s_glutInitialized) {
@@ -203,11 +176,11 @@ namespace Games
 			//Init connexion between GLUT and Windows
 			glutInit(&p_argc, p_argv);
 			//Tell GLUT to return from the main loop when the window is closed 
-			glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE,GLUT_ACTION_GLUTMAINLOOP_RETURNS);
+			glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 			s_glutInitialized = true;
 		}
 	}
-	
+
 	void GameBase::initializeGlew() {
 		if (!s_glewInitialized) {
 			GLenum stateResult = glewInit();
@@ -222,7 +195,7 @@ namespace Games
 	}
 
 	void GameBase::initializeOpenGL() {
-		
+
 		//Is not done once cause this parameter could be overwrite during a games to fit needs
 		glEnable(GL_DEPTH_TEST); // Enables depth buffer
 		glShadeModel(GL_SMOOTH); // Enables smooth shading model
@@ -248,7 +221,87 @@ namespace Games
 		//Change cursor so that we don't see it
 		glutSetCursor(GLUT_CURSOR_NONE);
 	}
+#pragma endregion
+	
+#pragma region VIRTUAL_FUNCTION
 
+	void GameBase::handleInput() {
+
+		glm::vec3 xAxis(1.0, 0.0, 0.0);
+		glm::vec3 yAxis(0.0, 1.0, 0.0);
+
+		// If we press escape, we close this game
+		// ie: 27 is the unsigned char value of escape but if you want to use a more common letter
+		// for instance e you could use _keyboard.isPressed('e').
+		if (_keyboard.isPressed(KeyAction::QUIT)) {
+			quit();
+		}
+
+		//Key Related to Translation Movement
+		if (_keyboard.isPressed(KeyAction::MOVEFRONT)) { _camera.translateFront(_cameraSpeed * _dt); }
+		if (_keyboard.isPressed(KeyAction::MOVEBACK)) { _camera.translateFront(-_cameraSpeed * _dt); }
+		if (_keyboard.isPressed(KeyAction::MOVERIGHT)) { _camera.translateRight(_cameraSpeed * _dt); }
+		if (_keyboard.isPressed(KeyAction::MOVELEFT)) { _camera.translateRight(-_cameraSpeed * _dt); }
+
+		//Key Related to Rotation Movement
+		if (_keyboard.isPressed(KeyAction::ROTATELEFT)) { _camera.rotateLocal(yAxis, _cameraRotationSpeed * _dt); }
+		if (_keyboard.isPressed(KeyAction::ROTATERIGHT)) { _camera.rotateLocal(yAxis, -_cameraRotationSpeed * _dt); }
+		if (_keyboard.isPressed(KeyAction::ROTATEUP)) { _camera.rotateLocal(xAxis, _cameraRotationSpeed * _dt); }
+		if (_keyboard.isPressed(KeyAction::ROTATEDOWN)) { _camera.rotateLocal(xAxis, -_cameraRotationSpeed * _dt); }
+	}
+
+	void GameBase::updateFrame() {
+		// 1 - Update Camera
+		// For now 
+		glMatrixMode(GL_MODELVIEW);
+		glMultMatrixf(&(_camera.getInverseTransform()[0][0]));
+	}
+
+	void GameBase::reshape(GLint p_width, GLint p_height)
+	{
+		// Updates the view port size
+		glViewport(0, 0, p_width, p_height);
+		// Update Projection Matrix
+		glMatrixMode(GL_PROJECTION); //Specifies the subsequent operation will affect the projection matrix
+		glLoadIdentity(); // Replace current projection matrix by an identity matrix
+		gluPerspective(_configuration.getFOV(), (float)p_width / p_height, _configuration.getNearPlane(), _configuration.getFarPlane()); //Create a new perspective projection matrix from our configuration frustum
+		glMatrixMode(GL_MODELVIEW); //We come back to model matrix
+		// Updates the configuration
+		_configuration.setWindowDimension(p_width, p_height);
+	}
+
+	void GameBase::keyPressed(unsigned char p_key, int p_x, int p_y) {
+		_keyboard.press(p_key);
+	}
+
+	void GameBase::keyReleased(unsigned char p_key, int p_x, int p_y)
+	{
+		_keyboard.release(p_key);
+	}
+
+	void GameBase::specialKeyPressed(unsigned char p_key, int p_x, int p_y)
+	{
+		_keyboard.pressSpecialKey(p_key);
+	}
+
+	void GameBase::specialKeyReleased(unsigned char p_key, int p_x, int p_y)
+	{
+		_keyboard.releaseSpecialKey(p_key);
+	}
+
+	void GameBase::mousePassiveMotion(int p_x, int p_y) {
+		glm::vec3 xAxis(1.0, 0.0, 0.0);
+		glm::vec3 yAxis(0.0, 1.0, 0.0);
+
+		_camera.rotateLocal(yAxis, -(p_x - _configuration.getWindowWidth() / 2) * _cameraRotationSpeed * _dt);
+		_camera.rotateLocal(xAxis, -(p_y - _configuration.getWindowHeight() / 2) * _cameraRotationSpeed * _dt);
+		_mouse.setX(p_x);
+		_mouse.setY(p_y);
+		glutWarpPointer(_configuration.getWindowWidth() / 2, _configuration.getWindowHeight() / 2);
+	}
+#pragma endregion
+	
+#pragma region GLUT_CALLBACK
 	void GameBase::registerGLUTCallback() {
 		//Register function used to display a frame
 		glutDisplayFunc(displayCallback);
@@ -259,12 +312,13 @@ namespace Games
 		glutKeyboardUpFunc(keyboardUpCallback); // function called when a key has been released
 		glutSpecialFunc(keyboardSpecialCallback); // Function called for special key
 		glutSpecialUpFunc(keyboardSpecialUpCallback);
-		glutMouseFunc(mouseCallback);
-		glutPassiveMotionFunc(mousePassiveMotionCallback);
+		glutMouseFunc(mouseCallback); //function called for mouse button event
+		glutMotionFunc(mouseMotionCallback); //function called for mouse motion event when a button is pressed
+		glutPassiveMotionFunc(mousePassiveMotionCallback);//function called for mouse motion event
 		//Register function called when the game is closed
 		glutCloseFunc(closeCallback);
 
-		
+
 	}
 
 	void GameBase::displayCallback()
@@ -272,44 +326,44 @@ namespace Games
 		s_activeInstance->displayLastFrame();
 	}
 
-	void GameBase::reshapeCallback(GLint width, GLint height)
+	void GameBase::reshapeCallback(GLint p_width, GLint p_height)
 	{
-		s_activeInstance->reshape(width, height);
+		s_activeInstance->reshape(p_width, p_height);
 	}
 
-	void GameBase::keyboardCallback(unsigned char key, int x, int y)
+	void GameBase::keyboardCallback(unsigned char p_key, int p_x, int p_y)
 	{
-		s_activeInstance->keyPressed(key, x, y);
+		s_activeInstance->keyPressed(p_key, p_x, p_y);
 	}
 
-	void GameBase::keyboardUpCallback(unsigned char key, int x, int y)
+	void GameBase::keyboardUpCallback(unsigned char p_key, int p_x, int p_y)
 	{
-		s_activeInstance->keyReleased(key, x, y);
+		s_activeInstance->keyReleased(p_key, p_x, p_y);
 	}
 
-	void GameBase::keyboardSpecialCallback(int key, int x, int y)
+	void GameBase::keyboardSpecialCallback(int p_key, int p_x, int p_y)
 	{
-		s_activeInstance->specialKeyPressed(key, x, y);
+		s_activeInstance->specialKeyPressed(p_key, p_x, p_y);
 	}
 
-	void GameBase::keyboardSpecialUpCallback(int key, int x, int y)
+	void GameBase::keyboardSpecialUpCallback(int p_key, int p_x, int p_y)
 	{
-		s_activeInstance->specialKeyReleased(key, x, y);
+		s_activeInstance->specialKeyReleased(p_key, p_x, p_y);
 	}
 
-	void GameBase::mouseCallback(int button, int state, int x, int y)
+	void GameBase::mouseCallback(int p_button, int p_state, int p_x, int p_y)
 	{
-		s_activeInstance->mouse(button, state, x, y);
+		s_activeInstance->mouse(p_button, p_state, p_x, p_y);
 	}
 
-	void GameBase::mouseMotionCallback(int x, int y)
+	void GameBase::mouseMotionCallback(int p_x, int p_y)
 	{
-		s_activeInstance->mouseMotion(x, y);
+		s_activeInstance->mouseMotion(p_x, p_y);
 	}
 
-	void GameBase::mousePassiveMotionCallback(int x, int y)
+	void GameBase::mousePassiveMotionCallback(int p_x, int p_y)
 	{
-		s_activeInstance->mousePassiveMotion(x, y);
+		s_activeInstance->mousePassiveMotion(p_x, p_y);
 	}
 
 	void GameBase::closeCallback()
@@ -319,49 +373,5 @@ namespace Games
 			s_activeInstance->_onCloseFunctions[cpt]();
 		}
 	}
-
-	void GameBase::reshape(GLint width, GLint height)
-	{
-		// Updates the view port size
-		glViewport(0, 0, width, height);
-		// Update Projection Matrix
-		glMatrixMode(GL_PROJECTION); //Specifies the subsequent operation will affect the projection matrix
-		glLoadIdentity(); // Replace current projection matrix by an identity matrix
-		gluPerspective(_configuration.getFOV(), (float)width / height, _configuration.getNearPlane(), _configuration.getFarPlane()); //Create a new perspective projection matrix from our configuration frustum
-		glMatrixMode(GL_MODELVIEW); //We come back to model matrix
-		// Updates the configuration
-		_configuration.setWindowDimension(width, height); 
-	}
-	
-	void GameBase::keyPressed(unsigned char key, int x, int y) {
-		_keyboard.press(key);
-	}
-
-	void GameBase::keyReleased(unsigned char key, int x, int y)
-	{
-		_keyboard.release(key);
-	}
-
-	void GameBase::specialKeyPressed(unsigned char key, int x, int y) 
-	{
-		_keyboard.pressSpecialKey(key);
-	}
-
-	void GameBase::specialKeyReleased(unsigned char key, int x, int y) 
-	{
-		_keyboard.releaseSpecialKey(key);
-	}
-
-	void GameBase::mousePassiveMotion(int x, int y) {
-		glm::vec3 xAxis(1.0, 0.0, 0.0);
-		glm::vec3 yAxis(0.0, 1.0, 0.0);
-
-		_camera.rotateLocal(yAxis, -(x- _configuration.getWindowWidth() / 2)*_cameraRotationSpeed * _dt);
-		_camera.rotateLocal(xAxis, -(y - _configuration.getWindowHeight() / 2) * _cameraRotationSpeed * _dt);
-		_mouse.setX(x);
-		_mouse.setY(y);
-		glutWarpPointer(_configuration.getWindowWidth() / 2, _configuration.getWindowHeight() / 2);
-	}
-
-
+#pragma endregion
 }
