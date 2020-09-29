@@ -17,6 +17,7 @@
 #include <Games/Header/KeyAction.hpp>
 #include <GraphicEngine/Header/Camera.hpp>
 #include <PhysicEngine/Header/MathConstant.hpp>
+#include <Games/Header/MouseStatus.hpp>
 
 #define NANO_TO_SECOND 0.000000001;
 
@@ -79,6 +80,7 @@ namespace Games {
 		::std::vector<::std::function<void()> > _onCloseFunctions;
 
 		KeyboardStatus _keyboard;
+		MouseStatus _mouse;
 
 		GameMenu* _mainMenu;
 
@@ -109,7 +111,7 @@ namespace Games {
 
 		virtual void mouseMotion(int x, int y) {}
 
-		virtual void mousePassiveMotion(int x, int y) {}
+		virtual void mousePassiveMotion(int x, int y);
 
 		static GameBase* getActiveApplication();
 
