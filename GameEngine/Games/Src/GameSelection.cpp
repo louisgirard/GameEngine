@@ -19,7 +19,7 @@ namespace Games {
 
 	void GameSelection::printSelectionMenu() {
 		std::cout << "-1 - Quit Engine" << std::endl;
-		for (int i = 0; i < s_gameDescriptions.size(); i++) {
+		for (int i = 0; i < (int)s_gameDescriptions.size(); i++) {
 			std::cout << i << " : " << s_gameDescriptions[i] << std::endl;
 		}
 	}

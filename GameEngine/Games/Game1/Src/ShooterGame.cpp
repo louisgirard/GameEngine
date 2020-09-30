@@ -44,7 +44,7 @@ namespace Games {
 		void ShooterGame::updatePhysic(double p_dt) {
 
 			//going through every particle in the scene and updating their positions
-			for (int i = 0; i < _projectiles.size(); i++)
+			for (int i = 0; i < (int)_projectiles.size(); i++)
 			{
 				_projectiles[i]->updatePhysic(p_dt);
 				//the positions of the particles are printed in the console
@@ -54,7 +54,7 @@ namespace Games {
 
 		void ShooterGame::updateFrame() {
 			GameBase::updateFrame();
-			for (int i = 0; i < _projectiles.size(); i++)
+			for (int i = 0; i < (int)_projectiles.size(); i++)
 			{
 				//Push the view matrix so that the transformation only apply to the particule
 				glPushMatrix();

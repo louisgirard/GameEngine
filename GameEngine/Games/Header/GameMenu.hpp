@@ -34,10 +34,11 @@ namespace Games {
 		/**GLUT menu's ID**/
 		int _menuId;
 
-		/**Button linked to the menu**/
-		int _linkedToButton;
 		/**Boolean true if there is a button linked to the menu**/
 		bool _isButtonLinked;
+
+		/**Button linked to the menu**/
+		int _linkedToButton;
 		
 
 	public :

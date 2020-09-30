@@ -33,10 +33,11 @@ namespace Games {
 		static bool s_glutInitialized;
 		static bool s_glewInitialized;
 
-		/**Time since last frame**/
-		std::chrono::steady_clock::time_point _lastFrameTime;
 		/**Delta time between last and current frame**/
 		double _dt;
+
+		/**Time since last frame**/
+		std::chrono::steady_clock::time_point _lastFrameTime;
 
 		/**Boolean used to keep track of game states (Running or not)**/
 		bool _running;

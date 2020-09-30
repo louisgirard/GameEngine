@@ -6,7 +6,7 @@ namespace Games
 	bool GameBase::s_glutInitialized = false;
 	bool GameBase::s_glewInitialized = false;
 
-	GameBase::GameBase():_configuration(),_dt(0.0),_lastFrameTime(), _running(false) {
+	GameBase::GameBase():_dt(0.0),_lastFrameTime(), _running(false), _configuration() {
 
 		initGameConfig();
 		//We only want one game to run at a time

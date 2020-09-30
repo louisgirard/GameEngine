@@ -20,6 +20,16 @@ namespace Games {
 		/**Does the game use the graphic library**/
 		bool _useGraphics;
 
+		/** Targetted frame rate.If used the frame rate will never be greater than the provided value(see FPS enum type). **/
+		FPS _fpsRate;
+
+		/*  GLUT display mode
+		* Default mode is GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE
+		* Meaning we are displaying in rgb, using a depth buffer,
+		* double buffered window(help to address flicker problems) and with window multisampling support
+		*/
+		GLuint _glutDisplayMode;
+
 		/**Game window dimensions**/
 		int _windowWidth;
 		int _windowHeight;
@@ -28,16 +38,6 @@ namespace Games {
 		GLfloat _fov;
 		GLfloat _nearPlane;
 		GLfloat _farPlane;
-		
-		/*  GLUT display mode
-		* Default mode is GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE 
-		* Meaning we are displaying in rgb, using a depth buffer,
-		* double buffered window(help to address flicker problems) and with window multisampling support 
-		*/
-		GLuint _glutDisplayMode;
-
-		/** Targetted frame rate.If used the frame rate will never be greater than the provided value(see FPS enum type). **/
-		FPS _fpsRate;
 
 	public :
 

@@ -6,7 +6,7 @@ DIR1 = .
 DIR2 = ../Dependencies_x64/include
 INC=$(DIR1) $(DIR2)
 INC_PARAMS=$(foreach d, $(INC), -I$d)
-CXXFLAGS=-Wall $(INC_PARAMS)
+CXXFLAGS=-Wall -Wno-unknown-pragmas $(INC_PARAMS)
 LIB=-lm -lGL -lglut -lGLEW -lGLU -lpthread
 OBJ=build/Main.o build/GameSelection.o build/GameBase.o build/GameMenu.o build/ShooterGame.o build/GameConfiguration.o build/KeyboardStatus.o build/CParticle.o build/Vector3.o build/AParticle.o build/PParticle.o build/MouseStatus.o \
 build/Camera.o 
