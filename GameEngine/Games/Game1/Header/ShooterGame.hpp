@@ -47,9 +47,6 @@ namespace Games {
 		public :
 			/* Default constructor */
 			ShooterGame();
-
-			/*Destructor*/
-			~ShooterGame();
 		};
 
 	}

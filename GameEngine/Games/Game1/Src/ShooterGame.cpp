@@ -5,11 +5,6 @@ namespace Games {
 
 		ShooterGame::ShooterGame() :GameBase() , _weaponMenu(new Games::GameMenu("Weapon Pocket")) {}
 
-		ShooterGame::~ShooterGame(){
-			GameBase::~GameBase();
-			delete _weaponMenu;
-		}
-
 		void ShooterGame::initGame() {
 			// 1- Binding Keys
 			_keyboard.bindActionToKey(KeyAction::MAINACTION, 13);
@@ -19,6 +14,11 @@ namespace Games {
 			_weaponMenu->addItem("Laser Gun", [this]() {_currentType = PhysicEngine::CParticle::Types::Laser; });
 			_weaponMenu->addItem("Fireball Gun", [this]() {_currentType = PhysicEngine::CParticle::Types::Fireball; });
 			getMenu()->addSubMenu(_weaponMenu);
+			// 3 - Add close function
+			onClose([this]() {
+				// We destroy the menus
+				delete _weaponMenu;
+			});
 		}
 
 		void ShooterGame::handleInput() {
