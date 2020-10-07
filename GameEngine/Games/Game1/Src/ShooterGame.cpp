@@ -3,9 +3,10 @@
 namespace Games {
 	namespace Game1 {
 
-		ShooterGame::ShooterGame() :GameBase() , _weaponMenu(new Games::GameMenu("Weapon Pocket")) {}
+		ShooterGame::ShooterGame() :GameBase() , _weaponMenu(new Games::GameMenu("Weapon Pocket")), gravityGenerator(*new PhysicEngine::ParticleGravity(*new PhysicEngine::Vector3(0, -10, 0))) {}
 
 		void ShooterGame::initGame() {
+			registry = *new PhysicEngine::ParticleForceRegistry();
 			// 1- Binding Keys
 			_keyboard.bindActionToKey(KeyAction::MAINACTION, 13);
 			// 2 - We create a sub menu for choosing a weapon
@@ -31,6 +32,7 @@ namespace Games {
 				if (!_shootingButtonPressed) {
 					//adding a new particle to the scene
 					_projectiles.push_back(std::make_shared<PhysicEngine::CParticle>(_currentType, PhysicEngine::Vector3::convertGlm(_camera.getPosition()), PhysicEngine::Vector3::convertGlm(_camera.lookingAt())));
+					registry.add((_projectiles.end()-1)->get(), &gravityGenerator);
 					_shootingButtonPressed = true;
 				}
 			}
@@ -44,6 +46,7 @@ namespace Games {
 		void ShooterGame::updatePhysic(double p_dt) {
 
 			//going through every particle in the scene and updating their positions
+			registry.updatePhysic(p_dt);
 			for (int i = 0; i < (int)_projectiles.size(); i++)
 			{
 				_projectiles[i]->updatePhysic(p_dt);

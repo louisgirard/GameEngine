@@ -21,6 +21,9 @@ namespace PhysicEngine {
 		/* Holds the inverse of the mass of the particle */
 		float _inverseMass;
 
+		/*Holds the accumulated force to be applied next step*/
+		Vector3 _forceAccum;
+
 	public:
 		/*Constructor*/
 		AParticle(float p_mass, Vector3 p_position, Vector3 p_velocity, Vector3 p_acceleration, float p_damping);
@@ -98,5 +101,11 @@ namespace PhysicEngine {
 		@param p_time the ellapsed time since the last update
 		*/
 		void integrate(double p_time);
+
+		/*Resets the force accumulator to zero*/
+		void clearAccumulator();
+
+		/*Adds a force to the particle for the next iteration only*/
+		void addForce(const Vector3 &p_force);
 	};
 }

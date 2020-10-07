@@ -8,6 +8,7 @@ namespace PhysicEngine {
 		_velocity = p_velocity;
 		_acceleration = p_acceleration;
 		_damping = p_damping;
+		_forceAccum = Vector3::ZERO;
 	}
 
 	Vector3 AParticle::getPosition() const
@@ -106,10 +107,30 @@ namespace PhysicEngine {
 		// Do not integrate if infinite mass
 		if (_inverseMass <= 0.0) { return; }
 
+		Vector3 resultingAcceleration = Vector3::ZERO;
+
+		//no force applied on an object without mass because the inverse mass is infinite
+		if (getMass() != 0) {
+			//Compute the acceleration due to forces
+			resultingAcceleration = _acceleration + _forceAccum * _inverseMass;
+		}
+
+
 		// Update the position
 		_position += _velocity * p_time;
 
 		// Update velocity
-		_velocity = _velocity * powf(_damping, p_time) + _acceleration * p_time;
+		_velocity = _velocity * powf(_damping, p_time) + resultingAcceleration * p_time;
+
+		//Clear the forces
+		clearAccumulator();
+	}
+
+	void AParticle::clearAccumulator() {
+		_forceAccum = Vector3::ZERO;
+	}
+
+	void AParticle::addForce(const Vector3& p_force) {
+		_forceAccum += p_force;
 	}
 }

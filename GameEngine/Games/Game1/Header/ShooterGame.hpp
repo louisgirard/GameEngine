@@ -4,6 +4,8 @@
 #include <Games/Header/GameBase.hpp>
 #include <PhysicEngine/Header/CParticle.hpp>
 #include <PhysicEngine/Header/Vector3.hpp>
+#include <PhysicEngine/Header/ParticleForceRegistry.hpp>
+#include <PhysicEngine/Header/ParticleGravity.hpp>
 
 namespace Games {
 	namespace Game1 {
@@ -43,6 +45,10 @@ namespace Games {
 			Updates the visual representations of the particles
 			*/
 			virtual void updateFrame();
+
+			PhysicEngine::ParticleForceRegistry registry;
+
+			PhysicEngine::ParticleGravity gravityGenerator;
 
 		public :
 			/* Default constructor */

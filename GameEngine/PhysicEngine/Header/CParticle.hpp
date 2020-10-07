@@ -119,5 +119,8 @@ namespace PhysicEngine {
 		@param p_time the ellapsed time since the last update
 		*/
 		void updatePhysic(double p_dt);
+
+		/*Adds a force to the particle for the next iteration only*/
+		void addForce(const Vector3& p_force);
 	};
 }
