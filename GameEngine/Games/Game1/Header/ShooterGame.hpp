@@ -46,9 +46,15 @@ namespace Games {
 			*/
 			virtual void updateFrame();
 
-			PhysicEngine::ParticleForceRegistry registry;
+			/*
+			* Contains all the forces and the particle they're associated with
+			*/
+			PhysicEngine::ParticleForceRegistry _registry;
 
-			PhysicEngine::ParticleGravity gravityGenerator;
+			/*
+			* The force generator for gravity in the game
+			*/
+			PhysicEngine::ParticleGravity _gravityGenerator;
 
 		public :
 			/* Default constructor */
