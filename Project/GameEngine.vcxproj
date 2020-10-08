@@ -31,6 +31,7 @@
     <ClCompile Include="..\GameEngine\Main.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\AParticle.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\CParticle.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\Src\ParticleDrag.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\ParticleForceRegistry.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\ParticleGravity.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\Vector3.cpp" />
@@ -50,6 +51,7 @@
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\AParticle.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\CParticle.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\MathConstant.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleDrag.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleForceGenerator.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleForceRegistry.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleGravity.hpp" />
