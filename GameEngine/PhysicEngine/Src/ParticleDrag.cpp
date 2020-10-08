@@ -12,9 +12,8 @@ namespace PhysicEngine {
 	{
 		// Get normalized velocity of the particle
 		Vector3 normalizedVelocity = p_particle->getVelocity();
-		normalizedVelocity.normalize();
-
 		float magnitude = normalizedVelocity.magnitude();
+		normalizedVelocity.normalize();
 
 		// Calculate force
 		Vector3 force = normalizedVelocity * -1 * (_k1 * magnitude + _k2 * magnitude * magnitude);
