@@ -99,6 +99,18 @@
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\ParticleDrag.cpp">
       <Filter>GameEngine\PhysicEngine\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\GameEngine\PhysicEngine\Src\ParticleAnchoredSpring.cpp">
+      <Filter>GameEngine\PhysicEngine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\PhysicEngine\Src\ParticleBungee.cpp">
+      <Filter>GameEngine\PhysicEngine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\PhysicEngine\Src\ParticleBuoyancy.cpp">
+      <Filter>GameEngine\PhysicEngine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\PhysicEngine\Src\ParticleSpring.cpp">
+      <Filter>GameEngine\PhysicEngine\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\GameEngine\Games\Game1\Header\ShooterGame.hpp">
@@ -156,6 +168,18 @@
       <Filter>GameEngine\PhysicEngine\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleDrag.hpp">
+      <Filter>GameEngine\PhysicEngine\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleAnchoredSpring.hpp">
+      <Filter>GameEngine\PhysicEngine\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleBungee.hpp">
+      <Filter>GameEngine\PhysicEngine\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleBuoyancy.hpp">
+      <Filter>GameEngine\PhysicEngine\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleSpring.hpp">
       <Filter>GameEngine\PhysicEngine\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

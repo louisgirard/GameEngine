@@ -13,7 +13,6 @@ namespace PhysicEngine {
 		/*Length at rest*/
 		float _l0;
 
-
 	public:
 		ParticleAnchoredSpring(Vector3 p_anchor, float p_k, float p_l);
 

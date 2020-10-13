@@ -7,12 +7,11 @@ namespace PhysicEngine {
 	{
 	private:
 		/*Particule at the opposite point of the spring*/
-		CParticle* _opposite_particle;
+		CParticle* _oppositeParticle;
 		/*Holds the compression distance coefficient */
 		float _k;
 		/*Length at rest*/
 		float _l0;
-
 
 	public:
 		ParticleSpring(CParticle* p_particle, float p_k, float p_l);

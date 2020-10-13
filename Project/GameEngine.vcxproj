@@ -31,9 +31,13 @@
     <ClCompile Include="..\GameEngine\Main.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\AParticle.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\CParticle.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\Src\ParticleAnchoredSpring.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\Src\ParticleBungee.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\Src\ParticleBuoyancy.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\ParticleDrag.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\ParticleForceRegistry.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\ParticleGravity.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\Src\ParticleSpring.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -51,10 +55,14 @@
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\AParticle.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\CParticle.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\MathConstant.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleAnchoredSpring.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleBungee.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleBuoyancy.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleDrag.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleForceGenerator.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleForceRegistry.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleGravity.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleSpring.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\Vector3.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -1,4 +1,4 @@
-#include <PhysicEngine/Header/ParticleForceGenerator.hpp>
+#include <PhysicEngine/Header/ParticleBuoyancy.hpp>
 
 namespace PhysicEngine 
 {
@@ -12,24 +12,22 @@ namespace PhysicEngine
 
 	void ParticleBuoyancy::updateForce(CParticle* p_particle, double p_dt)
 	{
-		Vector3 objectPos = p_particle.getPosition();
-		float y_0 = objectPos._y;
-		float d = (y_0 - this->_waterheight - this->_maxDepth) / 2;
+		Vector3 objectPos = p_particle->getPosition();
+		float d = (objectPos._y - _waterheight - _maxDepth) / (2 * _maxDepth);
 		Vector3 force(0,0,0);
 
-		if ( d <= 0)
+		if (d <= 0)
 		{
 			return;
 		}
 		else if (d >= 1)
 		{
-			force._y = (this->_volume * this->_density);
+			force._y = _volume * _density;
 		}
 		else
 		{
-			force._y = (d * this->_volume * this->_density);
+			force._y = d * _volume * _density;
 		}
 		p_particle->addForce(force);
 	}
-
 }
