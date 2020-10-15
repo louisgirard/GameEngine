@@ -34,6 +34,7 @@
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\ParticleAnchoredSpring.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\ParticleBungee.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\ParticleBuoyancy.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\Src\ParticleContact.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\ParticleDrag.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\ParticleForceRegistry.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\ParticleGravity.cpp" />
@@ -58,6 +59,7 @@
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleAnchoredSpring.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleBungee.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleBuoyancy.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleContact.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleDrag.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleForceGenerator.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleForceRegistry.hpp" />
