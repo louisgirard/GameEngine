@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -20,29 +20,43 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\GameEngine\Games\Game1\Src\ShooterGame.cpp" />
+    <ClCompile Include="..\GameEngine\Games\Game2\Src\BlobGame.cpp" />
     <ClCompile Include="..\GameEngine\Games\Src\GameBase.cpp" />
     <ClCompile Include="..\GameEngine\Games\Src\GameConfiguration.cpp" />
     <ClCompile Include="..\GameEngine\Games\Src\GameMenu.cpp" />
     <ClCompile Include="..\GameEngine\Games\Src\GameSelection.cpp" />
     <ClCompile Include="..\GameEngine\Games\Src\KeyboardStatus.cpp" />
     <ClCompile Include="..\GameEngine\Games\Src\MouseStatus.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\ElementBufferObject.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\FrameBufferObject.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\VertexArrayObject.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\VertexBufferObject.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\Shader.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\ShaderManager.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\ShaderParser.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\ShaderProgram.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\ShaderSource.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Src\Camera.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Src\PParticle.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\Textures\Src\Texture2D.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\TypeSpec\Header\TextureInternalFormatSpec.hpp" />
     <ClCompile Include="..\GameEngine\Main.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\ParticleContact.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\Forces\Src\ParticleDrag.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\Forces\Src\ParticleForceRegistry.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\Forces\Src\ParticleGravity.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\SpringForces\Src\ParticleAnchoredSpring.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\SpringForces\Src\ParticleBungee.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\SpringForces\Src\ParticleBuoyancy.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\SpringForces\Src\ParticleSpring.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\AParticle.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\CParticle.cpp" />
-    <ClCompile Include="..\GameEngine\PhysicEngine\Src\ParticleAnchoredSpring.cpp" />
-    <ClCompile Include="..\GameEngine\PhysicEngine\Src\ParticleBungee.cpp" />
-    <ClCompile Include="..\GameEngine\PhysicEngine\Src\ParticleBuoyancy.cpp" />
-    <ClCompile Include="..\GameEngine\PhysicEngine\Src\ParticleContact.cpp" />
-    <ClCompile Include="..\GameEngine\PhysicEngine\Src\ParticleDrag.cpp" />
-    <ClCompile Include="..\GameEngine\PhysicEngine\Src\ParticleForceRegistry.cpp" />
-    <ClCompile Include="..\GameEngine\PhysicEngine\Src\ParticleGravity.cpp" />
-    <ClCompile Include="..\GameEngine\PhysicEngine\Src\ParticleSpring.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\Vector3.cpp" />
+    <ClCompile Include="..\GameEngine\System\Src\Paths.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\GameEngine\Games\Game1\Header\ShooterGame.hpp" />
+    <ClInclude Include="..\GameEngine\Games\Game2\Header\BlobGame.hpp" />
     <ClInclude Include="..\GameEngine\Games\Header\DefaultConfig.hpp" />
     <ClInclude Include="..\GameEngine\Games\Header\GameBase.hpp" />
     <ClInclude Include="..\GameEngine\Games\Header\GameConfiguration.hpp" />
@@ -51,21 +65,36 @@
     <ClInclude Include="..\GameEngine\Games\Header\KeyAction.hpp" />
     <ClInclude Include="..\GameEngine\Games\Header\KeyboardStatus.hpp" />
     <ClInclude Include="..\GameEngine\Games\Header\MouseStatus.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\Buffers\Header\ElementBufferObject.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\Buffers\Header\FrameBufferObject.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\Buffers\Header\VertexArrayObject.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\Buffers\Header\VertexBufferObject.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Header\Camera.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\Header\GraphicEnum.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Header\PParticle.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\Shaders\Header\Shader.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\Shaders\Header\ShaderManager.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\Shaders\Header\ShaderParser.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\Shaders\Header\ShaderProgram.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\Shaders\Header\ShaderSource.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\Textures\Header\Texture2D.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\TypeSpec\Header\GLMTypeSpec.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\TypeSpec\Header\GLTypeSpec.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\TypeSpec\Header\ToGLTypeSpec.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleContact.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Forces\Header\ParticleDrag.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Forces\Header\ParticleForceGenerator.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Forces\Header\ParticleForceRegistry.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Forces\Header\ParticleGravity.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\AParticle.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\CParticle.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\MathConstant.hpp" />
-    <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleAnchoredSpring.hpp" />
-    <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleBungee.hpp" />
-    <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleBuoyancy.hpp" />
-    <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleContact.hpp" />
-    <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleDrag.hpp" />
-    <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleForceGenerator.hpp" />
-    <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleForceRegistry.hpp" />
-    <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleGravity.hpp" />
-    <ClInclude Include="..\GameEngine\PhysicEngine\Header\ParticleSpring.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\Vector3.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\SpringForces\Header\ParticleAnchoredSpring.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\SpringForces\Header\ParticleBungee.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\SpringForces\Header\ParticleBuoyancy.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\SpringForces\Header\ParticleSpring.hpp" />
+    <ClInclude Include="..\GameEngine\System\Header\Paths.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
