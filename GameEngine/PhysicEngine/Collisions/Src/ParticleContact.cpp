@@ -15,6 +15,7 @@ namespace PhysicEngine
 		void ParticleContact::resolve(float p_dt)
 		{
 			resolveVelocity(p_dt);
+			resolveInterpenetration(p_dt);
 		}
 
 		float ParticleContact::calculateSeparatingVelocity() const
@@ -31,11 +32,12 @@ namespace PhysicEngine
 
 		void ParticleContact::resolveVelocity(float p_dt)
 		{
-			// Vs
+			// Computation of separating velocities
 			float separatingVelocity = calculateSeparatingVelocity();
+			//if the separating velocity is positive, there's no need for an impulsion
 			if (separatingVelocity > 0) return;
 
-			// -cVs
+			// Apply restitution coefficient
 			float newSeparatingVelocity = -separatingVelocity * _restitutionCoef;
 
 			// Check the velocity build-up due to acceleration only
@@ -43,23 +45,30 @@ namespace PhysicEngine
 			if (_particles[1] != nullptr) accCausedVelocity -= _particles[1]->getAcceleration();
 			float accCausedSeparatingVelocity = accCausedVelocity.scalarProduct(_contactNormal) * p_dt;
 
+			//Check if the objects are getting closer due to acceleration build up
+			//If so, remove the closing velocity
 			if (accCausedSeparatingVelocity < 0)
 			{
 				newSeparatingVelocity += _restitutionCoef * accCausedSeparatingVelocity;
 
+				//check that we do not remove more than there is
 				if (newSeparatingVelocity < 0) newSeparatingVelocity = 0;
 			}
 
-			// dV
+			// separating velocity delta between before and after the contact
 			float deltaVelocity = newSeparatingVelocity - separatingVelocity;
 
-			// Calculate total impulse
+			// Computation of the sum of inverse masses
 			float totalInverseMass = _particles[0]->getInverseMass();
 			if (_particles[1] != nullptr) totalInverseMass += _particles[1]->getInverseMass();
 
+			//both masses are infinite, no need for resolution
+			if (totalInverseMass <= 0) return;
+
+			//the total impulse is dV*(mA*mB/(mA+mB))
 			Vector3 totalImpulse = _contactNormal * (deltaVelocity / totalInverseMass);
 
-			// Apply impulse
+			// Apply impulse proportionnaly to the inverse mass of the particle
 			_particles[0]->setVelocity(_particles[0]->getVelocity() + totalImpulse * _particles[0]->getInverseMass());
 			if (_particles[1] != nullptr)
 			{
@@ -74,13 +83,17 @@ namespace PhysicEngine
 			float totalInverseMass = _particles[0]->getInverseMass();
 			if (_particles[1] != nullptr) totalInverseMass += _particles[1]->getInverseMass();
 
-			// Movement = n*d*mA*mB / mA + mB
+			//both masses are infinite, no need for resolution
+			if (totalInverseMass <= 0) return;
+
+			// Movement = n*d*mA*mB / (mA + mB)
 			Vector3 movement = _contactNormal * (_penetration / totalInverseMass);
 
+			// the movement is distributed between the two particles proportionnaly to their inverse masses
 			_particles[0]->setPosition(_particles[0]->getPosition() + movement * _particles[0]->getInverseMass());
 			if (_particles[1] != nullptr)
 			{
-				_particles[1]->setVelocity(_particles[1]->getPosition() - movement * _particles[1]->getInverseMass());
+				_particles[1]->setPosition(_particles[1]->getPosition() - movement * _particles[1]->getInverseMass());
 			}
 		}
 	}

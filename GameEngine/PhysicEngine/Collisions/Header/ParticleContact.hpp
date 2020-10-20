@@ -7,7 +7,7 @@ namespace PhysicEngine
 		class ParticleContact
 		{
 		private:
-			/* Holds the two particles involved in the contact */
+			/* Holds the two particles involved in the contact (second particle can be NULL)*/
 			CParticle* _particles[2];
 
 			/* Holds the restitution coefficient */
@@ -19,7 +19,7 @@ namespace PhysicEngine
 			/* Holds the depth of penetration */
 			float _penetration;
 
-			/* Calculate the separating velocity */
+			/* Calculates the separating velocity */
 			float calculateSeparatingVelocity() const;
 
 			/*Apply impulsions
