@@ -7,7 +7,7 @@ namespace PhysicEngine
 		class ParticleContact
 		{
 		private:
-			/* Holds the two particles involved in the contact */
+			/* Holds the two particles involved in the contact (second particle can be NULL)*/
 			CParticle* _particles[2];
 
 			/* Holds the restitution coefficient */
