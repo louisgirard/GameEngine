@@ -17,6 +17,11 @@ namespace PhysicEngine
 			resolveVelocity(p_dt);
 		}
 
+		float ParticleContact::getPenetration()
+		{
+			return _penetration;
+		}
+
 		float ParticleContact::calculateSeparatingVelocity() const
 		{
 			if (_particles[1] == nullptr)
