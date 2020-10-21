@@ -7,16 +7,12 @@ namespace PhysicEngine {
 		{
 		protected :
 			/*Particules linked by the link (cable or rod) */
-			CParticle* _particule[2];
+			CParticle* _particle[2];
 
 			/*Calculate the length of the link
 			* @return return the length of the link
 			*/
-			float CurrentLenth() const;
-
-		public:
-			/*Generate the contact, if necesssary*/
-			virtual unsigned AddContact(CParticle* p_contact, unsigned p_limit) = 0;
+			float CurrentLength() const;
 		};
 	}
 }

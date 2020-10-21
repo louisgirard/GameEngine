@@ -5,7 +5,7 @@ namespace PhysicEngine {
 		class ParticleContactGenerator
 		{
 		public:
-			/*...idk*/
+			/*Generate the contact, if necesssary*/
 			virtual unsigned AddContact(CParticle *p_contact, unsigned p_limit) = 0;
 		private:
 
