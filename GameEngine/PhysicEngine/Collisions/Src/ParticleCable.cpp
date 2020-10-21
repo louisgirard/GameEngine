@@ -2,13 +2,6 @@
 
 namespace PhysicEngine{
 	namespace Collisions {
-		float ParticleLink::CurrentLength() const
-		{
-			Vector3 p1 = _particle[0]->getPosition();
-			Vector3 p2 = _particle[1]->getPosition();
-			return (p1 - p2).magnitude();
-		}
-
 		unsigned ParticleCable::AddContact(ParticleContact* p_contact, unsigned p_limit) const
 		{
 			float current_length = CurrentLength();
