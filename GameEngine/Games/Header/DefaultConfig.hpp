@@ -2,6 +2,7 @@
 #define _Games_DefaultConfig_H
 
 #include <filesystem>
+#include <iostream>
 
 #include <GL/freeglut.h>
 

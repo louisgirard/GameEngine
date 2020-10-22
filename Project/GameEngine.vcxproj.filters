@@ -183,24 +183,6 @@
     <ClCompile Include="..\GameEngine\System\Src\Paths.cpp">
       <Filter>GameEngine\System\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\Shader.cpp">
-      <Filter>GameEngine\GraphicEngine\Shaders\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\ShaderManager.cpp">
-      <Filter>GameEngine\GraphicEngine\Shaders\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\ShaderParser.cpp">
-      <Filter>GameEngine\GraphicEngine\Shaders\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\ShaderProgram.cpp">
-      <Filter>GameEngine\GraphicEngine\Shaders\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\ShaderSource.cpp">
-      <Filter>GameEngine\GraphicEngine\Shaders\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\VertexBufferObject.cpp">
-      <Filter>GameEngine\GraphicEngine\Buffers\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\GameEngine\PhysicEngine\SpringForces\Src\ParticleBungee.cpp">
       <Filter>GameEngine\PhysicEngine\SpringForces\Source Files</Filter>
     </ClCompile>
@@ -227,15 +209,6 @@
     </ClCompile>
     <ClCompile Include="..\GameEngine\GraphicEngine\TypeSpec\Header\TextureInternalFormatSpec.hpp">
       <Filter>GameEngine\GraphicEngine\TypeSpec\Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\VertexArrayObject.cpp">
-      <Filter>GameEngine\GraphicEngine\Buffers\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\ElementBufferObject.cpp">
-      <Filter>GameEngine\GraphicEngine\Buffers\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\FrameBufferObject.cpp">
-      <Filter>GameEngine\PhysicEngine\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\GameEngine\GraphicEngine\Textures\Src\Texture2D.cpp">
       <Filter>GameEngine\GraphicEngine\Textures\Source Files</Filter>

@@ -4,8 +4,11 @@
 #include <Games/Header/GameBase.hpp>
 #include <PhysicEngine/Header/CParticle.hpp>
 #include <PhysicEngine/Collisions/Header/ParticleContactResolver.hpp>
+#include <PhysicEngine/Forces/Header/ParticleForceRegistry.hpp>
+#include <PhysicEngine/Forces/Header/ParticleGravity.hpp>
+#include <PhysicEngine/SpringForces/Header/ParticleSpring.hpp>
 
-#define NUM_PARTICLES 3
+#define NUM_PARTICLES 2
 using namespace PhysicEngine;
 
 namespace Games {
@@ -18,6 +21,9 @@ namespace Games {
 
 			/* Holds the contact resolver to resolve contacts between particles */
 			Collisions::ParticleContactResolver _contactResolver;
+
+			/* Holds all the forces and the particle they're associated with */
+			PhysicEngine::Forces::ParticleForceRegistry _registry;
 
 			/* Initializes the game */
 			virtual void initGame();
