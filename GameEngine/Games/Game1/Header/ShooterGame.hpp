@@ -4,8 +4,8 @@
 #include <Games/Header/GameBase.hpp>
 #include <PhysicEngine/Header/CParticle.hpp>
 #include <PhysicEngine/Header/Vector3.hpp>
-#include <PhysicEngine/Header/ParticleForceRegistry.hpp>
-#include <PhysicEngine/Header/ParticleGravity.hpp>
+#include <PhysicEngine/Forces/Header/ParticleForceRegistry.hpp>
+#include <PhysicEngine/Forces/Header/ParticleGravity.hpp>
 
 namespace Games {
 	namespace Game1 {
@@ -49,12 +49,12 @@ namespace Games {
 			/*
 			* Contains all the forces and the particle they're associated with
 			*/
-			PhysicEngine::ParticleForceRegistry _registry;
+			PhysicEngine::Forces::ParticleForceRegistry _registry;
 
 			/*
 			* The force generator for gravity in the game
 			*/
-			PhysicEngine::ParticleGravity _gravityGenerator;
+			PhysicEngine::Forces::ParticleGravity _gravityGenerator;
 
 		public :
 			/* Default constructor */

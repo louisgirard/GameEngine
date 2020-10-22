@@ -3,10 +3,10 @@
 namespace Games {
 	namespace Game1 {
 
-		ShooterGame::ShooterGame() :GameBase() , _weaponMenu(new Games::GameMenu("Weapon Pocket")), _gravityGenerator(*new PhysicEngine::ParticleGravity(*new PhysicEngine::Vector3(0, -10, 0))) {}
+		ShooterGame::ShooterGame() :GameBase() , _weaponMenu(new Games::GameMenu("Weapon Pocket")), _gravityGenerator(*new PhysicEngine::Forces::ParticleGravity(*new PhysicEngine::Vector3(0, -10, 0))) {}
 
 		void ShooterGame::initGame() {
-			_registry = *new PhysicEngine::ParticleForceRegistry();
+			_registry = *new PhysicEngine::Forces::ParticleForceRegistry();
 			// 1- Binding Keys
 			_keyboard.bindActionToKey(KeyAction::MAINACTION, 13);
 			// 2 - We create a sub menu for choosing a weapon
