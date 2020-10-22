@@ -12,7 +12,7 @@ namespace PhysicEngine {
 			/*Calculate the length of the link
 			* @return return the length of the link
 			*/
-			float ParticleLink::CurrentLength() const
+			float CurrentLength() const
 			{
 				Vector3 p1 = _particle[0]->getPosition();
 				Vector3 p2 = _particle[1]->getPosition();

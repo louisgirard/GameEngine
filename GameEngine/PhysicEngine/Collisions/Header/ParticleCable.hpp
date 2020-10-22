@@ -1,6 +1,6 @@
 #pragma once
 #include <PhysicEngine/Collisions/Header/ParticleLink.hpp>
-#include <PhysicEngine/Collisions/Header/ParticleContact.hpp>
+
 namespace PhysicEngine
 {
 	namespace Collisions {

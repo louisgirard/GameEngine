@@ -41,7 +41,10 @@
     <ClCompile Include="..\GameEngine\GraphicEngine\Textures\Src\Texture2D.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\TypeSpec\Header\TextureInternalFormatSpec.hpp" />
     <ClCompile Include="..\GameEngine\Main.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\ParticleCable.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\ParticleContact.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\ParticleContactResolver.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\ParticleRod.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Forces\Src\ParticleDrag.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Forces\Src\ParticleForceRegistry.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Forces\Src\ParticleGravity.cpp" />
@@ -81,7 +84,12 @@
     <ClInclude Include="..\GameEngine\GraphicEngine\TypeSpec\Header\GLMTypeSpec.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\TypeSpec\Header\GLTypeSpec.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\TypeSpec\Header\ToGLTypeSpec.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleCable.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleContact.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleContactGenerator.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleContactResolver.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleLink.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleRod.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Forces\Header\ParticleDrag.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Forces\Header\ParticleForceGenerator.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Forces\Header\ParticleForceRegistry.hpp" />

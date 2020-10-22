@@ -240,6 +240,15 @@
     <ClCompile Include="..\GameEngine\GraphicEngine\Textures\Src\Texture2D.cpp">
       <Filter>GameEngine\GraphicEngine\Textures\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\ParticleCable.cpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\ParticleContactResolver.cpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\ParticleRod.cpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\GameEngine\Games\Game1\Header\ShooterGame.hpp">
@@ -361,6 +370,21 @@
     </ClInclude>
     <ClInclude Include="..\GameEngine\GraphicEngine\Textures\Header\Texture2D.hpp">
       <Filter>GameEngine\GraphicEngine\Textures\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleCable.hpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleContactGenerator.hpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleContactResolver.hpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleLink.hpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleRod.hpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

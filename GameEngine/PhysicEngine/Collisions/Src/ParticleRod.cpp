@@ -1,5 +1,4 @@
 #include <PhysicEngine/Collisions/Header/ParticleRod.hpp>
-#include <PhysicEngine/Collisions/Header/ParticleContact.hpp>
 
 namespace PhysicEngine
 {
