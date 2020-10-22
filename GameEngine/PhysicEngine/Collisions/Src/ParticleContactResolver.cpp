@@ -18,8 +18,8 @@ namespace PhysicEngine {
 			while (i < _iterations) {
 				//finding max separating velocity
 				float max = INFINITY;
-				int maxIndex = p_contactArray.size();
-				for (int j = 0; j < p_contactArray.size(); j++) {
+				int maxIndex = (int)p_contactArray.size();
+				for (int j = 0; j < (int)p_contactArray.size(); j++) {
 					float sepVel = p_contactArray[j]->calculateSeparatingVelocity();
 					if (sepVel < max && (sepVel < 0 || p_contactArray[j]->getPenetration() > 0)) {
 						max = sepVel;
@@ -28,7 +28,7 @@ namespace PhysicEngine {
 				}
 
 				//if the maxIndex hasn't changed, there are no more contacts that need solving
-				if (maxIndex == p_contactArray.size()) {
+				if (maxIndex == (int)p_contactArray.size()) {
 					return;
 				}
 				else {

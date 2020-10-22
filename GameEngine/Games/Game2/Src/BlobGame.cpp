@@ -6,9 +6,33 @@ namespace Games {
 		{
 		}
 
+		void Blob::initGame()
+		{
+		}
+
+		void Blob::handleInput()
+		{
+			if (_keyboard.isPressed(KeyAction::QUIT)) {
+				quit();
+			}
+
+			// Move blob / break blob
+		}
+
 		void Blob::updatePhysic(double p_dt)
 		{
 			checkCollisions(p_dt);
+		}
+
+		void Blob::updateFrame() {
+			GameBase::updateFrame();
+			for (int i = 0; i < NUM_PARTICLES; i++)
+			{
+				//Push the view matrix so that the transformation only apply to the particule
+				glPushMatrix();
+				_particles[i]->updateFrame();
+				glPopMatrix();
+			}
 		}
 
 		void Blob::checkCollisions(float p_dt)
@@ -27,6 +51,7 @@ namespace Games {
 					{
 						float penetration = totalSize - distance;
 						direction.normalize();
+						// Create contact
 						Collisions::ParticleContact* contact = new Collisions::ParticleContact(_particles[i].get(), _particles[j].get(), 0.7, direction, penetration);
 						contacts.push_back(contact);
 					}

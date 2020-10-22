@@ -5,7 +5,7 @@
 #include <PhysicEngine/Header/CParticle.hpp>
 #include <PhysicEngine/Collisions/Header/ParticleContactResolver.hpp>
 
-#define NUM_PARTICLES 4
+#define NUM_PARTICLES 3
 using namespace PhysicEngine;
 
 namespace Games {
@@ -18,12 +18,21 @@ namespace Games {
 
 			/* Holds the contact resolver to resolve contacts between particles */
 			Collisions::ParticleContactResolver _contactResolver;
-			
+
+			/* Initializes the game */
+			virtual void initGame();
+
+			/* Handles user inputs */
+			virtual void handleInput();
+
 			/*
 			Updates the positions of the particles
 			@param p_dt the time ellapsed since the last update
 			*/
 			virtual void updatePhysic(double p_dt);
+
+			/*Updates the visual representations of the particles*/
+			virtual void updateFrame();
 
 			/*
 			Check if there are collisions and add them to the contact resolver
