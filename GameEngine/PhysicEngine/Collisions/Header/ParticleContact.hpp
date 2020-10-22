@@ -17,9 +17,7 @@ namespace PhysicEngine
 			Vector3 _contactNormal;
 
 			/* Holds the depth of penetration */
-			float _penetration;
-
-			
+			float _penetration;			
 
 		public:
 			ParticleContact(CParticle* p_particle1, CParticle* p_particle2, float p_restitutionCoef, Vector3 p_contactNormal, float p_penetration);

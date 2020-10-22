@@ -1,5 +1,6 @@
 #pragma once
 #include <PhysicEngine/Collisions/Header/ParticleContact.hpp>
+#include <vector>
 
 namespace PhysicEngine {
 	namespace Collisions {
@@ -21,10 +22,9 @@ namespace PhysicEngine {
 			/*
 			* Resolves contacts for both velocity and interpenetration
 			* @param p_contactArray array of the contacts to be resolved
-			* @param p_numContacts number of contacts to be resolved
 			* @param p_dt ellapsed time since the last contact resolution
 			*/
-			void resolveContacts(ParticleContact* p_contactArray, int p_numContacts, double p_dt);
+			void resolveContacts(std::vector<ParticleContact*> p_contactArray, double p_dt);
 		};
 	}
 }

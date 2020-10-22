@@ -29,6 +29,10 @@ namespace PhysicEngine {
 		}
 	}
 
+	float CParticle::getSize() const
+	{
+		return _presentation->getSize();
+	}
 	Vector3 CParticle::getPosition() const
 	{
 		return _abstraction->getPosition();

@@ -19,6 +19,9 @@ namespace PhysicEngine {
 		*/
 		void setColor(const Vector3& p_color);
 
+		/*@returns the size of the particle*/
+		float getSize() const;
+
 		/*Sets the size of the particle
 		* @param p_size the new size of the particle
 		*/

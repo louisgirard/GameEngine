@@ -11,6 +11,10 @@ namespace PhysicEngine {
 	{
 		_color = p_color;
 	}
+	float PParticle::getSize() const
+	{
+		return _size;
+	}
 	void PParticle::setSize(float p_size)
 	{
 		_size = p_size;
