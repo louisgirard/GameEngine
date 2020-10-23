@@ -1,9 +1,12 @@
-#pragma 
+#pragma once
 #include <PhysicEngine/Header/CParticle.hpp>
 
 namespace PhysicEngine
 {
 	namespace Collisions {
+		/*
+		Class used to detect contacts between a plane and one or multiple particles
+		*/
 		class ParticleContact
 		{
 		private:
