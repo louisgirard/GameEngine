@@ -20,6 +20,10 @@ public:
 	static const int ROTATEDOWN = 9;
 	static const int ROTATELEFT = 10;
 	static const int ROTATERIGHT = 11;
+
+	// Blob
+	static const int FUSEBLOB = 12;
+	static const int BREAKBLOB = 13;
 };
 
 #endif // !_Games_KeyAction_H

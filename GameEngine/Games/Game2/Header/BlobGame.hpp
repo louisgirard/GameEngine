@@ -8,7 +8,7 @@
 #include <PhysicEngine/Forces/Header/ParticleGravity.hpp>
 #include <PhysicEngine/SpringForces/Header/ParticleSpring.hpp>
 
-#define NUM_PARTICLES 2
+#define NUM_PARTICLES 3
 using namespace PhysicEngine;
 
 namespace Games {
@@ -19,11 +19,17 @@ namespace Games {
 			/* Holds all the particles in the scene */
 			std::shared_ptr<CParticle> _particles[NUM_PARTICLES];
 
+			/* Holds all the springs in the scene */
+			std::vector<std::shared_ptr<SpringForces::ParticleSpring>> _springs;
+
 			/* Holds the contact resolver to resolve contacts between particles */
 			Collisions::ParticleContactResolver _contactResolver;
 
 			/* Holds all the forces and the particle they're associated with */
 			PhysicEngine::Forces::ParticleForceRegistry _registry;
+
+			/* Check if blob is broken or not */
+			bool isBroken = false;
 
 			/* Initializes the game */
 			virtual void initGame();

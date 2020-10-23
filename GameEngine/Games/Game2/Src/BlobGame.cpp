@@ -10,19 +10,35 @@ namespace Games {
 		{
 			_registry = *new Forces::ParticleForceRegistry();
 
+			// Binding Keys
+			_keyboard.bindActionToKey(KeyAction::BREAKBLOB, 98);
+			_keyboard.bindActionToKey(KeyAction::FUSEBLOB, 102);
+
 			// Create particles
 			Vector3 position(-5, 1, -30);
 			Vector3 color(1, 1, 1);
 			float radius = 3;
-			_particles[0] = std::make_shared<CParticle>(1, position, Vector3::ZERO, Vector3::ZERO, 0.999, color, radius);
+			_particles[0] = std::make_shared<CParticle>(1, position, Vector3::ZERO, Vector3::ZERO, 0.999, Vector3(1,0,0), radius);
 			position = Vector3(5, 1, -30);
 			_particles[1] = std::make_shared<CParticle>(1, position, Vector3::ZERO, Vector3::ZERO, 0.999, color, radius);
+			position = Vector3(0, 4, -30);
+			_particles[2] = std::make_shared<CParticle>(1, position, Vector3::ZERO, Vector3::ZERO, 0.999, color, radius);
 
 			// Add springs
-			SpringForces::ParticleSpring* spring1 = new SpringForces::ParticleSpring(_particles[0].get(), 2, 10);
-			SpringForces::ParticleSpring* spring2 = new SpringForces::ParticleSpring(_particles[1].get(), 2, 10);
-			_registry.add(_particles[0].get(), spring2);
-			_registry.add(_particles[1].get(), spring1);
+			auto spring1 = std::make_shared<SpringForces::ParticleSpring>(_particles[0].get(), 2, 10);
+			auto spring2 = std::make_shared<SpringForces::ParticleSpring>(_particles[1].get(), 2, 10);
+			_springs.push_back(spring1);
+			_springs.push_back(spring2);
+
+			auto spring3 = std::make_shared<SpringForces::ParticleSpring>(_particles[1].get(), 2, 10);
+			auto spring4 = std::make_shared<SpringForces::ParticleSpring>(_particles[2].get(), 2, 10);
+			_springs.push_back(spring3);
+			_springs.push_back(spring4);
+
+			auto spring5 = std::make_shared<SpringForces::ParticleSpring>(_particles[0].get(), 2, 10);
+			auto spring6 = std::make_shared<SpringForces::ParticleSpring>(_particles[2].get(), 2, 10);
+			_springs.push_back(spring5);
+			_springs.push_back(spring6);
 		}
 
 		void Blob::handleInput()
@@ -31,22 +47,59 @@ namespace Games {
 				quit();
 			}
 
-			// Move blob / break blob
-			_particles[0]->setAcceleration(Vector3::ZERO);
-			_registry.add(_particles[0].get(), new Forces::ParticleGravity(*new Vector3(-0.001, 0, 0)));
-			_registry.add(_particles[1].get(), new Forces::ParticleGravity(*new Vector3(0, -0.001, 0)));
+			// Move blob
+			if (_keyboard.isPressed(KeyAction::MOVEFRONT))
+			{
+				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::UP * 0.01);
+			}
+			if (_keyboard.isPressed(KeyAction::MOVEBACK))
+			{
+				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::DOWN * 0.01);
+			}
+			if (_keyboard.isPressed(KeyAction::MOVELEFT))
+			{
+				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::LEFT * 0.01);
+			}
+			if (_keyboard.isPressed(KeyAction::MOVERIGHT))
+			{
+				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::RIGHT * 0.01);
+			}
+
+			// Break blob
+			if (_keyboard.isPressed(KeyAction::BREAKBLOB))
+			{
+				isBroken = true;
+			}
+			if (_keyboard.isPressed(KeyAction::FUSEBLOB))
+			{
+				isBroken = false;
+			}
 		}
 
 		void Blob::updatePhysic(double p_dt)
 		{
+			if (!isBroken)
+			{
+				_registry.add(_particles[0].get(), _springs[1].get());
+				_registry.add(_particles[1].get(), _springs[0].get());
+
+				_registry.add(_particles[0].get(), _springs[5].get());
+				_registry.add(_particles[2].get(), _springs[4].get());
+
+				_registry.add(_particles[1].get(), _springs[3].get());
+				_registry.add(_particles[2].get(), _springs[2].get());
+			}
+
 			_registry.updatePhysic(p_dt);
+			checkCollisions(p_dt);
 			for (int i = 0; i < NUM_PARTICLES; i++)
 			{
 				_particles[i]->updatePhysic(p_dt);
 				//the positions of the particles are printed in the console
 				std::cout << "index = " << i << ", x = " << _particles[i]->getPosition()._x << ", y = " << _particles[i]->getPosition()._y << ", z = " << _particles[i]->getPosition()._z << std::endl;
 			}
-			checkCollisions(p_dt);
+
+			_registry.clear();
 		}
 
 		void Blob::updateFrame() {

@@ -113,19 +113,12 @@ namespace GraphicEngine {
 			/*
 			* Binds this texture inside openGL
 			*/
-			void bind() const
-			{
-				assert(isValid());
-				glBindTexture(GL_TEXTURE_2D, m_id);
-			}
+			void bind() const;
 
 			/*
 			* Unbinds this texture in openGL
 			*/
-			void unbind() const
-			{
-				glBindTexture(GL_TEXTURE_2D, 0);
-			}
+			void unbind() const;
 #pragma endregion
 
 #pragma region SETTERS

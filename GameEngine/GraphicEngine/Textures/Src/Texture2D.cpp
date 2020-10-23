@@ -30,7 +30,7 @@ namespace GraphicEngine {
 			
 		}
 
-		Texture2D::Texture2D(std::filesystem::path p_textureFile, size_t p_channels = 4, bool p_generateMipmaps = false)
+		Texture2D::Texture2D(std::filesystem::path p_textureFile, size_t p_channels, bool p_generateMipmaps)
 		{
 			// Verify channels number is supported in engine
 			assert(p_channels <= 4 && p_channels > 0);
