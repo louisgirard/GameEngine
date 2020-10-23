@@ -45,6 +45,7 @@
     <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\ParticleContact.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\ParticleContactResolver.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\ParticleRod.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\PlaneContactGenerator.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Forces\Src\ParticleDrag.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Forces\Src\ParticleForceRegistry.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Forces\Src\ParticleGravity.cpp" />
@@ -52,7 +53,9 @@
     <ClCompile Include="..\GameEngine\PhysicEngine\SpringForces\Src\ParticleBungee.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\SpringForces\Src\ParticleBuoyancy.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\SpringForces\Src\ParticleSpring.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\Src\AHorizontalPlane.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\AParticle.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\Src\CHorizontalPlane.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\CParticle.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\Vector3.cpp" />
     <ClCompile Include="..\GameEngine\System\Src\Paths.cpp" />
@@ -90,11 +93,14 @@
     <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleContactResolver.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleLink.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleRod.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\PlaneContactGenerator.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Forces\Header\ParticleDrag.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Forces\Header\ParticleForceGenerator.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Forces\Header\ParticleForceRegistry.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Forces\Header\ParticleGravity.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\AHorizontalPlane.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\AParticle.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\CHorizontalPlane.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\CParticle.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\MathConstant.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\Vector3.hpp" />

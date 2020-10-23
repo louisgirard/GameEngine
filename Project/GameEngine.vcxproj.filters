@@ -222,6 +222,42 @@
     <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\ParticleRod.cpp">
       <Filter>GameEngine\PhysicEngine\Collisions\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\ElementBufferObject.cpp">
+      <Filter>GameEngine\PhysicEngine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\FrameBufferObject.cpp">
+      <Filter>GameEngine\PhysicEngine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\VertexArrayObject.cpp">
+      <Filter>GameEngine\PhysicEngine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\VertexBufferObject.cpp">
+      <Filter>GameEngine\PhysicEngine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\Shader.cpp">
+      <Filter>GameEngine\PhysicEngine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\ShaderManager.cpp">
+      <Filter>GameEngine\PhysicEngine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\ShaderParser.cpp">
+      <Filter>GameEngine\PhysicEngine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\ShaderProgram.cpp">
+      <Filter>GameEngine\PhysicEngine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\ShaderSource.cpp">
+      <Filter>GameEngine\PhysicEngine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\PhysicEngine\Src\AHorizontalPlane.cpp">
+      <Filter>GameEngine\PhysicEngine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\PhysicEngine\Src\CHorizontalPlane.cpp">
+      <Filter>GameEngine\PhysicEngine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\PlaneContactGenerator.cpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\GameEngine\Games\Game1\Header\ShooterGame.hpp">
@@ -357,6 +393,15 @@
       <Filter>GameEngine\PhysicEngine\Collisions\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleRod.hpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\CHorizontalPlane.hpp">
+      <Filter>GameEngine\PhysicEngine\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\AHorizontalPlane.hpp">
+      <Filter>GameEngine\PhysicEngine\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\PlaneContactGenerator.hpp">
       <Filter>GameEngine\PhysicEngine\Collisions\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
