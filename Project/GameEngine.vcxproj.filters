@@ -360,6 +360,24 @@
     <ClCompile Include="..\GameEngine\SceneGraph\Src\EmptyNode.cpp">
       <Filter>GameEngine\SceneGraph\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\GameEngine\PhysicEngine\Src\AHorizontalPlane.cpp">
+      <Filter>GameEngine\PhysicEngine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\PhysicEngine\Src\CHorizontalPlane.cpp">
+      <Filter>GameEngine\PhysicEngine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\ElementBufferObject.cpp">
+      <Filter>GameEngine\GraphicEngine\Buffers\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\VertexArrayObject.cpp">
+      <Filter>GameEngine\GraphicEngine\Buffers\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\Src\PHorizontalPlane.cpp">
+      <Filter>GameEngine\GraphicEngine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\PlaneContactGenerator.cpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\GameEngine\Games\Game1\Header\ShooterGame.hpp">
@@ -568,6 +586,33 @@
     </ClInclude>
     <ClInclude Include="..\GameEngine\SceneGraph\Header\EmptyNode.hpp">
       <Filter>GameEngine\SceneGraph\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\AHorizontalPlane.hpp">
+      <Filter>GameEngine\PhysicEngine\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\CHorizontalPlane.hpp">
+      <Filter>GameEngine\PhysicEngine\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\Header\PHorizontalPlane.hpp">
+      <Filter>GameEngine\GraphicEngine\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleCable.hpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleContactGenerator.hpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleContactResolver.hpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleLink.hpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleRod.hpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\PlaneContactGenerator.hpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

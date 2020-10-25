@@ -33,7 +33,7 @@ namespace PhysicEngine {
 				}
 				else {
 					//resolve contact
-					p_contactArray[maxIndex]->resolve(p_dt);
+					p_contactArray[maxIndex]->resolve((float)p_dt);
 				}
 
 				i++;
