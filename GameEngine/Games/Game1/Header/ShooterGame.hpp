@@ -3,7 +3,6 @@
 
 #include <Games/Header/GameBase.hpp>
 
-
 namespace Games {
 	namespace Game1 {
 		class ShooterGame : public GameBase
@@ -47,7 +46,6 @@ namespace Games {
 			* Contains all the forces and the particle they're associated with
 			*/
 			ForceRegistry _registry;
-
 			/*
 			* The force generator for gravity in the game
 			*/

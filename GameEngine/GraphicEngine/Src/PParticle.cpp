@@ -1,7 +1,7 @@
 #include <GraphicEngine/Header/PParticle.hpp>
 #include <GL/freeglut_std.h>
 
-namespace PhysicEngine {
+namespace GraphicEngine {
 	PParticle::PParticle(Vector3 p_color, float p_size)
 	{
 		_color = p_color;
@@ -10,6 +10,10 @@ namespace PhysicEngine {
 	void PParticle::setColor(const Vector3& p_color)
 	{
 		_color = p_color;
+	}
+	float PParticle::getSize() const
+	{
+		return _size;
 	}
 	void PParticle::setSize(float p_size)
 	{

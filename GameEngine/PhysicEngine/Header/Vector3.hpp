@@ -21,7 +21,9 @@ namespace PhysicEngine {
 		static const Vector3 ZERO;
 		static const Vector3 FRONT;
 		static const Vector3 RIGHT;
+		static const Vector3 LEFT;
 		static const Vector3 UP;
+		static const Vector3 DOWN;
 
 		/* Default constructor */
 		Vector3();

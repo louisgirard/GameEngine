@@ -267,11 +267,17 @@
     <ClCompile Include="..\GameEngine\GraphicEngine\TypeSpec\Header\TextureInternalFormatSpec.hpp">
       <Filter>GameEngine\GraphicEngine\TypeSpec\Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\VertexArrayObject.cpp">
-      <Filter>GameEngine\GraphicEngine\Buffers\Source Files</Filter>
+    <ClCompile Include="..\GameEngine\GraphicEngine\Textures\Src\Texture2D.cpp">
+      <Filter>GameEngine\GraphicEngine\Textures\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\ElementBufferObject.cpp">
-      <Filter>GameEngine\GraphicEngine\Buffers\Source Files</Filter>
+    <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\ParticleCable.cpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\ParticleContactResolver.cpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\ParticleRod.cpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\GameEngine\GraphicEngine\Textures\Src\Texture2D.cpp">
       <Filter>GameEngine\GraphicEngine\Textures\Source Files</Filter>

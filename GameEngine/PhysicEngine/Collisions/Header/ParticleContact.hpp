@@ -1,13 +1,16 @@
-#pragma 
+#pragma once
 #include <PhysicEngine/Header/CParticle.hpp>
 
 namespace PhysicEngine
 {
 	namespace Collisions {
+		/*
+		Class used to detect contacts between a plane and one or multiple particles
+		*/
 		class ParticleContact
 		{
 		private:
-			/* Holds the two particles involved in the contact */
+			/* Holds the two particles involved in the contact (second particle can be NULL)*/
 			CParticle* _particles[2];
 
 			/* Holds the restitution coefficient */
@@ -17,7 +20,14 @@ namespace PhysicEngine
 			Vector3 _contactNormal;
 
 			/* Holds the depth of penetration */
-			float _penetration;
+			float _penetration;			
+
+		public:
+			ParticleContact(CParticle* p_particle1, CParticle* p_particle2, float p_restitutionCoef, Vector3 p_contactNormal, float p_penetration);
+
+			/*Get the contact penetration
+			*/
+			float getPenetration();
 
 			/* Calculate the separating velocity */
 			float calculateSeparatingVelocity() const;
@@ -31,9 +41,6 @@ namespace PhysicEngine
 			* @param p_dt the elapsed time since the last update
 			*/
 			void resolveInterpenetration(float p_dt);
-
-		public:
-			ParticleContact(CParticle* p_particle1, CParticle* p_particle2, float p_restitutionCoef, Vector3 p_contactNormal, float p_penetration);
 
 			/*Resolves the contact for velocity and interpenetration
 			* @param p_dt the elapsed time since the last update

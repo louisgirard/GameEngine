@@ -3,7 +3,6 @@
 
 #include <filesystem>
 #include <iostream>
-#include <stdlib.h>
 
 #include <GL/freeglut.h>
 

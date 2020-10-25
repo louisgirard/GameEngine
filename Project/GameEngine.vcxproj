@@ -28,6 +28,7 @@
     <ClCompile Include="..\GameEngine\Games\Src\GameSelection.cpp" />
     <ClCompile Include="..\GameEngine\Games\Src\KeyboardStatus.cpp" />
     <ClCompile Include="..\GameEngine\Games\Src\MouseStatus.cpp" />
+    
     <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\ElementBufferObject.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\FrameBuffer.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\FrameBufferObject.cpp" />
@@ -62,7 +63,11 @@
     <ClCompile Include="..\GameEngine\GraphicEngine\Textures\Src\Texture2D.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\TypeSpec\Header\TextureInternalFormatSpec.hpp" />
     <ClCompile Include="..\GameEngine\Main.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\ParticleCable.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\ParticleContact.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\ParticleContactResolver.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\ParticleRod.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\PlaneContactGenerator.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Forces\Src\ParticleDrag.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Forces\Src\ParticleForceRegistry.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Forces\Src\ParticleGravity.cpp" />
@@ -70,7 +75,9 @@
     <ClCompile Include="..\GameEngine\PhysicEngine\SpringForces\Src\ParticleBungee.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\SpringForces\Src\ParticleBuoyancy.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\SpringForces\Src\ParticleSpring.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\Src\AHorizontalPlane.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\AParticle.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\Src\CHorizontalPlane.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\CParticle.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\Vector3.cpp" />
     <ClCompile Include="..\GameEngine\SceneGraph\Src\EmptyNode.cpp" />
@@ -131,12 +138,20 @@
     <ClInclude Include="..\GameEngine\GraphicEngine\TypeSpec\Header\GLMTypesSpec.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\TypeSpec\Header\GLTypeSpec.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\TypeSpec\Header\ToGLTypeSpec.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleCable.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleContact.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleContactGenerator.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleContactResolver.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleLink.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleRod.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\PlaneContactGenerator.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Forces\Header\ParticleDrag.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Forces\Header\ParticleForceGenerator.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Forces\Header\ParticleForceRegistry.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Forces\Header\ParticleGravity.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\AHorizontalPlane.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\AParticle.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\CHorizontalPlane.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\CParticle.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\MathConstant.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\Vector3.hpp" />
@@ -258,7 +273,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)/../GameEngine;$(GameEngineDep)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -278,7 +293,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)/../GameEngine;$(GameEngineDep)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>

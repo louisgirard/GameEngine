@@ -1,7 +1,9 @@
 #pragma once
 #include <PhysicEngine/Header/Vector3.hpp>
 
-namespace PhysicEngine {
+using namespace PhysicEngine;
+
+namespace GraphicEngine {
 	class PParticle
 	{
 	private:
@@ -18,6 +20,9 @@ namespace PhysicEngine {
 		* @param p_color the new color of the particle (RGB between 0 and 1)
 		*/
 		void setColor(const Vector3& p_color);
+
+		/*@returns the size of the particle*/
+		float getSize() const;
 
 		/*Sets the size of the particle
 		* @param p_size the new size of the particle

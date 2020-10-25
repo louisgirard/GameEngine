@@ -4,7 +4,7 @@ namespace PhysicEngine {
 	CParticle::CParticle(float p_mass, Vector3 p_position, Vector3 p_velocity, Vector3 p_acceleration, float p_damping, Vector3 p_color, float p_size)
 	{
 		_abstraction = std::make_shared<AParticle>(p_mass, p_position, p_velocity, p_acceleration, p_damping);
-		_presentation = std::make_shared<PParticle>(p_color, p_size);
+		_presentation = std::make_shared<GraphicEngine::PParticle>(p_color, p_size);
 	}
 
 	CParticle::CParticle(Types p_type, Vector3 p_position= Vector3::ZERO,Vector3 p_launchDirection = Vector3::FRONT) {
@@ -29,6 +29,10 @@ namespace PhysicEngine {
 		}
 	}
 
+	float CParticle::getSize() const
+	{
+		return _presentation->getSize();
+	}
 	Vector3 CParticle::getPosition() const
 	{
 		return _abstraction->getPosition();

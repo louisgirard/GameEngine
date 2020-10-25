@@ -15,7 +15,7 @@ namespace PhysicEngine {
 	{
 	private:
 		std::shared_ptr<AParticle> _abstraction;
-		std::shared_ptr<PParticle> _presentation;
+		std::shared_ptr<GraphicEngine::PParticle> _presentation;
 
 	public:
 		/* Different types of projectile */
@@ -37,6 +37,9 @@ namespace PhysicEngine {
 		@param p_type the type of particle to be created
 		*/
 		CParticle(Types p_type, Vector3 p_position, Vector3 p_launchDirection);
+
+		/*@returns the size of the particle*/
+		float getSize() const;
 
 		/*@return the position of the particle */
 		Vector3 getPosition() const;
