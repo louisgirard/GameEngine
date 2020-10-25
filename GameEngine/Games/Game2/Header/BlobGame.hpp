@@ -7,6 +7,7 @@
 #include <PhysicEngine/Forces/Header/ParticleForceRegistry.hpp>
 #include <PhysicEngine/Forces/Header/ParticleGravity.hpp>
 #include <PhysicEngine/SpringForces/Header/ParticleSpring.hpp>
+#include <PhysicEngine/Header/CHorizontalPlane.hpp>
 
 #define NUM_PARTICLES 3
 using namespace PhysicEngine;
@@ -26,7 +27,10 @@ namespace Games {
 			Collisions::ParticleContactResolver _contactResolver;
 
 			/* Holds all the forces and the particle they're associated with */
-			PhysicEngine::Forces::ParticleForceRegistry _registry;
+			Forces::ParticleForceRegistry _registry;
+
+			/* Holds the ground plane */
+			std::shared_ptr<CHorizontalPlane> _ground;
 
 			/* Check if blob is broken or not */
 			bool isBroken = false;
@@ -47,10 +51,16 @@ namespace Games {
 			virtual void updateFrame();
 
 			/*
-			Check if there are collisions and add them to the contact resolver
+			Check if there are collisions between particles and add them to the contact resolver
 			@param p_dt the time ellapsed since the last update
 			*/
-			void checkCollisions(float p_dt);
+			void checkParticleCollisions(float p_dt);
+
+			/*
+			Check if there are collisions between particles and the ground
+			@param p_dt the time ellapsed since the last update
+			*/
+			void checkGroundCollisions(float p_dt);
 		public:
 			/* Default constructor */
 			Blob();

@@ -15,7 +15,7 @@ namespace PhysicEngine {
 	{
 	private:
 		std::shared_ptr<AParticle> _abstraction;
-		std::shared_ptr<PParticle> _presentation;
+		std::shared_ptr<GraphicEngine::PParticle> _presentation;
 
 	public:
 		/* Different types of projectile */

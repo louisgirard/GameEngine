@@ -27,6 +27,7 @@
     <ClCompile Include="..\GameEngine\Games\Src\GameSelection.cpp" />
     <ClCompile Include="..\GameEngine\Games\Src\KeyboardStatus.cpp" />
     <ClCompile Include="..\GameEngine\Games\Src\MouseStatus.cpp" />
+    
     <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\ElementBufferObject.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\FrameBufferObject.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\VertexArrayObject.cpp" />
@@ -36,7 +37,9 @@
     <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\ShaderParser.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\ShaderProgram.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\ShaderSource.cpp" />
+	
     <ClCompile Include="..\GameEngine\GraphicEngine\Src\Camera.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\Src\PHorizontalPlane.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Src\PParticle.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Textures\Src\Texture2D.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\TypeSpec\Header\TextureInternalFormatSpec.hpp" />
@@ -77,6 +80,7 @@
     <ClInclude Include="..\GameEngine\GraphicEngine\Buffers\Header\VertexBufferObject.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Header\Camera.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Header\GraphicEnum.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\Header\PHorizontalPlane.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Header\PParticle.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Shaders\Header\Shader.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Shaders\Header\ShaderManager.hpp" />

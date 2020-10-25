@@ -14,6 +14,9 @@ namespace Games {
 			_keyboard.bindActionToKey(KeyAction::BREAKBLOB, 98);
 			_keyboard.bindActionToKey(KeyAction::FUSEBLOB, 102);
 
+			// Create planes
+			_ground = std::make_shared<CHorizontalPlane>(Vector3(0, -5, -30), 30, 30);
+
 			// Create particles
 			Vector3 position(-5, 1, -30);
 			Vector3 color(1, 1, 1);
@@ -91,12 +94,14 @@ namespace Games {
 			}
 
 			_registry.updatePhysic(p_dt);
-			checkCollisions(p_dt);
+			checkParticleCollisions(p_dt);
+			checkGroundCollisions(p_dt);
+
 			for (int i = 0; i < NUM_PARTICLES; i++)
 			{
 				_particles[i]->updatePhysic(p_dt);
 				//the positions of the particles are printed in the console
-				std::cout << "index = " << i << ", x = " << _particles[i]->getPosition()._x << ", y = " << _particles[i]->getPosition()._y << ", z = " << _particles[i]->getPosition()._z << std::endl;
+				//std::cout << "index = " << i << ", x = " << _particles[i]->getPosition()._x << ", y = " << _particles[i]->getPosition()._y << ", z = " << _particles[i]->getPosition()._z << std::endl;
 			}
 
 			_registry.clear();
@@ -104,6 +109,12 @@ namespace Games {
 
 		void Blob::updateFrame() {
 			GameBase::updateFrame();
+
+			// Display Ground
+			glPushMatrix();
+			_ground->updateFrame();
+			glPopMatrix();
+
 			for (int i = 0; i < NUM_PARTICLES; i++)
 			{
 				//Push the view matrix so that the transformation only apply to the particule
@@ -113,7 +124,7 @@ namespace Games {
 			}
 		}
 
-		void Blob::checkCollisions(float p_dt)
+		void Blob::checkParticleCollisions(float p_dt)
 		{
 			std::vector<Collisions::ParticleContact*> contacts;
 			// For all particles, check if in collision with other particles
@@ -133,6 +144,36 @@ namespace Games {
 						Collisions::ParticleContact* contact = new Collisions::ParticleContact(_particles[i].get(), _particles[j].get(), 0.7, direction, penetration);
 						contacts.push_back(contact);
 					}
+				}
+			}
+
+			// Resolve contacts
+			_contactResolver.resolveContacts(contacts, p_dt);
+		}
+
+		void Blob::checkGroundCollisions(float p_dt)
+		{
+			std::vector<Collisions::ParticleContact*> contacts;
+			// For all particles, check if in collision with the ground
+			for (int i = 0; i < NUM_PARTICLES; i++)
+			{
+				float radius = _particles[i]->getSize();
+				float penetration = _particles[i]->getPosition()._y - _ground->getHeight();
+
+				// checking if the particle is intersecting with the plane
+				if (std::abs(penetration) <= radius && _ground->isAboveOrUnder(_particles[i]->getPosition()))
+				{
+					Vector3 normal;
+					//checking if the contact is happening from above or under
+					if (penetration > 0) {
+						normal = PhysicEngine::Vector3::UP;
+					}
+					else {
+						normal = PhysicEngine::Vector3::UP * -1;
+						penetration *= -1;
+					}
+					Collisions::ParticleContact* contact = new Collisions::ParticleContact(_particles[i].get(), NULL, 1, normal * 0.01, penetration);
+					contacts.push_back(contact);
 				}
 			}
 

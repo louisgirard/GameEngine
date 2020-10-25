@@ -231,32 +231,8 @@
     <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\PlaneContactGenerator.cpp">
       <Filter>GameEngine\PhysicEngine\Collisions\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\Shader.cpp">
-      <Filter>GameEngine\GraphicEngine\Shaders\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\ShaderManager.cpp">
-      <Filter>GameEngine\GraphicEngine\Shaders\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\ShaderParser.cpp">
-      <Filter>GameEngine\GraphicEngine\Shaders\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\ShaderProgram.cpp">
-      <Filter>GameEngine\GraphicEngine\Shaders\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\ShaderSource.cpp">
-      <Filter>GameEngine\GraphicEngine\Shaders\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\VertexBufferObject.cpp">
-      <Filter>GameEngine\GraphicEngine\Buffers\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\VertexArrayObject.cpp">
-      <Filter>GameEngine\GraphicEngine\Buffers\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\ElementBufferObject.cpp">
-      <Filter>GameEngine\GraphicEngine\Buffers\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\FrameBufferObject.cpp">
-      <Filter>GameEngine\GraphicEngine\Buffers\Source Files</Filter>
+    <ClCompile Include="..\GameEngine\GraphicEngine\Src\PHorizontalPlane.cpp">
+      <Filter>GameEngine\GraphicEngine\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -403,6 +379,9 @@
     </ClInclude>
     <ClInclude Include="..\GameEngine\GraphicEngine\Buffers\Header\FrameBufferObject.hpp">
       <Filter>GameEngine\GraphicEngine\Buffers\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\Header\PHorizontalPlane.hpp">
+      <Filter>GameEngine\GraphicEngine\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

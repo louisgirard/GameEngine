@@ -1,7 +1,9 @@
 #pragma once
 #include <PhysicEngine/Header/Vector3.hpp>
 
-namespace PhysicEngine {
+using namespace PhysicEngine;
+
+namespace GraphicEngine {
 	class PParticle
 	{
 	private:
