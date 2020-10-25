@@ -1,9 +1,7 @@
 #include <GraphicEngine/Buffers/Header/ElementBufferObject.hpp>
 
-namespace GraphicEngine {
-	namespace Buffers {
-
-		ElementBufferObject::ElementBufferObject(const std::vector<GLuint>& p_indices, BufferUpdate p_usage = BufferUpdate::staticDraw)
+namespace GraphicEngine::Buffers {
+		ElementBufferObject::ElementBufferObject(const std::vector<GLuint>& p_indices, BufferUpdate p_usage)
 		{
 			// Creation of the element buffer object
 			glGenBuffers(1, &_id);
@@ -75,5 +73,4 @@ namespace GraphicEngine {
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 		}
 #pragma endregion
-	}
 }

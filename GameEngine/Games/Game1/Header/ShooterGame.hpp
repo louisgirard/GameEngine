@@ -2,10 +2,7 @@
 #define _GAME1_SHOOTER_H
 
 #include <Games/Header/GameBase.hpp>
-#include <PhysicEngine/Header/CParticle.hpp>
-#include <PhysicEngine/Header/Vector3.hpp>
-#include <PhysicEngine/Header/ParticleForceRegistry.hpp>
-#include <PhysicEngine/Header/ParticleGravity.hpp>
+
 
 namespace Games {
 	namespace Game1 {
@@ -15,7 +12,7 @@ namespace Games {
 			/*
 			Vector containing the particles currently in game
 			*/
-			std::vector<std::shared_ptr<PhysicEngine::CParticle>> _projectiles;
+			std::vector<std::shared_ptr<Particle>> _projectiles;
 
 			/*
 			Determines if the shooting button is currently pressed (a new particle is only
@@ -24,7 +21,7 @@ namespace Games {
 			bool _shootingButtonPressed = false;
 
 			/* Holds the type of particle selected */
-			PhysicEngine::CParticle::Types _currentType = PhysicEngine::CParticle::Types::Bullet;
+			Particle::Types _currentType = Particle::Types::Bullet;
 
 			/* Menu used to choose a weapon */
 			Games::GameMenu* _weaponMenu;
@@ -49,12 +46,19 @@ namespace Games {
 			/*
 			* Contains all the forces and the particle they're associated with
 			*/
-			PhysicEngine::ParticleForceRegistry _registry;
+			ForceRegistry _registry;
 
 			/*
 			* The force generator for gravity in the game
 			*/
-			PhysicEngine::ParticleGravity _gravityGenerator;
+			Gravity _gravityGenerator;
+
+			/**
+			* Function called to deal with mouse's motion when no mouse's button is pressed
+			* @param p_x : position of the cursor in the window on the x axis
+			* @param p_y : position of the cursor in the window on the y axis
+			**/
+			virtual void mousePassiveMotion(int p_x, int p_y);
 
 		public :
 			/* Default constructor */

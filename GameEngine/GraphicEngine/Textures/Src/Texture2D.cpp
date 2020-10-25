@@ -1,11 +1,10 @@
 #include <GraphicEngine/Textures/Header/Texture2D.hpp>
 
-namespace GraphicEngine {
-	namespace Textures {
+namespace GraphicEngine::Textures {
 
 		Texture2D::Texture2D(GLuint p_width, GLuint p_height, TextureInternalFormat p_internalFormat)
 		{
-			p_internalFormat = _internalFormat;
+			 _internalFormat = p_internalFormat;
 			// We store the dimensions of the texture
 			_dimX = p_width;
 			_dimY = p_height;
@@ -30,8 +29,9 @@ namespace GraphicEngine {
 			
 		}
 
-		Texture2D::Texture2D(std::filesystem::path p_textureFile, size_t p_channels = 4, bool p_generateMipmaps = false)
+		Texture2D::Texture2D(std::filesystem::path p_textureFile, size_t p_channels, bool p_generateMipmaps)
 		{
+
 			// Verify channels number is supported in engine
 			assert(p_channels <= 4 && p_channels > 0);
 
@@ -64,7 +64,7 @@ namespace GraphicEngine {
 			size_t flag = SOIL_FLAG_POWER_OF_TWO;
 			if (p_generateMipmaps) { flag = flag | SOIL_FLAG_MIPMAPS; }
 			// Load texture
-			_id = SOIL_load_OGL_texture(p_textureFile.string().c_str(), p_channels, 0, flag);
+			_id = SOIL_load_OGL_texture(p_textureFile.string().c_str(), (int)p_channels, 0, (unsigned int)flag);
 			// Verify the texture has been loaded correctly
 			if (_id == 0)
 			{
@@ -196,5 +196,4 @@ namespace GraphicEngine {
 		}
 #pragma endregion
 
-	}
 }

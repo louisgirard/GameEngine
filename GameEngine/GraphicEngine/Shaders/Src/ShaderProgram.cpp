@@ -1,8 +1,6 @@
 #include <GraphicEngine/Shaders/Header/ShaderProgram.hpp>
 
-namespace GraphicEngine {
-	namespace Shaders {
-
+namespace GraphicEngine::Shaders {
 
 		ShaderProgram::ShaderProgram(const Shader& p_vertex, const Shader& p_fragment)
 		{
@@ -118,68 +116,68 @@ namespace GraphicEngine {
 			return glGetUniformLocation(_programID, p_name.c_str());
 		}
 
-		void ShaderProgram::setUniform(GLint p_id, const GLint& p_value, size_t p_size = 1) const
+		void ShaderProgram::setUniform(GLint p_id, const GLint& p_value, size_t p_size) const
 		{
 			assert(p_id >= 0 && "ShaderProgram::setUniform called with an invalid uniform index");
 			assert(isValid() && isActive());
 
-			glUniform1iv(p_id, p_size, &p_value);
+			glUniform1iv(p_id, (GLsizei)p_size, &p_value);
 		}
 
-		void ShaderProgram::setUniform(GLint p_id, const GLfloat& p_value, size_t p_size = 1) const
+		void ShaderProgram::setUniform(GLint p_id, const GLfloat& p_value, size_t p_size) const
 		{
 			assert(p_id >= 0 && "ShaderProgram::setUniform called with an invalid uniform index");
 			assert(isValid() && isActive());
 
-			glUniform1fv(p_id, p_size, &p_value);
+			glUniform1fv(p_id, (GLsizei)p_size, &p_value);
 		}
 
-		void ShaderProgram::setUniform(GLint p_id, const glm::vec2& p_value, size_t p_size = 1) const
+		void ShaderProgram::setUniform(GLint p_id, const glm::vec2& p_value, size_t p_size) const
 		{
 			assert(p_id >= 0 && "ShaderProgram::setUniform called with an invalid uniform index");
 			assert(isValid() && isActive());
 
-			glUniform2fv(p_id, p_size, glm::value_ptr(p_value));
+			glUniform2fv(p_id, (GLsizei)p_size, glm::value_ptr(p_value));
 		}
 
-		void ShaderProgram::setUniform(GLint p_id, const glm::vec3& p_value, size_t p_size = 1) const
+		void ShaderProgram::setUniform(GLint p_id, const glm::vec3& p_value, size_t p_size) const
 		{
 			assert(p_id >= 0 && "ShaderProgram::setUniform called with an invalid uniform index");
 			assert(isValid() && isActive());
 
-			glUniform3fv(p_id, p_size, glm::value_ptr(p_value));
+			glUniform3fv(p_id, (GLsizei)p_size, glm::value_ptr(p_value));
 		}
 
-		void ShaderProgram::setUniform(GLint p_id, const glm::vec4& p_value, size_t p_size = 1) const
+		void ShaderProgram::setUniform(GLint p_id, const glm::vec4& p_value, size_t p_size) const
 		{
 			assert(p_id >= 0 && "ShaderProgram::setUniform called with an invalid uniform index");
 			assert(isValid() && isActive());
 
-			glUniform4fv(p_id, p_size, glm::value_ptr(p_value));
+			glUniform4fv(p_id, (GLsizei)p_size, glm::value_ptr(p_value));
 		}
 
-		void ShaderProgram::setUniform(GLint p_id, const glm::mat2x2& p_value, size_t p_size = 1) const
+		void ShaderProgram::setUniform(GLint p_id, const glm::mat2x2& p_value, size_t p_size) const
 		{
 			assert(p_id >= 0 && "ShaderProgram::setUniform called with an invalid uniform index");
 			assert(isValid() && isActive());
 
-			glUniformMatrix2fv(p_id, p_size, GL_FALSE, glm::value_ptr(p_value));
+			glUniformMatrix2fv(p_id, (GLsizei)p_size, GL_FALSE, glm::value_ptr(p_value));
 		}
 
-		void ShaderProgram::setUniform(GLint p_id, const glm::mat3x3& p_value, size_t p_size = 1) const
+		void ShaderProgram::setUniform(GLint p_id, const glm::mat3x3& p_value, size_t p_size) const
 		{
 			assert(p_id >= 0 && "ShaderProgram::setUniform called with an invalid uniform index");
 			assert(isValid() && isActive());
 
-			glUniformMatrix3fv(p_id, p_size, GL_FALSE, glm::value_ptr(p_value));
+			glUniformMatrix3fv(p_id, (GLsizei)p_size, GL_FALSE, glm::value_ptr(p_value));
 		}
 
-		void ShaderProgram::setUniform(GLint p_id, const glm::mat4x4& p_value, size_t p_size = 1) const
+		void ShaderProgram::setUniform(GLint p_id, const glm::mat4x4& p_value, size_t p_size) const
 		{
 			assert(p_id >= 0 && "ShaderProgram::setUniform called with an invalid uniform index");
 			assert(isValid() && isActive());
 
-			glUniformMatrix4fv(p_id, p_size, GL_FALSE, glm::value_ptr(p_value));
+			glUniformMatrix4fv(p_id, (GLsizei)p_size, GL_FALSE, glm::value_ptr(p_value));
 		}
 #pragma endregion
 
@@ -190,14 +188,13 @@ namespace GraphicEngine {
 			return glGetAttribLocation(_programID, p_name.c_str());
 		}
 
-		void ShaderProgram::setAttribute(const std::string& p_name, const Buffers::VertexBufferObject* p_buffer, GLuint p_nbInstances = 0)
+		void ShaderProgram::setAttribute(const std::string& p_name, const Buffers::VertexBufferObject* p_buffer, GLuint p_nbInstances)
 		{
 			assert(isValid());
 			assert(isActive());
 
 			GLint location = getAttributeLocation(p_name);
-			p_buffer->attribPointer(location, p_nbInstances);
+			p_buffer->passAsAttribute(location, p_nbInstances);
 		}
 #pragma endregion
-	}
 }

@@ -1,7 +1,6 @@
 #include <GraphicEngine/Shaders/Header/ShaderParser.hpp>
 
-namespace GraphicEngine {
-	namespace Shaders {
+namespace GraphicEngine::Shaders {
 		void ShaderParser::addIncludePath(const std::filesystem::path& p_path)
 		{
 			_includePaths.push_back(p_path);
@@ -24,6 +23,7 @@ namespace GraphicEngine {
 			catch (const std::exception& error)
 			{
 				_includePaths.pop_back();
+				std::cout << error.what() << std::endl;
 				throw error;
 			}
 
@@ -40,7 +40,7 @@ namespace GraphicEngine {
 		{
 			// Get string size
 			int beginIndex = 0;
-			int endIndex = p_str.size() - 1;
+			int endIndex = (int)p_str.size() - 1;
 
 			//We remove every blank space from front and back of the string
 			while (beginIndex < p_str.size() && std::isspace(p_str[beginIndex])) { ++beginIndex; }
@@ -50,7 +50,7 @@ namespace GraphicEngine {
 			if (endIndex < beginIndex) { return ""; }
 
 			//Remove blank space from the string and give it as a result
-			return p_str.substr(beginIndex, endIndex - (int)beginIndex + (int)1);
+			return p_str.substr(beginIndex, (int)endIndex - (int)beginIndex + 1);
 		}
 
 		bool ShaderParser::extractInclude(const std::string& p_line, std::filesystem::path& p_includePath)
@@ -127,5 +127,4 @@ namespace GraphicEngine {
 			// If none of the directory contains this file, throw an error
 			throw std::ios_base::failure(std::string("Include file ") + p_path.string() + " not found.");
 		}
-	}
 }

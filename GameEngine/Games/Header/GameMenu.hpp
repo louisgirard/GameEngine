@@ -13,7 +13,7 @@ namespace Games {
 	private :
 
 		/**Callbacks function linked to an item of the menu**/
-		static std::vector<std::function<void()>> _menuCallbacks;
+		static std::vector<std::function<void()>> s_menuCallbacks;
 
 		/**
 		* Call the function link to the selected item

@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\GameEngine\Games\Demo\Src\Demo.cpp" />
     <ClCompile Include="..\GameEngine\Games\Game1\Src\ShooterGame.cpp" />
     <ClCompile Include="..\GameEngine\Games\Game2\Src\BlobGame.cpp" />
     <ClCompile Include="..\GameEngine\Games\Src\GameBase.cpp" />
@@ -28,16 +29,36 @@
     <ClCompile Include="..\GameEngine\Games\Src\KeyboardStatus.cpp" />
     <ClCompile Include="..\GameEngine\Games\Src\MouseStatus.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\ElementBufferObject.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\FrameBuffer.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\FrameBufferObject.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\GeometryBuffer.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\MultipleDataVBO.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\RenderBuffer.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\VertexArrayObject.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\VertexBufferObject.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\Materials\Src\Color.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\Materials\Src\PhongMaterial.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\SceneBase\Src\BoundingBox.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\SceneBase\Src\Camera.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\SceneBase\Src\ScreenRenderQuad.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\SceneBase\Src\SkyboxGeometry.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\SceneBase\Src\Text.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\Mesh.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\PMeshObject.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\TransformStack.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\Servers\Src\LightServer.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\Servers\Src\SceneServer.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\Servers\Src\ShaderServer.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\Servers\Src\TextureServer.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\MeshShader.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\Shader.cpp" />
-    <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\ShaderManager.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\ShaderParser.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\ShaderProgram.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\ShaderSource.cpp" />
-    <ClCompile Include="..\GameEngine\GraphicEngine\Src\Camera.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\SkyboxShader.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\VFXShader.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Src\PParticle.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\Textures\Src\CubeMap.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Textures\Src\Texture2D.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\TypeSpec\Header\TextureInternalFormatSpec.hpp" />
     <ClCompile Include="..\GameEngine\Main.cpp" />
@@ -52,9 +73,12 @@
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\AParticle.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\CParticle.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\Vector3.cpp" />
+    <ClCompile Include="..\GameEngine\SceneGraph\Src\EmptyNode.cpp" />
+    <ClCompile Include="..\GameEngine\SceneGraph\Src\CMeshObject.cpp" />
     <ClCompile Include="..\GameEngine\System\Src\Paths.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\GameEngine\Games\Demo\Header\Demo.hpp" />
     <ClInclude Include="..\GameEngine\Games\Game1\Header\ShooterGame.hpp" />
     <ClInclude Include="..\GameEngine\Games\Game2\Header\BlobGame.hpp" />
     <ClInclude Include="..\GameEngine\Games\Header\DefaultConfig.hpp" />
@@ -62,23 +86,49 @@
     <ClInclude Include="..\GameEngine\Games\Header\GameConfiguration.hpp" />
     <ClInclude Include="..\GameEngine\Games\Header\GameMenu.hpp" />
     <ClInclude Include="..\GameEngine\Games\Header\GameSelection.hpp" />
+    <ClInclude Include="..\GameEngine\Games\Header\GraphicEnabler.hpp" />
     <ClInclude Include="..\GameEngine\Games\Header\KeyAction.hpp" />
     <ClInclude Include="..\GameEngine\Games\Header\KeyboardStatus.hpp" />
     <ClInclude Include="..\GameEngine\Games\Header\MouseStatus.hpp" />
+    <ClInclude Include="..\GameEngine\Games\Header\PhysicEnabler.hpp" />
+    <ClInclude Include="..\GameEngine\Games\Header\SceneGraphEnabler.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Buffers\Header\ElementBufferObject.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\Buffers\Header\FrameBuffer.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Buffers\Header\FrameBufferObject.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\Buffers\Header\GeometryBuffer.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\Buffers\Header\MultipleDataVBO.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\Buffers\Header\RenderBuffer.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\Buffers\Header\TextureBufferObject.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Buffers\Header\VertexArrayObject.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Buffers\Header\VertexBufferObject.hpp" />
-    <ClInclude Include="..\GameEngine\GraphicEngine\Header\Camera.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\Header\GraphicConfig.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Header\GraphicEnum.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\Header\GraphicUtils.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Header\PParticle.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\Materials\Header\Color.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\Materials\Header\PhongMaterial.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\SceneBase\Header\BoundingBox.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\SceneBase\Header\Camera.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\SceneBase\Header\ScreenRenderQuad.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\SceneBase\Header\SkyboxGeometry.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\SceneBase\Header\Text.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\Mesh.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\PMeshObject.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\TransformStack.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\Servers\Header\LightServer.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\Servers\Header\SceneServer.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\Servers\Header\ShaderServer.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\Servers\Header\TextureServer.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\Shaders\Header\MeshShader.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Shaders\Header\Shader.hpp" />
-    <ClInclude Include="..\GameEngine\GraphicEngine\Shaders\Header\ShaderManager.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Shaders\Header\ShaderParser.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Shaders\Header\ShaderProgram.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Shaders\Header\ShaderSource.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\Shaders\Header\SkyboxShader.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\Shaders\Header\VFXShader.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\Textures\Header\CubeMap.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Textures\Header\Texture2D.hpp" />
-    <ClInclude Include="..\GameEngine\GraphicEngine\TypeSpec\Header\GLMTypeSpec.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\TypeSpec\Header\GLMTypesSpec.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\TypeSpec\Header\GLTypeSpec.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\TypeSpec\Header\ToGLTypeSpec.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleContact.hpp" />
@@ -94,7 +144,18 @@
     <ClInclude Include="..\GameEngine\PhysicEngine\SpringForces\Header\ParticleBungee.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\SpringForces\Header\ParticleBuoyancy.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\SpringForces\Header\ParticleSpring.hpp" />
+    <ClInclude Include="..\GameEngine\SceneGraph\Header\EmptyNode.hpp" />
+    <ClInclude Include="..\GameEngine\SceneGraph\Header\CMeshObject.hpp" />
     <ClInclude Include="..\GameEngine\System\Header\Paths.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Ressources\Shaders\filter.frag" />
+    <None Include="..\Ressources\Shaders\filter.vert" />
+    <None Include="..\Ressources\Shaders\gauss.frag" />
+    <None Include="..\Ressources\Shaders\PhongDirectional.frag" />
+    <None Include="..\Ressources\Shaders\PhongDirectional.vert" />
+    <None Include="..\Ressources\Shaders\skybox.frag" />
+    <None Include="..\Ressources\Shaders\skybox.vert" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -208,7 +269,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\;$(GameEngineDep)/lib/$(Configuration)/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32sd.lib;soil.lib;glfw3dll.lib;glew32d.lib;freeglut_staticd.lib;freeglutd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32sd.lib;soil.lib;glfw3dll.lib;glew32d.lib;freeglut_staticd.lib;freeglutd.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

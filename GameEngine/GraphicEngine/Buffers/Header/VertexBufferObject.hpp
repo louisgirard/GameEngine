@@ -8,12 +8,9 @@
 #include <glm/vec3.hpp>
 #include <glm/vec4.hpp>
 
-#include <GL/glew.h>
+#include <GraphicEngine/TypeSpec/Header/GLMTypesSpec.hpp>
 
-#include <GraphicEngine/TypeSpec/Header/GLMTypeSpec.hpp>
-
-namespace GraphicEngine {
-	namespace Buffers {
+namespace GraphicEngine::Buffers {
 		class VertexBufferObject
 		{
 		protected:
@@ -28,6 +25,13 @@ namespace GraphicEngine {
 			size_t _dataSize;
 
 		public:
+
+			/*
+			* Default constructor
+			* Warning this buffer is invalid
+			*/
+			VertexBufferObject():_id(0), _scalarType(), _bufferSize(0), _dataSize(0){}
+
 			/*
 			* Constructor
 			* @param p_buffer : The buffer linked to this object
@@ -152,7 +156,6 @@ namespace GraphicEngine {
 			void unbind() const;
 #pragma endregion
 		};
-	}
 }
 
 #endif

@@ -4,6 +4,7 @@
 #include <Games/Header/GameSelection.hpp>
 #include <Games/Header/GameBase.hpp>
 #include <Games/Game1/Header/ShooterGame.hpp>
+#include <Games/Demo/Header/Demo.hpp>
 
 namespace std
 {
@@ -12,7 +13,9 @@ namespace std
 
 int main(int p_argc, char** p_argv)
 {
-	Games::GameSelection::registerFactory<Games::Game1::ShooterGame>();
+	Games::GameSelection::registerFactory<Games::Demo>("Demo", "Graphic engine demo.");
+	Games::GameSelection::registerFactory<Games::Game1::ShooterGame>("Game 1", "Jeu qui presente le premier tp.");
+
 
 	bool engineRunning = true; 
 	

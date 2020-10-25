@@ -118,15 +118,6 @@
     <Filter Include="GameEngine\PhysicEngine\Collisions\Source Files">
       <UniqueIdentifier>{ef17c12c-9b07-4354-9da1-07155c7c4811}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameEngine\GraphicEngine\Mesh">
-      <UniqueIdentifier>{96233171-10da-4497-ba32-4395e4d3c0a3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngine\GraphicEngine\Mesh\Header Files">
-      <UniqueIdentifier>{58f5b552-1927-469c-9ba2-51a3b0096ed4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngine\GraphicEngine\Mesh\Source Files">
-      <UniqueIdentifier>{5cdb4173-4fb6-4ee6-b6b1-6966177abbb8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameEngine\GraphicEngine\Textures">
       <UniqueIdentifier>{08ace4e1-cb8b-43b2-8827-3fcd7fae059d}</UniqueIdentifier>
     </Filter>
@@ -135,6 +126,60 @@
     </Filter>
     <Filter Include="GameEngine\GraphicEngine\Textures\Source Files">
       <UniqueIdentifier>{8942333a-4c9d-4d71-9b97-193190cef52f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GraphicEngine\SceneBase">
+      <UniqueIdentifier>{497ca457-bece-4dca-ba5a-23e73dcb33e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GraphicEngine\SceneBase\Header Files">
+      <UniqueIdentifier>{7ae35326-b0f0-413f-a39e-e51de64b81d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GraphicEngine\SceneBase\Source Files">
+      <UniqueIdentifier>{667bf588-78e6-4841-8295-3f0a5a93662d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GraphicEngine\Materials">
+      <UniqueIdentifier>{22df2880-b2fb-45e5-ace8-587435e76f4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GraphicEngine\Materials\Header Files">
+      <UniqueIdentifier>{867c99d4-547c-4527-b25e-c4852c113266}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GraphicEngine\Materials\Source Files">
+      <UniqueIdentifier>{ef04baa0-6a11-44db-8026-c03830f9cf0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GraphicEngine\Servers">
+      <UniqueIdentifier>{8292993b-58e4-43b7-8dfc-80a3310527cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GraphicEngine\Servers\Header Files">
+      <UniqueIdentifier>{0b32fccd-b5b2-4112-862c-512f1913ab3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GraphicEngine\Servers\Source Files">
+      <UniqueIdentifier>{9df03bab-e60b-4279-922f-3eb8316fa011}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\SceneGraph">
+      <UniqueIdentifier>{fc83a6c7-ff98-4405-88c6-4550e9590e20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GraphicEngine\PSceneGraph">
+      <UniqueIdentifier>{a66438ae-ec86-4030-8cee-7ae7f7cfd4f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GraphicEngine\PSceneGraph\Header Files">
+      <UniqueIdentifier>{9f2cf754-e72f-4e90-961d-2969a534b2d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GraphicEngine\PSceneGraph\Source Files">
+      <UniqueIdentifier>{4b181523-45d9-478c-93b8-217eded482c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\SceneGraph\Header Files">
+      <UniqueIdentifier>{7ffabef6-9641-4028-8d50-b6eb7e7a9db7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\SceneGraph\Source Files">
+      <UniqueIdentifier>{4b2f57e1-e8ee-45ab-85f9-ed6286e13006}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Games\GraphicDemo">
+      <UniqueIdentifier>{4ca70cc2-e563-4306-8c6f-0dc79e81dc33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Games\GraphicDemo\Header Files">
+      <UniqueIdentifier>{c5f7d11c-bea7-4e24-abdd-fdf596cdff2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Games\GraphicDemo\Source Files">
+      <UniqueIdentifier>{e9de4283-4e7d-4c57-a1a3-b452342fcae1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -171,9 +216,6 @@
     <ClCompile Include="..\GameEngine\Games\Game1\Src\ShooterGame.cpp">
       <Filter>GameEngine\Games\Game1\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\GameEngine\GraphicEngine\Src\Camera.cpp">
-      <Filter>GameEngine\GraphicEngine\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\GameEngine\Games\Src\MouseStatus.cpp">
       <Filter>GameEngine\Games\Source Files</Filter>
     </ClCompile>
@@ -184,9 +226,6 @@
       <Filter>GameEngine\System\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\Shader.cpp">
-      <Filter>GameEngine\GraphicEngine\Shaders\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\ShaderManager.cpp">
       <Filter>GameEngine\GraphicEngine\Shaders\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\ShaderParser.cpp">
@@ -234,11 +273,86 @@
     <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\ElementBufferObject.cpp">
       <Filter>GameEngine\GraphicEngine\Buffers\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\FrameBufferObject.cpp">
-      <Filter>GameEngine\PhysicEngine\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\GameEngine\GraphicEngine\Textures\Src\Texture2D.cpp">
       <Filter>GameEngine\GraphicEngine\Textures\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\FrameBufferObject.cpp">
+      <Filter>GameEngine\GraphicEngine\Buffers\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\RenderBuffer.cpp">
+      <Filter>GameEngine\GraphicEngine\Buffers\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\FrameBuffer.cpp">
+      <Filter>GameEngine\GraphicEngine\Buffers\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\GeometryBuffer.cpp">
+      <Filter>GameEngine\GraphicEngine\Buffers\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\SceneBase\Src\Camera.cpp">
+      <Filter>GameEngine\GraphicEngine\SceneBase\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\SceneBase\Src\BoundingBox.cpp">
+      <Filter>GameEngine\GraphicEngine\SceneBase\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\Materials\Src\PhongMaterial.cpp">
+      <Filter>GameEngine\GraphicEngine\Materials\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\Servers\Src\TextureServer.cpp">
+      <Filter>GameEngine\GraphicEngine\Servers\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\Materials\Src\Color.cpp">
+      <Filter>GameEngine\GraphicEngine\Materials\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\Servers\Src\LightServer.cpp">
+      <Filter>GameEngine\GraphicEngine\Servers\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\Textures\Src\CubeMap.cpp">
+      <Filter>GameEngine\GraphicEngine\Textures\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\SceneBase\Src\SkyboxGeometry.cpp">
+      <Filter>GameEngine\GraphicEngine\SceneBase\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\SceneBase\Src\Text.cpp">
+      <Filter>GameEngine\GraphicEngine\SceneBase\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\SceneBase\Src\ScreenRenderQuad.cpp">
+      <Filter>GameEngine\GraphicEngine\SceneBase\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\Servers\Src\ShaderServer.cpp">
+      <Filter>GameEngine\GraphicEngine\Servers\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\TransformStack.cpp">
+      <Filter>GameEngine\GraphicEngine\PSceneGraph\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\Mesh.cpp">
+      <Filter>GameEngine\GraphicEngine\PSceneGraph\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\SceneGraph\Src\CMeshObject.cpp">
+      <Filter>GameEngine\SceneGraph\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\PMeshObject.cpp">
+      <Filter>GameEngine\GraphicEngine\PSceneGraph\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\Servers\Src\SceneServer.cpp">
+      <Filter>GameEngine\GraphicEngine\Servers\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\Games\Demo\Src\Demo.cpp">
+      <Filter>GameEngine\Games\GraphicDemo\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\MeshShader.cpp">
+      <Filter>GameEngine\GraphicEngine\Shaders\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\SkyboxShader.cpp">
+      <Filter>GameEngine\GraphicEngine\Shaders\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\VFXShader.cpp">
+      <Filter>GameEngine\GraphicEngine\Shaders\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\Buffers\Src\MultipleDataVBO.cpp">
+      <Filter>GameEngine\GraphicEngine\Buffers\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\SceneGraph\Src\EmptyNode.cpp">
+      <Filter>GameEngine\SceneGraph\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -278,9 +392,6 @@
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\Vector3.hpp">
       <Filter>GameEngine\PhysicEngine\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\GameEngine\GraphicEngine\Header\Camera.hpp">
-      <Filter>GameEngine\GraphicEngine\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\MathConstant.hpp">
       <Filter>GameEngine\PhysicEngine\Header Files</Filter>
     </ClInclude>
@@ -299,9 +410,6 @@
     <ClInclude Include="..\GameEngine\GraphicEngine\Shaders\Header\Shader.hpp">
       <Filter>GameEngine\GraphicEngine\Shaders\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\GameEngine\GraphicEngine\Shaders\Header\ShaderManager.hpp">
-      <Filter>GameEngine\GraphicEngine\Shaders\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\GameEngine\GraphicEngine\Shaders\Header\ShaderParser.hpp">
       <Filter>GameEngine\GraphicEngine\Shaders\Header Files</Filter>
     </ClInclude>
@@ -315,9 +423,6 @@
       <Filter>GameEngine\GraphicEngine\Buffers\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\GameEngine\GraphicEngine\TypeSpec\Header\GLTypeSpec.hpp">
-      <Filter>GameEngine\GraphicEngine\TypeSpec\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\GameEngine\GraphicEngine\TypeSpec\Header\GLMTypeSpec.hpp">
       <Filter>GameEngine\GraphicEngine\TypeSpec\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\GameEngine\PhysicEngine\SpringForces\Header\ParticleBungee.hpp">
@@ -356,11 +461,130 @@
     <ClInclude Include="..\GameEngine\GraphicEngine\Buffers\Header\ElementBufferObject.hpp">
       <Filter>GameEngine\GraphicEngine\Buffers\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\GameEngine\GraphicEngine\Buffers\Header\FrameBufferObject.hpp">
-      <Filter>GameEngine\PhysicEngine\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\GameEngine\GraphicEngine\Textures\Header\Texture2D.hpp">
       <Filter>GameEngine\GraphicEngine\Textures\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\Buffers\Header\FrameBufferObject.hpp">
+      <Filter>GameEngine\GraphicEngine\Buffers\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\Buffers\Header\RenderBuffer.hpp">
+      <Filter>GameEngine\GraphicEngine\Buffers\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\Buffers\Header\FrameBuffer.hpp">
+      <Filter>GameEngine\GraphicEngine\Buffers\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\Buffers\Header\TextureBufferObject.hpp">
+      <Filter>GameEngine\GraphicEngine\Buffers\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\TypeSpec\Header\GLMTypesSpec.hpp">
+      <Filter>GameEngine\GraphicEngine\TypeSpec\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\Buffers\Header\GeometryBuffer.hpp">
+      <Filter>GameEngine\GraphicEngine\Buffers\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\SceneBase\Header\Camera.hpp">
+      <Filter>GameEngine\GraphicEngine\SceneBase\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\SceneBase\Header\BoundingBox.hpp">
+      <Filter>GameEngine\GraphicEngine\SceneBase\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\Header\GraphicUtils.hpp">
+      <Filter>GameEngine\GraphicEngine\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\Header\GraphicConfig.hpp">
+      <Filter>GameEngine\GraphicEngine\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\Materials\Header\PhongMaterial.hpp">
+      <Filter>GameEngine\GraphicEngine\Materials\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\Servers\Header\TextureServer.hpp">
+      <Filter>GameEngine\GraphicEngine\Servers\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\Materials\Header\Color.hpp">
+      <Filter>GameEngine\GraphicEngine\Materials\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\Servers\Header\LightServer.hpp">
+      <Filter>GameEngine\GraphicEngine\Servers\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\Textures\Header\CubeMap.hpp">
+      <Filter>GameEngine\GraphicEngine\Textures\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\SceneBase\Header\SkyboxGeometry.hpp">
+      <Filter>GameEngine\GraphicEngine\SceneBase\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\SceneBase\Header\Text.hpp">
+      <Filter>GameEngine\GraphicEngine\SceneBase\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\SceneBase\Header\ScreenRenderQuad.hpp">
+      <Filter>GameEngine\GraphicEngine\SceneBase\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\Buffers\Header\MultipleDataVBO.hpp">
+      <Filter>GameEngine\GraphicEngine\Buffers\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\Servers\Header\ShaderServer.hpp">
+      <Filter>GameEngine\GraphicEngine\Servers\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\TransformStack.hpp">
+      <Filter>GameEngine\GraphicEngine\PSceneGraph\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\Mesh.hpp">
+      <Filter>GameEngine\GraphicEngine\PSceneGraph\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\SceneGraph\Header\CMeshObject.hpp">
+      <Filter>GameEngine\SceneGraph\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\PMeshObject.hpp">
+      <Filter>GameEngine\GraphicEngine\PSceneGraph\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\Servers\Header\SceneServer.hpp">
+      <Filter>GameEngine\GraphicEngine\Servers\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\Games\Demo\Header\Demo.hpp">
+      <Filter>GameEngine\Games\GraphicDemo\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\Games\Header\GraphicEnabler.hpp">
+      <Filter>GameEngine\Games\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\Games\Header\PhysicEnabler.hpp">
+      <Filter>GameEngine\Games\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\Games\Header\SceneGraphEnabler.hpp">
+      <Filter>GameEngine\Games\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\Shaders\Header\MeshShader.hpp">
+      <Filter>GameEngine\GraphicEngine\Shaders\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\Shaders\Header\SkyboxShader.hpp">
+      <Filter>GameEngine\GraphicEngine\Shaders\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\Shaders\Header\VFXShader.hpp">
+      <Filter>GameEngine\GraphicEngine\Shaders\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\SceneGraph\Header\EmptyNode.hpp">
+      <Filter>GameEngine\SceneGraph\Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Ressources\Shaders\gauss.frag">
+      <Filter>GameEngine\Resource Files\Shaders</Filter>
+    </None>
+    <None Include="..\Ressources\Shaders\PhongDirectional.frag">
+      <Filter>GameEngine\Resource Files\Shaders</Filter>
+    </None>
+    <None Include="..\Ressources\Shaders\PhongDirectional.vert">
+      <Filter>GameEngine\Resource Files\Shaders</Filter>
+    </None>
+    <None Include="..\Ressources\Shaders\skybox.frag">
+      <Filter>GameEngine\Resource Files\Shaders</Filter>
+    </None>
+    <None Include="..\Ressources\Shaders\skybox.vert">
+      <Filter>GameEngine\Resource Files\Shaders</Filter>
+    </None>
+    <None Include="..\Ressources\Shaders\filter.frag">
+      <Filter>GameEngine\Resource Files\Shaders</Filter>
+    </None>
+    <None Include="..\Ressources\Shaders\filter.vert">
+      <Filter>GameEngine\Resource Files\Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

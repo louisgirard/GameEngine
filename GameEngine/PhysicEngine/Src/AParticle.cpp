@@ -117,10 +117,10 @@ namespace PhysicEngine {
 
 
 		// Update the position
-		_position += _velocity * p_time;
+		_position += _velocity * (float)p_time;
 
 		// Update velocity
-		_velocity = _velocity * powf(_damping, p_time) + resultingAcceleration * p_time;
+		_velocity = _velocity * powf(_damping, (float)p_time) + resultingAcceleration * (float)p_time;
 
 		//Clear the forces
 		clearAccumulator();

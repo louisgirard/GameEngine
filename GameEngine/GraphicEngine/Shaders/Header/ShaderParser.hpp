@@ -12,8 +12,7 @@
 #include <string>
 #include <cctype>
 
-namespace GraphicEngine {
-	namespace Shaders {
+namespace GraphicEngine::Shaders {
 		class ShaderParser
 		{
 		protected:
@@ -86,8 +85,6 @@ namespace GraphicEngine {
 			std::string load(const std::filesystem::path& p_filePath);
 
 		};
-	
-	}
 }
 
 #endif // !_GRAPHIC_ENGINE_SHADER_PARSER_

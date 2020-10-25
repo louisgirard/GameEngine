@@ -1,7 +1,7 @@
 #include <Games/Header/GameMenu.hpp>
 
 namespace Games {
-	std::vector<std::function<void()>> GameMenu::_menuCallbacks;
+	std::vector<std::function<void()>> GameMenu::s_menuCallbacks;
 
 	GameMenu::GameMenu(::std::string const& p_title) : _title(p_title), _menuId(-1), _isButtonLinked(false), _linkedToButton(-1)
 	{
@@ -24,7 +24,7 @@ namespace Games {
 	}
 
 	void GameMenu::menuCallback(int p_selected) {
-		_menuCallbacks[p_selected]();
+		s_menuCallbacks[p_selected]();
 	}
 
 	void GameMenu::activate(int p_button)
@@ -52,9 +52,9 @@ namespace Games {
 	void GameMenu::addItem(::std::string const& p_name, const ::std::function<void()>& p_callback)
 	{
 		//Set id for this item as the one who will be needed to call it from the vector
-		int id = _menuCallbacks.size();
+		int id = (int)s_menuCallbacks.size();
 		//Add this item to the menu's vector of item
-		_menuCallbacks.push_back(p_callback);
+		s_menuCallbacks.push_back(p_callback);
 		//Set current Menu in GLUT as this one
 		bind();
 		//Add this item in GLUT for display and link purpose

@@ -1,7 +1,6 @@
 #include <GraphicEngine/Shaders/Header/Shader.hpp>
 
-namespace GraphicEngine {
-	namespace Shaders {
+namespace GraphicEngine::Shaders {
 
 		Shader::Shader(const ShaderSource p_source, ShaderType p_type) {
 
@@ -85,5 +84,4 @@ namespace GraphicEngine {
 		}
 
 #pragma endregion
-	}
 }

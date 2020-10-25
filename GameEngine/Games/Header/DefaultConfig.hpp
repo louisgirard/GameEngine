@@ -2,6 +2,8 @@
 #define _Games_DefaultConfig_H
 
 #include <filesystem>
+#include <iostream>
+#include <stdlib.h>
 
 #include <GL/freeglut.h>
 
@@ -33,13 +35,17 @@ namespace Games {
 	inline ::std::filesystem::path dataPath()
 	{
 		// Get the environment variable set earlier with the setup.exe
-		char* path = getenv("GameEngineRes");
-		if (path == nullptr)
-		{
+		char* path;
+		size_t len;
+		errno_t err = _dupenv_s(&path, &len, "GameEngineRes");
+
+		if (err) {
 			std::cerr << "Error when retrieving GameEngineRes environment variable, switching to relative path" << std::endl;
-			return executablePath() / ".."/ "Ressources";
+			return executablePath() / ".." / "Ressources";
 		}
-		return ::std::string(path);
+		std::filesystem::path res = std::filesystem::path(::std::string(path));
+		delete[] path;
+		return res;
 	}
 }
 
