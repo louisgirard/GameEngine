@@ -50,7 +50,7 @@ namespace GraphicEngine::Buffers {
 				// (We want only one buffer to be generated)
 				glGenBuffers(1, &_id);
 				handleGLerror("VBO()");
-				std::cout << "Vertex Buffer object created " << _id << std::endl;
+				//std::cout << "Vertex Buffer object created " << _id << std::endl;
 
 				// Bind buffer to openGL
 				bind();

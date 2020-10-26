@@ -16,8 +16,14 @@ namespace GraphicEngine::PSceneGraph {
 	void Mesh::forceTextureCoordinates()
 	{
 		if (!getTextureCoordinates()) {
+			size_t size = 0;
+			if (_vertices) size = _vertices.value().size();
+			else if (_normals) size = _normals.value().size();
+			else if (_tangents) size = _tangents.value().size();
+			else if (_bitangents) size = _bitangents.value().size();
+
 			_textureCoordinatesVBO.reset();
-			std::vector<glm::vec2> textureCoordinate;
+			std::vector<glm::vec2> textureCoordinate(size);
 			std::fill(textureCoordinate.begin(), textureCoordinate.end(), glm::vec2(0, 0));
 			_textureCoordinates = textureCoordinate;
 		}

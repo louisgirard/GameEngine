@@ -149,10 +149,12 @@ namespace GraphicEngine::Shaders {
 
 		void MeshShader::renderMesh(const Buffers::VertexArrayObject& p_meshVAO, const Materials::PhongMaterial& p_material) {
 			setMaterial(p_material);
+			glEnableClientState(GL_VERTEX_ARRAY);
 			p_meshVAO.bind();
 			glDrawElements(GL_TRIANGLES, (GLsizei)p_meshVAO.eboSize(), GL_UNSIGNED_INT, 0);
 			handleGLerror("MeshShader::renderMesh()");
 			p_meshVAO.unbind();
+			glDisableClientState(GL_VERTEX_ARRAY);
 		}
 
 #pragma region GETTERS
