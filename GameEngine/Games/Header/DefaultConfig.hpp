@@ -27,6 +27,8 @@ namespace Games {
 	*/
 	inline std::filesystem::path executablePath() { return System::Paths::executable(); }
 
+#if defined WIN32 
+
 	/*
 	* Full pathname of the data directory.
 	* @return the full path to the data directory
@@ -46,6 +48,14 @@ namespace Games {
 		delete[] path;
 		return res;
 	}
+
+#else
+
+	inline ::std::filesystem::path dataPath()
+	{
+		return executablePath() / ".." / "Ressources";
+	}
+#endif
 }
 
 #endif // !_Games_DefaultConfig_

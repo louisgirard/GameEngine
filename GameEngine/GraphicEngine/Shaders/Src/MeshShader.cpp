@@ -150,7 +150,7 @@ namespace GraphicEngine::Shaders {
 		void MeshShader::renderMesh(const Buffers::VertexArrayObject& p_meshVAO, const Materials::PhongMaterial& p_material) {
 			setMaterial(p_material);
 			p_meshVAO.bind();
-			glDrawElements(GL_TRIANGLES, (GLsizei)p_meshVAO.eboSize(), GL_UNSIGNED_INT, nullptr);
+			glDrawElements(GL_TRIANGLES, (GLsizei)p_meshVAO.eboSize(), GL_UNSIGNED_INT, 0);
 			p_meshVAO.unbind();
 		}
 
