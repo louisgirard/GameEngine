@@ -60,6 +60,9 @@ namespace Games {
 			/*Updates the visual representations of the particles*/
 			virtual void updateFrame();
 
+			/* Update the position of the camera to follow master particle */
+			void cameraFollowMaster();
+
 			/*
 			Check if there are collisions between particles and add them to the contact resolver
 			@param p_dt the time ellapsed since the last update

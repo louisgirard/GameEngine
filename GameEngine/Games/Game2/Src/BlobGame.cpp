@@ -61,15 +61,15 @@ namespace Games {
 			}
 			if (_keyboard.isPressed(KeyAction::MOVEBACK))
 			{
-				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::DOWN * 4 * (float)p_dt);
+				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::DOWN * 10 * (float)p_dt);
 			}
 			if (_keyboard.isPressed(KeyAction::MOVELEFT))
 			{
-				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::LEFT * 4 * (float)p_dt);
+				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::LEFT * 10 * (float)p_dt);
 			}
 			if (_keyboard.isPressed(KeyAction::MOVERIGHT))
 			{
-				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::RIGHT * 4 * (float)p_dt);
+				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::RIGHT * 10 * (float)p_dt);
 			}
 
 			// Break blob
@@ -124,6 +124,8 @@ namespace Games {
 		void Blob::updateFrame() {
 			GameBase::updateFrame();
 
+			cameraFollowMaster();
+
 			// Display Ground
 			glPushMatrix();
 			_ground->updateFrame();
@@ -141,6 +143,15 @@ namespace Games {
 				_particles[i]->updateFrame();
 				glPopMatrix();
 			}
+		}
+
+		void Blob::cameraFollowMaster()
+		{
+			Vector3 position = _particles[0]->getPosition();
+			_camera.setPosition(glm::vec3(position._x, position._y, 0.5));
+
+			glMatrixMode(GL_MODELVIEW);
+			glMultMatrixf(&(_camera.getInverseTransform()[0][0]));
 		}
 
 		void Blob::checkParticleCollisions(float p_dt)
