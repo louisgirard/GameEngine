@@ -174,7 +174,7 @@ namespace GraphicEngine::Shaders {
 				vbos.push_back(std::pair <GLint, const Buffers::VertexBufferObject* >(_inTextureCoordinate,p_mesh.getTextureCoordinatesVbo()));
 			}
 
-			return new Buffers::VertexArrayObject(vbos, p_mesh.getIndicesEbo());
+			return new Buffers::VertexArrayObject(vbos, p_mesh.getIndices().value());
 		}
 #pragma endregion
 
