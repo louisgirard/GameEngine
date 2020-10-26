@@ -34,8 +34,9 @@ namespace Games {
 		**/
 		virtual void reshape(GLint p_width, GLint p_height);
 
-		/* Handles user inputs */
-		virtual void handleInput();
+		/* Handles user inputs 
+		* @param p_dt the time ellapsed since the last update*/
+		virtual void handleInput(double p_dt);
 
 #pragma region UPDATE
 		/*

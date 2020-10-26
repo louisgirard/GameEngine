@@ -2,7 +2,7 @@
 
 namespace Games {
 	namespace Game2 {
-		Blob::Blob() : GameBase(), _contactResolver(NUM_PARTICLES*2)
+		Blob::Blob() : GameBase(), _contactResolver(NUM_PARTICLES*2), _gravity(Forces::ParticleGravity(Vector3(0, -10, 0)))
 		{
 		}
 
@@ -14,18 +14,22 @@ namespace Games {
 			_keyboard.bindActionToKey(KeyAction::BREAKBLOB, 98);
 			_keyboard.bindActionToKey(KeyAction::FUSEBLOB, 102);
 
+			float zAxis = -80;
+
 			// Create planes
-			_ground = std::make_shared<CHorizontalPlane>(Vector3(0.f, -5.f, -30.f), 30.f, 30.f);
+			_ground = std::make_shared<CHorizontalPlane>(Vector3(0, -50, zAxis), 500, 30);
+			_water = std::make_shared<CHorizontalPlane>(Vector3(0, -10, zAxis), 60, 30);
 
 			// Create particles
-			Vector3 position(-5, 1, -30);
+			float mass = 1;
+			Vector3 position(-5, 1, zAxis);
 			Vector3 color(1, 1, 1);
 			float radius = 3;
-			_particles[0] = std::make_shared<CParticle>(1.f, position, Vector3::ZERO, Vector3::ZERO, 0.999f, Vector3(1.f,0.f,0.f), radius);
-			position = Vector3(5, 1, -30);
-			_particles[1] = std::make_shared<CParticle>(1.f, position, Vector3::ZERO, Vector3::ZERO, 0.999f, color, radius);
-			position = Vector3(0, 4, -30);
-			_particles[2] = std::make_shared<CParticle>(1.f, position, Vector3::ZERO, Vector3::ZERO, 0.999f, color, radius);
+			_particles[0] = std::make_shared<CParticle>(mass, position, Vector3::ZERO, Vector3::ZERO, 0.999f, Vector3(1.f,0.f,0.f), radius);
+			position = Vector3(5, 1, zAxis);
+			_particles[1] = std::make_shared<CParticle>(mass, position, Vector3::ZERO, Vector3::ZERO, 0.999f, color, radius);
+			position = Vector3(0, 4, zAxis);
+			_particles[2] = std::make_shared<CParticle>(mass, position, Vector3::ZERO, Vector3::ZERO, 0.999f, color, radius);
 
 			// Add springs
 			auto spring1 = std::make_shared<SpringForces::ParticleSpring>(_particles[0].get(), 2, 10);
@@ -44,7 +48,7 @@ namespace Games {
 			_springs.push_back(spring6);
 		}
 
-		void Blob::handleInput()
+		void Blob::handleInput(double p_dt)
 		{
 			if (_keyboard.isPressed(KeyAction::QUIT)) {
 				quit();
@@ -53,19 +57,19 @@ namespace Games {
 			// Move blob
 			if (_keyboard.isPressed(KeyAction::MOVEFRONT))
 			{
-				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::UP * 0.01f);
+				_registry.add(_particles[0].get(), new Forces::ParticleGravity(Vector3(0, 50, 0)));
 			}
 			if (_keyboard.isPressed(KeyAction::MOVEBACK))
 			{
-				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::DOWN * 0.01f);
+				_registry.add(_particles[0].get(), new Forces::ParticleGravity(Vector3(0, -10, 0)));
 			}
 			if (_keyboard.isPressed(KeyAction::MOVELEFT))
 			{
-				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::LEFT * 0.01f);
+				_registry.add(_particles[0].get(), new Forces::ParticleGravity(Vector3(-10, 0, 0)));
 			}
 			if (_keyboard.isPressed(KeyAction::MOVERIGHT))
 			{
-				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::RIGHT * 0.01f);
+				_registry.add(_particles[0].get(), new Forces::ParticleGravity(Vector3(10, 0, 0)));
 			}
 
 			// Break blob
@@ -81,6 +85,7 @@ namespace Games {
 
 		void Blob::updatePhysic(double p_dt)
 		{
+			// Add forces
 			if (!isBroken)
 			{
 				_registry.add(_particles[0].get(), _springs[1].get());
@@ -93,9 +98,18 @@ namespace Games {
 				_registry.add(_particles[2].get(), _springs[2].get());
 			}
 
-			_registry.updatePhysic((float)p_dt);
-			checkParticleCollisions((float)p_dt);
-			checkGroundCollisions((float)p_dt);
+			for (int i = 0; i < NUM_PARTICLES; i++)
+			{
+				_registry.add(_particles[i].get(), &_gravity);
+			}
+
+			checkWaterInteraction(p_dt);
+
+			_registry.updatePhysic(p_dt);
+
+			// Check for collisions
+			checkParticleCollisions(p_dt);
+			checkGroundCollisions(p_dt);
 
 			for (int i = 0; i < NUM_PARTICLES; i++)
 			{
@@ -110,9 +124,16 @@ namespace Games {
 		void Blob::updateFrame() {
 			GameBase::updateFrame();
 
+			cameraFollowMaster();
+
 			// Display Ground
 			glPushMatrix();
 			_ground->updateFrame();
+			glPopMatrix();
+
+			// Display Water
+			glPushMatrix();
+			_water->updateFrame();
 			glPopMatrix();
 
 			for (int i = 0; i < NUM_PARTICLES; i++)
@@ -122,6 +143,15 @@ namespace Games {
 				_particles[i]->updateFrame();
 				glPopMatrix();
 			}
+		}
+
+		void Blob::cameraFollowMaster()
+		{
+			Vector3 position = _particles[0]->getPosition();
+			_camera.setPosition(glm::vec3(position._x, position._y, 0.5));
+
+			glMatrixMode(GL_MODELVIEW);
+			glMultMatrixf(&(_camera.getInverseTransform()[0][0]));
 		}
 
 		void Blob::checkParticleCollisions(float p_dt)
@@ -179,6 +209,19 @@ namespace Games {
 
 			// Resolve contacts
 			_contactResolver.resolveContacts(contacts, p_dt);
+		}
+
+		void Blob::checkWaterInteraction(float p_dt)
+		{
+			// For all particles, check if in collision with the water
+			for (int i = 0; i < NUM_PARTICLES; i++)
+			{
+				if (_water->isAboveOrUnder(_particles[i]->getPosition()))
+				{
+					SpringForces::ParticleBuoyancy* buoyancy = new SpringForces::ParticleBuoyancy(-1, 1, _water->getHeight());
+					_registry.add(_particles[i].get(), buoyancy);
+				}
+			}
 		}
 	}
 }

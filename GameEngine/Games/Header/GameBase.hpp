@@ -199,7 +199,7 @@ namespace Games {
 		/**
 		* Handle user's input callback
 		**/
-		virtual void handleInput();
+		virtual void handleInput(double p_dt);
 
 		/**
 		* Update game physics

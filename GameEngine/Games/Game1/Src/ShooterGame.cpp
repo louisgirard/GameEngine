@@ -22,8 +22,8 @@ namespace Games {
 			});
 		}
 
-		void ShooterGame::handleInput() {
-			GameBase::handleInput();
+		void ShooterGame::handleInput(double p_dt) {
+			GameBase::handleInput(p_dt);
 
 			//if the s key is pressed, a particle is launched
 			if (_keyboard.isPressed(KeyAction::MAINACTION)) {

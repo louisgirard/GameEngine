@@ -28,8 +28,9 @@ namespace Games {
 			/* Initializes the game */
 			virtual void initGame();
 
-			/* Handles user inputs */
-			virtual void handleInput();
+			/* Handles user inputs 
+			* @param p_dt the time ellapsed since the last update*/
+			virtual void handleInput(double p_dt);
 
 			/*
 			Updates the positions of the particles
