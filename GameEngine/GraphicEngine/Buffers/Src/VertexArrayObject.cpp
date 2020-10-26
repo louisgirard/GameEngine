@@ -2,6 +2,7 @@
 
 namespace GraphicEngine::Buffers {
 		VertexArrayObject::VertexArrayObject(const std::vector<std::pair<GLint, const VertexBufferObject*>>& p_vbos, const ElementBufferObject* p_ebo){
+			
 			// Creation and binding of the VAO
 			glGenVertexArrays(1, &_id);
 			glBindVertexArray(_id);
@@ -15,12 +16,15 @@ namespace GraphicEngine::Buffers {
 			}
 
 			// Association of the element buffer object with the VAO
-			if (p_ebo != nullptr) { p_ebo->bind(); }
+			if (p_ebo != nullptr) { 
+				p_ebo->bind(); 
+				//// We store the configuration
+				_eboSize = p_ebo->size();
+			}
 
 			// We unbind the VAO
 			glBindVertexArray(0);
-			//// We store the configuration
-			_eboSize = p_ebo->size();
+			
 		}
 
 		VertexArrayObject::VertexArrayObject(const Shaders::ShaderProgram& p_program, const std::vector<std::pair<std::string, const VertexBufferObject*>>& p_vbos, const ElementBufferObject* p_ebo)

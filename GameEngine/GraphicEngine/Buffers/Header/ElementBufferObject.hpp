@@ -12,6 +12,10 @@ namespace GraphicEngine::Buffers {
 			/* Size of the EBO */
 			size_t _size;
 
+			/*First indices to the data*/
+			GLuint* _data;
+
+
 		public:
 
 			/*
