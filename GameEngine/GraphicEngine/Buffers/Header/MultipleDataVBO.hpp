@@ -1,6 +1,7 @@
 #pragma once
 
 #include <tuple>
+#include <type_traits>
 
 #include <GraphicEngine/Buffers/Header/VertexBufferObject.hpp>
 
@@ -80,7 +81,8 @@ namespace GraphicEngine::Buffers {
 				// (We look for the given (by structIndex) type and get the buffer spec for this type)
 				if constexpr (sizeof...(OtherTypes) > 0)
 				{
-					using Type = typename std::remove_reference<std::remove_const<decltype(std::get<structIndex>(Data()))>::type>::type;
+					using TypeConst = typename std::remove_const<decltype(std::get<structIndex>(Data()))>::type;
+					using Type = typename std::remove_reference<TypeConst>::type;
 					Data tmp;
 					auto* value = &std::get<structIndex>(tmp);
 					valueOffset = ((char*)value) - ((char*)&tmp);

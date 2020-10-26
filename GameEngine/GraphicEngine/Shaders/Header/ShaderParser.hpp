@@ -2,6 +2,7 @@
 #define _GRAPHIC_ENGINE_SHADER_PARSER_
 
 #include <vector>
+#include <list>
 
 #include <filesystem>
 #include <exception>

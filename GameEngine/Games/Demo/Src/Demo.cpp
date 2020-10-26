@@ -6,6 +6,9 @@ namespace Games {
 	 const std::string Demo::FILTER = "Filter";
 	 const std::string Demo::GAUSSIAN = "Gaussian";
 
+	 Demo::Demo(): GameBase(), _sceneRoot(new EmptyNode()),_clippingDistance(0)
+	 {}
+
 	 void Demo::initGame()
 	 {
 		// 0 - We load the shaders

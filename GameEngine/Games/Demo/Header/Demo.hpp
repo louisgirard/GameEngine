@@ -53,10 +53,10 @@ namespace Games {
 
 	public:
 #pragma region INITIALIZATION
-		Demo():_sceneRoot(new EmptyNode()),_clippingDistance(0){}
+		Demo();
 #pragma endregion
 
-		virtual ~Demo();
+		~Demo();
 	};
 }
 
