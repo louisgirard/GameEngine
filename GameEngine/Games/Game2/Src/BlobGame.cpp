@@ -17,7 +17,7 @@ namespace Games {
 			float zAxis = -80;
 
 			// Create planes
-			_ground = std::make_shared<CHorizontalPlane>(Vector3(0, -200, zAxis), 30, 30);
+			_ground = std::make_shared<CHorizontalPlane>(Vector3(0, -50, zAxis), 500, 30);
 			_water = std::make_shared<CHorizontalPlane>(Vector3(0, -10, zAxis), 60, 30);
 
 			// Create particles
@@ -61,15 +61,15 @@ namespace Games {
 			}
 			if (_keyboard.isPressed(KeyAction::MOVEBACK))
 			{
-				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::DOWN * 10 * (float)p_dt);
+				_registry.add(_particles[0].get(), new Forces::ParticleGravity(Vector3(0, -10, 0)));
 			}
 			if (_keyboard.isPressed(KeyAction::MOVELEFT))
 			{
-				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::LEFT * 10 * (float)p_dt);
+				_registry.add(_particles[0].get(), new Forces::ParticleGravity(Vector3(-10, 0, 0)));
 			}
 			if (_keyboard.isPressed(KeyAction::MOVERIGHT))
 			{
-				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::RIGHT * 10 * (float)p_dt);
+				_registry.add(_particles[0].get(), new Forces::ParticleGravity(Vector3(10, 0, 0)));
 			}
 
 			// Break blob
@@ -216,10 +216,8 @@ namespace Games {
 			// For all particles, check if in collision with the water
 			for (int i = 0; i < NUM_PARTICLES; i++)
 			{
-				float radius = _particles[i]->getSize();
 				if (_water->isAboveOrUnder(_particles[i]->getPosition()))
 				{
-					float volume = 4 * PI * radius * radius * radius / 3;
 					SpringForces::ParticleBuoyancy* buoyancy = new SpringForces::ParticleBuoyancy(-1, 1, _water->getHeight());
 					_registry.add(_particles[i].get(), buoyancy);
 				}

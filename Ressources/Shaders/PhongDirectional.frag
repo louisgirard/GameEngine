@@ -76,7 +76,7 @@ vec3 specular(vec3 lightDirection, vec3 lightColor, vec3 point, vec3 normal, vec
 	vec4 skyCol = texture(uni_skybox, normalize(skyReflexion));
 
 	float cosine = max(dot(reflected, viewerDirection), 0.0);
-	return illuminatedFront * lightColor * pointColor * (pow(cosine, shininess) + skyCol*0.5);
+	return illuminatedFront * lightColor * pointColor * (pow(cosine, shininess) + skyCol.xyz*0.5);
 }
 
 // Compute mist indice
