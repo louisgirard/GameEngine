@@ -162,6 +162,7 @@ namespace GraphicEngine::Servers {
 
 		void ShaderServer::unbindsScreen() {
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);
+			glFlush();
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		}
 #pragma endregion

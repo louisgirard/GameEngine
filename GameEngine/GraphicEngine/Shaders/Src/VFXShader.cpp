@@ -150,6 +150,7 @@ namespace GraphicEngine::Shaders {
 			_framesBuffer->bind();
 			GLenum attach = static_cast<GLenum>(p_attachment);
 			glDrawBuffers(1, &attach);
+			glFlush();
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		}
 #pragma endregion
