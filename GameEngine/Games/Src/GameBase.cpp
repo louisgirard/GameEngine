@@ -144,7 +144,7 @@ namespace Games
 		// Reinit frame transformation
 		glLoadIdentity();
 		// Get Input event for this frame
-		handleInput();
+		handleInput(_dt);
 		// Update Game Physics
 		updatePhysic(_dt);
 		//Update Game Graphics
@@ -225,7 +225,7 @@ namespace Games
 	
 #pragma region VIRTUAL_FUNCTION
 
-	void GameBase::handleInput() {
+	void GameBase::handleInput(double p_dt) {
 
 		glm::vec3 xAxis(1.0, 0.0, 0.0);
 		glm::vec3 yAxis(0.0, 1.0, 0.0);
@@ -238,16 +238,16 @@ namespace Games
 		}
 
 		//Key Related to Translation Movement
-		if (_keyboard.isPressed(KeyAction::MOVEFRONT)) { _camera.translateFront(_cameraSpeed * (float)_dt); }
-		if (_keyboard.isPressed(KeyAction::MOVEBACK)) { _camera.translateFront(-_cameraSpeed * (float)_dt); }
-		if (_keyboard.isPressed(KeyAction::MOVERIGHT)) { _camera.translateRight(_cameraSpeed * (float)_dt); }
-		if (_keyboard.isPressed(KeyAction::MOVELEFT)) { _camera.translateRight(-_cameraSpeed * (float)_dt); }
+		if (_keyboard.isPressed(KeyAction::MOVEFRONT)) { _camera.translateFront(_cameraSpeed * (float)p_dt); }
+		if (_keyboard.isPressed(KeyAction::MOVEBACK)) { _camera.translateFront(-_cameraSpeed * (float)p_dt); }
+		if (_keyboard.isPressed(KeyAction::MOVERIGHT)) { _camera.translateRight(_cameraSpeed * (float)p_dt); }
+		if (_keyboard.isPressed(KeyAction::MOVELEFT)) { _camera.translateRight(-_cameraSpeed * (float)p_dt); }
 
 		//Key Related to Rotation Movement
-		if (_keyboard.isPressed(KeyAction::ROTATELEFT)) { _camera.rotateLocal(yAxis, _cameraRotationSpeed * (float)_dt); }
-		if (_keyboard.isPressed(KeyAction::ROTATERIGHT)) { _camera.rotateLocal(yAxis, -_cameraRotationSpeed * (float)_dt); }
-		if (_keyboard.isPressed(KeyAction::ROTATEUP)) { _camera.rotateLocal(xAxis, _cameraRotationSpeed * (float)_dt); }
-		if (_keyboard.isPressed(KeyAction::ROTATEDOWN)) { _camera.rotateLocal(xAxis, -_cameraRotationSpeed * (float)_dt); }
+		if (_keyboard.isPressed(KeyAction::ROTATELEFT)) { _camera.rotateLocal(yAxis, _cameraRotationSpeed * (float)p_dt); }
+		if (_keyboard.isPressed(KeyAction::ROTATERIGHT)) { _camera.rotateLocal(yAxis, -_cameraRotationSpeed * (float)p_dt); }
+		if (_keyboard.isPressed(KeyAction::ROTATEUP)) { _camera.rotateLocal(xAxis, _cameraRotationSpeed * (float)p_dt); }
+		if (_keyboard.isPressed(KeyAction::ROTATEDOWN)) { _camera.rotateLocal(xAxis, -_cameraRotationSpeed * (float)p_dt); }
 	}
 
 	void GameBase::updateFrame() {}

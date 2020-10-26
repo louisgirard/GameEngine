@@ -67,8 +67,8 @@ namespace Games {
 		 ShaderServer::getSingleton()->resizeScreen(p_width, p_height);
 	 }
 
-	 void Demo::handleInput() {
-		 GameBase::handleInput();
+	 void Demo::handleInput(double p_dt) {
+		 GameBase::handleInput(p_dt);
 	 }
 
 	 Demo::~Demo()

@@ -44,7 +44,7 @@ namespace Games {
 			_springs.push_back(spring6);
 		}
 
-		void Blob::handleInput()
+		void Blob::handleInput(double p_dt)
 		{
 			if (_keyboard.isPressed(KeyAction::QUIT)) {
 				quit();
@@ -53,19 +53,19 @@ namespace Games {
 			// Move blob
 			if (_keyboard.isPressed(KeyAction::MOVEFRONT))
 			{
-				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::UP * 0.01f);
+				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::UP * 4 * (float)p_dt);
 			}
 			if (_keyboard.isPressed(KeyAction::MOVEBACK))
 			{
-				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::DOWN * 0.01f);
+				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::DOWN * 4 * (float)p_dt);
 			}
 			if (_keyboard.isPressed(KeyAction::MOVELEFT))
 			{
-				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::LEFT * 0.01f);
+				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::LEFT * 4 * (float)p_dt);
 			}
 			if (_keyboard.isPressed(KeyAction::MOVERIGHT))
 			{
-				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::RIGHT * 0.01f);
+				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::RIGHT * 4 * (float)p_dt);
 			}
 
 			// Break blob
