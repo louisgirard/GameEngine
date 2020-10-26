@@ -86,6 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\GameEngine\Games\Demo\Header\Demo.hpp" />
+    <ClInclude Include="..\GameEngine\Games\Demo\Header\SimpleTestGraphic.hpp" />
     <ClInclude Include="..\GameEngine\Games\Game1\Header\ShooterGame.hpp" />
     <ClInclude Include="..\GameEngine\Games\Game2\Header\BlobGame.hpp" />
     <ClInclude Include="..\GameEngine\Games\Header\DefaultConfig.hpp" />

@@ -614,6 +614,9 @@
     <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\PlaneContactGenerator.hpp">
       <Filter>GameEngine\PhysicEngine\Collisions\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\GameEngine\Games\Demo\Header\SimpleTestGraphic.hpp">
+      <Filter>GameEngine\Games\GraphicDemo\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Ressources\Shaders\gauss.frag">
