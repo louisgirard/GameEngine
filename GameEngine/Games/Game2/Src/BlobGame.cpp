@@ -14,18 +14,22 @@ namespace Games {
 			_keyboard.bindActionToKey(KeyAction::BREAKBLOB, 98);
 			_keyboard.bindActionToKey(KeyAction::FUSEBLOB, 102);
 
+			float zAxis = -80;
+
 			// Create planes
-			_ground = std::make_shared<CHorizontalPlane>(Vector3(0, -10, -30), 30, 30);
+			_ground = std::make_shared<CHorizontalPlane>(Vector3(0, -200, zAxis), 30, 30);
+			_water = std::make_shared<CHorizontalPlane>(Vector3(0, -10, zAxis), 60, 30);
 
 			// Create particles
-			Vector3 position(-5, 1, -30);
+			float mass = 1;
+			Vector3 position(-5, 1, zAxis);
 			Vector3 color(1, 1, 1);
 			float radius = 3;
-			_particles[0] = std::make_shared<CParticle>(1.f, position, Vector3::ZERO, Vector3::ZERO, 0.999f, Vector3(1.f,0.f,0.f), radius);
-			position = Vector3(5, 1, -30);
-			_particles[1] = std::make_shared<CParticle>(1.f, position, Vector3::ZERO, Vector3::ZERO, 0.999f, color, radius);
-			position = Vector3(0, 4, -30);
-			_particles[2] = std::make_shared<CParticle>(1.f, position, Vector3::ZERO, Vector3::ZERO, 0.999f, color, radius);
+			_particles[0] = std::make_shared<CParticle>(mass, position, Vector3::ZERO, Vector3::ZERO, 0.999f, Vector3(1.f,0.f,0.f), radius);
+			position = Vector3(5, 1, zAxis);
+			_particles[1] = std::make_shared<CParticle>(mass, position, Vector3::ZERO, Vector3::ZERO, 0.999f, color, radius);
+			position = Vector3(0, 4, zAxis);
+			_particles[2] = std::make_shared<CParticle>(mass, position, Vector3::ZERO, Vector3::ZERO, 0.999f, color, radius);
 
 			// Add springs
 			auto spring1 = std::make_shared<SpringForces::ParticleSpring>(_particles[0].get(), 2, 10);
@@ -53,7 +57,7 @@ namespace Games {
 			// Move blob
 			if (_keyboard.isPressed(KeyAction::MOVEFRONT))
 			{
-				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::UP * 4 * (float)p_dt);
+				_registry.add(_particles[0].get(), new Forces::ParticleGravity(Vector3(0, 50, 0)));
 			}
 			if (_keyboard.isPressed(KeyAction::MOVEBACK))
 			{
@@ -99,6 +103,8 @@ namespace Games {
 				_registry.add(_particles[i].get(), &_gravity);
 			}
 
+			checkWaterInteraction(p_dt);
+
 			_registry.updatePhysic(p_dt);
 
 			// Check for collisions
@@ -121,6 +127,11 @@ namespace Games {
 			// Display Ground
 			glPushMatrix();
 			_ground->updateFrame();
+			glPopMatrix();
+
+			// Display Water
+			glPushMatrix();
+			_water->updateFrame();
 			glPopMatrix();
 
 			for (int i = 0; i < NUM_PARTICLES; i++)
@@ -187,6 +198,21 @@ namespace Games {
 
 			// Resolve contacts
 			_contactResolver.resolveContacts(contacts, p_dt);
+		}
+
+		void Blob::checkWaterInteraction(float p_dt)
+		{
+			// For all particles, check if in collision with the water
+			for (int i = 0; i < NUM_PARTICLES; i++)
+			{
+				float radius = _particles[i]->getSize();
+				if (_water->isAboveOrUnder(_particles[i]->getPosition()))
+				{
+					float volume = 4 * PI * radius * radius * radius / 3;
+					SpringForces::ParticleBuoyancy* buoyancy = new SpringForces::ParticleBuoyancy(-1, 1, _water->getHeight());
+					_registry.add(_particles[i].get(), buoyancy);
+				}
+			}
 		}
 	}
 }

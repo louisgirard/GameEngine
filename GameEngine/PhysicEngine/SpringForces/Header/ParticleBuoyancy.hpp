@@ -12,12 +12,12 @@ namespace PhysicEngine {
 			/* Volume of the object */
 			float _volume;
 			/* The height of the water plane */
-			float _waterheight;
+			float _waterHeight;
 			/* Density of the liquid */
 			float _density;
 
 		public:
-			ParticleBuoyancy(float p_maxDepth, float p_volume, float p_waterheight, float p_density = 1000.0f);
+			ParticleBuoyancy(float p_maxDepth, float p_volume, float p_waterHeight, float p_density = 1000.0f);
 
 			/*Applies buoyancy force to a particle
 			* @param p_particle the particle to apply buoyancy on

@@ -8,6 +8,7 @@
 #include <PhysicEngine/Forces/Header/ParticleForceRegistry.hpp>
 #include <PhysicEngine/Forces/Header/ParticleGravity.hpp>
 #include <PhysicEngine/SpringForces/Header/ParticleSpring.hpp>
+#include <PhysicEngine/SpringForces/Header/ParticleBuoyancy.hpp>
 
 #include <PhysicEngine/Collisions/Header/ParticleContactResolver.hpp>
 
@@ -30,6 +31,9 @@ namespace Games {
 
 			/* Holds the ground plane */
 			std::shared_ptr<CHorizontalPlane> _ground;
+
+			/* Holds the water plane */
+			std::shared_ptr<CHorizontalPlane> _water;
 
 			/* Holds all the forces and the particle they're associated with */
 			Forces::ParticleForceRegistry _registry;
@@ -67,6 +71,12 @@ namespace Games {
 			@param p_dt the time ellapsed since the last update
 			*/
 			void checkGroundCollisions(float p_dt);
+
+			/*
+			Check if there are interactions between particles and the water
+			@param p_dt the time ellapsed since the last update
+			*/
+			void checkWaterInteraction(float p_dt);
 		public:
 			/* Default constructor */
 			Blob();
