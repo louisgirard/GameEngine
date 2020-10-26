@@ -3,11 +3,13 @@
 
 #include <Games/Header/GameBase.hpp>
 #include <PhysicEngine/Header/CParticle.hpp>
-#include <PhysicEngine/Collisions/Header/ParticleContactResolver.hpp>
+#include <PhysicEngine/Header/CHorizontalPlane.hpp>
+
 #include <PhysicEngine/Forces/Header/ParticleForceRegistry.hpp>
 #include <PhysicEngine/Forces/Header/ParticleGravity.hpp>
 #include <PhysicEngine/SpringForces/Header/ParticleSpring.hpp>
-#include <PhysicEngine/Header/CHorizontalPlane.hpp>
+
+#include <PhysicEngine/Collisions/Header/ParticleContactResolver.hpp>
 
 #define NUM_PARTICLES 3
 using namespace PhysicEngine;
@@ -26,11 +28,14 @@ namespace Games {
 			/* Holds the contact resolver to resolve contacts between particles */
 			Collisions::ParticleContactResolver _contactResolver;
 
+			/* Holds the ground plane */
+			std::shared_ptr<CHorizontalPlane> _ground;
+
 			/* Holds all the forces and the particle they're associated with */
 			Forces::ParticleForceRegistry _registry;
 
-			/* Holds the ground plane */
-			std::shared_ptr<CHorizontalPlane> _ground;
+			/* The force generator for gravity in the game */
+			Forces::ParticleGravity _gravity;
 
 			/* Check if blob is broken or not */
 			bool isBroken = false;

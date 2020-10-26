@@ -2,7 +2,7 @@
 
 namespace Games {
 	namespace Game2 {
-		Blob::Blob() : GameBase(), _contactResolver(NUM_PARTICLES*2)
+		Blob::Blob() : GameBase(), _contactResolver(NUM_PARTICLES*2), _gravity(Forces::ParticleGravity(Vector3(0, -10, 0)))
 		{
 		}
 
@@ -15,7 +15,7 @@ namespace Games {
 			_keyboard.bindActionToKey(KeyAction::FUSEBLOB, 102);
 
 			// Create planes
-			_ground = std::make_shared<CHorizontalPlane>(Vector3(0, -5, -30), 30, 30);
+			_ground = std::make_shared<CHorizontalPlane>(Vector3(0, -10, -30), 30, 30);
 
 			// Create particles
 			Vector3 position(-5, 1, -30);
@@ -81,6 +81,7 @@ namespace Games {
 
 		void Blob::updatePhysic(double p_dt)
 		{
+			// Add forces
 			if (!isBroken)
 			{
 				_registry.add(_particles[0].get(), _springs[1].get());
@@ -93,7 +94,14 @@ namespace Games {
 				_registry.add(_particles[2].get(), _springs[2].get());
 			}
 
+			for (int i = 0; i < NUM_PARTICLES; i++)
+			{
+				_registry.add(_particles[i].get(), &_gravity);
+			}
+
 			_registry.updatePhysic(p_dt);
+
+			// Check for collisions
 			checkParticleCollisions(p_dt);
 			checkGroundCollisions(p_dt);
 
