@@ -14,7 +14,7 @@ namespace GraphicEngine {
 	{
 		glColor3f(_color._x, _color._y, _color._z);
 		glTranslatef(_position._x, _position._y, _position._z);
-		glScalef(_length, .1, _width);
+		glScalef(_length, .1f, _width);
 		glutSolidCube(1);
 	}
 }

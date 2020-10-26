@@ -1,23 +1,18 @@
 #ifndef _GRAPHIC_ENGINE_SHADER_PROGRAM_
 #define _GRAPHIC_ENGINE_SHADER_PROGRAM_
 
-#include <cassert>
-
 #include <glm/gtc/type_ptr.hpp>
 
 #include <GraphicEngine/Shaders/Header/Shader.hpp>
 #include <GraphicEngine/Buffers/Header/VertexBufferObject.hpp>
 
-namespace GraphicEngine {
-	namespace Shaders {
+namespace GraphicEngine::Shaders {
 		class ShaderProgram
 		{
 		protected :
 			
 			/* Program identifier in openGL */
 			GLuint _programID;
-
-		private:
 			
 			/*
 			* Link the shader program in openGL
@@ -40,10 +35,10 @@ namespace GraphicEngine {
 			template <typename T>
 			void setUniform(GLint p_id, const std::vector<T>& p_values)
 			{
-				assert(id >= 0 && "ShaderProgram::setUniform called with an invalid uniform index");
+				assert(p_id >= 0 && "ShaderProgram::setUniform called with an invalid uniform index");
 				assert(isValid() && isActive());
 
-				setUniform(id, vector[0], vector.size());
+				setUniform(p_id, p_values[0], p_values.size());
 			}
 
 			/*
@@ -111,21 +106,13 @@ namespace GraphicEngine {
 			void setUniform(GLint p_id, const glm::mat4x4& p_value, size_t p_size = 1) const;
 #pragma endregion
 
-#pragma region ATTRIBUTES
-			/*
-			* Gets the attribute location
-			* @param p_name : The name of the attribute
-			* @return -1 if the attribute does not exist, else the uniform id
-			*/
-			GLint getAttributeLocation(const std::string& p_name) const
-			{
-				assert(isValid());
-				return glGetAttribLocation(_programID, p_name.c_str());
-			}
-#pragma endregion
-
-
 		public :
+
+			/*
+			* Default constructor
+			* Warning this shader is invalid
+			*/
+			ShaderProgram():_programID(0){}
 
 			/*
 			* Constructor 
@@ -170,6 +157,8 @@ namespace GraphicEngine {
 			* @return active shader program's identifier
 			*/
 			static GLint getActive();
+
+
 #pragma endregion
 
 #pragma region COPY
@@ -187,7 +176,7 @@ namespace GraphicEngine {
 			*  Move assignment
 			*  @param p_other : Shader to move
 			*/
-			ShaderProgram& operator= (ShaderProgram&& p_other);
+			virtual ShaderProgram& operator= (ShaderProgram&& p_other);
 
 #pragma endregion
 
@@ -245,6 +234,13 @@ namespace GraphicEngine {
 
 #pragma region ATTRIBUTES
 			/*
+			* Gets the attribute location
+			* @param p_name : The name of the attribute
+			* @return -1 if the attribute does not exist, else the uniform id
+			*/
+			GLint getAttributeLocation(const std::string& p_name) const;
+
+			/*
 			* Sets an attribute of the shader
 			* @param p_name : The name of the attribute
 			* @param p_buffer : Vertex buffer object to associate with this attribute
@@ -253,7 +249,6 @@ namespace GraphicEngine {
 			void setAttribute(const std::string& p_name, const Buffers::VertexBufferObject* p_buffer, GLuint p_nbInstances = 0);
 #pragma endregion
 		};
-	}
 }
 
 #endif // !_GRAPHIC_ENGINE_SHADER_PROGRAM_

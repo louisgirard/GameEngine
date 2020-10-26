@@ -1,9 +1,11 @@
 #ifndef _Games_GameConfiguration_H
 #define _Games_GameConfiguration_H
 
-#include <Games/Header/DefaultConfig.hpp>
-#include <GL/freeglut.h>
 #include <string>
+
+#include <Games/Header/DefaultConfig.hpp>
+
+
 
 namespace Games {
 
@@ -50,55 +52,55 @@ namespace Games {
 		* Are the game graphics enabled ?
 		* @return a boolean to specify if the graphic are enabled
 		**/
-		bool graphicEnabled();
+		bool graphicEnabled() const;
 
 		/**
 		* Get the game's window width
 		* @return width of the game's window
 		**/
-		int getWindowWidth();
+		int getWindowWidth() const;
 
 		/**
 		* Get the game's window height
 		* @return height of the game's window
 		**/
-		int getWindowHeight();
+		int getWindowHeight() const;
 
 		/**
 		* Get the game's name
 		* @return the name of the game
 		**/
-		std::string getName();
+		std::string getName() const;
 
 		/**
 		* Get the camera field of view
 		* @return game's camera field of view
 		**/
-		GLfloat getFOV();
+		GLfloat getFOV() const;
 
 		/**
 		* Get the camera near plane
 		* @return game's camera near plane
 		**/
-		GLfloat getNearPlane();
+		GLfloat getNearPlane() const;
 
 		/**
 		* Get the camera far plane
 		* @return game's camera far plane
 		**/
-		GLfloat getFarPlane();
+		GLfloat getFarPlane() const;
 
 		/**
 		* Get GLUT display mode
 		* @return GLUT display mode
 		**/
-		GLint getDisplayMode();
+		GLint getDisplayMode() const;
 
 		/**
 		* Get FPS rate
 		* @return FPS rate
 		**/
-		FPS getFPS();
+		FPS getFPS() const;
 #pragma endregion
 
 

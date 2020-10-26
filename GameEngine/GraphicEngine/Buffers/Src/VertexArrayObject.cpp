@@ -1,9 +1,7 @@
 #include <GraphicEngine/Buffers/Header/VertexArrayObject.hpp>
 
-namespace GraphicEngine {
-	namespace Buffers {
-		VertexArrayObject::VertexArrayObject(const std::vector<std::pair<GLint, const VertexBufferObject*>>& p_vbos, const ElementBufferObject* p_ebo = nullptr)
-		{
+namespace GraphicEngine::Buffers {
+		VertexArrayObject::VertexArrayObject(const std::vector<std::pair<GLint, const VertexBufferObject*>>& p_vbos, const ElementBufferObject* p_ebo){
 			// Creation and binding of the VAO
 			glGenVertexArrays(1, &_id);
 			glBindVertexArray(_id);
@@ -25,7 +23,7 @@ namespace GraphicEngine {
 			_eboSize = p_ebo->size();
 		}
 
-		VertexArrayObject::VertexArrayObject(const Shaders::ShaderProgram& p_program, const std::vector<std::pair<std::string, const VertexBufferObject*>>& p_vbos, const ElementBufferObject* p_ebo = nullptr)
+		VertexArrayObject::VertexArrayObject(const Shaders::ShaderProgram& p_program, const std::vector<std::pair<std::string, const VertexBufferObject*>>& p_vbos, const ElementBufferObject* p_ebo)
 			: VertexArrayObject(convert(p_program, p_vbos), p_ebo)
 		{}
 
@@ -78,5 +76,4 @@ namespace GraphicEngine {
 			glBindVertexArray(0);
 		}
 #pragma endregion	
-	}
 }

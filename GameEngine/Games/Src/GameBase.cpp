@@ -238,24 +238,19 @@ namespace Games
 		}
 
 		//Key Related to Translation Movement
-		if (_keyboard.isPressed(KeyAction::MOVEFRONT)) { _camera.translateFront(_cameraSpeed * _dt); }
-		if (_keyboard.isPressed(KeyAction::MOVEBACK)) { _camera.translateFront(-_cameraSpeed * _dt); }
-		if (_keyboard.isPressed(KeyAction::MOVERIGHT)) { _camera.translateRight(_cameraSpeed * _dt); }
-		if (_keyboard.isPressed(KeyAction::MOVELEFT)) { _camera.translateRight(-_cameraSpeed * _dt); }
+		if (_keyboard.isPressed(KeyAction::MOVEFRONT)) { _camera.translateFront(_cameraSpeed * (float)_dt); }
+		if (_keyboard.isPressed(KeyAction::MOVEBACK)) { _camera.translateFront(-_cameraSpeed * (float)_dt); }
+		if (_keyboard.isPressed(KeyAction::MOVERIGHT)) { _camera.translateRight(_cameraSpeed * (float)_dt); }
+		if (_keyboard.isPressed(KeyAction::MOVELEFT)) { _camera.translateRight(-_cameraSpeed * (float)_dt); }
 
 		//Key Related to Rotation Movement
-		if (_keyboard.isPressed(KeyAction::ROTATELEFT)) { _camera.rotateLocal(yAxis, _cameraRotationSpeed * _dt); }
-		if (_keyboard.isPressed(KeyAction::ROTATERIGHT)) { _camera.rotateLocal(yAxis, -_cameraRotationSpeed * _dt); }
-		if (_keyboard.isPressed(KeyAction::ROTATEUP)) { _camera.rotateLocal(xAxis, _cameraRotationSpeed * _dt); }
-		if (_keyboard.isPressed(KeyAction::ROTATEDOWN)) { _camera.rotateLocal(xAxis, -_cameraRotationSpeed * _dt); }
+		if (_keyboard.isPressed(KeyAction::ROTATELEFT)) { _camera.rotateLocal(yAxis, _cameraRotationSpeed * (float)_dt); }
+		if (_keyboard.isPressed(KeyAction::ROTATERIGHT)) { _camera.rotateLocal(yAxis, -_cameraRotationSpeed * (float)_dt); }
+		if (_keyboard.isPressed(KeyAction::ROTATEUP)) { _camera.rotateLocal(xAxis, _cameraRotationSpeed * (float)_dt); }
+		if (_keyboard.isPressed(KeyAction::ROTATEDOWN)) { _camera.rotateLocal(xAxis, -_cameraRotationSpeed * (float)_dt); }
 	}
 
-	void GameBase::updateFrame() {
-		// 1 - Update Camera
-		// For now 
-		glMatrixMode(GL_MODELVIEW);
-		glMultMatrixf(&(_camera.getInverseTransform()[0][0]));
-	}
+	void GameBase::updateFrame() {}
 
 	void GameBase::reshape(GLint p_width, GLint p_height)
 	{
@@ -287,17 +282,6 @@ namespace Games
 	void GameBase::specialKeyReleased(unsigned char p_key, int p_x, int p_y)
 	{
 		_keyboard.releaseSpecialKey(p_key);
-	}
-
-	void GameBase::mousePassiveMotion(int p_x, int p_y) {
-		glm::vec3 xAxis(1.0, 0.0, 0.0);
-		glm::vec3 yAxis(0.0, 1.0, 0.0);
-
-		_camera.rotateLocal(yAxis, -(p_x - _configuration.getWindowWidth() / 2) * _cameraRotationSpeed * _dt);
-		_camera.rotateLocal(xAxis, -(p_y - _configuration.getWindowHeight() / 2) * _cameraRotationSpeed * _dt);
-		_mouse.setX(p_x);
-		_mouse.setY(p_y);
-		glutWarpPointer(_configuration.getWindowWidth() / 2, _configuration.getWindowHeight() / 2);
 	}
 #pragma endregion
 	

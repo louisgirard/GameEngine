@@ -1,14 +1,9 @@
 #ifndef _GRAPHIC_ENGINE_ELEMENT_BUFFER_OBJECT_HPP_
 #define _GRAPHIC_ENGINE_ELEMENT_BUFFER_OBJECT_HPP_
 
-#include <vector>
-#include <GL/glew.h>
-
-#include <GraphicEngine/Header/GraphicEnum.hpp>
 #include <GraphicEngine/Buffers/Header/VertexBufferObject.hpp>
 
-namespace GraphicEngine {
-	namespace Buffers {
+namespace GraphicEngine::Buffers {
 		class ElementBufferObject
 		{
 		protected:
@@ -20,8 +15,14 @@ namespace GraphicEngine {
 		public:
 
 			/*
+			* Default constructor
+			* Warning the buffer is invalid
+			*/
+			ElementBufferObject():_id(0), _size(0){}
+
+			/*
 			* Constructor 
-			* @param p_indices : Indicices buffer
+			* @param p_indices : Indices buffer
 			* @param p_usage : Update frequency for this buffer
 			*/
 			ElementBufferObject(const std::vector<GLuint>& p_indices, BufferUpdate p_usage = BufferUpdate::staticDraw);
@@ -85,8 +86,6 @@ namespace GraphicEngine {
 			void unbind() const;
 #pragma endregion
 		};
-	}
-
 }
 
 #endif // !_GRAPHIC_ENGINE_ELEMENT_BUFFER_OBJECT_HPP_

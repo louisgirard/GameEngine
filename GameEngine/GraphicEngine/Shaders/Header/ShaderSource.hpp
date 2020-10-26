@@ -3,8 +3,7 @@
 
 #include <GraphicEngine/Shaders/Header/ShaderParser.hpp>
 
-namespace GraphicEngine  {
-	namespace Shaders {
+namespace GraphicEngine::Shaders {
 		class ShaderSource
 		{
 		protected:
@@ -55,7 +54,6 @@ namespace GraphicEngine  {
 			std::string toString() const;
 
 		};
-	}
 }
 
 #endif // !_GRAPHIC_ENGINE_SHADER_SOURCE_HPP_

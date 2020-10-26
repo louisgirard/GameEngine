@@ -3,17 +3,17 @@
 namespace Games {
 	namespace Game1 {
 
-		ShooterGame::ShooterGame() :GameBase() , _weaponMenu(new Games::GameMenu("Weapon Pocket")), _gravityGenerator(*new PhysicEngine::Forces::ParticleGravity(*new PhysicEngine::Vector3(0, -10, 0))) {}
+		ShooterGame::ShooterGame() :GameBase() , _weaponMenu(new Games::GameMenu("Weapon Pocket")), _gravityGenerator(*new Gravity(*new PhysicEngine::Vector3(0, -10, 0))) {}
 
 		void ShooterGame::initGame() {
-			_registry = *new PhysicEngine::Forces::ParticleForceRegistry();
+			_registry = *new ForceRegistry();
 			// 1- Binding Keys
 			_keyboard.bindActionToKey(KeyAction::MAINACTION, 13);
 			// 2 - We create a sub menu for choosing a weapon
-			_weaponMenu->addItem("Pistol", [this]() {_currentType = PhysicEngine::CParticle::Types::Bullet; });
-			_weaponMenu->addItem("Canon", [this]() {_currentType = PhysicEngine::CParticle::Types::Canonball; });
-			_weaponMenu->addItem("Laser Gun", [this]() {_currentType = PhysicEngine::CParticle::Types::Laser; });
-			_weaponMenu->addItem("Fireball Gun", [this]() {_currentType = PhysicEngine::CParticle::Types::Fireball; });
+			_weaponMenu->addItem("Pistol", [this]() {_currentType = Particle::Types::Bullet; });
+			_weaponMenu->addItem("Canon", [this]() {_currentType = Particle::Types::Canonball; });
+			_weaponMenu->addItem("Laser Gun", [this]() {_currentType = Particle::Types::Laser; });
+			_weaponMenu->addItem("Fireball Gun", [this]() {_currentType = Particle::Types::Fireball; });
 			getMenu()->addSubMenu(_weaponMenu);
 			// 3 - Add close function
 			onClose([this]() {
@@ -31,7 +31,7 @@ namespace Games {
 				//this avoids sending multiple particles per key press
 				if (!_shootingButtonPressed) {
 					//adding a new particle to the scene
-					_projectiles.push_back(std::make_shared<PhysicEngine::CParticle>(_currentType, PhysicEngine::Vector3::convertGlm(_camera.getPosition()), PhysicEngine::Vector3::convertGlm(_camera.lookingAt())));
+					_projectiles.push_back(std::make_shared<Particle>(_currentType, Vector3::convertGlm(_camera.getPosition()), Vector3::convertGlm(_camera.lookingAt())));
 					_registry.add((_projectiles.end()-1)->get(), &_gravityGenerator);
 					_shootingButtonPressed = true;
 				}
@@ -57,6 +57,10 @@ namespace Games {
 
 		void ShooterGame::updateFrame() {
 			GameBase::updateFrame();
+			// 1 - Update Camera 
+			glMatrixMode(GL_MODELVIEW);
+			glMultMatrixf(&(_camera.getInverseTransform()[0][0]));
+			// 2 - Display model
 			for (int i = 0; i < (int)_projectiles.size(); i++)
 			{
 				//Push the view matrix so that the transformation only apply to the particule
@@ -64,6 +68,18 @@ namespace Games {
 				_projectiles[i]->updateFrame();
 				glPopMatrix();
 			}
+		}
+
+		void ShooterGame::mousePassiveMotion(int p_x, int p_y) {
+			GameBase::mousePassiveMotion(p_x, p_y);
+			glm::vec3 xAxis(1.0, 0.0, 0.0);
+			glm::vec3 yAxis(0.0, 1.0, 0.0);
+
+			_camera.rotateLocal(yAxis, -(p_x - _configuration.getWindowWidth() / 2) * _cameraRotationSpeed * (float)getDt());
+			_camera.rotateLocal(xAxis, -(p_y - _configuration.getWindowHeight() / 2) * _cameraRotationSpeed * (float)getDt());
+			_mouse.setX(p_x);
+			_mouse.setY(p_y);
+			glutWarpPointer(_configuration.getWindowWidth() / 2, _configuration.getWindowHeight() / 2);
 		}
 
 	}

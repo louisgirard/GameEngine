@@ -9,15 +9,17 @@
 
 //Glew needs to be included before any other file that contains gl.h 
 #include <GL/glew.h>
-#include <GL/freeglut.h>
+
+#include <Games/Header/PhysicEnabler.hpp>
+#include <Games/Header/GraphicEnabler.hpp>
+#include <Games/Header/SceneGraphEnabler.hpp>
 
 #include <Games/Header/GameConfiguration.hpp>
-#include <Games/Header/KeyboardStatus.hpp>
 #include <Games/Header/GameMenu.hpp>
-#include <Games/Header/KeyAction.hpp>
-#include <GraphicEngine/Header/Camera.hpp>
-#include <PhysicEngine/Header/MathConstant.hpp>
+#include <Games/Header/KeyboardStatus.hpp>
 #include <Games/Header/MouseStatus.hpp>
+
+
 
 /**Const used to define how to define a nanosecond**/
 #define NANO_TO_SECOND 0.000000001;
@@ -178,7 +180,7 @@ namespace Games {
 		GameMenu* _mainMenu;
 
 		/**Game Camera**/
-		GraphicEngine::Camera _camera;
+		Camera _camera;
 		/**Speed used to compute camera's motion**/
 		float _cameraSpeed, _cameraRotationSpeed;
 
@@ -272,7 +274,7 @@ namespace Games {
 		* @param p_x : position of the cursor in the window on the x axis
 		* @param p_y : position of the cursor in the window on the y axis
 		**/
-		virtual void mousePassiveMotion(int p_x, int p_y);
+		virtual void mousePassiveMotion(int p_x, int p_y){}
 
 #pragma endregion
 

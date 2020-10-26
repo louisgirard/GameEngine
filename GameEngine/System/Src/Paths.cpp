@@ -15,7 +15,7 @@ namespace System {
 	{
 		char result[MAX_PATH];
 		std::string res(result, GetModuleFileNameA(NULL, result, MAX_PATH));
-		int index = res.find_last_of('\\');
+		int index = (int)res.find_last_of('\\');
 		return res.substr(0, index);
 	}
 
@@ -36,4 +36,47 @@ namespace System {
 
 #endif
 
+	std::filesystem::path Paths::findFile(const std::filesystem::path& p_file) const
+	{
+		if (std::filesystem::exists(p_file)) { return p_file; }
+		// Look through every path to find the correct one
+		for (auto it = _paths.begin(), end = _paths.end(); it != end; ++it)
+		{
+			std::filesystem::path current = (*it);
+			current /= p_file;
+			if (std::filesystem::exists(current)) { return current; }
+		}
+		throw std::ios_base::failure("File: " + p_file.string() + " not found");
+	}
+
+#pragma region REGITER
+	void Paths::registerPath(const std::filesystem::path& p_path)
+	{
+		_paths.push_back(p_path);
+	}
+
+	void Paths::pop()
+	{
+		assert(!_paths.empty());
+		_paths.pop_back();
+	}
+#pragma endregion
+
+#pragma region ITERATOR
+	Paths::iterator Paths::begin() {
+		return _paths.begin(); 
+	}
+
+	Paths::const_iterator Paths::begin() const {
+		return _paths.begin(); 
+	}
+
+	Paths::iterator Paths::end() {
+		return _paths.end();
+	}
+
+	Paths::const_iterator Paths::end() const {
+		return _paths.end(); 
+	}
+#pragma endregion
 }

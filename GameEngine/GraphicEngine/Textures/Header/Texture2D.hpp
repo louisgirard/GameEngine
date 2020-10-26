@@ -1,18 +1,16 @@
 #ifndef _GRAPHIC_ENGINE_TEXTURE_2D_HPP_
 #define _GRAPHIC_ENGINE_TEXTURE_2D_HPP_
 
+#include <GraphicEngine/Header/GraphicEnum.hpp>
+
 #include <filesystem>
 #include <exception>
 #include <cassert>
 #include <iostream>
 
-#include <GL/glew.h>
 #include <SOIL/SOIL.h>
 
-#include <GraphicEngine/Header/GraphicEnum.hpp>
-
-namespace GraphicEngine {
-	namespace Textures {
+namespace GraphicEngine::Textures {
 		class Texture2D
 		{
 		protected:
@@ -25,6 +23,12 @@ namespace GraphicEngine {
 			TextureInternalFormat _internalFormat;
 
 		public:
+
+			/*
+			* Default constructor
+			* Warning the texture is not valid
+			*/
+			Texture2D() :_id(0), _dimX(0), _dimY(0), _internalFormat(TextureInternalFormat::rgba){}
 
 			/*
 			* Constructor
@@ -137,7 +141,6 @@ namespace GraphicEngine {
 			void set(TextureFilterTarget p_target, TextureFilterMode p_mode);
 #pragma endregion
 		};
-	}
 }
 
 #endif // !_GRAPHIC_ENGINE_TEXTURE_2D_HPP_

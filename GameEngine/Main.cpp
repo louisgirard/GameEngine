@@ -5,6 +5,7 @@
 #include <Games/Header/GameBase.hpp>
 #include <Games/Game1/Header/ShooterGame.hpp>
 #include <Games/Game2/Header/BlobGame.hpp>
+#include <Games/Demo/Header/Demo.hpp>
 
 namespace std
 {
@@ -13,8 +14,9 @@ namespace std
 
 int main(int p_argc, char** p_argv)
 {
-	Games::GameSelection::registerFactory<Games::Game1::ShooterGame>();
-	Games::GameSelection::registerFactory<Games::Game2::Blob>();
+	Games::GameSelection::registerFactory<Games::Demo>("Demo", "Graphic engine demo.");
+	Games::GameSelection::registerFactory<Games::Game1::ShooterGame>("Game 1", "Jeu qui presente le premier tp.");
+	Games::GameSelection::registerFactory<Games::Game2::Blob>("Game 2", "Jeu qui presente le deuxieme tp.");
 
 	bool engineRunning = true; 
 	

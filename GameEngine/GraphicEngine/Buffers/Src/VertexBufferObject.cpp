@@ -1,14 +1,12 @@
 #include <GraphicEngine/Buffers/Header/VertexBufferObject.hpp>
 
-namespace GraphicEngine {
-	namespace Buffers {
-
+namespace GraphicEngine::Buffers {
 		VertexBufferObject::~VertexBufferObject() {
 			// Release buffer memory in openGL
 			if (_id != 0) { glDeleteBuffers(1, &_id); }
 		}
 
-		void VertexBufferObject::passAsAttribute(GLint p_shaderAttributeIndex, GLuint nbInstances = 0) const
+		void VertexBufferObject::passAsAttribute(GLint p_shaderAttributeIndex, GLuint nbInstances) const
 		{
 			bind();
 
@@ -65,7 +63,7 @@ namespace GraphicEngine {
 
 		unsigned int VertexBufferObject::dataSize() const {
 			assert(isValid()); 
-			return _dataSize; 
+			return (unsigned int)_dataSize; 
 		}
 #pragma endregion
 
@@ -81,5 +79,4 @@ namespace GraphicEngine {
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
 #pragma endregion
-	}
 }

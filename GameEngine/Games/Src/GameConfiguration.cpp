@@ -7,39 +7,39 @@ namespace Games {
 		_fov(DEFAULT_FOV), _nearPlane(DEFAULT_NEAR_PLANE), _farPlane(DEFAULT_FAR_PLANE){}
 
 #pragma region GETTERS
-	bool GameConfiguration::graphicEnabled() {
+	bool GameConfiguration::graphicEnabled() const {
 		return _useGraphics;
 	}
 
-	int GameConfiguration::getWindowWidth() {
+	int GameConfiguration::getWindowWidth() const {
 		return _windowWidth;
 	}
 
-	int GameConfiguration::getWindowHeight() {
+	int GameConfiguration::getWindowHeight() const {
 		return _windowHeight;
 	}
 
-	std::string GameConfiguration::getName() {
+	std::string GameConfiguration::getName() const {
 		return _name;
 	}
 
-	GLfloat GameConfiguration::getFOV() {
+	GLfloat GameConfiguration::getFOV() const {
 		return _fov;
 	}
 
-	GLfloat GameConfiguration::getNearPlane() {
+	GLfloat GameConfiguration::getNearPlane() const {
 		return _nearPlane;
 	}
 
-	GLfloat GameConfiguration::getFarPlane() {
+	GLfloat GameConfiguration::getFarPlane() const {
 		return _farPlane;
 	}
 
-	GLint GameConfiguration::getDisplayMode() {
+	GLint GameConfiguration::getDisplayMode() const {
 		return _glutDisplayMode;
 	}
 
-	FPS GameConfiguration::getFPS() {
+	FPS GameConfiguration::getFPS() const {
 		return _fpsRate;
 	}
 #pragma endregion

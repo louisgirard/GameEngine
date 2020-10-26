@@ -1,17 +1,12 @@
 #ifndef _GRAPHIC_ENGINE_SHADER_HPP_
 #define _GRAPHIC_ENGINE_SHADER_HPP_
 
-#include <filesystem>
-#include <iostream>
 #include <cassert>
-
-#include <GL/glew.h>
 
 #include <GraphicEngine/Header/GraphicEnum.hpp>
 #include <GraphicEngine/Shaders/Header/ShaderSource.hpp>
 
-namespace GraphicEngine {
-	namespace Shaders {
+namespace GraphicEngine::Shaders {
 		class Shader
 		{
 		protected:
@@ -22,6 +17,12 @@ namespace GraphicEngine {
 			GLuint _shaderID;
 
 		public:
+
+			/*
+			* Default constructor
+			* Warning this shader is invalid
+			*/
+			Shader():_shaderID(0){}
 
 			/* Default Constructor
 			* Throws a exception if the source does not compile
@@ -69,13 +70,9 @@ namespace GraphicEngine {
 			*  Move assignment
 			*  @param p_other : Shader to move
 			*/
-			Shader& operator= (Shader&& p_other)
+			Shader& operator= (Shader&& p_other);
 #pragma endregion
-
-
-
 		};
-	}
 }
 
 #endif // !_GRAPHIC_ENGINE_SHADER_HPP_

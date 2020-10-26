@@ -2,11 +2,9 @@
 #define _GRAPHIC_ENGINE_VERTEX_ARRAY_OBJECT_HPP_
 
 #include <GraphicEngine/Shaders/Header/ShaderProgram.hpp>
-#include <GraphicEngine/Buffers/Header/VertexBufferObject.hpp>
 #include <GraphicEngine/Buffers/Header/ElementBufferObject.hpp>
 
-namespace GraphicEngine {
-	namespace Buffers {
+namespace GraphicEngine::Buffers {
 		class VertexArrayObject
 		{
 		protected :
@@ -43,6 +41,8 @@ namespace GraphicEngine {
 
 		public:
 
+			VertexArrayObject():_id(0), _eboSize(0){}
+
 			/*
 			* Constructor
 			* @param p_vbos : Buffer of VBO associated with a shader program
@@ -57,6 +57,7 @@ namespace GraphicEngine {
 			* @param p_ebo : EBO corresponding to the VBO buffer, can be null
 			*/
 			VertexArrayObject(const Shaders::ShaderProgram& p_program, const std::vector<std::pair<std::string, const VertexBufferObject*>>& p_vbos, const ElementBufferObject* p_ebo = nullptr);
+
 
 			/* Destructor */
 			~VertexArrayObject();
@@ -105,7 +106,6 @@ namespace GraphicEngine {
 			void unbind() const;
 #pragma endregion	
 		};
-	}
 }
 
 #endif // !_GRAPHIC_ENGINE_VERTEX_ARRAY_OBJECT_HPP_

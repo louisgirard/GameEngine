@@ -21,11 +21,11 @@ namespace Games {
 			Vector3 position(-5, 1, -30);
 			Vector3 color(1, 1, 1);
 			float radius = 3;
-			_particles[0] = std::make_shared<CParticle>(1, position, Vector3::ZERO, Vector3::ZERO, 0.999, Vector3(1,0,0), radius);
+			_particles[0] = std::make_shared<CParticle>(1.f, position, Vector3::ZERO, Vector3::ZERO, 0.999f, Vector3(1.f,0.f,0.f), radius);
 			position = Vector3(5, 1, -30);
-			_particles[1] = std::make_shared<CParticle>(1, position, Vector3::ZERO, Vector3::ZERO, 0.999, color, radius);
+			_particles[1] = std::make_shared<CParticle>(1.f, position, Vector3::ZERO, Vector3::ZERO, 0.999f, color, radius);
 			position = Vector3(0, 4, -30);
-			_particles[2] = std::make_shared<CParticle>(1, position, Vector3::ZERO, Vector3::ZERO, 0.999, color, radius);
+			_particles[2] = std::make_shared<CParticle>(1.f, position, Vector3::ZERO, Vector3::ZERO, 0.999f, color, radius);
 
 			// Add springs
 			auto spring1 = std::make_shared<SpringForces::ParticleSpring>(_particles[0].get(), 2, 10);
@@ -53,19 +53,19 @@ namespace Games {
 			// Move blob
 			if (_keyboard.isPressed(KeyAction::MOVEFRONT))
 			{
-				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::UP * 0.01);
+				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::UP * 0.01f);
 			}
 			if (_keyboard.isPressed(KeyAction::MOVEBACK))
 			{
-				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::DOWN * 0.01);
+				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::DOWN * 0.01f);
 			}
 			if (_keyboard.isPressed(KeyAction::MOVELEFT))
 			{
-				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::LEFT * 0.01);
+				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::LEFT * 0.01f);
 			}
 			if (_keyboard.isPressed(KeyAction::MOVERIGHT))
 			{
-				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::RIGHT * 0.01);
+				_particles[0]->setPosition(_particles[0]->getPosition() + Vector3::RIGHT * 0.01f);
 			}
 
 			// Break blob
@@ -94,6 +94,7 @@ namespace Games {
 				_registry.add(_particles[2].get(), _springs[2].get());
 			}
 
+<<<<<<< HEAD
 			for (int i = 0; i < NUM_PARTICLES; i++)
 			{
 				_registry.add(_particles[i].get(), &_gravity);
@@ -104,10 +105,15 @@ namespace Games {
 			// Check for collisions
 			checkParticleCollisions(p_dt);
 			checkGroundCollisions(p_dt);
+=======
+			_registry.updatePhysic((float)p_dt);
+			checkParticleCollisions((float)p_dt);
+			checkGroundCollisions((float)p_dt);
+>>>>>>> f2de7413d2c15b91877c00b26442a9ffff6e9dbf
 
 			for (int i = 0; i < NUM_PARTICLES; i++)
 			{
-				_particles[i]->updatePhysic(p_dt);
+				_particles[i]->updatePhysic((float)p_dt);
 				//the positions of the particles are printed in the console
 				//std::cout << "index = " << i << ", x = " << _particles[i]->getPosition()._x << ", y = " << _particles[i]->getPosition()._y << ", z = " << _particles[i]->getPosition()._z << std::endl;
 			}
@@ -149,7 +155,7 @@ namespace Games {
 						float penetration = totalSize - distance;
 						direction.normalize();
 						// Create contact
-						Collisions::ParticleContact* contact = new Collisions::ParticleContact(_particles[i].get(), _particles[j].get(), 0.7, direction, penetration);
+						Collisions::ParticleContact* contact = new Collisions::ParticleContact(_particles[i].get(), _particles[j].get(), 0.7f, direction, penetration);
 						contacts.push_back(contact);
 					}
 				}
@@ -180,7 +186,7 @@ namespace Games {
 						normal = PhysicEngine::Vector3::UP * -1;
 						penetration *= -1;
 					}
-					Collisions::ParticleContact* contact = new Collisions::ParticleContact(_particles[i].get(), NULL, 1, normal * 0.01, penetration);
+					Collisions::ParticleContact* contact = new Collisions::ParticleContact(_particles[i].get(), NULL, 1.f, normal * 0.01f, penetration);
 					contacts.push_back(contact);
 				}
 			}
