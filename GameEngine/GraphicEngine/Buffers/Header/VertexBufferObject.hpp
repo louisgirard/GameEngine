@@ -2,12 +2,14 @@
 #define _GRAPHIC_ENGINE_VERTEX_BUFFER_OBJECT_HPP_
 
 #include <vector>
+#include <iostream>
 
 #include <glm/common.hpp>
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
 #include <glm/vec4.hpp>
 
+#include <GraphicEngine/Header/GraphicConfig.hpp>
 #include <GraphicEngine/TypeSpec/Header/GLMTypesSpec.hpp>
 
 namespace GraphicEngine::Buffers {
@@ -43,22 +45,25 @@ namespace GraphicEngine::Buffers {
 				//Verify the type used in this buffer is compatible with our engine
 				static_assert(GLMTypesSpec<T>::isCompatible() && (GLMTypesSpec<T>::isScalar() || GLMTypesSpec<T>::isVector()), "Invalid type provided in VertexBufferObject constructor");
 				
+
 				// Création of the vertex buffer object
 				// (We want only one buffer to be generated)
 				glGenBuffers(1, &_id);
+				handleGLerror("VBO()");
+				std::cout << "Vertex Buffer object created " << _id << std::endl;
 
 				// Bind buffer to openGL
-				glBindBuffer(GL_ARRAY_BUFFER, _id);
+				bind();
 				// Set Buffer Data
 				glBufferData(GL_ARRAY_BUFFER, sizeof(T) * p_buffer.size(), p_buffer.data(), static_cast<GLenum>(p_usage));
-
+				handleGLerror("VBO()");
 				//Init attributes
 				_scalarType = GLenum(GLMTypesSpec<T>::glType());
 				_bufferSize = p_buffer.size();
 				_dataSize = GLMTypesSpec<T>::size();
 
 				// Unbind Buffer
-				glBindBuffer(GL_ARRAY_BUFFER, 0);
+				unbind();
 			}
 
 			/* Destructor */
@@ -83,6 +88,7 @@ namespace GraphicEngine::Buffers {
 				//Update the data in openGL
 				bind();
 				glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(T) * p_buffer.size(), p_buffer.data());
+				handleGLerror("VBO::update()");
 				unbind();
 			}
 

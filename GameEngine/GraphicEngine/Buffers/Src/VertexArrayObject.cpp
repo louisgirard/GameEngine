@@ -5,7 +5,9 @@ namespace GraphicEngine::Buffers {
 		p_ebo->unbind();
 		// Creation and binding of the VAO
 		glGenVertexArrays(1, &_id);
-		glBindVertexArray(_id);
+		handleGLerror("VAO()");
+		//std::cout << "Created VAO " << _id << std::endl;
+		bind();
 
 		// Association of VBOS with the VAO and the shader program
 		for (auto it = p_vbos.begin(), end = p_vbos.end(); it != end; ++it)
@@ -25,7 +27,7 @@ namespace GraphicEngine::Buffers {
 		}
 
 		// We unbind the VAO
-		glBindVertexArray(0);
+		unbind();
 		//// We store the configuration
 
 	}
@@ -37,7 +39,10 @@ namespace GraphicEngine::Buffers {
 	VertexArrayObject::VertexArrayObject(const std::vector<std::pair<GLint, const VertexBufferObject*>>& p_vbos, const std::vector<GLuint>& p_indices) {
 		// Creation and binding of the VAO
 		glGenVertexArrays(1, &_id);
-		glBindVertexArray(_id);
+		handleGLerror("VAO()");
+		bind();
+
+		//std::cout << "Created VAO " << _id << std::endl;
 
 		// Association of VBOS with the VAO and the shader program
 		for (auto it = p_vbos.begin(), end = p_vbos.end(); it != end; ++it)
@@ -52,7 +57,7 @@ namespace GraphicEngine::Buffers {
 		_eboSize = ebo.size();
 
 		// We unbind the VAO
-		glBindVertexArray(0);
+		unbind();
 
 	}
 
@@ -100,12 +105,16 @@ namespace GraphicEngine::Buffers {
 	void VertexArrayObject::bind() const
 	{
 		assert(isValid());
+		//std::cout << "Bind VAO " << _id << std::endl;
 		glBindVertexArray(_id);
+		handleGLerror("VAO::bind()");
 	}
 
 	void VertexArrayObject::unbind() const
 	{
+		//std::cout << "Unbinds VAOs " << std::endl;
 		glBindVertexArray(0);
+		handleGLerror("VAO::unbind()");
 	}
 #pragma endregion	
 }

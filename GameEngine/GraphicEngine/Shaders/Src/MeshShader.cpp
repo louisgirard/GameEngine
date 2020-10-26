@@ -151,6 +151,7 @@ namespace GraphicEngine::Shaders {
 			setMaterial(p_material);
 			p_meshVAO.bind();
 			glDrawElements(GL_TRIANGLES, (GLsizei)p_meshVAO.eboSize(), GL_UNSIGNED_INT, 0);
+			handleGLerror("MeshShader::renderMesh()");
 			p_meshVAO.unbind();
 		}
 

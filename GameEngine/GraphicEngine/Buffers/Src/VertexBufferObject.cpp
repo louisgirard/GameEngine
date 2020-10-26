@@ -9,10 +9,11 @@ namespace GraphicEngine::Buffers {
 		void VertexBufferObject::passAsAttribute(GLint p_shaderAttributeIndex, GLuint nbInstances) const
 		{
 			bind();
-
+			//std::cout << "Pass VBO " << _id << " as attribute " << p_shaderAttributeIndex << std::endl;
 			// Register the connexion between the VBO and the shader program
 			glEnableVertexAttribArray(p_shaderAttributeIndex);
 			glVertexAttribPointer(p_shaderAttributeIndex, dataSize(), glScalarType(), GL_FALSE, 0, nullptr);
+			handleGLerror("VBO::passAsAttribute()");
 			
 			// Wait for a certain amount of instances to update content
 			if (nbInstances > 0) { glVertexAttribDivisor(p_shaderAttributeIndex, nbInstances); }
@@ -71,12 +72,16 @@ namespace GraphicEngine::Buffers {
 		void VertexBufferObject::bind() const
 		{
 			assert(isValid());
+			//std::cout << "Vertex Buffer object binding " << _id << std::endl;
 			glBindBuffer(GL_ARRAY_BUFFER, _id);
+			handleGLerror("VBO::bind()");
 		}
 
 		void VertexBufferObject::unbind() const
 		{
+			//std::cout << "Unbinding VBOs " << _id << std::endl;
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
+			handleGLerror("VBO::unbind()");
 		}
 #pragma endregion
 }

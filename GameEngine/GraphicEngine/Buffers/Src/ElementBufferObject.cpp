@@ -5,11 +5,15 @@ namespace GraphicEngine::Buffers {
 	{
 		// Creation of the element buffer object
 		glGenBuffers(1, &_id);
+		handleGLerror("EBO()");
+
+		//std::cout << "Created EBO " << _id << std::endl;
 
 		// Initialization of the element buffer object in openGL
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _id);
+		bind();
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * p_indices.size(), p_indices.data(), static_cast<GLenum>(p_usage));
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+		handleGLerror("EBO()");
+		unbind();
 
 		_size = p_indices.size();
 	}
@@ -65,12 +69,16 @@ namespace GraphicEngine::Buffers {
 	void ElementBufferObject::bind() const
 	{
 		assert(isValid() && "ElementBufferObject::bind called but the EBO is not initialized");
+		//std::cout << "Binding EBO " << _id << std::endl;
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _id);
+		handleGLerror("EBO::bind()");
 	}
 
 	void ElementBufferObject::unbind() const
 	{
+		//std::cout << "Unbinds " << std::endl;
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+		handleGLerror("EBO::unbind()");
 	}
 #pragma endregion
 }
