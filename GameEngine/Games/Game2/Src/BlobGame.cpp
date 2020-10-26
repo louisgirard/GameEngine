@@ -188,21 +188,22 @@ namespace Games {
 			for (int i = 0; i < NUM_PARTICLES; i++)
 			{
 				float radius = _particles[i]->getSize();
-				float penetration = _particles[i]->getPosition()._y - _ground->getHeight();
+
+				float distance = _particles[i]->getPosition()._y - _ground->getHeight();
 
 				// checking if the particle is intersecting with the plane
-				if (std::abs(penetration) <= radius && _ground->isAboveOrUnder(_particles[i]->getPosition()))
+				if (std::abs(distance) <= radius && _ground->isAboveOrUnder(_particles[i]->getPosition()))
 				{
+					float penetration = distance - radius;
 					Vector3 normal;
 					//checking if the contact is happening from above or under
-					if (penetration > 0) {
+					if (distance > 0) {
 						normal = PhysicEngine::Vector3::UP;
 					}
 					else {
 						normal = PhysicEngine::Vector3::UP * -1;
-						penetration *= -1;
 					}
-					Collisions::ParticleContact* contact = new Collisions::ParticleContact(_particles[i].get(), NULL, 1.f, normal * 0.01f, penetration);
+					Collisions::ParticleContact* contact = new Collisions::ParticleContact(_particles[i].get(), NULL, 1.f, normal, penetration);
 					contacts.push_back(contact);
 				}
 			}
