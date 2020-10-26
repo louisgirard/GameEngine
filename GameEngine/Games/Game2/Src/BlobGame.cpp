@@ -94,7 +94,6 @@ namespace Games {
 				_registry.add(_particles[2].get(), _springs[2].get());
 			}
 
-<<<<<<< HEAD
 			for (int i = 0; i < NUM_PARTICLES; i++)
 			{
 				_registry.add(_particles[i].get(), &_gravity);
@@ -105,11 +104,6 @@ namespace Games {
 			// Check for collisions
 			checkParticleCollisions(p_dt);
 			checkGroundCollisions(p_dt);
-=======
-			_registry.updatePhysic((float)p_dt);
-			checkParticleCollisions((float)p_dt);
-			checkGroundCollisions((float)p_dt);
->>>>>>> f2de7413d2c15b91877c00b26442a9ffff6e9dbf
 
 			for (int i = 0; i < NUM_PARTICLES; i++)
 			{
