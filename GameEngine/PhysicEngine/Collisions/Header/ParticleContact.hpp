@@ -23,6 +23,7 @@ namespace PhysicEngine
 			float _penetration;			
 
 		public:
+			ParticleContact();
 			ParticleContact(CParticle* p_particle1, CParticle* p_particle2, float p_restitutionCoef, Vector3 p_contactNormal, float p_penetration);
 
 			/*Get the contact penetration

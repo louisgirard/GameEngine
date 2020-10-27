@@ -38,34 +38,43 @@ namespace Games {
 
 			// 4 - Create planes
 			_ground = std::make_shared<HorizontalPlane>(Vector3(0, -40, zAxis), 60, 30);
+
 			_water = std::make_shared<HorizontalPlane>(Vector3(0, -50, zAxis), 500, 30, Vector3(0.32f, 0.76f, 0.78f), Vector3(0.8f, 0.8f, 0.8f));
 
 			// 5 -  Create particles
 			float mass = 60000;
-			Vector3 position(-5, -38, zAxis);
+			Vector3 position(-10, -30, zAxis);
 			Vector3 color(1, 1, 1);
 			float radius = 3;
 			_particles[0] = std::make_shared<CParticle>(mass, position, Vector3::ZERO, Vector3::ZERO, 0.999f, Vector3(1.f,0.f,0.f), radius);
-			position = Vector3(5, -38, zAxis);
+			position = Vector3(10, -30, zAxis);
 			_particles[1] = std::make_shared<CParticle>(mass, position, Vector3::ZERO, Vector3::ZERO, 0.999f, color, radius);
 			position = Vector3(0, -35, zAxis);
 			_particles[2] = std::make_shared<CParticle>(mass, position, Vector3::ZERO, Vector3::ZERO, 0.999f, color, radius);
 
 			// 6 - Add springs
-			auto spring1 = std::make_shared<SpringForces::ParticleSpring>(_particles[0].get(), 2, 10);
-			auto spring2 = std::make_shared<SpringForces::ParticleSpring>(_particles[1].get(), 2, 10);
+			auto spring1 = std::make_shared<SpringForces::ParticleSpring>(_particles[0].get(), 20000, 5);
+			auto spring2 = std::make_shared<SpringForces::ParticleSpring>(_particles[1].get(), 20000, 5);
 			_springs.push_back(spring1);
 			_springs.push_back(spring2);
 
-			auto spring3 = std::make_shared<SpringForces::ParticleSpring>(_particles[1].get(), 2, 10);
-			auto spring4 = std::make_shared<SpringForces::ParticleSpring>(_particles[2].get(), 2, 10);
+			auto spring3 = std::make_shared<SpringForces::ParticleSpring>(_particles[1].get(), 20000, 5);
+			auto spring4 = std::make_shared<SpringForces::ParticleSpring>(_particles[2].get(), 20000, 5);
 			_springs.push_back(spring3);
 			_springs.push_back(spring4);
 
-			auto spring5 = std::make_shared<SpringForces::ParticleSpring>(_particles[0].get(), 2, 10);
-			auto spring6 = std::make_shared<SpringForces::ParticleSpring>(_particles[2].get(), 2, 10);
+			auto spring5 = std::make_shared<SpringForces::ParticleSpring>(_particles[0].get(), 20000, 5);
+			auto spring6 = std::make_shared<SpringForces::ParticleSpring>(_particles[2].get(), 20000, 5);
 			_springs.push_back(spring5);
 			_springs.push_back(spring6);
+
+			// 7 - Add cables
+			auto cable1 = std::make_shared<Collisions::ParticleCable>(_particles[0].get(), _particles[1].get(), 25);
+			auto cable2 = std::make_shared<Collisions::ParticleCable>(_particles[2].get(), _particles[1].get(), 25);
+			auto cable3 = std::make_shared<Collisions::ParticleCable>(_particles[0].get(), _particles[2].get(), 25);
+			_cables.push_back(cable1);
+			_cables.push_back(cable2);
+			_cables.push_back(cable3);
 		}
 
 		void Blob::handleInput(double p_dt)
@@ -121,6 +130,17 @@ namespace Games {
 
 				_registry.add(_particles[1].get(), _springs[3].get());
 				_registry.add(_particles[2].get(), _springs[2].get());
+				for (int i = 0; i < _cables.size(); i++) {
+					PhysicEngine::Collisions::ParticleContact contacts[2 * NUM_PARTICLES] = {};
+					unsigned numContactsGround = _cables[i]->AddContact(contacts, 2 * NUM_PARTICLES);
+					if (numContactsGround > 0) {
+						std::vector< PhysicEngine::Collisions::ParticleContact*> contactArray;
+						for (int j = 0; j < numContactsGround; j++) {
+							contactArray.push_back(&contacts[j]);
+						}
+						_contactResolver.resolveContacts(contactArray, p_dt);
+					}
+				}
 			}
 
 			for (int i = 0; i < NUM_PARTICLES; i++)
@@ -135,6 +155,10 @@ namespace Games {
 			// Check for collisions
 			checkParticleCollisions(p_dt);
 			checkGroundCollisions(p_dt);
+			if (!isBroken) {
+				
+			}
+			
 
 			for (int i = 0; i < NUM_PARTICLES; i++)
 			{
@@ -279,7 +303,7 @@ namespace Games {
 					else {
 						normal = PhysicEngine::Vector3::UP * -1;
 					}
-					Collisions::ParticleContact* contact = new Collisions::ParticleContact(_particles[i].get(), NULL, 1.f, normal, penetration);
+					Collisions::ParticleContact* contact = new Collisions::ParticleContact(_particles[i].get(), NULL, 0.5f, normal, penetration);
 					contacts.push_back(contact);
 				}
 			}
