@@ -79,6 +79,7 @@ namespace Games {
 		 delete _sceneRoot;
 		 ShaderServer::getSingleton()->clear();
 		 SceneServer::getSingleton()->clear();
+		 TextureServer::getSingleton()->clear();
 	 }
 
 	 void Demo::updateFrame(){

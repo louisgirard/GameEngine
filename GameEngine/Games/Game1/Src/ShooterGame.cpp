@@ -5,6 +5,11 @@ namespace Games {
 
 		ShooterGame::ShooterGame() :GameBase() , _weaponMenu(new Games::GameMenu("Weapon Pocket")), _gravityGenerator(*new Gravity(*new PhysicEngine::Vector3(0, -10, 0))) {}
 
+		ShooterGame::~ShooterGame() {
+			ShaderServer::getSingleton()->clear();
+			TextureServer::getSingleton()->clear();
+		}
+
 		void ShooterGame::initGame() {
 
 			_registry = *new ForceRegistry();

@@ -5,6 +5,7 @@
 namespace GraphicEngine::PSceneGraph {
 	PParticle::PParticle(Vector3 p_color, float p_size)
 	{
+
 		_size = p_size;
 
 		/*

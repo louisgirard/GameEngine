@@ -42,8 +42,6 @@ namespace GraphicEngine::Buffers {
 		handleGLerror("VAO()");
 		bind();
 
-		//std::cout << "Created VAO " << _id << std::endl;
-
 		// Association of VBOS with the VAO and the shader program
 		for (auto it = p_vbos.begin(), end = p_vbos.end(); it != end; ++it)
 		{

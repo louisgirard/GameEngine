@@ -11,7 +11,7 @@ namespace Games {
 
 		Blob::~Blob() {
 			ShaderServer::getSingleton()->clear();
-			SceneServer::getSingleton()->clear();
+			TextureServer::getSingleton()->clear();
 		}
 
 		void Blob::initGame()

@@ -36,6 +36,12 @@ namespace GraphicEngine::Servers {
 			* @param p_generateMipmap : if true generate texture's mipmap
 			*/
 			Textures::Texture2D* loadTexture(const std::filesystem::path& p_texturePath, size_t p_nbChannels = 4, bool p_generateMipmap = false);
+
+			/*
+			* Clear the server
+			* Call this every time you want to reste GLUT
+			*/
+			void clear();
 		};
 }
 

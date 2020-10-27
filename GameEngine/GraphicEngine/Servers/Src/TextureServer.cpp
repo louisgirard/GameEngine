@@ -17,4 +17,8 @@ namespace GraphicEngine::Servers {
 			_textures[{p_texturePath, p_nbChannels, p_generateMipmap}] = Textures::Texture2D(p_texturePath, p_nbChannels, p_generateMipmap);
 			return &_textures.find({ p_texturePath, p_nbChannels, p_generateMipmap })->second;
 		}
+
+		void TextureServer::clear() {
+			_textures.clear();
+		}
 }
