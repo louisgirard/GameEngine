@@ -97,9 +97,6 @@
     <Filter Include="GameEngine\PhysicEngine\SpringForces\Header Files">
       <UniqueIdentifier>{d962081c-3357-4990-9ab0-57fb41084102}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameEngine\PhysicEngine\SpringForces\Source Files">
-      <UniqueIdentifier>{b1f9378a-4ca5-4211-8cce-250c1f04817e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameEngine\PhysicEngine\Forces">
       <UniqueIdentifier>{b8dc94fd-138f-4b85-9856-dc9c75d4577a}</UniqueIdentifier>
     </Filter>
@@ -180,6 +177,9 @@
     </Filter>
     <Filter Include="GameEngine\Games\GraphicDemo\Source Files">
       <UniqueIdentifier>{e9de4283-4e7d-4c57-a1a3-b452342fcae1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\PhysicEngine\SpringForces\Source Files">
+      <UniqueIdentifier>{b1f9378a-4ca5-4211-8cce-250c1f04817e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

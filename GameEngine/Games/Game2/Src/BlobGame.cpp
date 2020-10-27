@@ -209,6 +209,10 @@ namespace Games {
 				if (_water->getHeight() < 0) waterHeight *= -1;
 				waterHeight = std::max(std::min(waterHeight, 1.f), -1.f);
 
+
+				/*float waterLeftLimit = 0.0f;
+				float waterRightLimit = 0.0f;*/
+
 				currentShader->trySetUniform("uni_waterHeight", waterHeight);
 				currentShader->trySetUniform("uni_waterColor", glm::vec3(0.32f, 0.76f, 0.78f));
 				currentShader->trySetUniform("uni_blendCoefficient", 0.8f);
