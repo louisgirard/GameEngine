@@ -8,17 +8,24 @@ INC=$(DIR1) $(DIR2)
 INC_PARAMS=$(foreach d, $(INC), -I$d)
 CXXFLAGS=-Wall -Wno-unknown-pragmas $(INC_PARAMS) -std=c++17 -lstdc++fs
 LIB=-lm -lGL -lglut -lGLEW -lGLU -lpthread -lassimp -lSOIL
-OBJ=build/Main.o build/GameSelection.o build/GameBase.o build/GameMenu.o build/ShooterGame.o build/GameConfiguration.o build/KeyboardStatus.o build/CParticle.o build/Vector3.o build/AParticle.o build/PParticle.o build/MouseStatus.o build/ParticleForceRegistry.o build/ParticleGravity.o build/ParticleDrag.o build/ParticleSpring.o build/ParticleAnchoredSpring.o build/ParticleBungee.o build/ParticleBuoyancy.o build/ParticleContact.o build/ParticleContactResolver.o build/PlaneContactGenerator.o build/AHorizontalPlane.o build/CHorizontalPlane.o\
-build/BlobGame.o build/ParticleCable.o build/ParticleRod.o build/Paths.o build/CMeshObject.o build/EmptyNode.o \
+OBJ=build/Main.o \
+build/Demo.o \
+build/BlobGame.o \
+build/ShooterGame.o \
+build/GameSelection.o build/GameBase.o build/GameMenu.o build/GameConfiguration.o build/KeyboardStatus.o build/MouseStatus.o \
+build/ParticleCable.o build/ParticleRod.o build/Paths.o build/CMeshObject.o build/EmptyNode.o \
+build/ParticleForceRegistry.o build/ParticleGravity.o build/ParticleDrag.o \
+build/ParticleSpring.o build/ParticleAnchoredSpring.o build/ParticleBungee.o build/ParticleBuoyancy.o \
+build/ParticleContact.o build/ParticleContactResolver.o \
+build/Vector3.o build/CParticle.o build/AParticle.o build/AHorizontalPlane.o build/CHorizontalPlane.o\
 build/ElementBufferObject.o build/GeometryBuffer.o build/VertexArrayObject.o build/FrameBuffer.o build/MultipleDataVBO.o build/VertexBufferObject.o build/FrameBufferObject.o build/RenderBuffer.o \
 build/Color.o build/PhongMaterial.o \
 build/BoundingBox.o build/Camera.o build/ScreenRenderQuad.o build/SkyboxGeometry.o build/Text.o \
 build/Mesh.o build/PMeshObject.o build/TransformStack.o \
 build/LightServer.o build/SceneServer.o build/ShaderServer.o build/TextureServer.o \
 build/MeshShader.o build/ShaderParser.o build/ShaderSource.o build/VFXShader.o build/Shader.o build/ShaderProgram.o build/SkyboxShader.o \
-build/PHorizontalPlane.o \
+build/PHorizontalPlane.o build/PParticle.o\
 build/CubeMap.o build/Texture2D.o \
-build/Demo.o
 
 
 all: checkdirs Main
