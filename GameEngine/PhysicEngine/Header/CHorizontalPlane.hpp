@@ -10,7 +10,7 @@ namespace PhysicEngine {
 		std::shared_ptr<GraphicEngine::PHorizontalPlane> _presentation;
 
 	public:
-		CHorizontalPlane(Vector3 p_center, float p_length, float p_width);
+		CHorizontalPlane(Vector3 p_center, float p_length, float p_width, Vector3 p_color);
 
 		//returns the height of the plane
 		float getHeight();

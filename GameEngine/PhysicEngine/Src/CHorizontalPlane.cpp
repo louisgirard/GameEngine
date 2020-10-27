@@ -1,10 +1,10 @@
 #include <PhysicEngine/Header/CHorizontalPlane.hpp>
 
 namespace PhysicEngine {
-	CHorizontalPlane::CHorizontalPlane(Vector3 p_center, float p_length, float p_width)
+	CHorizontalPlane::CHorizontalPlane(Vector3 p_center, float p_length, float p_width, Vector3 p_color)
 	{
 		_abstraction = std::make_shared<AHorizontalPlane>(p_center, p_length, p_width);
-		_presentation = std::make_shared<GraphicEngine::PHorizontalPlane>(p_center, p_length, p_width, Vector3(1,1,1));
+		_presentation = std::make_shared<GraphicEngine::PHorizontalPlane>(p_center, p_length, p_width, p_color);
 	}
 
 	float CHorizontalPlane::getHeight()

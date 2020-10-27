@@ -17,8 +17,8 @@ namespace Games {
 			float zAxis = -80;
 
 			// Create planes
-			_ground = std::make_shared<CHorizontalPlane>(Vector3(0, -50, zAxis), 500, 30);
-			_water = std::make_shared<CHorizontalPlane>(Vector3(0, -10, zAxis), 60, 30);
+			_ground = std::make_shared<CHorizontalPlane>(Vector3(0, -50, zAxis), 500, 30, Vector3(0.34, 0.8, 0.06));
+			_water = std::make_shared<CHorizontalPlane>(Vector3(0, -10, zAxis), 60, 30, Vector3(0.28, 0.67, 1));
 
 			// Create particles
 			float mass = 1;
