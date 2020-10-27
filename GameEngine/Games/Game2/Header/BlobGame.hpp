@@ -42,6 +42,9 @@ namespace Games {
 			/* Holds all the forces and the particle they're associated with */
 			Forces::ParticleForceRegistry _registry;
 
+			/*Gravity acceleration*/
+			float _gravityAcceleration;
+
 			/* The force generator for gravity in the game */
 			Forces::ParticleGravity _gravity;
 

@@ -5,7 +5,7 @@ namespace Games {
 
 		const std::string Blob::WATER = "Water";
 
-		Blob::Blob() : GameBase(), _contactResolver(NUM_PARTICLES*2), _gravity(Forces::ParticleGravity(Vector3(0, -10, 0)))
+		Blob::Blob() : GameBase(), _contactResolver(NUM_PARTICLES*2), _gravityAcceleration(-10), _gravity(Forces::ParticleGravity(Vector3(0, _gravityAcceleration, 0)))
 		{
 		}
 
@@ -37,18 +37,18 @@ namespace Games {
 			_keyboard.bindActionToKey(KeyAction::FUSEBLOB, 102);
 
 			// 4 - Create planes
-			_ground = std::make_shared<HorizontalPlane>(Vector3(0, -10, zAxis), 60, 30);
+			_ground = std::make_shared<HorizontalPlane>(Vector3(0, -40, zAxis), 60, 30);
 			_water = std::make_shared<HorizontalPlane>(Vector3(0, -50, zAxis), 500, 30, Vector3(0.32f, 0.76f, 0.78f), Vector3(0.8f, 0.8f, 0.8f));
 
 			// 5 -  Create particles
-			float mass = 1;
-			Vector3 position(-5, 1, zAxis);
+			float mass = 60000;
+			Vector3 position(-5, -38, zAxis);
 			Vector3 color(1, 1, 1);
 			float radius = 3;
 			_particles[0] = std::make_shared<CParticle>(mass, position, Vector3::ZERO, Vector3::ZERO, 0.999f, Vector3(1.f,0.f,0.f), radius);
-			position = Vector3(5, 1, zAxis);
+			position = Vector3(5, -38, zAxis);
 			_particles[1] = std::make_shared<CParticle>(mass, position, Vector3::ZERO, Vector3::ZERO, 0.999f, color, radius);
-			position = Vector3(0, 4, zAxis);
+			position = Vector3(0, -35, zAxis);
 			_particles[2] = std::make_shared<CParticle>(mass, position, Vector3::ZERO, Vector3::ZERO, 0.999f, color, radius);
 
 			// 6 - Add springs
@@ -291,7 +291,7 @@ namespace Games {
 			{
 				if (_water->isAboveOrUnder(_particles[i]->getPosition()))
 				{
-					SpringForces::ParticleBuoyancy* buoyancy = new SpringForces::ParticleBuoyancy(-1, 1, _water->getHeight());
+					SpringForces::ParticleBuoyancy* buoyancy = new SpringForces::ParticleBuoyancy(_particles[i]->getSize(), 4/3*PI*std::pow(_particles[i]->getSize(),3), _water->getHeight(), _gravityAcceleration);
 					_registry.add(_particles[i].get(), buoyancy);
 				}
 			}
