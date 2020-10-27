@@ -34,20 +34,25 @@ namespace PhysicEngine {
 				std::shared_ptr<PhysicEngine::CParticle> particle = _particles[i];
 				float radius = particle->getSize();
 				float penetration = particle->getPosition()._y - _plane->getHeight();
+				float distance = particle->getPosition()._y - _plane->getHeight();
 
 				//checking if the particle is intersecting with the plane
-				if (std::abs(penetration) <= radius && _plane->isAboveOrUnder(particle->getPosition())) {
+				if (std::abs(distance) <= radius && _plane->isAboveOrUnder(particle->getPosition()))
+				{
+					float penetration = distance - radius;
 					Vector3 normal;
 					//checking if the contact is happening from above or under
-					if (penetration > 0) {
+					if (distance > 0) {
 						normal = PhysicEngine::Vector3::UP;
 					}
 					else {
-						normal = PhysicEngine::Vector3::UP*-1;
-						penetration *= -1;
+						normal = PhysicEngine::Vector3::UP * -1;
 					}
+					Collisions::ParticleContact* contact = new Collisions::ParticleContact(particle.get(), NULL, 1.f, normal, penetration);
 					p_contact[numContacts] = ParticleContact(particle.get(), NULL, 1, normal, penetration);
+					numContacts += 1;
 				}
+				i++;
 			}
 			return numContacts;
 		}

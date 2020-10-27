@@ -13,6 +13,9 @@
 
 #include <PhysicEngine/Collisions/Header/ParticleContactResolver.hpp>
 
+#include <PhysicEngine/Collisions/Header/PlaneContactGenerator.hpp>
+#include <PhysicEngine/Collisions/Header/ParticleCable.hpp>
+
 #define NUM_PARTICLES 3
 using namespace PhysicEngine;
 
@@ -29,6 +32,9 @@ namespace Games {
 
 			/* Holds all the springs in the scene */
 			std::vector<std::shared_ptr<SpringForces::ParticleSpring>> _springs;
+
+			/* Holds all the cables in the scene */
+			std::vector<std::shared_ptr<Collisions::ParticleCable>> _cables;
 
 			/* Holds the contact resolver to resolve contacts between particles */
 			Collisions::ParticleContactResolver _contactResolver;
