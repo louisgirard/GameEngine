@@ -1,7 +1,7 @@
 #pragma once
 #include <PhysicEngine/Header/Vector3.hpp>
 #include <PhysicEngine/Header/AParticle.hpp>
-#include <GraphicEngine/Header/PParticle.hpp>
+#include <GraphicEngine/SceneGraph/Header/PParticle.hpp>
 #include <memory>
 
 namespace PhysicEngine {
@@ -15,7 +15,7 @@ namespace PhysicEngine {
 	{
 	private:
 		std::shared_ptr<AParticle> _abstraction;
-		std::shared_ptr<GraphicEngine::PParticle> _presentation;
+		std::shared_ptr<GraphicEngine::PSceneGraph::PParticle> _presentation;
 
 	public:
 		/* Different types of projectile */

@@ -210,9 +210,6 @@
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\AParticle.cpp">
       <Filter>GameEngine\PhysicEngine\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\GameEngine\GraphicEngine\Src\PParticle.cpp">
-      <Filter>GameEngine\GraphicEngine\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\GameEngine\Games\Game1\Src\ShooterGame.cpp">
       <Filter>GameEngine\Games\Game1\Source Files</Filter>
     </ClCompile>
@@ -378,6 +375,9 @@
     <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\PHorizontalPlane.cpp">
       <Filter>GameEngine\GraphicEngine\PSceneGraph\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\PParticle.cpp">
+      <Filter>GameEngine\GraphicEngine\PSceneGraph\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\GameEngine\Games\Game1\Header\ShooterGame.hpp">
@@ -403,9 +403,6 @@
     </ClInclude>
     <ClInclude Include="..\GameEngine\Games\Header\KeyboardStatus.hpp">
       <Filter>GameEngine\Games\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\GameEngine\GraphicEngine\Header\PParticle.hpp">
-      <Filter>GameEngine\GraphicEngine\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\AParticle.hpp">
       <Filter>GameEngine\PhysicEngine\Header Files</Filter>
@@ -615,6 +612,9 @@
       <Filter>GameEngine\SceneGraph\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\PHorizontalPlane.hpp">
+      <Filter>GameEngine\GraphicEngine\PSceneGraph\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\PParticle.hpp">
       <Filter>GameEngine\GraphicEngine\PSceneGraph\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

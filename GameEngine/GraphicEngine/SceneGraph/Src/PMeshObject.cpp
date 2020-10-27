@@ -14,8 +14,8 @@ namespace GraphicEngine::PSceneGraph {
 			delete _mesh;
 		}
 
-		void PMeshObject::draw(std::string p_shaderName) {
-			glm::mat4 modelMatrix = glm::mat4(1.0);
+		void PMeshObject::draw(std::string p_shaderName, glm::vec3 p_position) {
+			glm::mat4 modelMatrix = glm::translate(glm::mat4(1.0), p_position);
 			if (p_shaderName == _shaderName) {
 				Servers::ShaderServer::getSingleton()->renderMesh(p_shaderName, modelMatrix, (*_VAO), (*_material));
 			}

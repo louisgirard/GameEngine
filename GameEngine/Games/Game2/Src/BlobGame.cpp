@@ -178,23 +178,16 @@ namespace Games {
 				((MeshShader*)currentShader)->setViewTransform(viewMatrix);
 				((MeshShader*)currentShader)->setViewPosition(_camera.getPosition());
 				((MeshShader*)currentShader)->setLights(lightDirection, lightColor);
-				((MeshShader*)currentShader)->setClippingDistance(500.f);
+				((MeshShader*)currentShader)->setClippingDistance(_configuration.getFarPlane());
 				((MeshShader*)currentShader)->setEnvTexture(ShaderServer::getSingleton()->getSkyboxTexture());
 				// We draw the mesh related to this shader 
 				_ground->draw(shaderUsed);
 				_water->draw(shaderUsed);
+				for (int i = 0; i < NUM_PARTICLES; i++)
+				{
+					_particles[i]->updateFrame();
+				}
 				ShaderServer::getSingleton()->unuse(currentShader);
-			}
-			glMatrixMode(GL_MODELVIEW);
-			glMultMatrixf(&(_camera.getInverseTransform()[0][0]));
-
-			// 5 - Draw the particles (We use GLUT cause sphere not supported yet)
-			for (int i = 0; i < NUM_PARTICLES; i++)
-			{
-				//Push the view matrix so that the transformation only apply to the particule
-				glPushMatrix();
-				_particles[i]->updateFrame();
-				glPopMatrix();
 			}
 
 			// 6 - Binding original Frame Buffer

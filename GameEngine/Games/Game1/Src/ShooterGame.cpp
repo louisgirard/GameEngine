@@ -6,10 +6,19 @@ namespace Games {
 		ShooterGame::ShooterGame() :GameBase() , _weaponMenu(new Games::GameMenu("Weapon Pocket")), _gravityGenerator(*new Gravity(*new PhysicEngine::Vector3(0, -10, 0))) {}
 
 		void ShooterGame::initGame() {
+
 			_registry = *new ForceRegistry();
-			// 1- Binding Keys
+
+			// 1 - We load the shaders
+			{
+				std::cout << "Init 1 - Loading Shader " << std::endl;
+				ShaderServer::getSingleton()->init();
+			}
+			
+			// 2- Binding Keys
 			_keyboard.bindActionToKey(KeyAction::MAINACTION, 13);
-			// 2 - We create a sub menu for choosing a weapon
+
+			// 3 - We create a sub menu for choosing a weapon
 			_weaponMenu->addItem("Pistol", [this]() {_currentType = Particle::Types::Bullet; });
 			_weaponMenu->addItem("Canon", [this]() {_currentType = Particle::Types::Canonball; });
 			_weaponMenu->addItem("Laser Gun", [this]() {_currentType = Particle::Types::Laser; });
@@ -57,17 +66,33 @@ namespace Games {
 
 		void ShooterGame::updateFrame() {
 			GameBase::updateFrame();
-			// 1 - Update Camera 
-			glMatrixMode(GL_MODELVIEW);
-			glMultMatrixf(&(_camera.getInverseTransform()[0][0]));
-			// 2 - Display model
-			for (int i = 0; i < (int)_projectiles.size(); i++)
+			// 0 - Matrices and initialisations
+			ShaderProgram* currentShader = nullptr;
+			glm::mat4 projectionMatrix = glm::perspective(glm::radians<float>(_configuration.getFOV()), (float)getConfiguration().getWindowWidth() / (float)getConfiguration().getWindowHeight(), _configuration.getNearPlane(), _configuration.getFarPlane());
+			glm::mat4 viewMatrix = _camera.getInverseTransform();
+
+			glm::vec3 lightDirection = glm::normalize(glm::vec3(0.4f, -0.3f, -1.0f));
+			glm::vec3 lightColor = glm::vec3(1, 1, 1);
+
+			// 1 - Display object that use phong shader
 			{
-				//Push the view matrix so that the transformation only apply to the particule
-				glPushMatrix();
-				_projectiles[i]->updateFrame();
-				glPopMatrix();
+				std::string shaderUsed = ShaderServer::getSingleton()->getDefaultMeshShader();
+				ShaderServer::getSingleton()->use(shaderUsed, currentShader);
+				// We initialize the uniforms shared by every mesh
+				((MeshShader*)currentShader)->setProjectionTransform(projectionMatrix);
+				((MeshShader*)currentShader)->setViewTransform(viewMatrix);
+				((MeshShader*)currentShader)->setViewPosition(_camera.getPosition());
+				((MeshShader*)currentShader)->setLights(lightDirection, lightColor);
+				((MeshShader*)currentShader)->setClippingDistance(_configuration.getFarPlane());
+				((MeshShader*)currentShader)->setEnvTexture(ShaderServer::getSingleton()->getSkyboxTexture());
+				// We draw the mesh related to this shader 
+				for (int i = 0; i < (int)_projectiles.size(); i++)
+				{
+					_projectiles[i]->updateFrame();
+				}
+				ShaderServer::getSingleton()->unuse(currentShader);
 			}
+
 		}
 
 		void ShooterGame::mousePassiveMotion(int p_x, int p_y) {

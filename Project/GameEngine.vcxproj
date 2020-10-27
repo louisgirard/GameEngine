@@ -46,6 +46,7 @@
     <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\Mesh.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\PHorizontalPlane.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\PMeshObject.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\PParticle.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\TransformStack.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Servers\Src\LightServer.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Servers\Src\SceneServer.cpp" />
@@ -58,7 +59,6 @@
     <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\ShaderSource.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\SkyboxShader.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\VFXShader.cpp" />
-    <ClCompile Include="..\GameEngine\GraphicEngine\Src\PParticle.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Textures\Src\CubeMap.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Textures\Src\Texture2D.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\TypeSpec\Header\TextureInternalFormatSpec.hpp" />
@@ -112,7 +112,6 @@
     <ClInclude Include="..\GameEngine\GraphicEngine\Header\GraphicConfig.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Header\GraphicEnum.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Header\GraphicUtils.hpp" />
-    <ClInclude Include="..\GameEngine\GraphicEngine\Header\PParticle.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Materials\Header\Color.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Materials\Header\PhongMaterial.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\SceneBase\Header\BoundingBox.hpp" />
@@ -123,6 +122,7 @@
     <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\Mesh.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\PHorizontalPlane.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\PMeshObject.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\PParticle.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\TransformStack.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Servers\Header\LightServer.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Servers\Header\SceneServer.hpp" />

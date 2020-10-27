@@ -41,7 +41,7 @@ namespace GraphicEngine::PSceneGraph {
 			* Draws this node
 			* @param p_shaderName : Name of the shader we are using now to render the node
 			*/
-			virtual void draw(std::string p_shaderName);
+			virtual void draw(std::string p_shaderName, glm::vec3 p_position = glm::vec3(0,0,0));
 
 			/*
 			* Compute a bounding box for this node and its child
