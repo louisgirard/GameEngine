@@ -44,6 +44,7 @@
     <ClCompile Include="..\GameEngine\GraphicEngine\SceneBase\Src\SkyboxGeometry.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\SceneBase\Src\Text.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\Mesh.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\PHorizontalPlane.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\PMeshObject.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\TransformStack.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Servers\Src\LightServer.cpp" />
@@ -57,7 +58,6 @@
     <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\ShaderSource.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\SkyboxShader.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Shaders\Src\VFXShader.cpp" />
-    <ClCompile Include="..\GameEngine\GraphicEngine\Src\PHorizontalPlane.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Src\PParticle.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Textures\Src\CubeMap.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Textures\Src\Texture2D.cpp" />
@@ -77,9 +77,9 @@
     <ClCompile Include="..\GameEngine\PhysicEngine\SpringForces\Src\ParticleSpring.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\AHorizontalPlane.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\AParticle.cpp" />
-    <ClCompile Include="..\GameEngine\PhysicEngine\Src\CHorizontalPlane.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\CParticle.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\Vector3.cpp" />
+    <ClCompile Include="..\GameEngine\SceneGraph\Src\CHorizontalPlane.cpp" />
     <ClCompile Include="..\GameEngine\SceneGraph\Src\EmptyNode.cpp" />
     <ClCompile Include="..\GameEngine\SceneGraph\Src\CMeshObject.cpp" />
     <ClCompile Include="..\GameEngine\System\Src\Paths.cpp" />
@@ -112,7 +112,6 @@
     <ClInclude Include="..\GameEngine\GraphicEngine\Header\GraphicConfig.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Header\GraphicEnum.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Header\GraphicUtils.hpp" />
-    <ClInclude Include="..\GameEngine\GraphicEngine\Header\PHorizontalPlane.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Header\PParticle.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Materials\Header\Color.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Materials\Header\PhongMaterial.hpp" />
@@ -122,6 +121,7 @@
     <ClInclude Include="..\GameEngine\GraphicEngine\SceneBase\Header\SkyboxGeometry.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\SceneBase\Header\Text.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\Mesh.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\PHorizontalPlane.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\PMeshObject.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\TransformStack.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Servers\Header\LightServer.hpp" />
@@ -153,7 +153,6 @@
     <ClInclude Include="..\GameEngine\PhysicEngine\Forces\Header\ParticleGravity.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\AHorizontalPlane.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\AParticle.hpp" />
-    <ClInclude Include="..\GameEngine\PhysicEngine\Header\CHorizontalPlane.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\CParticle.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\MathConstant.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\Vector3.hpp" />
@@ -161,6 +160,7 @@
     <ClInclude Include="..\GameEngine\PhysicEngine\SpringForces\Header\ParticleBungee.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\SpringForces\Header\ParticleBuoyancy.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\SpringForces\Header\ParticleSpring.hpp" />
+    <ClInclude Include="..\GameEngine\SceneGraph\Header\CHorizontalPlane.hpp" />
     <ClInclude Include="..\GameEngine\SceneGraph\Header\EmptyNode.hpp" />
     <ClInclude Include="..\GameEngine\SceneGraph\Header\CMeshObject.hpp" />
     <ClInclude Include="..\GameEngine\System\Header\Paths.hpp" />
@@ -173,6 +173,8 @@
     <None Include="..\Ressources\Shaders\PhongDirectional.vert" />
     <None Include="..\Ressources\Shaders\skybox.frag" />
     <None Include="..\Ressources\Shaders\skybox.vert" />
+    <None Include="..\Ressources\Shaders\water.frag" />
+    <None Include="..\Ressources\Shaders\water.vert" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

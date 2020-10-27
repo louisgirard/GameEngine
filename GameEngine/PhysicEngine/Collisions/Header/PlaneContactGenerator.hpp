@@ -1,5 +1,5 @@
 #pragma once
-#include <PhysicEngine/Header/CHorizontalPlane.hpp>
+#include <SceneGraph/Header/CHorizontalPlane.hpp>
 #include <PhysicEngine/Collisions/Header/ParticleContactGenerator.hpp>
 #include <vector>
 namespace PhysicEngine {
@@ -8,12 +8,12 @@ namespace PhysicEngine {
 		{
 		private:
 			//The plane with which the particles are colliding
-			std::shared_ptr<PhysicEngine::CHorizontalPlane> _plane;
+			std::shared_ptr<SceneGraph::CHorizontalPlane> _plane;
 			//The particles colliding with the plane
 			std::vector<std::shared_ptr<PhysicEngine::CParticle>> _particles;
 
 		public:
-			PlaneContactGenerator(PhysicEngine::CHorizontalPlane* p_plane, PhysicEngine::CParticle* p_particles, unsigned arraySize);
+			PlaneContactGenerator(SceneGraph::CHorizontalPlane* p_plane, PhysicEngine::CParticle* p_particles, unsigned arraySize);
 
 			/*Adds a new particle to collide with the plane
 			* @param p_particle the new colliding particle

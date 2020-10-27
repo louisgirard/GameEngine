@@ -3,7 +3,8 @@
 
 #include <Games/Header/GameBase.hpp>
 #include <PhysicEngine/Header/CParticle.hpp>
-#include <PhysicEngine/Header/CHorizontalPlane.hpp>
+
+#include <glm/matrix.hpp>
 
 #include <PhysicEngine/Forces/Header/ParticleForceRegistry.hpp>
 #include <PhysicEngine/Forces/Header/ParticleGravity.hpp>
@@ -20,6 +21,9 @@ namespace Games {
 		class Blob : public GameBase
 		{
 		private:
+			// Shaders
+			static const std::string WATER;
+
 			/* Holds all the particles in the scene */
 			std::shared_ptr<CParticle> _particles[NUM_PARTICLES];
 
@@ -30,10 +34,10 @@ namespace Games {
 			Collisions::ParticleContactResolver _contactResolver;
 
 			/* Holds the ground plane */
-			std::shared_ptr<CHorizontalPlane> _ground;
+			std::shared_ptr<HorizontalPlane> _ground;
 
 			/* Holds the water plane */
-			std::shared_ptr<CHorizontalPlane> _water;
+			std::shared_ptr<HorizontalPlane> _water;
 
 			/* Holds all the forces and the particle they're associated with */
 			Forces::ParticleForceRegistry _registry;
@@ -50,6 +54,13 @@ namespace Games {
 			/* Handles user inputs 
 			@param p_dt the time ellapsed since the last update*/
 			virtual void handleInput(double p_dt);
+
+			/**
+			* Function called when the user reshapes the game window
+			* @param p_width : new window's width
+			* @param p_height : new window's height
+			**/
+			virtual void reshape(GLint p_width, GLint p_height);
 
 			/*
 			Updates the positions of the particles
@@ -84,6 +95,7 @@ namespace Games {
 			/* Default constructor */
 			Blob();
 		
+			~Blob();
 		};
 	}
 }

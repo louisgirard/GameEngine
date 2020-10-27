@@ -2,25 +2,45 @@
 
 namespace Games {
 	namespace Game2 {
+
+		const std::string Blob::WATER = "Water";
+
 		Blob::Blob() : GameBase(), _contactResolver(NUM_PARTICLES*2), _gravity(Forces::ParticleGravity(Vector3(0, -10, 0)))
 		{
 		}
 
+		Blob::~Blob() {
+			ShaderServer::getSingleton()->clear();
+			SceneServer::getSingleton()->clear();
+		}
+
 		void Blob::initGame()
 		{
+			// 0 - Init variable 
 			_registry = *new Forces::ParticleForceRegistry();
+			float zAxis = -80;
 
-			// Binding Keys
+			// 1 - We load the shaders
+			{
+				std::cout << "Init 1 - Loading Shader " << std::endl;
+				ShaderServer::getSingleton()->init();
+				ShaderServer::getSingleton()->loadAndRegisterShader(GraphicEngine::ShaderProgramType::VFX, WATER, "water.vert", "water.frag");
+			}
+
+			// 2 - We initialize multi-pass rendering
+			std::vector<std::tuple<FBOAttachment, FBOAttachmentType, TextureInternalFormat>> configuration;
+			configuration.push_back(std::tuple(FBOAttachment::colorAttachment0, FBOAttachmentType::texture, TextureInternalFormat::rgba));
+			ShaderServer::getSingleton()->initVFX(WATER, configuration, getConfiguration().getWindowWidth(), getConfiguration().getWindowHeight());
+
+			// 3 - Binding Keys
 			_keyboard.bindActionToKey(KeyAction::BREAKBLOB, 98);
 			_keyboard.bindActionToKey(KeyAction::FUSEBLOB, 102);
 
-			float zAxis = -80;
+			// 4 - Create planes
+			_ground = std::make_shared<HorizontalPlane>(Vector3(0, -10, zAxis), 60, 30);
+			_water = std::make_shared<HorizontalPlane>(Vector3(0, -50, zAxis), 500, 30, Vector3(0.32f, 0.76f, 0.78f), Vector3(0.8f, 0.8f, 0.8f));
 
-			// Create planes
-			_ground = std::make_shared<CHorizontalPlane>(Vector3(0, -50, zAxis), 500, 30);
-			_water = std::make_shared<CHorizontalPlane>(Vector3(0, -10, zAxis), 60, 30);
-
-			// Create particles
+			// 5 -  Create particles
 			float mass = 1;
 			Vector3 position(-5, 1, zAxis);
 			Vector3 color(1, 1, 1);
@@ -31,7 +51,7 @@ namespace Games {
 			position = Vector3(0, 4, zAxis);
 			_particles[2] = std::make_shared<CParticle>(mass, position, Vector3::ZERO, Vector3::ZERO, 0.999f, color, radius);
 
-			// Add springs
+			// 6 - Add springs
 			auto spring1 = std::make_shared<SpringForces::ParticleSpring>(_particles[0].get(), 2, 10);
 			auto spring2 = std::make_shared<SpringForces::ParticleSpring>(_particles[1].get(), 2, 10);
 			_springs.push_back(spring1);
@@ -83,6 +103,11 @@ namespace Games {
 			}
 		}
 
+		void Blob::reshape(GLint p_width, GLint p_height) {
+			GameBase::reshape(p_width, p_height);
+			ShaderServer::getSingleton()->resizeScreen(p_width, p_height);
+		}
+
 		void Blob::updatePhysic(double p_dt)
 		{
 			// Add forces
@@ -124,24 +149,79 @@ namespace Games {
 		void Blob::updateFrame() {
 			GameBase::updateFrame();
 
+			// 0 - Update Camera position 
 			cameraFollowMaster();
 
-			// Display Ground
-			glPushMatrix();
-			_ground->updateFrame();
-			glPopMatrix();
+			// 1 - Matrices and initialisations
+			ShaderProgram* currentShader = nullptr;
+			glm::mat4 projectionMatrix = glm::perspective(glm::radians<float>(_configuration.getFOV()), (float)getConfiguration().getWindowWidth() / (float)getConfiguration().getWindowHeight(), _configuration.getNearPlane(), _configuration.getFarPlane());
+			glm::mat4 viewMatrix = _camera.getInverseTransform();
+			// View matrix that only gets the rotation from the view 
+			glm::mat4 noTranslationMatrix = glm::mat4(glm::mat3(viewMatrix));
 
-			// Display Water
-			glPushMatrix();
-			_water->updateFrame();
-			glPopMatrix();
+			glm::vec3 lightDirection = glm::normalize(glm::vec3(0.4f, -0.3f, -1.0f));
+			glm::vec3 lightColor = glm::vec3(1, 1, 1);
+			GLenum textAttachment = GL_COLOR_ATTACHMENT0;
 
+			// 2 - Bind Frame Buffer to render
+			ShaderServer::getSingleton()->bindScreenTo(WATER, FBOAttachment::colorAttachment0);
+
+			// 3 - Draw a skybox
+			ShaderServer::getSingleton()->renderSkybox(noTranslationMatrix, projectionMatrix);
+
+			// 4 - Display object that use phong shader
+			{
+				std::string shaderUsed = ShaderServer::getSingleton()->getDefaultMeshShader();
+				ShaderServer::getSingleton()->use(shaderUsed, currentShader);
+				// We initialize the uniforms shared by every mesh
+				((MeshShader*)currentShader)->setProjectionTransform(projectionMatrix);
+				((MeshShader*)currentShader)->setViewTransform(viewMatrix);
+				((MeshShader*)currentShader)->setViewPosition(_camera.getPosition());
+				((MeshShader*)currentShader)->setLights(lightDirection, lightColor);
+				((MeshShader*)currentShader)->setClippingDistance(500.f);
+				((MeshShader*)currentShader)->setEnvTexture(ShaderServer::getSingleton()->getSkyboxTexture());
+				// We draw the mesh related to this shader 
+				_ground->draw(shaderUsed);
+				_water->draw(shaderUsed);
+				ShaderServer::getSingleton()->unuse(currentShader);
+			}
+			glMatrixMode(GL_MODELVIEW);
+			glMultMatrixf(&(_camera.getInverseTransform()[0][0]));
+
+			// 5 - Draw the particles (We use GLUT cause sphere not supported yet)
 			for (int i = 0; i < NUM_PARTICLES; i++)
 			{
 				//Push the view matrix so that the transformation only apply to the particule
 				glPushMatrix();
 				_particles[i]->updateFrame();
 				glPopMatrix();
+			}
+
+			// 6 - Binding original Frame Buffer
+			ShaderServer::getSingleton()->unbindsScreen();
+
+			// 7 - Gaussian Filter
+			{
+				ShaderServer::getSingleton()->use(WATER, currentShader);
+
+				//Compute camera frustum
+				//float fov = std::atan(1.f / projectionMatrix[1][1]) * 2.f * (180 / PI);
+				float fov = _configuration.getFOV();
+
+				// Depth of the nearer limit of the water is : abs(zAxis - (30/2))
+				float depth = 66.f;
+				float heightScreenAtDepth = 2.f * depth * std::tan(glm::radians<float>(fov * 0.5f));
+
+				float waterHeight = (_camera.getPosition().y - _water->getHeight()) / (heightScreenAtDepth /2);
+				if (_water->getHeight() < 0) waterHeight *= -1;
+				waterHeight = std::max(std::min(waterHeight, 1.f), -1.f);
+
+				currentShader->trySetUniform("uni_waterHeight", waterHeight);
+				currentShader->trySetUniform("uni_waterColor", glm::vec3(0.32f, 0.76f, 0.78f));
+				currentShader->trySetUniform("uni_blendCoefficient", 0.8f);
+				((VFXShader*)currentShader)->renderScreen();
+
+				ShaderServer::getSingleton()->unuse(currentShader);
 			}
 		}
 
@@ -150,8 +230,7 @@ namespace Games {
 			Vector3 position = _particles[0]->getPosition();
 			_camera.setPosition(glm::vec3(position._x, position._y, 0.5));
 
-			glMatrixMode(GL_MODELVIEW);
-			glMultMatrixf(&(_camera.getInverseTransform()[0][0]));
+			
 		}
 
 		void Blob::checkParticleCollisions(float p_dt)

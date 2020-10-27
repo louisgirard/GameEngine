@@ -2,9 +2,9 @@
 namespace PhysicEngine {
 	namespace Collisions {
 
-		PlaneContactGenerator::PlaneContactGenerator(PhysicEngine::CHorizontalPlane* p_plane, PhysicEngine::CParticle* p_particles, unsigned arraySize)
+		PlaneContactGenerator::PlaneContactGenerator(SceneGraph::CHorizontalPlane* p_plane, PhysicEngine::CParticle* p_particles, unsigned arraySize)
 		{
-			_plane = std::make_shared<PhysicEngine::CHorizontalPlane>(*p_plane);
+			_plane = std::make_shared<SceneGraph::CHorizontalPlane>(*p_plane);
 			for (unsigned i = 0; i < arraySize; i++) {
 				_particles.push_back(std::make_shared<PhysicEngine::CParticle>(p_particles[i]));
 			}
