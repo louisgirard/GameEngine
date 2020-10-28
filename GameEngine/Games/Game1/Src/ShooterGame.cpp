@@ -76,7 +76,7 @@ namespace Games {
 			glm::mat4 projectionMatrix = glm::perspective(glm::radians<float>(_configuration.getFOV()), (float)getConfiguration().getWindowWidth() / (float)getConfiguration().getWindowHeight(), _configuration.getNearPlane(), _configuration.getFarPlane());
 			glm::mat4 viewMatrix = _camera.getInverseTransform();
 
-			glm::vec3 lightDirection = glm::normalize(glm::vec3(0.4f, -0.3f, -1.0f));
+			glm::vec3 lightDirection = glm::normalize(glm::vec3(0.4f, 0.3f, 1.0f));
 			glm::vec3 lightColor = glm::vec3(1, 1, 1);
 
 			// 1 - Display object that use phong shader

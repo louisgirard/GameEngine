@@ -5,6 +5,11 @@ namespace PhysicEngine
 	namespace Collisions {
 		ParticleContact::ParticleContact()
 		{
+			_particles[0] = nullptr;
+			_particles[1] = nullptr;
+			_restitutionCoef = 0;
+			_contactNormal = Vector3(0,0,0);
+			_penetration = 0;
 		}
 		ParticleContact::ParticleContact(CParticle* p_particle1, CParticle* p_particle2, float p_restitutionCoef, Vector3 p_contactNormal, float p_penetration)
 		{

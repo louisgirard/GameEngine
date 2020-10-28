@@ -44,9 +44,13 @@ namespace Games {
 			std::cerr << "Error when retrieving GameEngineRes environment variable, switching to relative path" << std::endl;
 			return executablePath() / ".." / "Ressources";
 		}
-		std::filesystem::path res = std::filesystem::path(::std::string(path));
-		delete[] path;
-		return res;
+		if (path != nullptr) {
+			std::string pathString = ::std::string(path);
+			std::filesystem::path res = std::filesystem::path(pathString);
+			delete[] path;
+			return res;
+		}
+		return std::filesystem::path();
 	}
 
 #else

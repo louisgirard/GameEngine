@@ -27,8 +27,8 @@ namespace GraphicEngine::PSceneGraph {
 		int sectorCount = 100;
 		int stackCount = 100;
 
-		float sectorStep = 2 * PI / sectorCount;
-		float stackStep = PI / stackCount;
+		float sectorStep = 2.f * (float)PI / sectorCount;
+		float stackStep = (float)PI / stackCount;
 		float sectorAngle, stackAngle;
 
 		for (int i = 0; i <= stackCount; ++i)
@@ -49,9 +49,9 @@ namespace GraphicEngine::PSceneGraph {
 				sphereVertices.push_back(glm::vec3(x, y, z));
 
 				// normalized vertex normal (nx, ny, nz)
-				nx = x * lengthInv;
-				ny = y * lengthInv;
-				nz = z * lengthInv;
+				nx = -x * lengthInv;
+				ny = -y * lengthInv;
+				nz = -z * lengthInv;
 				sphereNormal.push_back(glm::vec3(nx, ny, nz));
 
 				// vertex tex coord (s, t) range between [0, 1]

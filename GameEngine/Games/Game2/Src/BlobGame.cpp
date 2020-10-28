@@ -28,30 +28,30 @@ namespace Games {
 
 				int indiceCurrent = i % 8;
 
-				int xAdd = 0;
+				float xAdd = 0;
 				//Get x addition
-				if (indiceCurrent == 0 || indiceCurrent == 4 || indiceCurrent == 7) xAdd = -10;
-				else if (indiceCurrent == 1 || indiceCurrent == 5 || indiceCurrent == 6) xAdd = 10;
+				if (indiceCurrent == 0 || indiceCurrent == 4 || indiceCurrent == 7) xAdd = -10.f;
+				else if (indiceCurrent == 1 || indiceCurrent == 5 || indiceCurrent == 6) xAdd = 10.f;
 
-				int yAdd = 0;
+				float yAdd = 0;
 				//Get z addition
-				if (indiceCurrent == 4 || indiceCurrent == 2 || indiceCurrent == 5) yAdd = 10;
-				else if (indiceCurrent == 3 || indiceCurrent == 6 || indiceCurrent == 7) yAdd = -10;
+				if (indiceCurrent == 4 || indiceCurrent == 2 || indiceCurrent == 5) yAdd = 10.f;
+				else if (indiceCurrent == 3 || indiceCurrent == 6 || indiceCurrent == 7) yAdd = -10.f;
 
-				position = positionInit + (Vector3(xAdd, yAdd, 0) * ((int)(i / 8) + 1 ));
+				position = positionInit + (Vector3(xAdd, yAdd, 0) * (float)((int)(i / 8) + 1 ));
 			}
 
 			for (int i = 0; i < NUM_PARTICLES; ++i) {
 				// 2 - Add spring forces
 				for (int j = 0; j < NUM_PARTICLES; ++j) {
 					if (j != i) {
-						auto spring = std::make_shared<SpringForces::ParticleSpring>(_particles[j].get(), 20000, 5);
+						auto spring = std::make_shared<SpringForces::ParticleSpring>(_particles[j].get(), 20000.f, 5.f);
 						_springs.push_back(spring);
 					}
 				}
 				// 3 - Add cables
 				for (int k = i + 1; k < NUM_PARTICLES; ++k) {
-					auto cable = std::make_shared<Collisions::ParticleCable>(_particles[i].get(), _particles[k].get(), 20);
+					auto cable = std::make_shared<Collisions::ParticleCable>(_particles[i].get(), _particles[k].get(), 20.f);
 					_cables.push_back(cable);
 				}
 			}
@@ -59,6 +59,8 @@ namespace Games {
 
 		void Blob::initGame()
 		{
+			glDisable(GL_CULL_FACE); // disable back face culling
+
 			// 0 - Init variable 
 			_registry = *new Forces::ParticleForceRegistry();
 			float zAxis = -80;
@@ -80,9 +82,9 @@ namespace Games {
 			_keyboard.bindActionToKey(KeyAction::FUSEBLOB, 102);
 
 			// 4 - Create planes
-			_ground = std::make_shared<HorizontalPlane>(Vector3(0, -40, zAxis), 100, 30, Vector3(0.4, 0.9, 0), Vector3(0.1, 0.1, 0.1));
+			_ground = std::make_shared<HorizontalPlane>(Vector3(0.f, -40.f, zAxis), 100.f, 30.f, Vector3(0.4f, 0.9f, 0.f), Vector3(0.1f, 0.1f, 0.1f));
 
-			_water = std::make_shared<HorizontalPlane>(Vector3(0, -50, zAxis), 500, 30, Vector3(0.32f, 0.76f, 0.78f), Vector3(0.8f, 0.8f, 0.8f));
+			_water = std::make_shared<HorizontalPlane>(Vector3(0.f, -50.f, zAxis), 500.f, 30.f, Vector3(0.32f, 0.76f, 0.78f), Vector3(0.8f, 0.8f, 0.8f));
 
 			// 5 -  Create particles
 			generateParticles(zAxis);
@@ -145,7 +147,7 @@ namespace Games {
 					unsigned numContactsGround = _cables[i]->AddContact(contacts, 2 * NUM_PARTICLES);
 					if (numContactsGround > 0) {
 						std::vector<Collisions::ParticleContact*> contactArray;
-						for (int j = 0; j < numContactsGround; j++) {
+						for (unsigned int j = 0; j < numContactsGround; j++) {
 							contactArray.push_back(&contacts[j]);
 						}
 						_contactResolver.resolveContacts(contactArray, p_dt);
@@ -158,13 +160,13 @@ namespace Games {
 				_registry.add(_particles[i].get(), &_gravity);
 			}
 
-			checkWaterInteraction(p_dt);
+			checkWaterInteraction((float)p_dt);
 
 			_registry.updatePhysic(p_dt);
 
 			// Check for collisions
-			checkParticleCollisions(p_dt);
-			checkGroundCollisions(p_dt);			
+			checkParticleCollisions((float)p_dt);
+			checkGroundCollisions((float)p_dt);
 			
 			for (int i = 0; i < NUM_PARTICLES; i++)
 			{
@@ -339,7 +341,7 @@ namespace Games {
 			{
 				if (_water->isAboveOrUnder(_particles[i]->getPosition()))
 				{
-					float volume = 4 / 3 * PI * std::pow(_particles[i]->getSize(), 3);
+					float volume = 4.f / 3.f * (float)PI * std::pow(_particles[i]->getSize(), 3);
 					SpringForces::ParticleBuoyancy* buoyancy = new SpringForces::ParticleBuoyancy(_particles[i]->getSize(), volume, _water->getHeight(), _gravityAcceleration);
 					_registry.add(_particles[i].get(), buoyancy);
 				}

@@ -33,7 +33,7 @@ namespace GraphicEngine::Buffers {
 			* Default constructor
 			* Warning this buffer is invalid
 			*/
-			FrameBuffer(){}
+			FrameBuffer():_height(0),_width(0){}
 
 			/*
 			* Constructor

@@ -22,7 +22,7 @@ namespace GraphicEngine::Shaders {
 			* Default constructor
 			* Warning this shader is invalid
 			*/
-			Shader():_shaderID(0){}
+			Shader():_type(ShaderType::vertexShader),_shaderID(0){}
 
 			/* Default Constructor
 			* Throws a exception if the source does not compile
