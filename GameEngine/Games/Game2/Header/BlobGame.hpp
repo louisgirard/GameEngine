@@ -16,7 +16,7 @@
 #include <PhysicEngine/Collisions/Header/PlaneContactGenerator.hpp>
 #include <PhysicEngine/Collisions/Header/ParticleCable.hpp>
 
-#define NUM_PARTICLES 4
+#define NUM_PARTICLES 10
 using namespace PhysicEngine;
 
 namespace Games {

@@ -15,7 +15,7 @@ namespace Games {
 		}
 
 		void Blob::generateParticles(float p_zAxis) {
-			float mass = 6000;
+			float mass = 50000;
 			Vector3 positionInit(0, -30, p_zAxis);
 			Vector3 position = positionInit;
 			Vector3 color(1, 0, 0);
@@ -80,7 +80,7 @@ namespace Games {
 			_keyboard.bindActionToKey(KeyAction::FUSEBLOB, 102);
 
 			// 4 - Create planes
-			_ground = std::make_shared<HorizontalPlane>(Vector3(0, -40, zAxis), 60, 30, Vector3(0.4, 0.9, 0), Vector3(0.1, 0.1, 0.1));
+			_ground = std::make_shared<HorizontalPlane>(Vector3(0, -40, zAxis), 100, 30, Vector3(0.4, 0.9, 0), Vector3(0.1, 0.1, 0.1));
 
 			_water = std::make_shared<HorizontalPlane>(Vector3(0, -50, zAxis), 500, 30, Vector3(0.32f, 0.76f, 0.78f), Vector3(0.8f, 0.8f, 0.8f));
 
@@ -339,7 +339,8 @@ namespace Games {
 			{
 				if (_water->isAboveOrUnder(_particles[i]->getPosition()))
 				{
-					SpringForces::ParticleBuoyancy* buoyancy = new SpringForces::ParticleBuoyancy(_particles[i]->getSize(), 4/3*PI*std::pow(_particles[i]->getSize(),3), _water->getHeight(), _gravityAcceleration);
+					float volume = 4 / 3 * PI * std::pow(_particles[i]->getSize(), 3);
+					SpringForces::ParticleBuoyancy* buoyancy = new SpringForces::ParticleBuoyancy(_particles[i]->getSize(), volume, _water->getHeight(), _gravityAcceleration);
 					_registry.add(_particles[i].get(), buoyancy);
 				}
 			}
