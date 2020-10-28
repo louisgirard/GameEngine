@@ -13,20 +13,20 @@ build/Demo.o \
 build/BlobGame.o \
 build/ShooterGame.o \
 build/GameSelection.o build/GameBase.o build/GameMenu.o build/GameConfiguration.o build/KeyboardStatus.o build/MouseStatus.o \
-build/ParticleCable.o build/ParticleRod.o build/Paths.o build/CMeshObject.o build/EmptyNode.o \
+build/ParticleCable.o build/ParticleRod.o \
 build/ParticleForceRegistry.o build/ParticleGravity.o build/ParticleDrag.o \
 build/ParticleSpring.o build/ParticleAnchoredSpring.o build/ParticleBungee.o build/ParticleBuoyancy.o \
 build/ParticleContact.o build/ParticleContactResolver.o \
-build/Vector3.o build/CParticle.o build/AParticle.o build/AHorizontalPlane.o build/CHorizontalPlane.o\
+build/Vector3.o build/CParticle.o build/AParticle.o build/AHorizontalPlane.o \
 build/ElementBufferObject.o build/GeometryBuffer.o build/VertexArrayObject.o build/FrameBuffer.o build/MultipleDataVBO.o build/VertexBufferObject.o build/FrameBufferObject.o build/RenderBuffer.o \
 build/Color.o build/PhongMaterial.o \
 build/BoundingBox.o build/Camera.o build/ScreenRenderQuad.o build/SkyboxGeometry.o build/Text.o \
-build/Mesh.o build/PMeshObject.o build/TransformStack.o \
+build/Mesh.o build/PMeshObject.o build/TransformStack.o build/PHorizontalPlane.o build/PParticle.o \
 build/LightServer.o build/SceneServer.o build/ShaderServer.o build/TextureServer.o \
 build/MeshShader.o build/ShaderParser.o build/ShaderSource.o build/VFXShader.o build/Shader.o build/ShaderProgram.o build/SkyboxShader.o \
-build/PHorizontalPlane.o build/PParticle.o\
 build/CubeMap.o build/Texture2D.o \
-
+build/CMeshObject.o build/EmptyNode.o build/CHorizontalPlane.o \
+build/Paths.o
 
 all: checkdirs Main
 
