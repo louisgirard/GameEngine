@@ -115,7 +115,6 @@ namespace PhysicEngine {
 			resultingAcceleration = _acceleration + _forceAccum * _inverseMass;
 		}
 
-
 		// Update the position
 		_position += _velocity * (float)p_time;
 

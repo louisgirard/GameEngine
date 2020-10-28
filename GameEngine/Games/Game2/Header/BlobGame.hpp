@@ -16,7 +16,7 @@
 #include <PhysicEngine/Collisions/Header/PlaneContactGenerator.hpp>
 #include <PhysicEngine/Collisions/Header/ParticleCable.hpp>
 
-#define NUM_PARTICLES 3
+#define NUM_PARTICLES 5
 using namespace PhysicEngine;
 
 namespace Games {
@@ -100,6 +100,9 @@ namespace Games {
 			@param p_dt the time ellapsed since the last update
 			*/
 			void checkWaterInteraction(float p_dt);
+
+			/* Generates particle and its force associated */
+			void generateParticles(float p_zAxis);
 		public:
 			/* Default constructor */
 			Blob();

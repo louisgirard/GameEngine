@@ -14,6 +14,49 @@ namespace Games {
 			TextureServer::getSingleton()->clear();
 		}
 
+		void Blob::generateParticles(float p_zAxis) {
+			float mass = 60000;
+			Vector3 positionInit(0, -30, p_zAxis);
+			Vector3 position = positionInit;
+			Vector3 color(1, 0, 0);
+			float radius = 3;
+
+			for (int i = 0; i < NUM_PARTICLES; ++i) {
+				// 1- create particle
+				if (i > 0) color = Vector3(1, 1, 1);
+				_particles[i] = std::make_shared<CParticle>(mass, position, Vector3::ZERO, Vector3::ZERO, 0.999f, color, radius);
+
+				int indiceCurrent = i % 8;
+
+				int xAdd = 0;
+				//Get x addition
+				if (indiceCurrent == 0 || indiceCurrent == 4 || indiceCurrent == 7) xAdd = -10;
+				else if (indiceCurrent == 1 || indiceCurrent == 5 || indiceCurrent == 6) xAdd = 10;
+
+				int yAdd = 0;
+				//Get z addition
+				if (indiceCurrent == 4 || indiceCurrent == 2 || indiceCurrent == 5) yAdd = 10;
+				else if (indiceCurrent == 3 || indiceCurrent == 6 || indiceCurrent == 7) yAdd = -10;
+
+				position = positionInit + (Vector3(xAdd, yAdd, 0) * ((int)(i / 8) + 1 ));
+			}
+
+			for (int i = 0; i < NUM_PARTICLES; ++i) {
+				// 2 - Add spring forces
+				for (int j = 0; j < NUM_PARTICLES; ++j) {
+					if (j != i) {
+						auto spring = std::make_shared<SpringForces::ParticleSpring>(_particles[j].get(), 20000, 5);
+						_springs.push_back(spring);
+					}
+				}
+				// 3 - Add cables
+				for (int k = i + 1; k < NUM_PARTICLES; ++k) {
+					auto cable = std::make_shared<Collisions::ParticleCable>(_particles[i].get(), _particles[k].get(), 20);
+					_cables.push_back(cable);
+				}
+			}
+		}
+
 		void Blob::initGame()
 		{
 			// 0 - Init variable 
@@ -42,39 +85,7 @@ namespace Games {
 			_water = std::make_shared<HorizontalPlane>(Vector3(0, -50, zAxis), 500, 30, Vector3(0.32f, 0.76f, 0.78f), Vector3(0.8f, 0.8f, 0.8f));
 
 			// 5 -  Create particles
-			float mass = 60000;
-			Vector3 position(-10, -30, zAxis);
-			Vector3 color(1, 1, 1);
-			float radius = 3;
-			_particles[0] = std::make_shared<CParticle>(mass, position, Vector3::ZERO, Vector3::ZERO, 0.999f, Vector3(1.f,0.f,0.f), radius);
-			position = Vector3(10, -30, zAxis);
-			_particles[1] = std::make_shared<CParticle>(mass, position, Vector3::ZERO, Vector3::ZERO, 0.999f, color, radius);
-			position = Vector3(0, -35, zAxis);
-			_particles[2] = std::make_shared<CParticle>(mass, position, Vector3::ZERO, Vector3::ZERO, 0.999f, color, radius);
-
-			// 6 - Add springs
-			auto spring1 = std::make_shared<SpringForces::ParticleSpring>(_particles[0].get(), 20000, 5);
-			auto spring2 = std::make_shared<SpringForces::ParticleSpring>(_particles[1].get(), 20000, 5);
-			_springs.push_back(spring1);
-			_springs.push_back(spring2);
-
-			auto spring3 = std::make_shared<SpringForces::ParticleSpring>(_particles[1].get(), 20000, 5);
-			auto spring4 = std::make_shared<SpringForces::ParticleSpring>(_particles[2].get(), 20000, 5);
-			_springs.push_back(spring3);
-			_springs.push_back(spring4);
-
-			auto spring5 = std::make_shared<SpringForces::ParticleSpring>(_particles[0].get(), 20000, 5);
-			auto spring6 = std::make_shared<SpringForces::ParticleSpring>(_particles[2].get(), 20000, 5);
-			_springs.push_back(spring5);
-			_springs.push_back(spring6);
-
-			// 7 - Add cables
-			auto cable1 = std::make_shared<Collisions::ParticleCable>(_particles[0].get(), _particles[1].get(), 25);
-			auto cable2 = std::make_shared<Collisions::ParticleCable>(_particles[2].get(), _particles[1].get(), 25);
-			auto cable3 = std::make_shared<Collisions::ParticleCable>(_particles[0].get(), _particles[2].get(), 25);
-			_cables.push_back(cable1);
-			_cables.push_back(cable2);
-			_cables.push_back(cable3);
+			generateParticles(zAxis);
 		}
 
 		void Blob::handleInput(double p_dt)
@@ -122,14 +133,11 @@ namespace Games {
 			// Add forces
 			if (!isBroken)
 			{
-				_registry.add(_particles[0].get(), _springs[1].get());
-				_registry.add(_particles[1].get(), _springs[0].get());
-
-				_registry.add(_particles[0].get(), _springs[5].get());
-				_registry.add(_particles[2].get(), _springs[4].get());
-
-				_registry.add(_particles[1].get(), _springs[3].get());
-				_registry.add(_particles[2].get(), _springs[2].get());
+				for (int i = 0; i < NUM_PARTICLES; i++) {
+					for (int j = 0; j < NUM_PARTICLES - 1; j++) {
+						_registry.add(_particles[i].get(), _springs[i*(NUM_PARTICLES - 1)+j].get());
+					}
+				}
 				for (int i = 0; i < _cables.size(); i++) {
 					PhysicEngine::Collisions::ParticleContact contacts[2 * NUM_PARTICLES] = {};
 					unsigned numContactsGround = _cables[i]->AddContact(contacts, 2 * NUM_PARTICLES);
@@ -159,7 +167,7 @@ namespace Games {
 				
 			}
 			
-
+			
 			for (int i = 0; i < NUM_PARTICLES; i++)
 			{
 				_particles[i]->updatePhysic((float)p_dt);
@@ -172,7 +180,6 @@ namespace Games {
 
 		void Blob::updateFrame() {
 			GameBase::updateFrame();
-
 			// 0 - Update Camera position 
 			cameraFollowMaster();
 
@@ -224,6 +231,7 @@ namespace Games {
 				//Compute camera frustum
 				//float fov = std::atan(1.f / projectionMatrix[1][1]) * 2.f * (180 / PI);
 				float fov = _configuration.getFOV();
+				float aspect = projectionMatrix[1][1] / projectionMatrix[0][0];
 
 				// Depth of the nearer limit of the water is : abs(zAxis - (30/2))
 				float depth = 66.f;
@@ -232,11 +240,27 @@ namespace Games {
 				float waterHeight = (_camera.getPosition().y - _water->getHeight()) / (heightScreenAtDepth /2);
 				if (_water->getHeight() < 0) waterHeight *= -1;
 				waterHeight = std::max(std::min(waterHeight, 1.f), -1.f);
+				
+				float ScreenNearWidth = heightScreenAtDepth * aspect;
+				float waterNearLeftLimit = (_camera.getPosition().x + 250) / ScreenNearWidth;
+				float waterNearRightLimit = (_camera.getPosition().x - 250) / ScreenNearWidth;
+						
+				depth = 95.f;
+				float heightScreenAtFarDepth = 2.f * depth * std::tan(glm::radians<float>(fov * 0.5f));
+				float ScreenFarWidth = heightScreenAtFarDepth * aspect;
+				float waterFarLeftLimit = (_camera.getPosition().x + 250) / ScreenFarWidth;
+				float waterFarRightLimit = (_camera.getPosition().x - 250) / ScreenFarWidth;
 
+				
+				float waterLeftLimit = 0;
+				if (waterNearLeftLimit > waterFarLeftLimit) waterLeftLimit = std::max(std::min(waterFarLeftLimit, 1.f), -1.f)*-1.f;
+				else waterLeftLimit = std::max(std::min(waterNearLeftLimit, 1.f), -1.f)*-1.f;
+				float waterRightLimit = 0;
+				if (waterNearRightLimit > waterFarRightLimit) waterRightLimit = std::max(std::min(waterNearRightLimit, 1.f), -1.f)*-1.f;
+				else waterRightLimit = std::max(std::min(waterFarRightLimit, 1.f), -1.f)*-1.f;
 
-				/*float waterLeftLimit = 0.0f;
-				float waterRightLimit = 0.0f;*/
-
+				currentShader->trySetUniform("uni_waterRightLimit", waterRightLimit);
+				currentShader->trySetUniform("uni_waterLeftLimit", waterLeftLimit);
 				currentShader->trySetUniform("uni_waterHeight", waterHeight);
 				currentShader->trySetUniform("uni_waterColor", glm::vec3(0.32f, 0.76f, 0.78f));
 				currentShader->trySetUniform("uni_blendCoefficient", 0.8f);

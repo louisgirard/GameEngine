@@ -3,6 +3,7 @@
 #include <string>
 
 #include <glm/glm.hpp>
+#include <iostream>
 
 namespace PhysicEngine {
 	/* Holds a vector in three dimensions */
@@ -99,6 +100,13 @@ namespace PhysicEngine {
 
 		static Vector3 convertGlm(const glm::vec3& p_vec);
 	};
+
+	inline std::ostream& operator << (std::ostream& p_out, const Vector3& p_vec)
+	{
+		std::cout << "(" << p_vec._x << ", "  << p_vec._y << ", " << p_vec._z << ")";
+		return p_out;
+	}
+
 }
 
 
