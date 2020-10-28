@@ -87,8 +87,6 @@ namespace PhysicEngine
 
 		void ParticleContact::resolveInterpenetration(float p_dt)
 		{
-			std::cout << "There probably an issue in this function ParticleContact::resolveIntepenetration()" << std::endl;
-			std::cout << "We should probably check the inverse mass or the penetration "<< std::endl;
 			if (_penetration <= 0) return;
 
 			float totalInverseMass = _particles[0]->getInverseMass();
@@ -105,9 +103,7 @@ namespace PhysicEngine
 			if (_particles[1] != nullptr)
 			{
 				_particles[1]->setPosition(_particles[1]->getPosition() - movement * _particles[1]->getInverseMass());
-				std::cout << "Particle1 position after resolve Interpenetration" << _particles[1]->getPosition() << std::endl;
 			}
-			std::cout << "Particle0 position after resolve Interpenetration" << _particles[0]->getPosition() << std::endl;
 			
 		}
 	}

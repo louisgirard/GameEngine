@@ -15,7 +15,7 @@ namespace PhysicEngine {
 		void ParticleContactResolver::resolveContacts(std::vector<ParticleContact*> p_contactArray, double p_dt)
 		{
 			int i = 0;
-			while (i < _iterations) {
+			while (i < p_contactArray.size()) {
 				//finding max separating velocity
 				float max = INFINITY;
 				int maxIndex = (int)p_contactArray.size();
