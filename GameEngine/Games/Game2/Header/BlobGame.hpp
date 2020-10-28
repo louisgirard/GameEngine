@@ -16,7 +16,7 @@
 #include <PhysicEngine/Collisions/Header/PlaneContactGenerator.hpp>
 #include <PhysicEngine/Collisions/Header/ParticleCable.hpp>
 
-#define NUM_PARTICLES 5
+#define NUM_PARTICLES 4
 using namespace PhysicEngine;
 
 namespace Games {
@@ -55,7 +55,7 @@ namespace Games {
 			Forces::ParticleGravity _gravity;
 
 			/* Check if blob is broken or not */
-			bool isBroken = false;
+			bool _isBroken = false;
 
 			/* Initializes the game */
 			virtual void initGame();

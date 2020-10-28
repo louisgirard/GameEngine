@@ -15,7 +15,7 @@ namespace Games {
 		}
 
 		void Blob::generateParticles(float p_zAxis) {
-			float mass = 60000;
+			float mass = 6000;
 			Vector3 positionInit(0, -30, p_zAxis);
 			Vector3 position = positionInit;
 			Vector3 color(1, 0, 0);
@@ -80,7 +80,7 @@ namespace Games {
 			_keyboard.bindActionToKey(KeyAction::FUSEBLOB, 102);
 
 			// 4 - Create planes
-			_ground = std::make_shared<HorizontalPlane>(Vector3(0, -40, zAxis), 60, 30);
+			_ground = std::make_shared<HorizontalPlane>(Vector3(0, -40, zAxis), 60, 30, Vector3(0.4, 0.9, 0), Vector3(0.1, 0.1, 0.1));
 
 			_water = std::make_shared<HorizontalPlane>(Vector3(0, -50, zAxis), 500, 30, Vector3(0.32f, 0.76f, 0.78f), Vector3(0.8f, 0.8f, 0.8f));
 
@@ -95,31 +95,32 @@ namespace Games {
 			}
 
 			// Move blob
+			float moveCoefficient = 20;
 			if (_keyboard.isPressed(KeyAction::MOVEFRONT))
 			{
-				_registry.add(_particles[0].get(), new Forces::ParticleGravity(Vector3(0, 50, 0)));
+				_registry.add(_particles[0].get(), new Forces::ParticleGravity(Vector3::UP * 50));
 			}
 			if (_keyboard.isPressed(KeyAction::MOVEBACK))
 			{
-				_registry.add(_particles[0].get(), new Forces::ParticleGravity(Vector3(0, -10, 0)));
+				_registry.add(_particles[0].get(), new Forces::ParticleGravity(Vector3::DOWN * moveCoefficient));
 			}
 			if (_keyboard.isPressed(KeyAction::MOVELEFT))
 			{
-				_registry.add(_particles[0].get(), new Forces::ParticleGravity(Vector3(-10, 0, 0)));
+				_registry.add(_particles[0].get(), new Forces::ParticleGravity(Vector3::LEFT * moveCoefficient));
 			}
 			if (_keyboard.isPressed(KeyAction::MOVERIGHT))
 			{
-				_registry.add(_particles[0].get(), new Forces::ParticleGravity(Vector3(10, 0, 0)));
+				_registry.add(_particles[0].get(), new Forces::ParticleGravity(Vector3::RIGHT * moveCoefficient));
 			}
 
 			// Break blob
 			if (_keyboard.isPressed(KeyAction::BREAKBLOB))
 			{
-				isBroken = true;
+				_isBroken = true;
 			}
 			if (_keyboard.isPressed(KeyAction::FUSEBLOB))
 			{
-				isBroken = false;
+				_isBroken = false;
 			}
 		}
 
@@ -131,18 +132,19 @@ namespace Games {
 		void Blob::updatePhysic(double p_dt)
 		{
 			// Add forces
-			if (!isBroken)
+			if (!_isBroken)
 			{
 				for (int i = 0; i < NUM_PARTICLES; i++) {
 					for (int j = 0; j < NUM_PARTICLES - 1; j++) {
-						_registry.add(_particles[i].get(), _springs[i*(NUM_PARTICLES - 1)+j].get());
+						int index = i * (NUM_PARTICLES - 1) + j;
+						_registry.add(_particles[i].get(), _springs[index].get());
 					}
 				}
 				for (int i = 0; i < _cables.size(); i++) {
-					PhysicEngine::Collisions::ParticleContact contacts[2 * NUM_PARTICLES] = {};
+					Collisions::ParticleContact contacts[2 * NUM_PARTICLES] = {};
 					unsigned numContactsGround = _cables[i]->AddContact(contacts, 2 * NUM_PARTICLES);
 					if (numContactsGround > 0) {
-						std::vector< PhysicEngine::Collisions::ParticleContact*> contactArray;
+						std::vector<Collisions::ParticleContact*> contactArray;
 						for (int j = 0; j < numContactsGround; j++) {
 							contactArray.push_back(&contacts[j]);
 						}
@@ -162,11 +164,7 @@ namespace Games {
 
 			// Check for collisions
 			checkParticleCollisions(p_dt);
-			checkGroundCollisions(p_dt);
-			if (!isBroken) {
-				
-			}
-			
+			checkGroundCollisions(p_dt);			
 			
 			for (int i = 0; i < NUM_PARTICLES; i++)
 			{
@@ -273,9 +271,7 @@ namespace Games {
 		void Blob::cameraFollowMaster()
 		{
 			Vector3 position = _particles[0]->getPosition();
-			_camera.setPosition(glm::vec3(position._x, position._y, 0.5));
-
-			
+			_camera.setPosition(glm::vec3(position._x, position._y, 0.5));			
 		}
 
 		void Blob::checkParticleCollisions(float p_dt)
