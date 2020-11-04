@@ -69,15 +69,20 @@ namespace PhysicEngine
 		// Create an old matrix to keep track of coefficient
 		Matrix3 m(*this);
 
-		_values[0] = inverseDet * (m._values[4] * m._values[8] - m._values[5] * m._values[7]);
-		_values[1] = inverseDet * (m._values[2] * m._values[7] - m._values[1] * m._values[8]);
-		_values[2] = inverseDet * (m._values[1] * m._values[5] - m._values[2] * m._values[4]);
-		_values[3] = inverseDet * (m._values[5] * m._values[6] - m._values[3] * m._values[8]);
-		_values[4] = inverseDet * (m._values[0] * m._values[8] - m._values[2] * m._values[6]);
-		_values[5] = inverseDet * (m._values[2] * m._values[3] - m._values[0] * m._values[5]);
-		_values[6] = inverseDet * (m._values[3] * m._values[7] - m._values[4] * m._values[6]);
-		_values[7] = inverseDet * (m._values[1] * m._values[6] - m._values[0] * m._values[7]);
-		_values[8] = inverseDet * (m._values[0] * m._values[4] - m._values[1] * m._values[3]);
+		_values[0] = m._values[4] * m._values[8] - m._values[5] * m._values[7];
+		_values[1] = m._values[2] * m._values[7] - m._values[1] * m._values[8];
+		_values[2] = m._values[1] * m._values[5] - m._values[2] * m._values[4];
+		_values[3] = m._values[5] * m._values[6] - m._values[3] * m._values[8];
+		_values[4] = m._values[0] * m._values[8] - m._values[2] * m._values[6];
+		_values[5] = m._values[2] * m._values[3] - m._values[0] * m._values[5];
+		_values[6] = m._values[3] * m._values[7] - m._values[4] * m._values[6];
+		_values[7] = m._values[1] * m._values[6] - m._values[0] * m._values[7];
+		_values[8] = m._values[0] * m._values[4] - m._values[1] * m._values[3];
+
+		for (int i = 0; i < 9; i++)
+		{
+			_values[i] *= inverseDet;
+		}
 	}
 
 	void Matrix3::transpose()

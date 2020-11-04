@@ -6,7 +6,7 @@
 #include <Games/Game1/Header/ShooterGame.hpp>
 #include <Games/Game2/Header/BlobGame.hpp>
 #include <Games/Demo/Header/Demo.hpp>
-#include <PhysicEngine/Header/Matrix3.hpp>
+#include <PhysicEngine/Header/Matrix4.hpp>
 
 namespace std
 {
@@ -22,11 +22,6 @@ int main(int p_argc, char** p_argv)
 
 	bool engineRunning = true;
 
-	Matrix3 m1(5,8,9,7,2,0,1,5,8);
-
-	m1.transpose();
-	
-	
 	//Select a games and run it 
 	while (engineRunning) {
 		//Initialize here cause we need main arguments
