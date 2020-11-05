@@ -378,12 +378,6 @@
     <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\PParticle.cpp">
       <Filter>GameEngine\GraphicEngine\PSceneGraph\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\GameEngine\PhysicEngine\Src\Matrix3.cpp">
-      <Filter>GameEngine\PhysicEngine\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\GameEngine\PhysicEngine\Src\Matrix4.cpp">
-      <Filter>GameEngine\PhysicEngine\Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\GameEngine\Games\Game1\Header\ShooterGame.hpp">
@@ -622,12 +616,6 @@
     </ClInclude>
     <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\PParticle.hpp">
       <Filter>GameEngine\GraphicEngine\PSceneGraph\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\GameEngine\PhysicEngine\Header\Matrix3.hpp">
-      <Filter>GameEngine\PhysicEngine\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\GameEngine\PhysicEngine\Header\Matrix4.hpp">
-      <Filter>GameEngine\PhysicEngine\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
