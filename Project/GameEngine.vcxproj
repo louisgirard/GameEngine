@@ -78,6 +78,8 @@
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\AHorizontalPlane.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\AParticle.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\CParticle.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\Src\Matrix3.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\Src\Matrix4.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\Vector3.cpp" />
     <ClCompile Include="..\GameEngine\SceneGraph\Src\CHorizontalPlane.cpp" />
     <ClCompile Include="..\GameEngine\SceneGraph\Src\EmptyNode.cpp" />
@@ -155,6 +157,8 @@
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\AParticle.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\CParticle.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\MathConstant.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\Matrix3.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\Matrix4.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\Vector3.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\SpringForces\Header\ParticleAnchoredSpring.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\SpringForces\Header\ParticleBungee.hpp" />
