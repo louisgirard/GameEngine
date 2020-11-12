@@ -1,5 +1,5 @@
 #pragma once
-#include <PhysicEngine/Header/Vector3.hpp>
+#include <PhysicEngine/Header/MathEnabler.hpp>
 #include <GraphicEngine/SceneGraph/Header/PMeshObject.hpp>
 
 using namespace PhysicEngine;

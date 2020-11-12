@@ -6,8 +6,7 @@
 #include <cassert>
 
 #include <GraphicEngine/Materials/Header/Color.hpp>
-#include <PhysicEngine/Header/Vector3.hpp>
-
+#include <PhysicEngine/Header/MathEnabler.hpp>
 
 namespace GraphicEngine::Servers {
 		class LightServer

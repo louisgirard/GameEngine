@@ -63,6 +63,10 @@
     <ClCompile Include="..\GameEngine\GraphicEngine\Textures\Src\Texture2D.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\TypeSpec\Header\TextureInternalFormatSpec.hpp" />
     <ClCompile Include="..\GameEngine\Main.cpp" />
+    <ClCompile Include="..\GameEngine\Math\Src\Matrix3x3.cpp" />
+    <ClCompile Include="..\GameEngine\Math\Src\Matrix3x4.cpp" />
+    <ClCompile Include="..\GameEngine\Math\Src\Quaternion.cpp" />
+    <ClCompile Include="..\GameEngine\Math\Src\Vector3.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\ParticleCable.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\ParticleContact.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\ParticleContactResolver.cpp" />
@@ -78,9 +82,6 @@
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\AHorizontalPlane.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\AParticle.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\CParticle.cpp" />
-    <ClCompile Include="..\GameEngine\PhysicEngine\Src\Matrix3.cpp" />
-    <ClCompile Include="..\GameEngine\PhysicEngine\Src\Matrix4.cpp" />
-    <ClCompile Include="..\GameEngine\PhysicEngine\Src\Vector3.cpp" />
     <ClCompile Include="..\GameEngine\SceneGraph\Src\CHorizontalPlane.cpp" />
     <ClCompile Include="..\GameEngine\SceneGraph\Src\EmptyNode.cpp" />
     <ClCompile Include="..\GameEngine\SceneGraph\Src\CMeshObject.cpp" />
@@ -88,7 +89,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\GameEngine\Games\Demo\Header\Demo.hpp" />
-    <ClInclude Include="..\GameEngine\Games\Demo\Header\SimpleTestGraphic.hpp" />
     <ClInclude Include="..\GameEngine\Games\Game1\Header\ShooterGame.hpp" />
     <ClInclude Include="..\GameEngine\Games\Game2\Header\BlobGame.hpp" />
     <ClInclude Include="..\GameEngine\Games\Header\DefaultConfig.hpp" />
@@ -142,6 +142,11 @@
     <ClInclude Include="..\GameEngine\GraphicEngine\TypeSpec\Header\GLMTypesSpec.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\TypeSpec\Header\GLTypeSpec.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\TypeSpec\Header\ToGLTypeSpec.hpp" />
+    <ClInclude Include="..\GameEngine\Math\Header\MathConstant.hpp" />
+    <ClInclude Include="..\GameEngine\Math\Header\Matrix3x3.hpp" />
+    <ClInclude Include="..\GameEngine\Math\Header\Matrix3x4.hpp" />
+    <ClInclude Include="..\GameEngine\Math\Header\Quaternion.hpp" />
+    <ClInclude Include="..\GameEngine\Math\Header\Vector3.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleCable.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleContact.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleContactGenerator.hpp" />
@@ -156,10 +161,7 @@
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\AHorizontalPlane.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\AParticle.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\CParticle.hpp" />
-    <ClInclude Include="..\GameEngine\PhysicEngine\Header\MathConstant.hpp" />
-    <ClInclude Include="..\GameEngine\PhysicEngine\Header\Matrix3.hpp" />
-    <ClInclude Include="..\GameEngine\PhysicEngine\Header\Matrix4.hpp" />
-    <ClInclude Include="..\GameEngine\PhysicEngine\Header\Vector3.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\MathEnabler.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\SpringForces\Header\ParticleAnchoredSpring.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\SpringForces\Header\ParticleBungee.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\SpringForces\Header\ParticleBuoyancy.hpp" />

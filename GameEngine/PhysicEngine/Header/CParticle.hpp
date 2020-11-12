@@ -1,5 +1,7 @@
 #pragma once
-#include <PhysicEngine/Header/Vector3.hpp>
+
+
+#include <PhysicEngine/Header/MathEnabler.hpp>
 #include <PhysicEngine/Header/AParticle.hpp>
 #include <GraphicEngine/SceneGraph/Header/PParticle.hpp>
 #include <memory>
