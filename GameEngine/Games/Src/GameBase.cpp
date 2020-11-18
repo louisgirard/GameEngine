@@ -8,7 +8,6 @@ namespace Games
 
 	GameBase::GameBase():_dt(0.0),_lastFrameTime(), _running(false), _configuration() {
 
-		initGameConfig();
 		//We only want one game to run at a time
 		if (s_activeInstance != nullptr) {
 			std::cout << "ERROR : you are trying to launch an instance of a game while another is already running " << std::endl;
@@ -59,6 +58,60 @@ namespace Games
 				s_glutInitialized = false;
 			} ) ;
 			
+		}
+	}
+
+	GameBase::GameBase(GameConfiguration p_config):_dt(0.0), _lastFrameTime(), _running(false), _configuration(p_config) {
+		//We only want one game to run at a time
+		if (s_activeInstance != nullptr) {
+			std::cout << "ERROR : you are trying to launch an instance of a game while another is already running " << std::endl;
+			exit(-1);
+		}
+		s_activeInstance = this;
+		if (_configuration.graphicEnabled()) {
+			//if glut is not initialized the game can't be launched
+			if (!s_glutInitialized)
+			{
+				::std::cerr << "You can't create a instane of GameBase before initiating GLUT with Games::GameBase" << ::std::endl;
+				exit(-1);
+			}
+			createGameWindow();
+			//Initialize Open GL related library
+			initializeGlew();
+			initializeOpenGL();
+			//Register function that will be use in glut window
+			registerGLUTCallback();
+
+			_mainMenu = new GameMenu("Main menu");
+			_mainMenu->activate(GLUT_RIGHT_BUTTON);
+
+			//Bind basic key
+			_keyboard.bindActionToKey(KeyAction::QUIT, 27);
+
+			_keyboard.bindActionToSpecialKey(KeyAction::MOVEFRONT, GLUT_KEY_UP);
+			_keyboard.bindActionToSpecialKey(KeyAction::MOVEBACK, GLUT_KEY_DOWN);
+			_keyboard.bindActionToSpecialKey(KeyAction::MOVERIGHT, GLUT_KEY_RIGHT);
+			_keyboard.bindActionToSpecialKey(KeyAction::MOVELEFT, GLUT_KEY_LEFT);
+
+			_keyboard.bindActionToKey(KeyAction::ROTATERIGHT, 'd');
+			_keyboard.bindActionToKey(KeyAction::ROTATELEFT, 'q');
+			_keyboard.bindActionToKey(KeyAction::ROTATEUP, 'z');
+			_keyboard.bindActionToKey(KeyAction::ROTATEDOWN, 's');
+
+			//Init Camera
+			_camera.setPosition(glm::vec3(0.0f, 0.0f, 0.5f));
+			_cameraSpeed = 10.0f;
+			_cameraRotationSpeed = (float)(PhysicEngine::PI / 20.0);
+
+			onClose([this]() {
+				// We destroy the current window
+				//glutDestroyWindow(_windowID) ;
+				// We destroy the menus
+				delete _mainMenu;
+				//Force reinit glut
+				s_glutInitialized = false;
+			});
+
 		}
 	}
 	

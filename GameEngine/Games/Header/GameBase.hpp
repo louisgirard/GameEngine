@@ -187,11 +187,6 @@ namespace Games {
 #pragma region VIRTUAL_FUNCTION
 
 		/**
-		* Initialize the game configuration
-		**/
-		virtual void initGameConfig() {}
-
-		/**
 		* Initialize game state
 		**/
 		virtual void initGame() = 0;
@@ -290,6 +285,12 @@ namespace Games {
 	
 		/*Default constructor*/
 		GameBase();
+
+		/*
+		* Constructor
+		* @param p_config : the config you want to start your game with
+		*/
+		GameBase(GameConfiguration p_config);
 
 		/*Default destructor*/
 		virtual ~GameBase();

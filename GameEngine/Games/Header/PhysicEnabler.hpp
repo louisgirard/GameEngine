@@ -10,6 +10,9 @@
 namespace Games {
 
 	using Vector3 = PhysicEngine::Vector3;
+	using Matrix3x3 = PhysicEngine::Matrix3x3;
+	using Matrix3x4 = PhysicEngine::Matrix3x4;
+	using Quaternion = PhysicEngine::Quaternion;
 
 	using Particle = PhysicEngine::CParticle;
 

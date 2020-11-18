@@ -6,11 +6,10 @@ namespace Math {
 	/* Holds a 3x4 dimensional matrix */
 	class Matrix3x4
 	{
-	private:
+	public:
 		/* Holds the values inside the matrix*/
 		float _values[12];
 
-	public:
 		/* Constructors */
 		Matrix3x4();
 
@@ -132,7 +131,7 @@ namespace Math {
 	*/
 	inline std::ostream& operator << (std::ostream& p_out, const Matrix3x4& p_mat)
 	{
-		std::cout << "[" << p_mat[0] << " " << p_mat[1]<< " " << p_mat[2] << " " << p_mat[3] <<std::endl;
+		std::cout << std::endl << "[" << p_mat[0] << " " << p_mat[1]<< " " << p_mat[2] << " " << p_mat[3] << std::endl;
 		std::cout << p_mat[4] << " " << p_mat[5] << " " << p_mat[6] << " " << p_mat[7] << std::endl;
 		std::cout << p_mat[8] << " " << p_mat[9] << " " << p_mat[10] << " " << p_mat[11] << std::endl;
 		std::cout << 0 << " " << 0 << " " << 0 << " " << 1 << "]" << std::endl;

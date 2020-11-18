@@ -6,12 +6,11 @@ namespace Math {
 	/*Contains a 3 DOF rotation */
 	class Quaternion
 	{
-	protected :
+	public :
 		/* real component of the quaternion */
 		float _r;
 		/* Holds the complex component of the quaternion */
 		Vector3 _complex;
-	public :
 
 		/*
 		* Default constructor 

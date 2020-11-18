@@ -5,8 +5,6 @@
 
 #include <Games/Header/DefaultConfig.hpp>
 
-
-
 namespace Games {
 
 	/**FPS possible rates**/

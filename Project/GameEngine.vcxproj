@@ -22,6 +22,9 @@
     <ClCompile Include="..\GameEngine\Games\Demo\Src\Demo.cpp" />
     <ClCompile Include="..\GameEngine\Games\Game1\Src\ShooterGame.cpp" />
     <ClCompile Include="..\GameEngine\Games\Game2\Src\BlobGame.cpp" />
+    <ClCompile Include="..\GameEngine\Games\Game3\Src\CarDemo.cpp" />
+    <ClCompile Include="..\GameEngine\Games\Game3\Src\RigidBodyDemo.cpp" />
+    <ClCompile Include="..\GameEngine\Games\Game3\Src\TestMath.cpp" />
     <ClCompile Include="..\GameEngine\Games\Src\GameBase.cpp" />
     <ClCompile Include="..\GameEngine\Games\Src\GameConfiguration.cpp" />
     <ClCompile Include="..\GameEngine\Games\Src\GameMenu.cpp" />
@@ -91,6 +94,9 @@
     <ClInclude Include="..\GameEngine\Games\Demo\Header\Demo.hpp" />
     <ClInclude Include="..\GameEngine\Games\Game1\Header\ShooterGame.hpp" />
     <ClInclude Include="..\GameEngine\Games\Game2\Header\BlobGame.hpp" />
+    <ClInclude Include="..\GameEngine\Games\Game3\Header\CarDemo.hpp" />
+    <ClInclude Include="..\GameEngine\Games\Game3\Header\RigidBodyDemo.hpp" />
+    <ClInclude Include="..\GameEngine\Games\Game3\Header\TestMath.hpp" />
     <ClInclude Include="..\GameEngine\Games\Header\DefaultConfig.hpp" />
     <ClInclude Include="..\GameEngine\Games\Header\GameBase.hpp" />
     <ClInclude Include="..\GameEngine\Games\Header\GameConfiguration.hpp" />

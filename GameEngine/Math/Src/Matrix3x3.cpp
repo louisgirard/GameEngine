@@ -155,7 +155,7 @@ namespace Math
 	Matrix3x3& Matrix3x3::identity() {
 		Matrix3x3 result;
 		result._values[0] = 1;
-		result._values[5] = 1;
+		result._values[4] = 1;
 		result._values[8] = 1;
 		return result;
 	}
