@@ -13,5 +13,7 @@ namespace PhysicEngine {
 	using Quaternion = Math::Quaternion;
 
 	static const double PI = Math::PI;
+	static const double RadToDeg = Math::RadToDeg;
+	static const double DegToRad = Math::DegToRad;
 }
 

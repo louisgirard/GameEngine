@@ -144,6 +144,7 @@ namespace Games {
 		void setFPS(FPS p_fpsRate);
 #pragma endregion
 
+		static GameConfiguration disabledGraphicConfig();
 	};
 }
 

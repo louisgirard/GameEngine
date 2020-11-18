@@ -11,6 +11,11 @@ namespace Math {
 		_complex = p_complex;
 	}
 
+	Quaternion::Quaternion(const Quaternion& p_quaternion) {
+		_r = p_quaternion._r;
+		_complex = p_quaternion._complex;
+	}
+
 	void Quaternion::normalize() {
 
 		float squaredNorm = _r * _r + _complex.squaredMagnitude();
@@ -25,50 +30,67 @@ namespace Math {
 		_complex *= invNorm;
 	}
 
+	Quaternion& Quaternion::operator= (const Quaternion& p_other) {
+		_r = p_other._r;
+		_complex = p_other._complex;
+		return (*this);
+	}
+
 	Quaternion& Quaternion::operator*= (const Quaternion& p_other) {
 
 		//Formula from classes
-		_r = _r * p_other._r - _complex.scalarProduct(p_other._complex);
-		_complex = p_other._complex * _r + _complex * p_other._r + _complex.vectorProduct(p_other._complex);
+		float saveR = _r;
+		Vector3 saveComplex = _complex;
+
+		_r = saveR * p_other._r - saveComplex.scalarProduct(p_other._complex);
+		_complex = saveComplex * p_other._r + p_other._complex * saveR + saveComplex.vectorProduct(p_other._complex);
 
 		return (*this);
 	}
 
-	void Quaternion::rotateFromEulerVector(const Vector3& p_euler) {
+	void Quaternion::rotateFromVector(const Vector3& p_vector) {
 		// Equivalent of the vector as quaternion
 		Quaternion q(0, p_euler);
 		(*this) *= q;
 	}
 
-	void Quaternion::updateAngularVelocity(const Vector3& p_euler, float p_time) {
+
+
+	void Quaternion::updateAngularVelocity(const Vector3& p_aVelocity, float p_time) {
+
 		// We take a certain amount of rotation given time
-		Quaternion q(0, p_euler * p_time);
-		/*Multiply current rotation with angular velocity that as been weighted by time*/
+		Quaternion q(0, p_aVelocity);
+		/*Multiply angular velocity that as been weighted by time with current orientation */
 		q *= *this;
-		/*then we multiply by the 0.5 factor of the equation (because of the derivation)*/
-		_r = q._r * 0.5f;
-		_complex = q._complex * 0.5f;
+		/*then we multiply by the 0.5*time factor of the equation (because of the derivation)*/
+		_r += q._r * 0.5f* p_time;
+		_complex += q._complex * 0.5f* p_time;
 	}
 
-	Matrix3x3& Quaternion::getOrientationMatrix() const{
+	Matrix3x3 Quaternion::getOrientationMatrix() const{
 	
+		Quaternion q(*this);
+		q.normalize();
+
+		Vector3 saveComplex = q._complex;
+		float saveR = q._r;
+
 		//Formula from classes
 		Vector3 cols[3];
 		cols[0] = Vector3(
-			1.f - (2.f * _complex[1] * _complex[1] + 2.f * _complex[2] * _complex[2]),
-			2.f*_complex[0]*_complex[1] - 2.f*_complex[2]*_r,
-			2.f*_complex[0]*_complex[2] + 2*_complex[1]*_r
+			1.f - 2.f*(saveComplex[1] * saveComplex[1] + saveComplex[2] * saveComplex[2]),
+			2.f* (saveComplex[0]* saveComplex[1] - saveComplex[2]* saveR),
+			2.f* (saveComplex[0]* saveComplex[2] + saveComplex[1]* saveR)
 		);
 		cols[1] = Vector3(
-			2.f*_complex[0]*_complex[1] + 2.f*_complex[2]*_r,
-			1-(2.f*_complex[0]*_complex[0] + 2.f*_complex[2]*_complex[2]),
-			2.f*_complex[1]*_complex[2] - 2.f*_complex[0]*_r
-		
+			2.f* (saveComplex[0]* saveComplex[1] + saveComplex[2]* saveR),
+			1- 2.f * ( saveComplex[0]* saveComplex[0] + saveComplex[2]* saveComplex[2]),
+			2.f* (saveComplex[1]* saveComplex[2] - saveComplex[0]* saveR)
 		);
 		cols[2] = Vector3(
-			2.f * _complex[0] * _complex[2] - 2.f * _complex[1] * _r,
-			2.f * _complex[1] * _complex[2] + 2.f * _complex[0] * _r,
-			1 - (2.f * _complex[0] * _complex[0] + 2 * _complex[1] * _complex[1])
+			2.f * (saveComplex[0] * saveComplex[2] - saveComplex[1] * saveR),
+			2.f * (saveComplex[1] * saveComplex[2] + saveComplex[0] * saveR),
+			1 - 2.f * (saveComplex[0] * saveComplex[0] + saveComplex[1] * saveComplex[1])
 		);
 
 		Matrix3x3 result(cols);

@@ -4,7 +4,7 @@ namespace Games {
 	GameConfiguration::GameConfiguration() : _name("Game"), _useGraphics(true), _fpsRate(FPS::FpsMax),
 		_glutDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE),
 		_windowWidth(DEFAULT_WINDOW_WIDTH), _windowHeight(DEFAULT_WINDOW_HEIGHT),
-		_fov(DEFAULT_FOV), _nearPlane(DEFAULT_NEAR_PLANE), _farPlane(DEFAULT_FAR_PLANE){}
+		_fov(DEFAULT_FOV), _nearPlane(DEFAULT_NEAR_PLANE), _farPlane(DEFAULT_FAR_PLANE) {}
 
 #pragma region GETTERS
 	bool GameConfiguration::graphicEnabled() const {
@@ -73,5 +73,9 @@ namespace Games {
 	}
 
 #pragma endregion
-
+	GameConfiguration GameConfiguration::disabledGraphicConfig() {
+		GameConfiguration config;
+		config.enableGraphic(false);
+		return config;
+	}
 }
