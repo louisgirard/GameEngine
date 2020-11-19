@@ -56,7 +56,7 @@ namespace Math {
 
 
 
-	void Quaternion::updateAngularVelocity(const Vector3& p_aVelocity, float p_time) {
+	void Quaternion::updateByAngularVelocity(const Vector3& p_aVelocity, float p_time) {
 
 		// We take a certain amount of rotation given time
 		Quaternion q(0, p_aVelocity);

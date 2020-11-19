@@ -161,7 +161,7 @@ namespace Games::Game3 {
 			q2.normalize();
 			std::cout << "Quaternion 2 normalized (should be a orientation to update) : " << q2 << std::endl;
 
-			q2.updateAngularVelocity(velocity,2);
+			q2.updateByAngularVelocity(velocity,2);
 			std::cout << "Quaternion 2 update by velocity in 2s " << q2 << std::endl;
 
 			// Verify with a web calculator

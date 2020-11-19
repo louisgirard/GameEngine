@@ -61,7 +61,7 @@ namespace Math {
 		* @param p_aVelocity : Angular velocity
 		* @param p_time : time to which it will be updated (in sec)
 		*/
-		void updateAngularVelocity(const Vector3& p_aVelocity, float p_time);
+		void updateByAngularVelocity(const Vector3& p_aVelocity, float p_time);
 
 		/*
 		* Gets equivalent orientation matrix
