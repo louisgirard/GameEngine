@@ -19,7 +19,7 @@ int main(int p_argc, char** p_argv)
 	Games::GameSelection::registerFactory<Games::Demo>("Demo", "Graphic engine demo.");
 	Games::GameSelection::registerFactory<Games::Game1::ShooterGame>("Game 1", "Jeu qui presente le premier tp.");
 	Games::GameSelection::registerFactory<Games::Game2::Blob>("Game 2", "Jeu qui presente le deuxieme tp.");
-	Games::GameSelection::registerFactory<Games::Game3::TestMath>("Test Math", "Test math component");
+	//Games::GameSelection::registerFactory<Games::Game3::TestMath>("Test Math", "Test math component");
 
 	bool engineRunning = true;
 

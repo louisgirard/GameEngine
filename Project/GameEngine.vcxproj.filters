@@ -414,6 +414,9 @@
     <ClCompile Include="..\GameEngine\Games\Game3\Src\TestMath.cpp">
       <Filter>GameEngine\Games\Game3\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\GameEngine\PhysicEngine\Src\ARigidBody.cpp">
+      <Filter>GameEngine\PhysicEngine\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\GameEngine\Games\Game1\Header\ShooterGame.hpp">
@@ -670,6 +673,9 @@
     </ClInclude>
     <ClInclude Include="..\GameEngine\Games\Game3\Header\TestMath.hpp">
       <Filter>GameEngine\Games\Game3\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Header\ARigidBody.hpp">
+      <Filter>GameEngine\PhysicEngine\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

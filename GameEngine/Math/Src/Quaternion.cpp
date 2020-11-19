@@ -50,7 +50,7 @@ namespace Math {
 
 	void Quaternion::rotateFromVector(const Vector3& p_vector) {
 		// Equivalent of the vector as quaternion
-		Quaternion q(0, p_euler);
+		Quaternion q(0, p_vector);
 		(*this) *= q;
 	}
 
