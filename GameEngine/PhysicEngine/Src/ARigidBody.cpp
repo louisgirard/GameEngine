@@ -1,6 +1,27 @@
 #include <PhysicEngine/Header/ARigidBody.hpp>
 
 namespace PhysicEngine {
+
+	ARigidBody::ARigidBody(float p_inverseMass, Matrix3x3 p_inverseInertiaTensor, Vector3 p_position, Quaternion p_orientation, 
+		Vector3 p_velocity, Vector3 p_angularVelocity, float p_linearDamping, float p_angularDamping)
+	{
+		_inverseMass = p_inverseMass;
+		_inverseInertiaTensor = p_inverseInertiaTensor;
+		_position = p_position;
+		_orientation = p_orientation;
+		_velocity = p_velocity;
+		_angularVelocity = p_angularVelocity;
+		_linearDamping = p_linearDamping;
+		_angularDamping = p_angularDamping;
+		_transformMatrix = Matrix3x4();
+		_inverseInertiaTensorWorld = Matrix3x3();
+
+		calculateDerivedData();
+
+		_forceAccum = Vector3::ZERO;
+		_torqueAccum = Vector3::ZERO;
+	}
+
 	inline void ARigidBody::s_calculateTransformMatrix(Matrix3x4& p_transformMatrix, const Vector3& p_position, const Quaternion& p_orientation)
 	{
 		p_transformMatrix._values[0] = 1 - 2 * p_orientation._complex[1] * p_orientation._complex[1] - 2 * p_orientation._complex[2] * p_orientation._complex[2];
@@ -67,6 +88,14 @@ namespace PhysicEngine {
 		_torqueAccum += pt.vectorProduct(p_force);
 	}
 
+	void ARigidBody::addForceAtLocalPoint(const Vector3& p_force, const Vector3& p_point)
+	{
+		//going from local coordinates to world coordinates
+		Vector3 pt = _transformMatrix.getInversion().transformPoint(p_point);
+
+		addForceAtPoint(p_force, pt);
+	}
+
 	void ARigidBody::clearAccumulators()
 	{
 		_forceAccum = Vector3::ZERO;
@@ -75,6 +104,31 @@ namespace PhysicEngine {
 
 	void ARigidBody::integrate(double p_dt)
 	{
+		//linear acceleration
+		Vector3 acceleration = _forceAccum * _inverseMass;
+
+		//angular acceleration
+		Vector3 angularAcceleration = _inverseInertiaTensorWorld * _torqueAccum;
+
+		//update velocity
+		_velocity += acceleration * p_dt;
+
+		//update angular velocity
+		_angularVelocity += angularAcceleration * p_dt;
+
+		//drag
+		_velocity *= pow(_linearDamping, p_dt);
+		_angularVelocity *= pow(_angularDamping, p_dt);
+
+		//update position
+		_position += _velocity * p_dt;
+
+		//update orientation
+		_orientation.rotateFromVector(_angularVelocity * p_dt);
+
+		//update matrices and normalize orientation
+		calculateDerivedData();
+
 		clearAccumulators();
 	}
 }
