@@ -426,6 +426,12 @@
     <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\PIrregularCube.cpp">
       <Filter>GameEngine\GraphicEngine\PSceneGraph\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\GameEngine\PhysicEngine\Forces\Src\BodyForceRegistry.cpp">
+      <Filter>GameEngine\PhysicEngine\Forces\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\PhysicEngine\Forces\Src\BodyGravity.cpp">
+      <Filter>GameEngine\PhysicEngine\Forces\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\GameEngine\Games\Game1\Header\ShooterGame.hpp">
@@ -694,6 +700,15 @@
     </ClInclude>
     <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\PIrregularCube.hpp">
       <Filter>GameEngine\GraphicEngine\PSceneGraph\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Forces\Header\BodyForceRegistry.hpp">
+      <Filter>GameEngine\PhysicEngine\Forces\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Forces\Header\BodyForceGenerator.hpp">
+      <Filter>GameEngine\PhysicEngine\Forces\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Forces\Header\BodyGravity.hpp">
+      <Filter>GameEngine\PhysicEngine\Forces\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

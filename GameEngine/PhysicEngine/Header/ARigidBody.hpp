@@ -44,6 +44,68 @@ namespace PhysicEngine {
 		ARigidBody(float p_inverseMass, Matrix3x3 p_inverseInertiaTensor, Vector3 p_position, Quaternion p_orientation, 
 			Vector3 p_velocity, Vector3 p_angularVelocity, float p_linearDamping, float p_angularDamping);
 
+		/*@return the position of the body */
+		Vector3 getPosition() const;
+
+		/* Sets the position of the body
+		@param p_position the position to which the body must be set
+		*/
+		void setPosition(const Vector3& p_position);
+
+		/* Sets the position of the body
+		@param p_x the new x of the body
+		@param p_y the new y of the body
+		@param p_z the new z of the body
+		*/
+		void setPosition(const float p_x, const float p_y, const float p_z);
+
+		/*@return the velocity of the body */
+		Vector3 getVelocity() const;
+
+		/* Sets the velocity of the body
+		@param p_velocity the velocity at which the body must be set
+		*/
+		void setVelocity(const Vector3& p_velocity);
+
+		/* Sets the velocity of the body
+		@param p_x the new x of the velocity
+		@param p_y the new y of the velocity
+		@param p_z the new z of the velocity
+		*/
+		void setVelocity(const float p_x, const float p_y, const float p_z);
+
+		/*@return the linear damping */
+		float getLinearDamping() const;
+
+		/* Sets the damping
+		@param p_damping the new damping
+		*/
+		void setLinearDamping(const float p_linearDamping);
+
+		/*@return the damping */
+		float getAngularDamping() const;
+
+		/* Sets the damping
+		@param p_damping the new damping
+		*/
+		void setAngularDamping(const float p_angularDamping);
+
+		/*@return the inverse of the mass of the body */
+		float getInverseMass() const;
+
+		/* Sets the inverse of the mass of the body
+		@param p_inverseMass the new inverse mass of the body
+		*/
+		void setInverseMass(const float p_inverseMass);
+
+		/*@return the mass of the body */
+		float getMass() const;
+
+		/* Sets the mass of the body
+		@param p_mass the new mass of the body
+		*/
+		void setMass(const float p_mass);
+
 		//updates internal data (transformMatrix, world space inertia tensor)
 		void calculateDerivedData();
 

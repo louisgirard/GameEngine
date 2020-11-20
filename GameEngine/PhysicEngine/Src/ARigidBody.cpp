@@ -22,6 +22,90 @@ namespace PhysicEngine {
 		_torqueAccum = Vector3::ZERO;
 	}
 
+	Vector3 ARigidBody::getPosition() const
+	{
+		return _position;
+	}
+
+	void ARigidBody::setPosition(const Vector3& p_position)
+	{
+		_position = p_position;
+	}
+
+	void ARigidBody::setPosition(const float p_x, const float p_y, const float p_z)
+	{
+		_position._x = p_x;
+		_position._y = p_y;
+		_position._z = p_z;
+	}
+
+	Vector3 ARigidBody::getVelocity() const
+	{
+		return _velocity;
+	}
+
+	void ARigidBody::setVelocity(const Vector3& p_velocity)
+	{
+		_velocity = p_velocity;
+	}
+
+	void ARigidBody::setVelocity(const float p_x, const float p_y, const float p_z)
+	{
+		_velocity._x = p_x;
+		_velocity._y = p_y;
+		_velocity._z = p_z;
+	}
+
+	float ARigidBody::getLinearDamping() const
+	{
+		return _linearDamping;
+	}
+
+	void ARigidBody::setLinearDamping(const float p_linearDamping)
+	{
+		_linearDamping = p_linearDamping;
+	}
+
+	float ARigidBody::getAngularDamping() const
+	{
+		return _angularDamping;
+	}
+
+	void ARigidBody::setAngularDamping(const float p_angularDamping)
+	{
+		_angularDamping = p_angularDamping;
+	}
+
+	float ARigidBody::getInverseMass() const
+	{
+		return _inverseMass;
+	}
+
+	void ARigidBody::setInverseMass(const float p_inverseMass)
+	{
+		_inverseMass = p_inverseMass;
+	}
+
+	float ARigidBody::getMass() const
+	{
+		if (_inverseMass == 0) {
+			return std::numeric_limits<float>::max();
+		}
+		else {
+			return 1.0f / _inverseMass;
+		}
+	}
+
+	void ARigidBody::setMass(const float p_mass)
+	{
+		if (p_mass == 0) {
+			_inverseMass = INFINITY;
+		}
+		else {
+			_inverseMass = 1.0f / p_mass;
+		}
+	}
+
 	inline void ARigidBody::s_calculateTransformMatrix(Matrix3x4& p_transformMatrix, const Vector3& p_position, const Quaternion& p_orientation)
 	{
 		p_transformMatrix._values[0] = 1 - 2 * p_orientation._complex[1] * p_orientation._complex[1] - 2 * p_orientation._complex[2] * p_orientation._complex[2];
@@ -124,7 +208,7 @@ namespace PhysicEngine {
 		_position += _velocity * p_dt;
 
 		//update orientation
-		_orientation.rotateFromVector(_angularVelocity * p_dt);
+		_orientation.updateByAngularVelocity(_angularVelocity, p_dt);
 
 		//update matrices and normalize orientation
 		calculateDerivedData();

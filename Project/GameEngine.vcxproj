@@ -76,6 +76,8 @@
     <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\ParticleContactResolver.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\ParticleRod.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\PlaneContactGenerator.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\Forces\Src\BodyForceRegistry.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\Forces\Src\BodyGravity.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Forces\Src\ParticleDrag.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Forces\Src\ParticleForceRegistry.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Forces\Src\ParticleGravity.cpp" />
@@ -165,6 +167,9 @@
     <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleLink.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleRod.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\PlaneContactGenerator.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Forces\Header\BodyForceGenerator.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Forces\Header\BodyForceRegistry.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Forces\Header\BodyGravity.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Forces\Header\ParticleDrag.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Forces\Header\ParticleForceGenerator.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Forces\Header\ParticleForceRegistry.hpp" />
