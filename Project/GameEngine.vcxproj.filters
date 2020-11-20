@@ -417,6 +417,15 @@
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\ARigidBody.cpp">
       <Filter>GameEngine\PhysicEngine\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\GameEngine\SceneGraph\Src\CCar.cpp">
+      <Filter>GameEngine\SceneGraph\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\SceneGraph\Src\CIrregularCube.cpp">
+      <Filter>GameEngine\SceneGraph\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\PIrregularCube.cpp">
+      <Filter>GameEngine\GraphicEngine\PSceneGraph\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\GameEngine\Games\Game1\Header\ShooterGame.hpp">
@@ -676,6 +685,15 @@
     </ClInclude>
     <ClInclude Include="..\GameEngine\PhysicEngine\Header\ARigidBody.hpp">
       <Filter>GameEngine\PhysicEngine\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\SceneGraph\Header\CCar.hpp">
+      <Filter>GameEngine\SceneGraph\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\SceneGraph\Header\CIrregularCube.hpp">
+      <Filter>GameEngine\SceneGraph\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\PIrregularCube.hpp">
+      <Filter>GameEngine\GraphicEngine\PSceneGraph\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

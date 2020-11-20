@@ -8,6 +8,12 @@ namespace SceneGraph {
 		}
 	}
 
+	void EmptyNode::draw(std::string p_shaderName, glm::mat4 p_transform) {
+		for (std::vector<std::shared_ptr<EmptyNode>>::iterator it = _sons.begin(); it != _sons.end(); ++it) {
+			(*it)->draw(p_shaderName, p_transform);
+		}
+	}
+
 	GraphicEngine::SceneBase::BoundingBox EmptyNode::computeSceneBoundingBox()
 	{
 		GraphicEngine::SceneBase::BoundingBox result;

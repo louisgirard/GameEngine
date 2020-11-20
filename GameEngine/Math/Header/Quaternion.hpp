@@ -70,7 +70,11 @@ namespace Math {
 		*/
 		Matrix3x3 getOrientationMatrix() const;
 
-
+		/*
+		* Gets quaternion identity
+		* @return Quaternion identity
+		*/
+		static Quaternion identity();
 	};
 
 	/*

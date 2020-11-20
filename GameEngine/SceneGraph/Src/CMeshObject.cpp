@@ -9,6 +9,11 @@ namespace SceneGraph {
 		EmptyNode::draw(p_shaderName);
 	}
 
+	void CMeshObject::draw(std::string p_shaderName, glm::mat4 p_transform) {
+		_presentation->draw(p_shaderName, p_transform);
+		EmptyNode::draw(p_shaderName, p_transform);
+	}
+
 	GraphicEngine::SceneBase::BoundingBox CMeshObject::computeSceneBoundingBox() {
 		return _presentation->computeSceneBoundingBox() + EmptyNode::computeSceneBoundingBox();
 	}

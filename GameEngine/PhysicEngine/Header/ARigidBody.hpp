@@ -5,7 +5,7 @@
 namespace PhysicEngine {
 	class ARigidBody
 	{
-	protected:
+	public:
 
 		float _inverseMass;
 
@@ -40,6 +40,7 @@ namespace PhysicEngine {
 		//torque accumulator
 		Vector3 _torqueAccum;
 
+	
 		ARigidBody(float p_inverseMass, Matrix3x3 p_inverseInertiaTensor, Vector3 p_position, Quaternion p_orientation, 
 			Vector3 p_velocity, Vector3 p_angularVelocity, float p_linearDamping, float p_angularDamping);
 

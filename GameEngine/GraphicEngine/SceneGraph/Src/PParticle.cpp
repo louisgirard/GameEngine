@@ -88,8 +88,6 @@ namespace GraphicEngine::PSceneGraph {
 			}
 		}
 
-
-
 		_mesh->setVertices(sphereVertices);
 		_mesh->setNormals(sphereNormal);
 		_mesh->setTextureCoodinates(sphereTexCoords);

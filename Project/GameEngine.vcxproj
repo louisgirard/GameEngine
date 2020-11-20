@@ -48,6 +48,7 @@
     <ClCompile Include="..\GameEngine\GraphicEngine\SceneBase\Src\Text.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\Mesh.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\PHorizontalPlane.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\PIrregularCube.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\PMeshObject.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\PParticle.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\TransformStack.cpp" />
@@ -86,7 +87,9 @@
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\AParticle.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\ARigidBody.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\CParticle.cpp" />
+    <ClCompile Include="..\GameEngine\SceneGraph\Src\CCar.cpp" />
     <ClCompile Include="..\GameEngine\SceneGraph\Src\CHorizontalPlane.cpp" />
+    <ClCompile Include="..\GameEngine\SceneGraph\Src\CIrregularCube.cpp" />
     <ClCompile Include="..\GameEngine\SceneGraph\Src\EmptyNode.cpp" />
     <ClCompile Include="..\GameEngine\SceneGraph\Src\CMeshObject.cpp" />
     <ClCompile Include="..\GameEngine\System\Src\Paths.cpp" />
@@ -130,6 +133,7 @@
     <ClInclude Include="..\GameEngine\GraphicEngine\SceneBase\Header\Text.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\Mesh.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\PHorizontalPlane.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\PIrregularCube.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\PMeshObject.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\PParticle.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\TransformStack.hpp" />
@@ -174,7 +178,9 @@
     <ClInclude Include="..\GameEngine\PhysicEngine\SpringForces\Header\ParticleBungee.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\SpringForces\Header\ParticleBuoyancy.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\SpringForces\Header\ParticleSpring.hpp" />
+    <ClInclude Include="..\GameEngine\SceneGraph\Header\CCar.hpp" />
     <ClInclude Include="..\GameEngine\SceneGraph\Header\CHorizontalPlane.hpp" />
+    <ClInclude Include="..\GameEngine\SceneGraph\Header\CIrregularCube.hpp" />
     <ClInclude Include="..\GameEngine\SceneGraph\Header\EmptyNode.hpp" />
     <ClInclude Include="..\GameEngine\SceneGraph\Header\CMeshObject.hpp" />
     <ClInclude Include="..\GameEngine\System\Header\Paths.hpp" />

@@ -21,6 +21,12 @@ namespace GraphicEngine::PSceneGraph {
 			}
 		}
 
+		void PMeshObject::draw(std::string p_shaderName, glm::mat4 p_transform) {
+			if (p_shaderName == _shaderName) {
+				Servers::ShaderServer::getSingleton()->renderMesh(p_shaderName, p_transform, (*_VAO), (*_material));
+			}
+		}
+
 		SceneBase::BoundingBox PMeshObject::computeSceneBoundingBox() {
 			return _mesh->boundingBox();
 		}

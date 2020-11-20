@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include <GraphicEngine/SceneBase/Header/BoundingBox.hpp>
+#include <glm/matrix.hpp>
 
 namespace SceneGraph {
 	class EmptyNode
@@ -23,6 +24,13 @@ namespace SceneGraph {
 		* @param p_shaderName : Name of the shader we are using now to render the node
 		*/
 		virtual void draw(std::string p_shaderName);
+
+		/*
+		* Draws this node
+		* @param p_shaderName : Name of the shader we are using now to render the node
+		* @param p_transform : transformation matrix
+		*/
+		virtual void draw(std::string p_shaderName, glm::mat4 p_transform);
 
 		/*
 		* Compute a bounding box for this node and its child

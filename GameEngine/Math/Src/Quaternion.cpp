@@ -54,8 +54,6 @@ namespace Math {
 		(*this) *= q;
 	}
 
-
-
 	void Quaternion::updateByAngularVelocity(const Vector3& p_aVelocity, float p_time) {
 
 		// We take a certain amount of rotation given time
@@ -95,5 +93,9 @@ namespace Math {
 
 		Matrix3x3 result(cols);
 		return result;
+	}
+
+	Quaternion Quaternion::identity() {
+		return Quaternion(1, Vector3(0, 0, 0));
 	}
 }
