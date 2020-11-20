@@ -94,40 +94,6 @@ namespace SceneGraph{
 
 	}
 
-	void CCar::calculateDerivedData() {
-		_abstraction->calculateDerivedData();
-	}
-
-	void CCar::SetInertiaTensor(PhysicEngine::Matrix3x3 p_inertiaTensor)
-	{
-		_abstraction->SetInertiaTensor(p_inertiaTensor);
-	}
-
-	void CCar::addForce(const PhysicEngine::Vector3& p_force)
-	{
-		_abstraction->addForce(p_force);
-	}
-
-	void CCar::addForceAtPoint(const PhysicEngine::Vector3& p_force, const PhysicEngine::Vector3& p_point)
-	{
-		_abstraction->addForceAtPoint(p_force, p_point);
-	}
-
-	void CCar::addForceAtLocalPoint(const PhysicEngine::Vector3& p_force, const PhysicEngine::Vector3& p_point)
-	{
-		_abstraction->addForceAtLocalPoint(p_force, p_point);
-	}
-
-	void CCar::clearAccumulators()
-	{
-		_abstraction->clearAccumulators();
-	}
-
-	void CCar::integrate(double p_dt)
-	{
-		_abstraction->integrate(p_dt);
-	}
-
 	void CCar::draw(std::string p_shaderName)
 	{
 		PhysicEngine::Matrix3x4 transform = _abstraction->_transformMatrix;

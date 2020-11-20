@@ -148,40 +148,6 @@ namespace SceneGraph {
 
 	}
 
-	void CIrregularCube::calculateDerivedData() {
-		_abstraction->calculateDerivedData();
-	}
-
-	void CIrregularCube::SetInertiaTensor(PhysicEngine::Matrix3x3 p_inertiaTensor)
-	{
-		_abstraction->SetInertiaTensor(p_inertiaTensor);
-	}
-
-	void CIrregularCube::addForce(const PhysicEngine::Vector3& p_force)
-	{
-		_abstraction->addForce(p_force);
-	}
-
-	void CIrregularCube::addForceAtPoint(const PhysicEngine::Vector3& p_force, const PhysicEngine::Vector3& p_point)
-	{
-		_abstraction->addForceAtPoint(p_force, p_point);
-	}
-
-	void CIrregularCube::addForceAtLocalPoint(const PhysicEngine::Vector3& p_force, const PhysicEngine::Vector3& p_point)
-	{
-		_abstraction->addForceAtLocalPoint(p_force, p_point);
-	}
-
-	void CIrregularCube::clearAccumulators()
-	{
-		_abstraction->clearAccumulators();
-	}
-
-	void CIrregularCube::integrate(double p_dt)
-	{
-		_abstraction->integrate(p_dt);
-	}
-
 	void CIrregularCube::markOrigin() {
 		_trailPosition[_trailOffset] = _abstraction->_position;
 		_trailOffset += 1;

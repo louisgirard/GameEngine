@@ -10,8 +10,7 @@ namespace SceneGraph {
 	class CIrregularCube : public CMeshObject
 	{
 	private:
-		/*Object abstraction*/
-		std::shared_ptr<PhysicEngine::ARigidBody> _abstraction;
+		
 
 		/*Trail*/
 		std::vector <std::shared_ptr < GraphicEngine::PSceneGraph::PParticle>> _trails;
@@ -21,6 +20,8 @@ namespace SceneGraph {
 		void computeRigidBodyProperties(const std::vector<PhysicEngine::Vector3> p_vertices, const std::vector<float>  p_massRepartition, PhysicEngine::Vector3& p_centerOfMass, float& p_inverseMass, PhysicEngine::Matrix3x3& p_invInertiaTensor);
 
 	public:
+		/*Object abstraction*/
+		std::shared_ptr<PhysicEngine::ARigidBody> _abstraction;
 
 		CIrregularCube(const PhysicEngine::Vector3& p_center, const PhysicEngine::Vector3& p_dimension, const std::vector<float> p_massRepartition);
 
@@ -43,36 +44,6 @@ namespace SceneGraph {
 			const PhysicEngine::Vector3& p_color, const PhysicEngine::Vector3& p_specularColor,
 			int p_nbTrailComponent, float p_trailSize, const PhysicEngine::Vector3& p_trailColor);
 		
-
-		//updates internal data (transformMatrix, world space inertia tensor)
-		void calculateDerivedData();
-
-
-		void SetInertiaTensor(PhysicEngine::Matrix3x3 p_inertiaTensor);
-
-		/*Adds a force at the center of mass of the rigidbody (no torque)
-		* @param p_force: the force to apply
-		*/
-		void addForce(const PhysicEngine::Vector3& p_force);
-
-		/*
-		* Adds a force at a given point of the body in world space coordinates
-		* @param p_force: the force to apply (world coordinates)
-		* @param p_point: the point to apply the force at (world coordinates)
-		*/
-		void addForceAtPoint(const PhysicEngine::Vector3& p_force, const PhysicEngine::Vector3& p_point);
-
-		/*
-		* Adds a force at a given point of the body in local space coordinates
-		* @param p_force: the force to apply (world coordinates)
-		* @param p_point: the point to apply the force at (local coordinates)
-		*/
-		void addForceAtLocalPoint(const PhysicEngine::Vector3& p_force, const PhysicEngine::Vector3& p_point);
-
-		//Clears the force and torque accumulators
-		void clearAccumulators();
-
-		void integrate(double p_dt);
 
 		/*Mark origin where it is now*/
 		void markOrigin();
