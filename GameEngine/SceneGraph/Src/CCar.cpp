@@ -50,9 +50,9 @@ namespace SceneGraph{
 			i22 += mass_i * (x_i * x_i + y_i * y_i);
 
 			/* Diagonal is mass* square distance from plan */
-			i01 += mass_i * (z_i * z_i);
-			i02 += mass_i * (y_i * y_i);
-			i12 += mass_i * (x_i * x_i);
+			i01 += mass_i * (x_i * y_i);
+			i02 += mass_i * (x_i * z_i);
+			i12 += mass_i * (y_i * z_i);
 		}
 
 
@@ -88,7 +88,7 @@ namespace SceneGraph{
 		PhysicEngine::Vector3 centerOfMass;
 		PhysicEngine::Matrix3x3 invInertiaTensor;
 		computeRigidBodyProperties(p_mass, centerOfMass, inverseMass, invInertiaTensor);
-		_abstraction = std::make_shared< PhysicEngine::ARigidBody>( inverseMass, invInertiaTensor, centerOfMass, p_orientation, p_velocity, p_angularVelocity, p_linearDamping, p_angularDamping);
+		_abstraction = std::make_shared< PhysicEngine::ARigidBody>( inverseMass, invInertiaTensor, p_center, p_orientation, p_velocity, p_angularVelocity, p_linearDamping, p_angularDamping);
 
 		
 
