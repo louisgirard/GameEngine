@@ -1,0 +1,2 @@
+C:/Users/Dark Vador/Desktop/UQAC work/8INF935_Math_Physique_JV/GameEngine/Dependencies_x64/include/glm/out/build/x64-Debug (par défaut)/CMakeFiles/edit_cache.dir
+C:/Users/Dark Vador/Desktop/UQAC work/8INF935_Math_Physique_JV/GameEngine/Dependencies_x64/include/glm/out/build/x64-Debug (par défaut)/CMakeFiles/rebuild_cache.dir

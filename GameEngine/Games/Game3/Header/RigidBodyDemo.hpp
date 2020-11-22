@@ -1,8 +1,10 @@
 #pragma once
 
 #include <Games/Header/GameBase.hpp>
-
-
+#include <PhysicEngine/Forces/Header/BodyForceRegistry.hpp>
+#include <PhysicEngine/Header/ARigidBody.hpp>
+#include <SceneGraph/Header/CIrregularCube.hpp>
+#include <PhysicEngine/Forces/Header/BodyGravity.hpp>
 namespace Games::Game3 {
 	class RigidBodyDemo : public GameBase
 	{
@@ -13,13 +15,6 @@ namespace Games::Game3 {
 		@param p_dt the time ellapsed since the last update*/
 		virtual void handleInput(double p_dt);
 
-		/**
-		* Function called when the user reshapes the game window
-		* @param p_width : new window's width
-		* @param p_height : new window's height
-		**/
-		virtual void reshape(GLint p_width, GLint p_height);
-
 		/*
 		Updates the positions of the particles
 		@param p_dt the time ellapsed since the last update
@@ -28,6 +23,22 @@ namespace Games::Game3 {
 
 		/*Updates the visual representations of the particles*/
 		virtual void updateFrame();
+
+		void cameraFollowMaster();
+
+		/* Holds all the forces and the Rigidbody they're associated with */
+		Forces::BodyForceRegistry _registry;
+
+		/*Gravity acceleration*/
+		float _gravityAcceleration;
+
+		/* The force generator for gravity in the game */
+		Forces::BodyGravity _gravity;
+
+		std::shared_ptr<SceneGraph::CIrregularCube> _cube;
+
+		/* Holds the ground plane */
+		std::shared_ptr<HorizontalPlane> _ground;
 
 	public:
 		/* Default constructor */
