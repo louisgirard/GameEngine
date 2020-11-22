@@ -10,13 +10,13 @@ namespace GraphicEngine::PSceneGraph {
 		_shaderName = Servers::ShaderServer::getSingleton()->getDefaultMeshShader();
 
 		const glm::vec3 frontNW = PhysicEngine::Vector3::toGlm(p_vertices[0]);
-		const glm::vec3 frontNE = PhysicEngine::Vector3::toGlm(p_vertices[0]);
-		const glm::vec3 frontSW = PhysicEngine::Vector3::toGlm(p_vertices[0]);
-		const glm::vec3 frontSE = PhysicEngine::Vector3::toGlm(p_vertices[0]);
-		const glm::vec3 backNW = PhysicEngine::Vector3::toGlm(p_vertices[0]);
-		const glm::vec3 backNE = PhysicEngine::Vector3::toGlm(p_vertices[0]);
-		const glm::vec3 backSW = PhysicEngine::Vector3::toGlm(p_vertices[0]);
-		const glm::vec3 backSE = PhysicEngine::Vector3::toGlm(p_vertices[0]);
+		const glm::vec3 frontNE = PhysicEngine::Vector3::toGlm(p_vertices[1]);
+		const glm::vec3 frontSW = PhysicEngine::Vector3::toGlm(p_vertices[2]);
+		const glm::vec3 frontSE = PhysicEngine::Vector3::toGlm(p_vertices[3]);
+		const glm::vec3 backNW = PhysicEngine::Vector3::toGlm(p_vertices[4]);
+		const glm::vec3 backNE = PhysicEngine::Vector3::toGlm(p_vertices[5]);
+		const glm::vec3 backSW = PhysicEngine::Vector3::toGlm(p_vertices[6]);
+		const glm::vec3 backSE = PhysicEngine::Vector3::toGlm(p_vertices[7]);
 
 
 		/*
@@ -26,29 +26,34 @@ namespace GraphicEngine::PSceneGraph {
 		std::vector<glm::vec3> quadVertices =
 		{
 			// (positions)
-			frontNW, backNW, frontNE, backNE, frontSW, backSW, frontNE, backSE
+			frontSW, frontSE, frontNE, frontNW, backSW, backSE, backNE, backNW
 		};
+
+		std::cout << "Quad vertices " << std::endl;
+		for (int i = 0; i < quadVertices.size(); i++) {
+			std::cout << "Vertice " << quadVertices[i] << std::endl;
+		}
 		//Normals
 		std::vector<glm::vec3> quadNormal =
 		{
 			// (normals)
-			glm::normalize(frontNW - backSE), glm::normalize(backNW - frontSE), glm::normalize(frontNE - backSW), glm::normalize(backNE - frontSW),
-			glm::normalize(frontSW - backNE), glm::normalize(backSW - frontNE), glm::normalize(frontSE - backNW), glm::normalize(backSE - frontNW)
+			glm::normalize(frontSW - backNE), glm::normalize(frontSE - backNW), glm::normalize(frontNE - backSW), glm::normalize(frontNW - backSE),
+			glm::normalize(backSW - frontNE), glm::normalize(backSE - frontNW), glm::normalize(backNE - frontSW), glm::normalize(backNW - frontSE)
 		};
 		//Indices
 		std::vector<GLuint> indices = {
-			//Up Face
-			0,1,2,2,1,3,
-			//Down Face
-			4,6,5,5,6,7,
-			//Right face
-			3,2,7,7,2,6,
-			//Left Face
-			0,1,5,5,4,0,
 			//Front Face
-			2,0,6,0,4,6,
-			//Back Face
-			1,3,7,7,5,1
+			0,1,2,2,3,0,
+			//Right Face
+			1,5,6,6,2,1,
+			//Back face
+			7,6,5,5,4,7,
+			//Left Face
+			4,0,3,3,7,4,
+			//Bottom Face
+			4,5,1,1,0,4,
+			//Top Face
+			3,2,6,6,7,3
 		};
 
 
@@ -63,7 +68,6 @@ namespace GraphicEngine::PSceneGraph {
 		/*
 		* Creating Material
 		*/
-
 		_material = std::make_shared<Materials::PhongMaterial>();
 
 		glm::vec3 color = glm::vec3(p_color._x, p_color._y, p_color._z);

@@ -37,6 +37,10 @@ namespace Games::Game3 {
 
 		std::shared_ptr<SceneGraph::CIrregularCube> _cube;
 
+		bool _launch;
+		float _saveTime;
+		float _savePhysicTime;
+
 		/* Holds the ground plane */
 		std::shared_ptr<HorizontalPlane> _ground;
 

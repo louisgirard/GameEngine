@@ -109,8 +109,9 @@ namespace Math
 		float det = _values[0] * _values[4] * _values[8] + _values[3] * _values[7] * _values[2] + _values[6] * _values[1] * _values[5] -
 			_values[0] * _values[7] * _values[5] - _values[6] * _values[4] * _values[2] - _values[3] * _values[1] * _values[8];
 
+		std::cout << "Determinant " << det<<std::endl;
 		// Cannot divide by 0
-		if (det == 0) return;
+		if (det <0.000001 && det>-0.000001) return;
 
 		float inverseDet = 1.0f / det;
 

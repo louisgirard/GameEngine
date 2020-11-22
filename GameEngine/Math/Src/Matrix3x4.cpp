@@ -229,10 +229,10 @@ namespace Math
 
 	glm::mat4 Matrix3x4::toGlm(const Matrix3x4& p_mat) {
 		return glm::mat4(
-			p_mat[0], p_mat[4], p_mat[8], 1,
+			p_mat[0], p_mat[4], p_mat[8], 0,
 			p_mat[1], p_mat[5], p_mat[9], 0,
 			p_mat[2], p_mat[6], p_mat[10], 0,
-			p_mat[3], p_mat[7], p_mat[11], 0
+			p_mat[3], p_mat[7], p_mat[11], 1
 		);
 
 	}

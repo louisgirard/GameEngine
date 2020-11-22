@@ -70,13 +70,14 @@ namespace SceneGraph {
 		p_invInertiaTensor._values[7] = -i12;
 		p_invInertiaTensor._values[8] = i22;
 
-	
+		std::cout << "Inertia Tensor before invertion" << p_invInertiaTensor << std::endl;
 		//Compute inverse
 		p_invInertiaTensor.invert();
+		std::cout << "Inverse inertia tenseur computed" << p_invInertiaTensor << std::endl;
 	}
 
 	CIrregularCube::CIrregularCube(const PhysicEngine::Vector3& p_center, const PhysicEngine::Vector3& p_dimension, const std::vector<float> p_massRepartition)
-		:CIrregularCube(p_center, p_dimension, p_massRepartition, PhysicEngine::Vector3(1,1,1), PhysicEngine::Vector3(0,0,0)) {}
+		:CIrregularCube(p_center, p_dimension, p_massRepartition, PhysicEngine::Vector3(1,0,0), PhysicEngine::Vector3(0,0,0)) {}
 
 	CIrregularCube::CIrregularCube(const PhysicEngine::Vector3& p_center, const PhysicEngine::Vector3& p_dimension, const std::vector<float> p_massRepartition, const PhysicEngine::Vector3& p_color, const PhysicEngine::Vector3& p_specularColor) :
 		CIrregularCube(p_center, p_dimension, p_massRepartition, p_color, p_specularColor, 5, 0.1f, PhysicEngine::Vector3(0,1,0)) {}
@@ -89,7 +90,7 @@ namespace SceneGraph {
 	CIrregularCube::CIrregularCube(const PhysicEngine::Vector3& p_center, const PhysicEngine::Vector3& p_dimension, const std::vector<float> p_massRepartition, const PhysicEngine::Quaternion& p_orientation,
 		const PhysicEngine::Vector3& p_velocity, const PhysicEngine::Vector3& p_angularVelocity, float p_linearDamping, float p_angularDamping):
 		CIrregularCube(p_center, p_dimension, p_massRepartition, p_orientation,
-			p_velocity, p_angularVelocity, p_linearDamping, p_angularDamping, PhysicEngine::Vector3(1, 1, 1), PhysicEngine::Vector3(0, 0, 0)) {}
+			p_velocity, p_angularVelocity, p_linearDamping, p_angularDamping, PhysicEngine::Vector3(1, 0, 0), PhysicEngine::Vector3(0, 0, 0)) {}
 
 	CIrregularCube::CIrregularCube(const PhysicEngine::Vector3& p_center, const PhysicEngine::Vector3& p_dimension, const std::vector<float> p_massRepartition, const PhysicEngine::Quaternion& p_orientation,
 		const PhysicEngine::Vector3& p_velocity, const PhysicEngine::Vector3& p_angularVelocity, float p_linearDamping, float p_angularDamping, const PhysicEngine::Vector3& p_color, const PhysicEngine::Vector3& p_specularColor) :
@@ -122,6 +123,7 @@ namespace SceneGraph {
 		PhysicEngine::Vector3 centerOfMass;
 		PhysicEngine::Matrix3x3 invInertiaTensor;
 		computeRigidBodyProperties(vertices, p_massRepartition, centerOfMass, inverseMass, invInertiaTensor);
+		std::cout << "Inverse inertia tenseur " << invInertiaTensor << std::endl;
 		_abstraction = std::make_shared< PhysicEngine::ARigidBody>(inverseMass, invInertiaTensor, centerOfMass, p_orientation, p_velocity, p_angularVelocity, p_linearDamping, p_angularDamping);
 
 		const PhysicEngine::Vector3 frontNWOrigin = frontNW - centerOfMass;
@@ -157,8 +159,10 @@ namespace SceneGraph {
 	void CIrregularCube::draw(std::string p_shaderName)
 	{
 		PhysicEngine::Matrix3x4 transform = _abstraction->_transformMatrix;
-		CMeshObject::draw(p_shaderName, PhysicEngine::Matrix3x4::toGlm(transform));
-
+		/*std::cout << "mat" << glm::translate(glm::mat4(1.0), Vector3::toGlm(_abstraction->_position)) << std::endl;
+		CMeshObject::draw(p_shaderName, glm::translate(glm::mat4(1.0), Vector3::toGlm(_abstraction->_position)));*/
+		std::cout << "mat" << transform << std::endl;
+		CMeshObject::draw(p_shaderName, Matrix3x4::toGlm(transform));
 		for (int i = 0; i < _trails.size(); i++) {
 			_trails[i]->draw(_trailPosition[i]);
 		}
