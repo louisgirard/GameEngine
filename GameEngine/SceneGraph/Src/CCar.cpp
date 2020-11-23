@@ -2,7 +2,7 @@
 
 namespace SceneGraph{
 
-	const std::string CCar::CAR_MODEL = "Chevrolet_Camaro_SS_Low.obj";
+	const std::string CCar::CAR_MODEL = "Cartoon_Lowpoly_Car.obj";
 
 	void CCar::computeRigidBodyProperties(float p_mass, PhysicEngine::Vector3& p_centerOfMass, float& p_inverseMass, PhysicEngine::Matrix3x3& p_invInertiaTensor) {
 		//Init
