@@ -88,7 +88,7 @@ namespace SceneGraph{
 		PhysicEngine::Vector3 centerOfMass;
 		PhysicEngine::Matrix3x3 invInertiaTensor;
 		computeRigidBodyProperties(p_mass, centerOfMass, inverseMass, invInertiaTensor);
-		_abstraction = std::make_shared< PhysicEngine::ARigidBody>( inverseMass, invInertiaTensor, p_center, p_orientation, p_velocity, p_angularVelocity, p_linearDamping, p_angularDamping);
+		_abstraction = std::make_shared< PhysicEngine::ARigidBody>( inverseMass, invInertiaTensor, centerOfMass, p_orientation, p_velocity, p_angularVelocity, p_linearDamping, p_angularDamping);
 
 		
 

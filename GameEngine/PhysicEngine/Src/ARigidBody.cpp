@@ -175,7 +175,7 @@ namespace PhysicEngine {
 	void ARigidBody::addForceAtLocalPoint(const Vector3& p_force, const Vector3& p_point)
 	{
 		//going from local coordinates to world coordinates
-		Vector3 pt = _transformMatrix.getInversion().transformPoint(p_point);
+		Vector3 pt = _transformMatrix.transformPoint(p_point);
 
 		addForceAtPoint(p_force, pt);
 	}
