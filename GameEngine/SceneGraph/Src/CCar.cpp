@@ -10,6 +10,7 @@ namespace SceneGraph{
 		p_centerOfMass = PhysicEngine::Vector3::ZERO;
 		p_inverseMass = 0;
 		std::cout << "Car dmension " << bb.extent() << std::endl;
+		_dim = Math::Vector3::convertGlm(bb.extent());
 		std::vector<glm::vec3> vertices = bb.getVertices();
 		//Compute
 		for (int i = 0; i < vertices.size(); i++) {

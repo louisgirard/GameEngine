@@ -1,13 +1,16 @@
 #include <Games/Game3/Header/CarDemo.hpp>
 
 namespace Games::Game3 {
-	CarDemo::CarDemo() : GameBase()
+	CarDemo::CarDemo() : GameBase(), _gravityAcceleration(-10), _gravity(Vector3(0,_gravityAcceleration,0))
 	{
+
 	}
 
 	CarDemo::~CarDemo() {
-		/*ShaderServer::getSingleton()->clear();
-		TextureServer::getSingleton()->clear();*/
+		_car1 = nullptr;
+		_car2 = nullptr;
+		ShaderServer::getSingleton()->clear();
+		TextureServer::getSingleton()->clear();
 	}
 
 	void CarDemo::initGame()
@@ -29,22 +32,13 @@ namespace Games::Game3 {
 		Vector3 posCar2(0, 0, -100);
 
 		PhysicEngine::Quaternion car1Orientation = Quaternion::identity();
-		PhysicEngine::Quaternion car2Orientation = Quaternion::identity();
+		PhysicEngine::Quaternion car2Orientation = Quaternion(0.f,Vector3(0.7,0,0.7));
 
 		_car1 = std::make_shared<SceneGraph::CCar>(posCar1, 10.f, car1Orientation, Vector3(10, 0, 0), Vector3::ZERO, 0.99f, 0.99f);
 		_car2 = std::make_shared<SceneGraph::CCar>(posCar2, 10.f, car2Orientation, Vector3(0, 0, 10), Vector3::ZERO, 0.99f, 0.99f);
 
-		//Appliquer une force
-		/*glDisable(GL_CULL_FACE); // disable back face culling
-
-		// 2 - We initialize multi-pass rendering
-		std::vector<std::tuple<FBOAttachment, FBOAttachmentType, TextureInternalFormat>> configuration;
-		configuration.push_back(std::tuple(FBOAttachment::colorAttachment0, FBOAttachmentType::texture, TextureInternalFormat::rgba));
-		ShaderServer::getSingleton()->initVFX(WATER, configuration, getConfiguration().getWindowWidth(), getConfiguration().getWindowHeight());
-
 		// 4 - Create planes
-		_ground = std::make_shared<HorizontalPlane>(Vector3(0.f, -40.f, zAxis), 100.f, 30.f, Vector3(0.4f, 0.9f, 0.f), Vector3(0.1f, 0.1f, 0.1f));
-		*/
+		_ground = std::make_shared<HorizontalPlane>(Vector3(0.f, -40.f, 0), 100.f, 30.f, Vector3(0.4f, 0.9f, 0.f), Vector3(0.1f, 0.1f, 0.1f));
 	}
 
 	void CarDemo::handleInput(double p_dt)
@@ -60,53 +54,20 @@ namespace Games::Game3 {
 	void CarDemo::updatePhysic(double p_dt)
 	{
 		//Test sur la distance 
-		float car1Width = 10.f;
-		if((_car1->_abstraction->getPosition() - _contactPoint).magnitude() < car1Width/2)
-		//Update car 
+		Vector3 car1_dim = _car1->getDim();
+		Vector3 car2_dim = _car2->getDim();
 
-		/*// Add forces
-		if (!_isBroken)
+		if ((_car1->_abstraction->getPosition() - _contactPoint).magnitude() < car1_dim._x / 2)
 		{
-			for (int i = 0; i < NUM_PARTICLES; i++) {
-				for (int j = 0; j < NUM_PARTICLES - 1; j++) {
-					int index = i * (NUM_PARTICLES - 1) + j;
-					_registry.add(_particles[i].get(), _springs[index].get());
-				}
-			}
-			for (int i = 0; i < _cables.size(); i++) {
-				Collisions::ParticleContact contacts[2 * NUM_PARTICLES] = {};
-				unsigned numContactsGround = _cables[i]->AddContact(contacts, 2 * NUM_PARTICLES);
-				if (numContactsGround > 0) {
-					std::vector<Collisions::ParticleContact*> contactArray;
-					for (unsigned int j = 0; j < numContactsGround; j++) {
-						contactArray.push_back(&contacts[j]);
-					}
-					_contactResolver.resolveContacts(contactArray, p_dt);
-				}
+			if ((_car2->_abstraction->getPosition() - _contactPoint).magnitude() < car2_dim._z / 2)
+			{
+				std::cout << "collisiiion !" << std::endl;
 			}
 		}
-
-		for (int i = 0; i < NUM_PARTICLES; i++)
-		{
-			_registry.add(_particles[i].get(), &_gravity);
-		}
-
-		checkWaterInteraction((float)p_dt);
-
 		_registry.updatePhysic(p_dt);
-
-		// Check for collisions
-		checkParticleCollisions((float)p_dt);
-		checkGroundCollisions((float)p_dt);
-
-		for (int i = 0; i < NUM_PARTICLES; i++)
-		{
-			_particles[i]->updatePhysic((float)p_dt);
-			//the positions of the particles are printed in the console
-			//std::cout << "index = " << i << ", x = " << _particles[i]->getPosition()._x << ", y = " << _particles[i]->getPosition()._y << ", z = " << _particles[i]->getPosition()._z << std::endl;
-		}
-
-		_registry.clear();*/
+		_car1->_abstraction->integrate(p_dt);
+		_car2->_abstraction->integrate(p_dt);
+		_registry.clear();
 	}
 
 	void CarDemo::updateFrame() {

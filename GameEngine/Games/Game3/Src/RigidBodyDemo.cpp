@@ -6,6 +6,7 @@ namespace Games::Game3 {
 	}
 
 	RigidBodyDemo::~RigidBodyDemo() {
+		_cube = nullptr;
 		ShaderServer::getSingleton()->clear();
 		TextureServer::getSingleton()->clear();
 	}

@@ -3,6 +3,7 @@
 #include <SceneGraph/Header/CMeshObject.hpp>
 #include <PhysicEngine/Header/ARigidBody.hpp>
 #include <GraphicEngine/Servers/Header/SceneServer.hpp>
+#include <Math/Header/Vector3.hpp>
 #include <string>
 
 namespace SceneGraph {
@@ -13,6 +14,7 @@ namespace SceneGraph {
 
 		void computeRigidBodyProperties(float p_mass, PhysicEngine::Vector3& p_centerOfMass, float& p_inverseMass, PhysicEngine::Matrix3x3& p_invInertiaTensor);
 
+		Math::Vector3 _dim;
 	public:
 		/*Object abstraction*/
 		std::shared_ptr<PhysicEngine::ARigidBody> _abstraction;
@@ -27,6 +29,11 @@ namespace SceneGraph {
 		* @param p_shaderName : Name of the shader we are using now to render the node
 		*/
 		virtual void draw(std::string p_shaderName);
+
+		Math::Vector3 getDim()
+		{
+			return _dim;
+		}
 
 	};
 }
