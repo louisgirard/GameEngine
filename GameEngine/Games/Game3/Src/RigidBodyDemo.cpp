@@ -19,8 +19,8 @@ namespace Games::Game3 {
 		Vector3 velocity = Vector3::ZERO;
 		Vector3 angularVelocity = Vector3::ZERO;
 		Vector3 dim(3, 1, 2);
-		Vector3 center(0, dim._y/2, 0);
-		std::vector<float> mass = { 0.1f,0.3f,0.1f,0.1f,0.1f,0.1f,0.1f,0.1f };
+		Vector3 center(5, dim._y/2, 0);
+		std::vector<float> mass = { 0.1f,5,0.1f,0.1f,0.1f,0.1f,0.1f,0.1f };
 		PhysicEngine::Quaternion orientation(Quaternion::identity());
 		float damping = 0.99f;
 		float angularDamping = 0.99f;
@@ -52,7 +52,7 @@ namespace Games::Game3 {
 	void RigidBodyDemo::updatePhysic(double p_dt)
 	{
 		if (_launch) {
-			_cube->_abstraction->addForceAtLocalPoint(Vector3(0, 30, 0), Vector3(1,0,0));
+			_cube->_abstraction->addForceAtLocalPoint(Vector3(0, 150, 0), Vector3(1,0,0));
 			_savePhysicTime += p_dt;
 			if (_savePhysicTime > 0.5) _launch = false;
 		}
