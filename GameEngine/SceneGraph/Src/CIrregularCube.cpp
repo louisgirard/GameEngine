@@ -121,7 +121,7 @@ namespace SceneGraph {
 		PhysicEngine::Vector3 centerOfMass;
 		PhysicEngine::Matrix3x3 invInertiaTensor;
 		computeRigidBodyProperties(vertices, p_massRepartition, centerOfMass, inverseMass, invInertiaTensor);
-		std::cout << "Inverse inertia tenseur " << invInertiaTensor << std::endl;
+		//std::cout << "Inverse inertia tenseur " << invInertiaTensor << std::endl;
 		_abstraction = std::make_shared< PhysicEngine::ARigidBody>(inverseMass, invInertiaTensor, centerOfMass, p_orientation, p_velocity, p_angularVelocity, p_linearDamping, p_angularDamping);
 
 		const PhysicEngine::Vector3 frontNWOrigin = frontNW - centerOfMass;
@@ -159,9 +159,9 @@ namespace SceneGraph {
 		PhysicEngine::Matrix3x4 transform = _abstraction-> _transformMatrix;
 		/*std::cout << "mat" << glm::translate(glm::mat4(1.0), Vector3::toGlm(_abstraction->_position)) << std::endl;
 		CMeshObject::draw(p_shaderName, glm::translate(glm::mat4(1.0), Vector3::toGlm(_abstraction->_position)));*/
-		std::cout << "Quaternion : " << _abstraction->_orientation << std::endl;
+		/*std::cout << "Quaternion : " << _abstraction->_orientation << std::endl;
 		std::cout << "From quaternion : " << _abstraction->_orientation.getOrientationMatrix() << std::endl;
-		std::cout << "mat" << transform << std::endl;
+		std::cout << "mat" << transform << std::endl;*/
 
 		CMeshObject::draw(p_shaderName, Matrix3x4::toGlm(transform));
 		for (int i = 0; i < _trails.size(); i++) {

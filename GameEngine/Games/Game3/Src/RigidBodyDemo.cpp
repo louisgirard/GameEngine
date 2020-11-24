@@ -54,7 +54,7 @@ namespace Games::Game3 {
 	{
 		// from first frame and during 0.5s we add a force to laucnh the cube in the air
 		if (_launch) {
-			_cube->_abstraction->addForceAtLocalPoint(Vector3(0, 20000, 0), Vector3(1,0,0));
+			_cube->_abstraction->addForceAtLocalPoint(Vector3(0, 50*(1/p_dt), 0), Vector3(1,0,0));
 			/*_savePhysicTime += p_dt;
 			if (_savePhysicTime > 0.5)*/ _launch = false;
 		}

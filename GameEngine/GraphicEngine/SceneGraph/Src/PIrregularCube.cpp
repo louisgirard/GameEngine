@@ -29,10 +29,6 @@ namespace GraphicEngine::PSceneGraph {
 			frontSW, frontSE, frontNE, frontNW, backSW, backSE, backNE, backNW
 		};
 
-		std::cout << "Quad vertices " << std::endl;
-		for (int i = 0; i < quadVertices.size(); i++) {
-			std::cout << "Vertice " << quadVertices[i] << std::endl;
-		}
 		//Normals
 		std::vector<glm::vec3> quadNormal =
 		{
