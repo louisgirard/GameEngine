@@ -2,8 +2,6 @@
 
 #include <Games/Header/GameBase.hpp>
 #include <SceneGraph/Header/CCar.hpp>
-#include <PhysicEngine/Forces/Header/BodyGravity.hpp>
-#include <PhysicEngine/Forces/Header/BodyForceRegistry.hpp>
 
 namespace Games::Game3 {
 	class CarDemo : public GameBase
@@ -31,17 +29,15 @@ namespace Games::Game3 {
 		/*Updates the visual representations of the particles*/
 		virtual void updateFrame();
 
-		/*Gravity acceleration*/
-		float _gravityAcceleration;
-
-		/* The force generator for gravity in the game */
-		Forces::BodyGravity _gravity;
-
-		/* Holds all the forces and the Rigidbody they're associated with */
-		Forces::BodyForceRegistry _registry;
-
 		std::shared_ptr<SceneGraph::CCar> _car1;
 		std::shared_ptr<SceneGraph::CCar> _car2;
+
+		bool _collision;
+		bool _collisionComputed;
+
+		float _distanceToCollision1;
+		float _distanceToCollision2;
+		
 		/* Holds the ground plane */
 		std::shared_ptr<HorizontalPlane> _ground;
 

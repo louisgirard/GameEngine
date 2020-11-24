@@ -64,12 +64,13 @@ namespace Games::Game3 {
 		GameBase::updateFrame();
 		// 0 - Update Camera position
 		//cameraFollowMaster();
-		_saveTime += getDt();
 
 		if (_saveTime > 0.2) {
 			_cube->markOrigin();
 			_saveTime = 0;
 		}
+		_saveTime += getDt();
+
 
 		// 1 - Matrices and initialisations
 		ShaderProgram* currentShader = nullptr;

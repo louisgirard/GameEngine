@@ -4,17 +4,24 @@ namespace SceneGraph{
 
 	const std::string CCar::CAR_MODEL = "Chevrolet_Camaro_SS_Low.obj";
 
-	void CCar::computeRigidBodyProperties(float p_mass, PhysicEngine::Vector3& p_centerOfMass, float& p_inverseMass, PhysicEngine::Matrix3x3& p_invInertiaTensor) {
+	void CCar::computeRigidBodyProperties(float p_mass, const PhysicEngine::Vector3& p_center, PhysicEngine::Vector3& p_centerOfMass, float& p_inverseMass, PhysicEngine::Matrix3x3& p_invInertiaTensor) {
 		//Init
 		GraphicEngine::SceneBase::BoundingBox bb = computeSceneBoundingBox();
 		p_centerOfMass = PhysicEngine::Vector3::ZERO;
-		p_inverseMass = 0;
-		std::cout << "Car dmension " << bb.extent() << std::endl;
 		_dim = Math::Vector3::convertGlm(bb.extent());
 		std::vector<glm::vec3> vertices = bb.getVertices();
 		//Compute
+		float weight = 1.0f;
 		for (int i = 0; i < vertices.size(); i++) {
-			p_centerOfMass += PhysicEngine::Vector3::convertGlm(vertices[i]) * (p_mass / 8.f);
+			if(vertices[i].y>0){
+				weight = 1.0f;
+				std::cout << "High" << std::endl;
+			}
+			else {
+				weight = 2.0f;
+				std::cout << "Low" << std::endl;
+			}
+			p_centerOfMass += (PhysicEngine::Vector3::convertGlm(vertices[i]) + p_center) * (p_mass / weight);
 		}
 
 		//Compute inverse
@@ -22,7 +29,7 @@ namespace SceneGraph{
 		else {
 			p_inverseMass = (1.f / p_inverseMass);
 		}
-		p_centerOfMass *= p_inverseMass;
+		p_centerOfMass *= (1/3.0f)* p_inverseMass;
 
 		// Tensor 
 		//Init 
@@ -85,10 +92,11 @@ namespace SceneGraph{
 		std::filesystem::path meshPath = Games::dataPath() / "car" / CAR_MODEL;
 		addSon(GraphicEngine::Servers::SceneServer::getSingleton()->load(meshPath, true));
 
-		float inverseMass;
+		float inverseMass = p_mass;
 		PhysicEngine::Vector3 centerOfMass;
 		PhysicEngine::Matrix3x3 invInertiaTensor;
-		computeRigidBodyProperties(p_mass, centerOfMass, inverseMass, invInertiaTensor);
+		computeRigidBodyProperties(p_mass, p_center, centerOfMass, inverseMass, invInertiaTensor);
+		std::cout << "Centre de masse " << centerOfMass << std::endl;
 		_abstraction = std::make_shared< PhysicEngine::ARigidBody>( inverseMass, invInertiaTensor, centerOfMass, p_orientation, p_velocity, p_angularVelocity, p_linearDamping, p_angularDamping);
 	}
 

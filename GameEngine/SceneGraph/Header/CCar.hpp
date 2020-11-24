@@ -12,7 +12,7 @@ namespace SceneGraph {
 	private:
 		const static std::string CAR_MODEL;
 
-		void computeRigidBodyProperties(float p_mass, PhysicEngine::Vector3& p_centerOfMass, float& p_inverseMass, PhysicEngine::Matrix3x3& p_invInertiaTensor);
+		void computeRigidBodyProperties(float p_mass, const PhysicEngine::Vector3& p_center, PhysicEngine::Vector3& p_centerOfMass, float& p_inverseMass, PhysicEngine::Matrix3x3& p_invInertiaTensor);
 
 		Math::Vector3 _dim;
 	public:
