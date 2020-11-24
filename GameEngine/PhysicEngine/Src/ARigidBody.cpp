@@ -108,19 +108,19 @@ namespace PhysicEngine {
 
 	inline void ARigidBody::s_calculateTransformMatrix(Matrix3x4& p_transformMatrix, const Vector3& p_position, const Quaternion& p_orientation)
 	{
-		p_transformMatrix._values[0] = 1 - 2 * (p_orientation._complex[1] * p_orientation._complex[1] + p_orientation._complex[2] * p_orientation._complex[2]);
-		p_transformMatrix._values[1] = 2 * (p_orientation._complex[0] * p_orientation._complex[1] + p_orientation._r * p_orientation._complex[2]);
-		p_transformMatrix._values[2] = 2 * (p_orientation._complex[0] * p_orientation._complex[2] - p_orientation._r * p_orientation._complex[1]);
+		p_transformMatrix._values[0] = 1 - 2 * p_orientation._complex[1] * p_orientation._complex[1] - 2 * p_orientation._complex[2] * p_orientation._complex[2];
+		p_transformMatrix._values[1] = 2 * p_orientation._complex[0] * p_orientation._complex[1] - 2 * p_orientation._r * p_orientation._complex[2];
+		p_transformMatrix._values[2] = 2 * p_orientation._complex[0] * p_orientation._complex[2] + 2 * p_orientation._r * p_orientation._complex[1];
 		p_transformMatrix._values[3] = p_position._x;
 
-		p_transformMatrix._values[4] = 2 * (p_orientation._complex[0] * p_orientation._complex[1] -p_orientation._r * p_orientation._complex[2]);
-		p_transformMatrix._values[5] = 1 - 2 * (p_orientation._complex[0] * p_orientation._complex[0] + p_orientation._complex[2] * p_orientation._complex[2]);
-		p_transformMatrix._values[6] = 2 * (p_orientation._complex[1] * p_orientation._complex[2] + p_orientation._r * p_orientation._complex[0]);
+		p_transformMatrix._values[4] = 2 * p_orientation._complex[0] * p_orientation._complex[1] + 2 * p_orientation._r * p_orientation._complex[2];
+		p_transformMatrix._values[5] = 1 - 2 * p_orientation._complex[0] * p_orientation._complex[0] - 2 * p_orientation._complex[2] * p_orientation._complex[2];
+		p_transformMatrix._values[6] = 2 * p_orientation._complex[1] * p_orientation._complex[2] - 2 * p_orientation._r * p_orientation._complex[0];
 		p_transformMatrix._values[7] = p_position._y;
 
-		p_transformMatrix._values[8] = 2 * (p_orientation._complex[0] * p_orientation._complex[2] + p_orientation._r * p_orientation._complex[1]);
-		p_transformMatrix._values[9] = 2 * (p_orientation._complex[1] * p_orientation._complex[2] - p_orientation._r * p_orientation._complex[0]);
-		p_transformMatrix._values[10] = 1 - 2 * (p_orientation._complex[0] * p_orientation._complex[0] + p_orientation._complex[1] * p_orientation._complex[1]);
+		p_transformMatrix._values[8] = 2 * p_orientation._complex[0] * p_orientation._complex[2] - 2 * p_orientation._r * p_orientation._complex[1];
+		p_transformMatrix._values[9] = 2 * p_orientation._complex[1] * p_orientation._complex[2] + 2 * p_orientation._r * p_orientation._complex[0];
+		p_transformMatrix._values[10] = 1 - 2 * p_orientation._complex[0] * p_orientation._complex[0] - 2 * p_orientation._complex[1] * p_orientation._complex[1];
 		p_transformMatrix._values[11] = p_position._z;
 	}
 
