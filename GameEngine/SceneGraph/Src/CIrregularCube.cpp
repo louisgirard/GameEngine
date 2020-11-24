@@ -70,10 +70,8 @@ namespace SceneGraph {
 		p_invInertiaTensor._values[7] = -i12;
 		p_invInertiaTensor._values[8] = i22;
 
-		std::cout << "Inertia Tensor before invertion" << p_invInertiaTensor << std::endl;
 		//Compute inverse
 		p_invInertiaTensor.invert();
-		std::cout << "Inverse inertia tenseur computed" << p_invInertiaTensor << std::endl;
 	}
 
 	CIrregularCube::CIrregularCube(const PhysicEngine::Vector3& p_center, const PhysicEngine::Vector3& p_dimension, const std::vector<float> p_massRepartition)
@@ -158,10 +156,13 @@ namespace SceneGraph {
 
 	void CIrregularCube::draw(std::string p_shaderName)
 	{
-		PhysicEngine::Matrix3x4 transform = _abstraction->_transformMatrix;
+		PhysicEngine::Matrix3x4 transform = _abstraction-> _transformMatrix;
 		/*std::cout << "mat" << glm::translate(glm::mat4(1.0), Vector3::toGlm(_abstraction->_position)) << std::endl;
 		CMeshObject::draw(p_shaderName, glm::translate(glm::mat4(1.0), Vector3::toGlm(_abstraction->_position)));*/
+		std::cout << "Quaternion : " << _abstraction->_orientation << std::endl;
+		std::cout << "From quaternion : " << _abstraction->_orientation.getOrientationMatrix() << std::endl;
 		std::cout << "mat" << transform << std::endl;
+
 		CMeshObject::draw(p_shaderName, Matrix3x4::toGlm(transform));
 		for (int i = 0; i < _trails.size(); i++) {
 			_trails[i]->draw(_trailPosition[i]);

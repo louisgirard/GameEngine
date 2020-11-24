@@ -2,7 +2,7 @@
 
 namespace SceneGraph{
 
-	const std::string CCar::CAR_MODEL = "Cartoon_Lowpoly_Car.obj";
+	const std::string CCar::CAR_MODEL = "Chevrolet_Camaro_SS_Low.obj";
 
 	void CCar::computeRigidBodyProperties(float p_mass, PhysicEngine::Vector3& p_centerOfMass, float& p_inverseMass, PhysicEngine::Matrix3x3& p_invInertiaTensor) {
 		//Init
@@ -83,22 +83,19 @@ namespace SceneGraph{
 	CCar::CCar(const PhysicEngine::Vector3& p_center, float p_mass, const PhysicEngine::Quaternion& p_orientation, const PhysicEngine::Vector3& p_velocity, const PhysicEngine::Vector3& p_angularVelocity, float p_linearDamping, float p_angularDamping) {
 
 		std::filesystem::path meshPath = Games::dataPath() / "car" / CAR_MODEL;
-		addSon(GraphicEngine::Servers::SceneServer::getSingleton()->load(meshPath));
+		addSon(GraphicEngine::Servers::SceneServer::getSingleton()->load(meshPath, true));
 
 		float inverseMass;
 		PhysicEngine::Vector3 centerOfMass;
 		PhysicEngine::Matrix3x3 invInertiaTensor;
 		computeRigidBodyProperties(p_mass, centerOfMass, inverseMass, invInertiaTensor);
 		_abstraction = std::make_shared< PhysicEngine::ARigidBody>( inverseMass, invInertiaTensor, centerOfMass, p_orientation, p_velocity, p_angularVelocity, p_linearDamping, p_angularDamping);
-
-		
-
 	}
 
 	void CCar::draw(std::string p_shaderName)
 	{
 		PhysicEngine::Matrix3x4 transform = _abstraction->_transformMatrix;
-		CMeshObject::draw(p_shaderName, PhysicEngine::Matrix3x4::toGlm(transform));
+		EmptyNode::draw(p_shaderName, PhysicEngine::Matrix3x4::toGlm(transform));
 	}
 
 }

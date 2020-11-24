@@ -7,7 +7,7 @@
 #include <string>
 
 namespace SceneGraph {
-	class CCar : public CMeshObject
+	class CCar : public EmptyNode
 	{
 	private:
 		const static std::string CAR_MODEL;

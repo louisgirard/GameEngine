@@ -37,9 +37,6 @@ namespace Games::Game3 {
 		// 3 - Create body
 		_cube = std::make_shared<SceneGraph::CIrregularCube>(center, dim, mass, orientation,velocity,angularVelocity,damping,angularDamping);
 
-		std::cout << "Cube " << center << std::endl;
-		std::cout << "CameraPosition" << _camera.getPosition();
-
 		// 4 - Add force to registery
 		_registry.add((_cube->_abstraction.get()),&_gravity);
 

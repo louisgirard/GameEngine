@@ -108,21 +108,20 @@ namespace PhysicEngine {
 
 	inline void ARigidBody::s_calculateTransformMatrix(Matrix3x4& p_transformMatrix, const Vector3& p_position, const Quaternion& p_orientation)
 	{
-		p_transformMatrix._values[0] = 1 - 2 * p_orientation._complex[1] * p_orientation._complex[1] - 2 * p_orientation._complex[2] * p_orientation._complex[2];
-		p_transformMatrix._values[1] = 2 * p_orientation._complex[0] * p_orientation._complex[1] - 2 * p_orientation._r * p_orientation._complex[2];
-		p_transformMatrix._values[2] = 2 * p_orientation._complex[0] * p_orientation._complex[2] - 2 * p_orientation._r * p_orientation._complex[1];
+		p_transformMatrix._values[0] = 1 - 2 * (p_orientation._complex[1] * p_orientation._complex[1] + p_orientation._complex[2] * p_orientation._complex[2]);
+		p_transformMatrix._values[1] = 2 * (p_orientation._complex[0] * p_orientation._complex[1] + p_orientation._r * p_orientation._complex[2]);
+		p_transformMatrix._values[2] = 2 * (p_orientation._complex[0] * p_orientation._complex[2] - p_orientation._r * p_orientation._complex[1]);
 		p_transformMatrix._values[3] = p_position._x;
 
-		p_transformMatrix._values[4] = 2 * p_orientation._complex[0] * p_orientation._complex[1] - 2 * p_orientation._r * p_orientation._complex[2];
-		p_transformMatrix._values[5] = 1 - 2 * p_orientation._complex[0] * p_orientation._complex[0] - 2 * p_orientation._complex[2] * p_orientation._complex[2];
-		p_transformMatrix._values[6] = 2 * p_orientation._complex[1] * p_orientation._complex[2] - 2 * p_orientation._r * p_orientation._complex[0];
+		p_transformMatrix._values[4] = 2 * (p_orientation._complex[0] * p_orientation._complex[1] -p_orientation._r * p_orientation._complex[2]);
+		p_transformMatrix._values[5] = 1 - 2 * (p_orientation._complex[0] * p_orientation._complex[0] + p_orientation._complex[2] * p_orientation._complex[2]);
+		p_transformMatrix._values[6] = 2 * (p_orientation._complex[1] * p_orientation._complex[2] + p_orientation._r * p_orientation._complex[0]);
 		p_transformMatrix._values[7] = p_position._y;
 
-		p_transformMatrix._values[8] = 2 * p_orientation._complex[0] * p_orientation._complex[2] - 2 * p_orientation._r * p_orientation._complex[1];
-		p_transformMatrix._values[9] = 2 * p_orientation._complex[1] * p_orientation._complex[2] - 2 * p_orientation._r * p_orientation._complex[0];
-		p_transformMatrix._values[10] = 1 - 2 * p_orientation._complex[0] * p_orientation._complex[0] - 2 * p_orientation._complex[1] * p_orientation._complex[1];
+		p_transformMatrix._values[8] = 2 * (p_orientation._complex[0] * p_orientation._complex[2] + p_orientation._r * p_orientation._complex[1]);
+		p_transformMatrix._values[9] = 2 * (p_orientation._complex[1] * p_orientation._complex[2] - p_orientation._r * p_orientation._complex[0]);
+		p_transformMatrix._values[10] = 1 - 2 * (p_orientation._complex[0] * p_orientation._complex[0] + p_orientation._complex[1] * p_orientation._complex[1]);
 		p_transformMatrix._values[11] = p_position._z;
-
 	}
 
 	void ARigidBody::calculateDerivedData() {
@@ -190,7 +189,7 @@ namespace PhysicEngine {
 	{
 		//linear acceleration
 		Vector3 acceleration = _forceAccum * _inverseMass;
-		std::cout << "Start Angular velocity " << _angularVelocity << std::endl;
+		//std::cout << "Start Angular velocity " << _angularVelocity << std::endl;
 		//angular acceleration
 		Vector3 angularAcceleration = _inverseInertiaTensorWorld * _torqueAccum;
 
@@ -210,14 +209,14 @@ namespace PhysicEngine {
 		//update orientation
 		_orientation.updateByAngularVelocity(_angularVelocity, p_dt);
 
-		std::cout << "Force" << _forceAccum << std::endl;
+		/*std::cout << "Force" << _forceAccum << std::endl;
 		std::cout << "Acceleration " << acceleration << std::endl;
 		std::cout << "DT" << p_dt << std::endl;
 		std::cout << "Velocity " << _velocity << std::endl;
 		std::cout << "Angular velocity " << _angularVelocity << std::endl;
 		std::cout << "Orientation " << _orientation << std::endl;
 		std::cout << "Torque " << _torqueAccum << std::endl;
-		std::cout << "Inverse Tensor" << _inverseInertiaTensorWorld << std::endl;
+		std::cout << "Inverse Tensor" << _inverseInertiaTensorWorld << std::endl;*/
 
 
 		//update matrices and normalize orientation
