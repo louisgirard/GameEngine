@@ -1,82 +1,49 @@
 #include <Games/Game3/Header/CarDemo.hpp>
 
 namespace Games::Game3 {
-	CarDemo::CarDemo() : GameBase()
+	CarDemo::CarDemo() : GameBase(), _gravityAcceleration(-10), _gravity(Vector3(0,_gravityAcceleration,0))
 	{
+
 	}
 
 	CarDemo::~CarDemo() {
-		/*ShaderServer::getSingleton()->clear();
-		TextureServer::getSingleton()->clear();*/
+		_car1 = nullptr;
+		_car2 = nullptr;
+		ShaderServer::getSingleton()->clear();
+		TextureServer::getSingleton()->clear();
 	}
 
 	void CarDemo::initGame()
 	{
-		/*glDisable(GL_CULL_FACE); // disable back face culling
-
-		// 0 - Init variable 
-		_registry = *new Forces::ParticleForceRegistry();
-		float zAxis = -80;
-
-		// 1 - We load the shaders
+		//1 - We load the shaders
 		{
 			std::cout << "Init 1 - Loading Shader " << std::endl;
 			ShaderServer::getSingleton()->init();
-			ShaderServer::getSingleton()->loadAndRegisterShader(GraphicEngine::ShaderProgramType::VFX, WATER, "water.vert", "water.frag");
 		}
+		//Le registery
+		_registry = *new Forces::BodyForceRegistry();
 
-		// 2 - We initialize multi-pass rendering
-		std::vector<std::tuple<FBOAttachment, FBOAttachmentType, TextureInternalFormat>> configuration;
-		configuration.push_back(std::tuple(FBOAttachment::colorAttachment0, FBOAttachmentType::texture, TextureInternalFormat::rgba));
-		ShaderServer::getSingleton()->initVFX(WATER, configuration, getConfiguration().getWindowWidth(), getConfiguration().getWindowHeight());
+		//Point de contact
+		_contactPoint = Vector3::ZERO;
 
-		// 3 - Binding Keys
-		_keyboard.bindActionToKey(KeyAction::BREAKBLOB, 98);
-		_keyboard.bindActionToKey(KeyAction::FUSEBLOB, 102);
+
+		//Creer les deux CCAr
+		Vector3 posCar1(-100, 0, 0);
+		Vector3 posCar2(0, 0, -100);
+
+		PhysicEngine::Quaternion car1Orientation = Quaternion::identity();
+		PhysicEngine::Quaternion car2Orientation = Quaternion(0.f,Vector3(0.7,0,0.7));
+
+		_car1 = std::make_shared<SceneGraph::CCar>(posCar1, 10.f, car1Orientation, Vector3(10, 0, 0), Vector3::ZERO, 0.99f, 0.99f);
+		_car2 = std::make_shared<SceneGraph::CCar>(posCar2, 10.f, car2Orientation, Vector3(0, 0, 10), Vector3::ZERO, 0.99f, 0.99f);
 
 		// 4 - Create planes
-		_ground = std::make_shared<HorizontalPlane>(Vector3(0.f, -40.f, zAxis), 100.f, 30.f, Vector3(0.4f, 0.9f, 0.f), Vector3(0.1f, 0.1f, 0.1f));
-
-		_water = std::make_shared<HorizontalPlane>(Vector3(0.f, -50.f, zAxis), 500.f, 30.f, Vector3(0.32f, 0.76f, 0.78f), Vector3(0.8f, 0.8f, 0.8f));
-
-		// 5 -  Create particles
-		generateParticles(zAxis);*/
+		_ground = std::make_shared<HorizontalPlane>(Vector3(0.f, -40.f, 0), 100.f, 30.f, Vector3(0.4f, 0.9f, 0.f), Vector3(0.1f, 0.1f, 0.1f));
 	}
 
 	void CarDemo::handleInput(double p_dt)
 	{
-		/*if (_keyboard.isPressed(KeyAction::QUIT)) {
-			quit();
-		}
-
-		// Move blob
-		float moveCoefficient = 20;
-		if (_keyboard.isPressed(KeyAction::MOVEFRONT))
-		{
-			_registry.add(_particles[0].get(), new Forces::ParticleGravity(Vector3::UP * 50));
-		}
-		if (_keyboard.isPressed(KeyAction::MOVEBACK))
-		{
-			_registry.add(_particles[0].get(), new Forces::ParticleGravity(Vector3::DOWN * moveCoefficient));
-		}
-		if (_keyboard.isPressed(KeyAction::MOVELEFT))
-		{
-			_registry.add(_particles[0].get(), new Forces::ParticleGravity(Vector3::LEFT * moveCoefficient));
-		}
-		if (_keyboard.isPressed(KeyAction::MOVERIGHT))
-		{
-			_registry.add(_particles[0].get(), new Forces::ParticleGravity(Vector3::RIGHT * moveCoefficient));
-		}
-
-		// Break blob
-		if (_keyboard.isPressed(KeyAction::BREAKBLOB))
-		{
-			_isBroken = true;
-		}
-		if (_keyboard.isPressed(KeyAction::FUSEBLOB))
-		{
-			_isBroken = false;
-		}*/
+		GameBase::handleInput(p_dt);
 	}
 
 	void CarDemo::reshape(GLint p_width, GLint p_height) {
@@ -86,49 +53,21 @@ namespace Games::Game3 {
 
 	void CarDemo::updatePhysic(double p_dt)
 	{
-		/*// Add forces
-		if (!_isBroken)
+		//Test sur la distance 
+		Vector3 car1_dim = _car1->getDim();
+		Vector3 car2_dim = _car2->getDim();
+
+		if ((_car1->_abstraction->getPosition() - _contactPoint).magnitude() < car1_dim._x / 2)
 		{
-			for (int i = 0; i < NUM_PARTICLES; i++) {
-				for (int j = 0; j < NUM_PARTICLES - 1; j++) {
-					int index = i * (NUM_PARTICLES - 1) + j;
-					_registry.add(_particles[i].get(), _springs[index].get());
-				}
-			}
-			for (int i = 0; i < _cables.size(); i++) {
-				Collisions::ParticleContact contacts[2 * NUM_PARTICLES] = {};
-				unsigned numContactsGround = _cables[i]->AddContact(contacts, 2 * NUM_PARTICLES);
-				if (numContactsGround > 0) {
-					std::vector<Collisions::ParticleContact*> contactArray;
-					for (unsigned int j = 0; j < numContactsGround; j++) {
-						contactArray.push_back(&contacts[j]);
-					}
-					_contactResolver.resolveContacts(contactArray, p_dt);
-				}
+			if ((_car2->_abstraction->getPosition() - _contactPoint).magnitude() < car2_dim._z / 2)
+			{
+				std::cout << "collisiiion !" << std::endl;
 			}
 		}
-
-		for (int i = 0; i < NUM_PARTICLES; i++)
-		{
-			_registry.add(_particles[i].get(), &_gravity);
-		}
-
-		checkWaterInteraction((float)p_dt);
-
 		_registry.updatePhysic(p_dt);
-
-		// Check for collisions
-		checkParticleCollisions((float)p_dt);
-		checkGroundCollisions((float)p_dt);
-
-		for (int i = 0; i < NUM_PARTICLES; i++)
-		{
-			_particles[i]->updatePhysic((float)p_dt);
-			//the positions of the particles are printed in the console
-			//std::cout << "index = " << i << ", x = " << _particles[i]->getPosition()._x << ", y = " << _particles[i]->getPosition()._y << ", z = " << _particles[i]->getPosition()._z << std::endl;
-		}
-
-		_registry.clear();*/
+		_car1->_abstraction->integrate(p_dt);
+		_car2->_abstraction->integrate(p_dt);
+		_registry.clear();
 	}
 
 	void CarDemo::updateFrame() {
