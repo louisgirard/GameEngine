@@ -9,6 +9,7 @@ namespace Games::Game3 {
 		_cube = nullptr;
 		ShaderServer::getSingleton()->clear();
 		TextureServer::getSingleton()->clear();
+		SceneServer::getSingleton()->clear();
 	}
 
 	void RigidBodyDemo::initGame()
@@ -51,11 +52,13 @@ namespace Games::Game3 {
 
 	void RigidBodyDemo::updatePhysic(double p_dt)
 	{
+		// from first frame and during 0.5s we add a force to laucnh the cube in the air
 		if (_launch) {
-			_cube->_abstraction->addForceAtLocalPoint(Vector3(0, 150, 0), Vector3(1,0,0));
-			_savePhysicTime += p_dt;
-			if (_savePhysicTime > 0.5) _launch = false;
+			_cube->_abstraction->addForceAtLocalPoint(Vector3(0, 20000, 0), Vector3(1,0,0));
+			/*_savePhysicTime += p_dt;
+			if (_savePhysicTime > 0.5)*/ _launch = false;
 		}
+		//Physic Update
 		_registry.updatePhysic(p_dt);
 		_cube->_abstraction->integrate(p_dt);
 	}

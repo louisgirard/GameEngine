@@ -32,11 +32,9 @@ namespace Games::Game3 {
 		std::shared_ptr<SceneGraph::CCar> _car1;
 		std::shared_ptr<SceneGraph::CCar> _car2;
 
+		/*Check if a collision happened*/
 		bool _collision;
-		bool _collisionComputed;
 
-		float _distanceToCollision1;
-		float _distanceToCollision2;
 		
 		/* Holds the ground plane */
 		std::shared_ptr<HorizontalPlane> _ground;

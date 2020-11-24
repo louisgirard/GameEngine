@@ -15,11 +15,9 @@ namespace SceneGraph{
 		for (int i = 0; i < vertices.size(); i++) {
 			if(vertices[i].y>0){
 				weight = 1.0f;
-				std::cout << "High" << std::endl;
 			}
 			else {
 				weight = 2.0f;
-				std::cout << "Low" << std::endl;
 			}
 			p_centerOfMass += (PhysicEngine::Vector3::convertGlm(vertices[i]) + p_center) * (p_mass / weight);
 		}
@@ -96,7 +94,6 @@ namespace SceneGraph{
 		PhysicEngine::Vector3 centerOfMass;
 		PhysicEngine::Matrix3x3 invInertiaTensor;
 		computeRigidBodyProperties(p_mass, p_center, centerOfMass, inverseMass, invInertiaTensor);
-		std::cout << "Centre de masse " << centerOfMass << std::endl;
 		_abstraction = std::make_shared< PhysicEngine::ARigidBody>( inverseMass, invInertiaTensor, centerOfMass, p_orientation, p_velocity, p_angularVelocity, p_linearDamping, p_angularDamping);
 	}
 

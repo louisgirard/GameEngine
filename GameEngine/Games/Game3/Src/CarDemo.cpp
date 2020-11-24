@@ -1,15 +1,17 @@
 #include <Games/Game3/Header/CarDemo.hpp>
 
 namespace Games::Game3 {
-	CarDemo::CarDemo() : GameBase(){
+	CarDemo::CarDemo() : GameBase(), _collision(false){
 
 	}
 
 	CarDemo::~CarDemo() {
+
 		_car1 = nullptr;
 		_car2 = nullptr;
 		ShaderServer::getSingleton()->clear();
 		TextureServer::getSingleton()->clear();
+		SceneServer::getSingleton()->clear();
 	}
 
 	void CarDemo::initGame()
@@ -20,19 +22,20 @@ namespace Games::Game3 {
 			ShaderServer::getSingleton()->init();
 		}
 
-		// 0 - Init Camera
+		// 2 - Init Camera
 		_camera.setPosition(Vector3::toGlm(Vector3(0, 50,0)));
 		_camera.rotateLocal(Vector3::toGlm((Vector3(1, 0, 0))),-PI/2);
 
-		//Point de contact
+		// 3 - Init contact point
 		_contactPoint = Vector3::ZERO;
 
+		// 4 - Init Car
 		Vector3 center1 = Vector3(1.9593, 1.34115, -50);
 		Vector3 center2 = Vector3(-50, 1.34115, 0);
 
 		PhysicEngine::Quaternion car1Orientation = Quaternion::identity();
+		// Rotate from 90 in Y axis
 		PhysicEngine::Quaternion car2Orientation = Quaternion(0.7071068,Vector3(0, 0.7071068,0));
-		std::cout << "Quaternion orientation : " << car2Orientation.getOrientationMatrix() << std::endl;
 
 		float speed = 30;
 		_car1 = std::make_shared<SceneGraph::CCar>(center1, 10.f, car1Orientation, Vector3(0, 0, speed), Vector3::ZERO, 0.99f, 0.99f);
@@ -40,12 +43,6 @@ namespace Games::Game3 {
 
 		// 4 - Create planes
 		_ground = std::make_shared<HorizontalPlane>(Vector3(0.f, 0.f, 0), 100.f, 100.f, Vector3(0.4f, 0.4f, 0.4f), Vector3(0.1f, 0.1f, 0.1f));
-
-		//Test sur la distance 
-		_distanceToCollision1 = 4.924125;
-		_distanceToCollision2 = 4.924125;
-		_collision = false;
-		_collisionComputed = false;
 	}
 
 	void CarDemo::handleInput(double p_dt)
@@ -60,23 +57,21 @@ namespace Games::Game3 {
 
 	void CarDemo::updatePhysic(double p_dt)
 	{
+		/*If there is a collision we apply a force at the point of the collision*/
 		if (!_collision) {
-			if (_car1->_abstraction->getPosition()._z > _contactPoint._z)
+			if (_car1->_abstraction->getPosition()._z >= _contactPoint._z)
 			{
-				if (_car2->_abstraction->getPosition()._x > _contactPoint._x)
+				if (_car2->_abstraction->getPosition()._x >= _contactPoint._x)
 				{
-					//std::cout << "collisiiion !" << std::endl;
+					float force = 200000;
+					_car1->_abstraction->addForceAtPoint(Vector3(force, 0, 0), _contactPoint + Vector3(0, 1.34115, 0));
+					_car2->_abstraction->addForceAtPoint(Vector3(-force, 0, 0), _contactPoint + Vector3(0, 1.34115, 0));
 					_collision = true;
 				}
 			}
 		}
-		if(_collision && !_collisionComputed) {
-			float force = 350;
-			_car1->_abstraction->addForceAtPoint(Vector3(force, 0, 0), _contactPoint+Vector3(0, 1.34115,0));
-			_car2->_abstraction->addForceAtPoint(Vector3(-force, 0, 0), _contactPoint + Vector3(0, 1.34115, 0));
-			_collisionComputed = false;
-		}
 		
+		//Update car physic
 		_car1->_abstraction->integrate(p_dt);
 		_car2->_abstraction->integrate(p_dt);
 		

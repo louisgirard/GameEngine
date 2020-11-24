@@ -12,6 +12,14 @@ namespace SceneGraph {
 	private:
 		const static std::string CAR_MODEL;
 
+		/*
+		* Compute every rigidBody properties needed 
+		* @param p_mass :total mass
+		* @param p_center : model center
+		* @param p_centerOfMass : center of mass (out)
+		* @param p_inverseMass : inverse mass (out)
+		* @param p_invInertiaTensor : inverse inertia tensor of the model (out)
+		*/
 		void computeRigidBodyProperties(float p_mass, const PhysicEngine::Vector3& p_center, PhysicEngine::Vector3& p_centerOfMass, float& p_inverseMass, PhysicEngine::Matrix3x3& p_invInertiaTensor);
 
 		Math::Vector3 _dim;
