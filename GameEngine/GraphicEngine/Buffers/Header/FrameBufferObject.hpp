@@ -2,6 +2,7 @@
 #define _GRAPHIC_ENGINE_FRAME_BUFFER_OBJECT_HPP_
 
 #include <GraphicEngine/Buffers/Header/RenderBuffer.hpp>
+#include <vector>
 
 namespace GraphicEngine::Buffers {
 		class FrameBufferObject

@@ -2,6 +2,7 @@
 #define _GRAPHIC_ENGINE_GEOMETRY_BUFFER_HPP_
 
 #include <GraphicEngine/Buffers/Header/FrameBuffer.hpp>
+#include <vector>
 
 namespace GraphicEngine::Buffers {
 		class GeometryBuffer : public FrameBuffer
