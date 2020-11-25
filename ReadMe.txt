@@ -1,4 +1,8 @@
 Utilisation :
+Demo 1 et 2 du TP3 :
+Il suffit de lancer l'application
+
+Blob Game :
 - Déplacement avec les touches directionnelles
 - B : Séparer le blob
 - F : Reconstituer le blob

@@ -12,20 +12,21 @@ OBJ=build/Main.o \
 build/Demo.o \
 build/BlobGame.o \
 build/ShooterGame.o \
+build/RigidBodyDemo.o build/CarDemo.o \
 build/GameSelection.o build/GameBase.o build/GameMenu.o build/GameConfiguration.o build/KeyboardStatus.o build/MouseStatus.o \
-build/ParticleCable.o build/ParticleRod.o \
-build/ParticleForceRegistry.o build/ParticleGravity.o build/ParticleDrag.o \
-build/ParticleSpring.o build/ParticleAnchoredSpring.o build/ParticleBungee.o build/ParticleBuoyancy.o \
-build/ParticleContact.o build/ParticleContactResolver.o \
-build/Vector3.o build/CParticle.o build/AParticle.o build/AHorizontalPlane.o \
 build/ElementBufferObject.o build/GeometryBuffer.o build/VertexArrayObject.o build/FrameBuffer.o build/MultipleDataVBO.o build/VertexBufferObject.o build/FrameBufferObject.o build/RenderBuffer.o \
 build/Color.o build/PhongMaterial.o \
 build/BoundingBox.o build/Camera.o build/ScreenRenderQuad.o build/SkyboxGeometry.o build/Text.o \
-build/Mesh.o build/PMeshObject.o build/TransformStack.o build/PHorizontalPlane.o build/PParticle.o \
+build/Mesh.o build/PMeshObject.o build/TransformStack.o build/PHorizontalPlane.o build/PParticle.o build/PIrregularCube.o \
 build/LightServer.o build/SceneServer.o build/ShaderServer.o build/TextureServer.o \
 build/MeshShader.o build/ShaderParser.o build/ShaderSource.o build/VFXShader.o build/Shader.o build/ShaderProgram.o build/SkyboxShader.o \
 build/CubeMap.o build/Texture2D.o \
-build/CMeshObject.o build/EmptyNode.o build/CHorizontalPlane.o \
+build/Matrix3x3.o build/Matrix3x4.o build/Quaternion.o build/Vector3.o \
+build/ParticleCable.o build/ParticleRod.o build/ParticleContact.o build/ParticleContactResolver.o build/PlaneContactGenerator.o \
+build/ParticleForceRegistry.o build/ParticleGravity.o build/ParticleDrag.o build/BodyForceRegistry.o build/BodyGravity.o \
+build/ParticleSpring.o build/ParticleAnchoredSpring.o build/ParticleBungee.o build/ParticleBuoyancy.o \
+build/CParticle.o build/AParticle.o build/AHorizontalPlane.o build/ARigidBody.o \
+build/CMeshObject.o build/EmptyNode.o build/CHorizontalPlane.o build/CCar.o build/CIrregularCube.o \
 build/Paths.o
 
 all: checkdirs Main
@@ -37,6 +38,18 @@ build/%.o: %.cpp
 	$(CXX) -c $(CXXFLAGS) $< -o $@
 
 build/%.o: Games/Src/%.cpp
+	$(CXX) -c $(CXXFLAGS) $< -o $@
+
+build/%.o: Games/Game1/Src/%.cpp
+	$(CXX) -c $(CXXFLAGS) $< -o $@
+	
+build/%.o: Games/Game2/Src/%.cpp
+	$(CXX) -c $(CXXFLAGS) $< -o $@
+	
+build/%.o: Games/Demo/Src/%.cpp
+	$(CXX) -c $(CXXFLAGS) $< -o $@
+
+build/%.o: Games/Game3/Src/%.cpp
 	$(CXX) -c $(CXXFLAGS) $< -o $@
 
 build/%.o: GraphicEngine/Src/%.cpp
@@ -62,7 +75,10 @@ build/%.o: GraphicEngine/Shaders/Src/%.cpp
 
 build/%.o: GraphicEngine/Textures/Src/%.cpp
 	$(CXX) -c $(CXXFLAGS) $< -o $@
-	
+
+build/%.o: Math/Src/%.cpp
+	$(CXX) -c $(CXXFLAGS) $< -o $@
+
 build/%.o: PhysicEngine/Src/%.cpp
 	$(CXX) -c $(CXXFLAGS) $< -o $@
 	
@@ -74,22 +90,13 @@ build/%.o: PhysicEngine/Forces/Src/%.cpp
 	
 build/%.o: PhysicEngine/SpringForces/Src/%.cpp
 	$(CXX) -c $(CXXFLAGS) $< -o $@
-	
-build/%.o: Games/Game1/Src/%.cpp
-	$(CXX) -c $(CXXFLAGS) $< -o $@
-	
-build/%.o: Games/Game2/Src/%.cpp
-	$(CXX) -c $(CXXFLAGS) $< -o $@
-	
-build/%.o: Games/Demo/Src/%.cpp
-	$(CXX) -c $(CXXFLAGS) $< -o $@
-	
-build/%.o: System/Src/%.cpp
-	$(CXX) -c $(CXXFLAGS) $< -o $@
-	
+
 build/%.o: SceneGraph/Src/%.cpp
 	$(CXX) -c $(CXXFLAGS) $< -o $@
 
+build/%.o: System/Src/%.cpp
+	$(CXX) -c $(CXXFLAGS) $< -o $@
+	
 checkdirs:
 	@mkdir -p build/
 
