@@ -63,7 +63,7 @@ namespace Games::Game3 {
 			{
 				if (_car2->_abstraction->getPosition()._x >= _contactPoint._x)
 				{
-					float force = 400*(1/p_dt);
+					float force = 250*(1/p_dt);
 					_car1->_abstraction->addForceAtPoint(Vector3(force, 0, 0), _contactPoint + Vector3(0, 1.34115, 0));
 					_car2->_abstraction->addForceAtPoint(Vector3(-force, 0, 0), _contactPoint + Vector3(0, 1.34115, 0));
 					_collision = true;
