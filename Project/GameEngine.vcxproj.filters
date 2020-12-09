@@ -199,6 +199,15 @@
     <Filter Include="GameEngine\Games\Game3\Source Files">
       <UniqueIdentifier>{0a548110-606b-4af0-8e28-f436c29960de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\Games\Game4">
+      <UniqueIdentifier>{9dd9053b-839d-4d15-8a08-655b89988d07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Games\Game4\Header Files">
+      <UniqueIdentifier>{5af44aaa-8985-474a-b737-3edf8748c52e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Games\Game4\Source Files">
+      <UniqueIdentifier>{a7e9e19b-2b38-426b-b4f4-ad0454455494}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\GameEngine\Games\Src\GameSelection.cpp">
@@ -431,6 +440,24 @@
     </ClCompile>
     <ClCompile Include="..\GameEngine\PhysicEngine\Forces\Src\BodyGravity.cpp">
       <Filter>GameEngine\PhysicEngine\Forces\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\Games\Game4\Src\CollisionDemo.cpp">
+      <Filter>GameEngine\Games\Game4\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\CollisionData.cpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\SphereCollider.cpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\BoxCollider.cpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\Octree.cpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\PlaneCollider.cpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -709,6 +736,24 @@
     </ClInclude>
     <ClInclude Include="..\GameEngine\PhysicEngine\Forces\Header\BodyGravity.hpp">
       <Filter>GameEngine\PhysicEngine\Forces\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\Games\Game4\Header\CollisionDemo.hpp">
+      <Filter>GameEngine\Games\Game4\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\CollisionData.hpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\SphereCollider.hpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\BoxCollider.hpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\Octree.hpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\PlaneCollider.hpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

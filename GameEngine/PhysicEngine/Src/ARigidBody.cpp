@@ -189,7 +189,7 @@ namespace PhysicEngine {
 	{
 		//linear acceleration
 		Vector3 acceleration = _forceAccum * _inverseMass;
-		std::cout << "Start Angular velocity " << _angularVelocity << std::endl;
+		//std::cout << "Start Angular velocity " << _angularVelocity << std::endl;
 		//angular acceleration
 		Vector3 angularAcceleration = _inverseInertiaTensorWorld * _torqueAccum;
 
@@ -209,13 +209,13 @@ namespace PhysicEngine {
 		//update orientation
 		_orientation.updateByAngularVelocity(_angularVelocity, p_dt);
 
-		std::cout << "Force" << _forceAccum << std::endl;
+		/*std::cout << "Force" << _forceAccum << std::endl;
 		std::cout << "Acceleration " << acceleration << std::endl;
 		std::cout << "DT" << p_dt << std::endl;
 		std::cout << "Velocity " << _velocity << std::endl;
 		std::cout << "Angular velocity " << _angularVelocity << std::endl;
 		std::cout << "Orientation " << _orientation << std::endl;
-		std::cout << "Torque " << _torqueAccum << std::endl << std::endl;
+		std::cout << "Torque " << _torqueAccum << std::endl << std::endl;*/
 
 
 		//update matrices and normalize orientation
