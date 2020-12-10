@@ -1,4 +1,5 @@
 #include <PhysicEngine/Collisions/Header/PlaneCollider.hpp>
+#include <PhysicEngine/Collisions/Header/SphereCollider.hpp>
 
 namespace PhysicEngine::Collisions {
 

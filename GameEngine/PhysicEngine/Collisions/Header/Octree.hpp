@@ -3,6 +3,7 @@
 #include <vector>
 #include <PhysicEngine/Header/MathEnabler.hpp>
 #include <SceneGraph/Header/CMeshObject.hpp>
+#include <PhysicEngine/Collisions/Header/Collider.hpp>
 
 namespace PhysicEngine::Collisions {
 

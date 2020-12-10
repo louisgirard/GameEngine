@@ -1,9 +1,10 @@
 #pragma once
 
-#include <SceneGraph/Header/CMeshObject.hpp>
 #include <PhysicEngine/Header/MathEnabler.hpp>
 #include <GraphicEngine/SceneBase/Header/BoundingBox.hpp>
 #include <PhysicEngine/Collisions/Header/CollisionData.hpp>
+
+namespace SceneGraph { class CMeshObject; }
 
 namespace PhysicEngine::Collisions {
 	class Collider

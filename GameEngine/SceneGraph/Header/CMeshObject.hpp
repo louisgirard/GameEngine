@@ -2,7 +2,8 @@
 
 #include <SceneGraph/Header/EmptyNode.hpp>
 #include <GraphicEngine/SceneGraph/Header/PMeshObject.hpp>
-#include <PhysicEngine/Collisions/Header/Collider.hpp>
+
+namespace PhysicEngine::Collisions { class Collider;}
 
 namespace SceneGraph {
 	class CMeshObject : public EmptyNode

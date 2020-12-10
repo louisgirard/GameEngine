@@ -1,4 +1,5 @@
 #include <SceneGraph/Header/CMeshObject.hpp>
+#include <PhysicEngine/Collisions/Header/Collider.hpp>
 
 namespace SceneGraph {
 

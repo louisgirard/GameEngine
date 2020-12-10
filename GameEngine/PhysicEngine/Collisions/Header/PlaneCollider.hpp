@@ -1,7 +1,7 @@
 #pragma once
 
 #include <PhysicEngine/Header/MathEnabler.hpp>
-#include <PhysicEngine/Collisions/Header/SphereCollider.hpp>
+#include <PhysicEngine/Collisions/Header/Collider.hpp>
 
 namespace PhysicEngine::Collisions {
 	class PlaneCollider : public Collider

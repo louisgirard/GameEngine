@@ -46,5 +46,6 @@ namespace PhysicEngine::Collisions {
 		Vector3 transformedCenter = _transform.transformPoint(_center);
 
 		//TO DO
+		return false;
 	}
 }
