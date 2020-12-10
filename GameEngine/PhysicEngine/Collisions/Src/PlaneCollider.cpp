@@ -1,3 +1,57 @@
 #include <PhysicEngine/Collisions/Header/PlaneCollider.hpp>
 
-namespace PhysicEngine::Collisions {}
+namespace PhysicEngine::Collisions {
+
+	PlaneCollider::PlaneCollider(int p_flag, int p_mask, SceneGraph::CMeshObject* p_owner, Vector3 p_center, Vector3 p_normal) :
+		Collider(p_flag, p_mask, p_owner, PLANE_CODE),_center(p_center), _normal(p_normal){}
+
+	Vector3 PlaneCollider::getCenter() {
+		return _transform.transformPoint(_center);
+	}
+
+	Vector3 PlaneCollider::getNormal() {
+		return _transform.transformDirection(_normal);
+	}
+
+	bool PlaneCollider::insideRegion(const GraphicEngine::SceneBase::BoundingBox& p_region) {
+	
+		// Gets property transformed
+		Vector3 transformedCenter = _transform.transformPoint(_center);
+		Vector3 transformedNormal = _transform.transformDirection(_normal);
+
+		// Gets box center and dimension
+		Vector3 boxCenter = Vector3::convertGlm(p_region.center());
+		Vector3 dimension = Vector3::convertGlm(p_region.extent());
+
+		// Project center onto plan
+		Vector3 planToCenter = boxCenter - _center;
+		float distance = planToCenter.scalarProduct(_normal);
+		Vector3 projectedPoint = planToCenter - _normal*distance;
+
+		// We want distance along axis-aligned
+		if (_normal._x != 0 && std::abs(_center._x - projectedPoint._x) < dimension._x/2) {
+			return true;
+		}
+		else if (_normal._y != 0 && std::abs(_center._y - projectedPoint._y) < dimension._y / 2) {
+			return true;
+		}
+		else if (_normal._z != 0 && std::abs(_center._z - projectedPoint._z) < dimension._z / 2) {
+			return true;
+		}
+
+		return false;
+	}
+
+	bool PlaneCollider::resolveCollision(Collider& const p_collider, CollisionData* p_data) {
+
+		if (!Collider::resolveCollision(p_collider, p_data)) return false;
+
+		if (p_collider.getGeometryCode() == SPHERE_CODE) {
+			SphereCollider& sphereCollider = dynamic_cast<SphereCollider&>(p_collider);
+			return sphereCollider.resolvePlaneCollision(*this, p_data);
+		}
+
+		return false;
+	}
+
+}

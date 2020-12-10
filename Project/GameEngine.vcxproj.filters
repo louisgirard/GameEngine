@@ -450,14 +450,23 @@
     <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\SphereCollider.cpp">
       <Filter>GameEngine\PhysicEngine\Collisions\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\BoxCollider.cpp">
-      <Filter>GameEngine\PhysicEngine\Collisions\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\Octree.cpp">
       <Filter>GameEngine\PhysicEngine\Collisions\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\PlaneCollider.cpp">
       <Filter>GameEngine\PhysicEngine\Collisions\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\Collider.cpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\SceneGraph\Src\CCube.cpp">
+      <Filter>GameEngine\SceneGraph\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\SceneGraph\Src\CWall.cpp">
+      <Filter>GameEngine\SceneGraph\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\PWall.cpp">
+      <Filter>GameEngine\GraphicEngine\PSceneGraph\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -746,14 +755,23 @@
     <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\SphereCollider.hpp">
       <Filter>GameEngine\PhysicEngine\Collisions\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\BoxCollider.hpp">
-      <Filter>GameEngine\PhysicEngine\Collisions\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\Octree.hpp">
       <Filter>GameEngine\PhysicEngine\Collisions\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\PlaneCollider.hpp">
       <Filter>GameEngine\PhysicEngine\Collisions\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\Collider.hpp">
+      <Filter>GameEngine\PhysicEngine\Collisions\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\SceneGraph\Header\CCube.hpp">
+      <Filter>GameEngine\SceneGraph\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\SceneGraph\Header\CWall.hpp">
+      <Filter>GameEngine\SceneGraph\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\PWall.hpp">
+      <Filter>GameEngine\GraphicEngine\PSceneGraph\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

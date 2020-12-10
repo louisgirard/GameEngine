@@ -77,17 +77,17 @@ namespace Math {
 		Vector3 cols[3];
 		cols[0] = Vector3(
 			1.f - 2.f*(saveComplex[1] * saveComplex[1] + saveComplex[2] * saveComplex[2]),
-			2.f* (saveComplex[0]* saveComplex[1] - saveComplex[2]* saveR),
-			2.f* (saveComplex[0]* saveComplex[2] + saveComplex[1]* saveR)
+			2.f* (saveComplex[0]* saveComplex[1] + saveComplex[2]* saveR),
+			2.f* (saveComplex[0]* saveComplex[2] - saveComplex[1]* saveR)
 		);
 		cols[1] = Vector3(
-			2.f* (saveComplex[0]* saveComplex[1] + saveComplex[2]* saveR),
+			2.f* (saveComplex[0]* saveComplex[1] - saveComplex[2]* saveR),
 			1- 2.f * ( saveComplex[0]* saveComplex[0] + saveComplex[2]* saveComplex[2]),
-			2.f* (saveComplex[1]* saveComplex[2] - saveComplex[0]* saveR)
+			2.f* (saveComplex[1]* saveComplex[2] + saveComplex[0]* saveR)
 		);
 		cols[2] = Vector3(
-			2.f * (saveComplex[0] * saveComplex[2] - saveComplex[1] * saveR),
-			2.f * (saveComplex[1] * saveComplex[2] + saveComplex[0] * saveR),
+			2.f * (saveComplex[0] * saveComplex[2] + saveComplex[1] * saveR),
+			2.f * (saveComplex[1] * saveComplex[2] - saveComplex[0] * saveR),
 			1 - 2.f * (saveComplex[0] * saveComplex[0] + saveComplex[1] * saveComplex[1])
 		);
 

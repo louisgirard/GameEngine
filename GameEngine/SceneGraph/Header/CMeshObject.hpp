@@ -2,12 +2,15 @@
 
 #include <SceneGraph/Header/EmptyNode.hpp>
 #include <GraphicEngine/SceneGraph/Header/PMeshObject.hpp>
+#include <PhysicEngine/Collisions/Header/Collider.hpp>
 
 namespace SceneGraph {
 	class CMeshObject : public EmptyNode
 	{
 	protected:
 		std::shared_ptr<GraphicEngine::PSceneGraph::PMeshObject> _presentation;
+
+		std::vector<PhysicEngine::Collisions::Collider*> _colliders;
 
 	public:
 
@@ -23,6 +26,8 @@ namespace SceneGraph {
 		* @param p_forcesTexture : true if the mesh attached to this object needs to have texture coordinates
 		*/
 		CMeshObject(GraphicEngine::PSceneGraph::Mesh* p_mesh, std::shared_ptr<GraphicEngine::Materials::PhongMaterial> p_material, std::string p_shaderName, bool p_forcesTexture = false);
+
+		std::vector<PhysicEngine::Collisions::Collider*> getColliders();
 
 		/*
 		* Draws this node

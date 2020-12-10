@@ -52,6 +52,7 @@
     <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\PIrregularCube.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\PMeshObject.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\PParticle.cpp" />
+    <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\PWall.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\TransformStack.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Servers\Src\LightServer.cpp" />
     <ClCompile Include="..\GameEngine\GraphicEngine\Servers\Src\SceneServer.cpp" />
@@ -72,7 +73,7 @@
     <ClCompile Include="..\GameEngine\Math\Src\Matrix3x4.cpp" />
     <ClCompile Include="..\GameEngine\Math\Src\Quaternion.cpp" />
     <ClCompile Include="..\GameEngine\Math\Src\Vector3.cpp" />
-    <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\BoxCollider.cpp" />
+    <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\Collider.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\CollisionData.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\Octree.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\ParticleCable.cpp" />
@@ -96,8 +97,10 @@
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\ARigidBody.cpp" />
     <ClCompile Include="..\GameEngine\PhysicEngine\Src\CParticle.cpp" />
     <ClCompile Include="..\GameEngine\SceneGraph\Src\CCar.cpp" />
+    <ClCompile Include="..\GameEngine\SceneGraph\Src\CCube.cpp" />
     <ClCompile Include="..\GameEngine\SceneGraph\Src\CHorizontalPlane.cpp" />
     <ClCompile Include="..\GameEngine\SceneGraph\Src\CIrregularCube.cpp" />
+    <ClCompile Include="..\GameEngine\SceneGraph\Src\CWall.cpp" />
     <ClCompile Include="..\GameEngine\SceneGraph\Src\EmptyNode.cpp" />
     <ClCompile Include="..\GameEngine\SceneGraph\Src\CMeshObject.cpp" />
     <ClCompile Include="..\GameEngine\System\Src\Paths.cpp" />
@@ -145,6 +148,7 @@
     <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\PIrregularCube.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\PMeshObject.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\PParticle.hpp" />
+    <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\PWall.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\SceneGraph\Header\TransformStack.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Servers\Header\LightServer.hpp" />
     <ClInclude Include="..\GameEngine\GraphicEngine\Servers\Header\SceneServer.hpp" />
@@ -167,7 +171,7 @@
     <ClInclude Include="..\GameEngine\Math\Header\Matrix3x4.hpp" />
     <ClInclude Include="..\GameEngine\Math\Header\Quaternion.hpp" />
     <ClInclude Include="..\GameEngine\Math\Header\Vector3.hpp" />
-    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\BoxCollider.hpp" />
+    <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\Collider.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\CollisionData.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\Octree.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\Collisions\Header\ParticleCable.hpp" />
@@ -196,8 +200,10 @@
     <ClInclude Include="..\GameEngine\PhysicEngine\SpringForces\Header\ParticleBuoyancy.hpp" />
     <ClInclude Include="..\GameEngine\PhysicEngine\SpringForces\Header\ParticleSpring.hpp" />
     <ClInclude Include="..\GameEngine\SceneGraph\Header\CCar.hpp" />
+    <ClInclude Include="..\GameEngine\SceneGraph\Header\CCube.hpp" />
     <ClInclude Include="..\GameEngine\SceneGraph\Header\CHorizontalPlane.hpp" />
     <ClInclude Include="..\GameEngine\SceneGraph\Header\CIrregularCube.hpp" />
+    <ClInclude Include="..\GameEngine\SceneGraph\Header\CWall.hpp" />
     <ClInclude Include="..\GameEngine\SceneGraph\Header\EmptyNode.hpp" />
     <ClInclude Include="..\GameEngine\SceneGraph\Header\CMeshObject.hpp" />
     <ClInclude Include="..\GameEngine\System\Header\Paths.hpp" />

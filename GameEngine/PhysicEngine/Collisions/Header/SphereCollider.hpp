@@ -1,22 +1,23 @@
 #pragma once
 
-#include <PhysicEngine/Header/MathEnabler.hpp>
-#include <GraphicEngine/SceneBase/Header/BoundingBox.hpp>
+#include <PhysicEngine/Collisions/Header/Collider.hpp>
+#include <PhysicEngine/Collisions/Header/PlaneCollider.hpp>
 
 namespace PhysicEngine::Collisions {
-	class SphereCollider
+	class SphereCollider : public Collider
 	{
 	protected:
 		Vector3 _center;
 		float _radius;
-
-		Matrix3x4 _transform;
 	public:
-		SphereCollider(GraphicEngine::SceneBase::BoundingBox p_boundingBox);
+		
+		SphereCollider(int p_flag, int p_mask, SceneGraph::CMeshObject* p_owner, Vector3 p_center, float p_radius);
 
-		void setTransform(Matrix3x4 p_newTransform);
+		bool insideRegion(const GraphicEngine::SceneBase::BoundingBox& p_region) override;
 
-		bool insideRegion(GraphicEngine::SceneBase::BoundingBox p_region);
+		bool resolveCollision(Collider& const p_collider, CollisionData* p_data) override;
+
+		bool resolvePlaneCollision(const PlaneCollider& p_boxCollider, CollisionData* p_data);
 	};
 }
 

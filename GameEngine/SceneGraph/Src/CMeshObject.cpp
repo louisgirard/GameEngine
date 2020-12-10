@@ -2,11 +2,16 @@
 
 namespace SceneGraph {
 
-	CMeshObject::CMeshObject(GraphicEngine::PSceneGraph::Mesh* p_mesh, std::shared_ptr<GraphicEngine::Materials::PhongMaterial> p_material, std::string p_shaderName, bool p_forcesTexture) : EmptyNode(), _presentation(new GraphicEngine::PSceneGraph::PMeshObject(p_mesh, p_material, p_shaderName, p_forcesTexture)) {}
+	CMeshObject::CMeshObject(GraphicEngine::PSceneGraph::Mesh* p_mesh, std::shared_ptr<GraphicEngine::Materials::PhongMaterial> p_material, std::string p_shaderName, bool p_forcesTexture) : 
+		EmptyNode(), _presentation(new GraphicEngine::PSceneGraph::PMeshObject(p_mesh, p_material, p_shaderName, p_forcesTexture)){}
 
 	void CMeshObject::draw(std::string p_shaderName) {
 		_presentation->draw(p_shaderName);
 		EmptyNode::draw(p_shaderName);
+	}
+
+	std::vector<PhysicEngine::Collisions::Collider*>  CMeshObject::getColliders() {
+		return _colliders;
 	}
 
 	void CMeshObject::draw(std::string p_shaderName, glm::mat4 p_transform) {
