@@ -14,9 +14,9 @@ namespace PhysicEngine::Collisions {
 		
 		PlaneCollider(int p_flag, int p_mask, SceneGraph::CMeshObject* p_owner, Vector3 p_center, Vector3 p_normal);
 
-		Vector3 getCenter();
+		const Vector3 getCenter() const;
 
-		Vector3 getNormal();
+		const Vector3 getNormal() const;
 
 		bool insideRegion(const GraphicEngine::SceneBase::BoundingBox& p_region) override;
 

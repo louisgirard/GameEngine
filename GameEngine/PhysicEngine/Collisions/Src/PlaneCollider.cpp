@@ -6,11 +6,11 @@ namespace PhysicEngine::Collisions {
 	PlaneCollider::PlaneCollider(int p_flag, int p_mask, SceneGraph::CMeshObject* p_owner, Vector3 p_center, Vector3 p_normal) :
 		Collider(p_flag, p_mask, p_owner, PLANE_CODE),_center(p_center), _normal(p_normal){}
 
-	Vector3 PlaneCollider::getCenter() {
+	const Vector3 PlaneCollider::getCenter() const {
 		return _transform.transformPoint(_center);
 	}
 
-	Vector3 PlaneCollider::getNormal() {
+	const Vector3 PlaneCollider::getNormal() const {
 		return _transform.transformDirection(_normal);
 	}
 

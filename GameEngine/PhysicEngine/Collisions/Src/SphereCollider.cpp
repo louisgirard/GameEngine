@@ -45,7 +45,13 @@ namespace PhysicEngine::Collisions {
 		// Gets the center transformed
 		Vector3 transformedCenter = _transform.transformPoint(_center);
 
-		//TO DO
+		// Check if point is on the same side of the normal
+		float side = (transformedCenter - p_boxCollider.getCenter()).scalarProduct(p_boxCollider.getNormal());
+		if (side < 0)
+		{
+			// TODO, fill CollisionData information
+			return true;
+		}
 		return false;
 	}
 }
