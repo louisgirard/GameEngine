@@ -14,19 +14,16 @@ namespace PhysicEngine::Collisions {
 		Vector3 boxCenter = Vector3::convertGlm(p_region.center());
 		Vector3 dimension = Vector3::convertGlm(p_region.extent());
 
-		// Region is axis aligned then we only need to verify for each axis if a part of the sphere is inside the box  
-		if ((std::abs(transformedCenter._x - boxCenter._x) - _radius) < (dimension._x/2.0f)) {
-			return true;
-		}
-		else if ((std::abs(transformedCenter._y - boxCenter._y) - _radius) < (dimension._y / 2.0f)) {
-			return true;
-		}
-		else if ((std::abs(transformedCenter._z - boxCenter._z) - _radius) < (dimension._z / 2.0f)) {
-			return true;
-		}
+		// Find the box's closest point to the sphere
+		float x = std::max(boxCenter._x - dimension._x / 2.0f, std::min(transformedCenter._x, boxCenter._x + dimension._x / 2.0f));
+		float y = std::max(boxCenter._y - dimension._y / 2.0f, std::min(transformedCenter._y, boxCenter._y + dimension._y / 2.0f));
+		float z = std::max(boxCenter._z - dimension._z / 2.0f, std::min(transformedCenter._z, boxCenter._z + dimension._z / 2.0f));
+		Vector3 closestPoint = Vector3(x, y, z);
+
+		//compute distance between closest point and sphere center
+		float distanceSquared = (closestPoint - transformedCenter).squaredMagnitude();
 		
-		// Then the only thing we need to know is if the the distance is inferior or equal to the radius to know if there is a collision between the sphere and the plane
-		return false;
+		return distanceSquared <= _radius * _radius;
 	}
 
 	bool SphereCollider::resolveCollision(Collider& const p_collider, CollisionData* p_data) {
