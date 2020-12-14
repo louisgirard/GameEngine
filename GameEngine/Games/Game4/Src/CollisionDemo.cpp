@@ -26,23 +26,31 @@ namespace Games::Game4 {
 		Vector3 cubePos(0, 10, 0);
 
 		// 0 - Init Camera
-		Vector3 camera_position = cubePos + Vector3(0,0,10);
+		//Vector3 camera_position = cubePos + Vector3(0,0,10);
+		Vector3 camera_position(0, 10, 100);
 		_camera.setPosition(Vector3::toGlm(camera_position));
 
 		//Init 6 walls
-		float l = 50;
-		float w = 50;
+		//glDisable(GL_CULL_FACE);
+		float l = 100;
+		float w = 100;
+		// Down
 		_tabWall.push_back(SceneGraph::CWall(Vector3(0, 0, 0), Vector3(0, 1, 0), l, w));
+		// Up
 		_tabWall.push_back(SceneGraph::CWall(Vector3(0, w, 0), Vector3(0, -1, 0), l, w));
-		_tabWall.push_back(SceneGraph::CWall(Vector3(0, 0, -l / 2), Vector3(0, 0, -1), l, w));
-		_tabWall.push_back(SceneGraph::CWall(Vector3(0, 0, l / 2), Vector3(0, 0, 1), l, w));
-		_tabWall.push_back(SceneGraph::CWall(Vector3(l / 2, 0, 0), Vector3(-1, 0, 0), l, w));
-		_tabWall.push_back(SceneGraph::CWall(Vector3(-l / 2, 0, 0), Vector3(1, 0, 0), l, w));
+		// Front
+		_tabWall.push_back(SceneGraph::CWall(Vector3(0, l / 2, w / 2), Vector3(0, 0, -1), l, w));
+		// Back
+		_tabWall.push_back(SceneGraph::CWall(Vector3(0, l / 2, -w / 2), Vector3(0, 0, 1), l, w));
+		// Right
+		_tabWall.push_back(SceneGraph::CWall(Vector3(l / 2, w / 2, 0), Vector3(-1, 0, 0), l, w));
+		// Left
+		_tabWall.push_back(SceneGraph::CWall(Vector3(-l / 2, w / 2, 0), Vector3(1, 0, 0), l, w));
 
 		//Init Cube
 		_cube = std::make_shared<SceneGraph::CCube>(cubePos, Vector3(10, 10, 10), 10, 3);
 
-		/*std::vector<PhysicEngine::Collisions::Collider*> colliders;
+		std::vector<PhysicEngine::Collisions::Collider*> colliders;
 		for (int i = 0; i < _tabWall.size(); i++)
 		{
 			for (int j = 0; j < _tabWall[i].getColliders().size(); j++)
@@ -57,7 +65,7 @@ namespace Games::Game4 {
 		}
 
 		//Octree
-		_octree = std::make_shared<PhysicEngine::Collisions::Octree>(20, 20, colliders);*/
+		_octree = std::make_shared<PhysicEngine::Collisions::Octree>(20, 20, l + 10, colliders);
 	}
 
 	void CollisionDemo::handleInput(double p_dt)
@@ -68,13 +76,13 @@ namespace Games::Game4 {
 	void CollisionDemo::updatePhysic(double p_dt)
 	{
 		//Update Tree
-		//_octree->build()
+		_octree->build();
 
 		//Get possible collisions and pass it to NarrowPhaseCollisions
-		//auto possibleCollisions = _octree->getPossibleCollison();
-		//narrowPhaseCollisions(possibleCollisions);
+		auto possibleCollisions = _octree->getPossibleCollison();
+		narrowPhaseCollisions(possibleCollisions);
 
-		//_octree->clear();
+		_octree->clear();
 	}
 
 	void CollisionDemo::updateFrame()

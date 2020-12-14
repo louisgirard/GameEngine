@@ -24,7 +24,7 @@ int main(int p_argc, char** p_argv)
 	Games::GameSelection::registerFactory<Games::Game2::Blob>("Game 2", "Jeu qui presente le deuxieme tp.");
 	Games::GameSelection::registerFactory<Games::Game3::RigidBodyDemo>("Demo 1 TP3");
 	Games::GameSelection::registerFactory<Games::Game3::CarDemo>("Demo 2 TP3");
-	Games::GameSelection::registerFactory<Games::Game4::CollisionDemo>("Game 4", "Jeu qui presente le quatrième tp.");
+	Games::GameSelection::registerFactory<Games::Game4::CollisionDemo>("Game 4", "Jeu qui presente le quatrieme tp.");
 	//Games::GameSelection::registerFactory<Games::Game3::TestMath>("Test Math", "Test math component");
 
 	bool engineRunning = true;
