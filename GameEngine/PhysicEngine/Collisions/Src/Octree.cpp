@@ -91,7 +91,8 @@ namespace PhysicEngine::Collisions {
 
 	Octree::Node::~Node() {
 		for (std::vector<Node*>::iterator it = _childs.begin(); it != _childs.end(); it++) {
-			delete (*it);
+			if((*it) != nullptr) delete (*it);
 		}
+		_childs.clear();
 	}
 }
