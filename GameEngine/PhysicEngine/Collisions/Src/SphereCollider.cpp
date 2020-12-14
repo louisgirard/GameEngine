@@ -2,13 +2,13 @@
 
 namespace PhysicEngine::Collisions {
 
-	SphereCollider::SphereCollider(int p_flag, int p_mask, SceneGraph::CMeshObject* p_owner, Vector3 p_center, float p_radius):
-		Collider(p_flag, p_mask, p_owner, SPHERE_CODE),_center(p_center), _radius(p_radius){}
+	SphereCollider::SphereCollider(int p_flag, int p_mask, SceneGraph::CMeshObject* p_owner, Matrix3x4* p_transform, Vector3 p_center, float p_radius):
+		Collider(p_flag, p_mask, p_owner, p_transform, SPHERE_CODE),_center(p_center), _radius(p_radius){}
 
 	bool SphereCollider::insideRegion(const GraphicEngine::SceneBase::BoundingBox& p_region) {
 
 		// Gets the center transformed
-		Vector3 transformedCenter = _transform.transformPoint(_center) ;
+		Vector3 transformedCenter = _transform->transformPoint(_center) ;
 		
 		// Gets box center and dimension
 		Vector3 boxCenter = Vector3::convertGlm(p_region.center());
@@ -40,13 +40,15 @@ namespace PhysicEngine::Collisions {
 
 	bool SphereCollider::resolvePlaneCollision(const PlaneCollider& p_boxCollider, CollisionData* p_data) {
 		// Gets the center transformed
-		Vector3 transformedCenter = _transform.transformPoint(_center);
+		Vector3 transformedCenter = _transform->transformPoint(_center);
 
 		// Check if point is on the same side of the normal
-		float side = (transformedCenter - p_boxCollider.getCenter()).scalarProduct(p_boxCollider.getNormal());
-		if (side < 0)
+		float distance = (transformedCenter - p_boxCollider.getCenter()).scalarProduct(p_boxCollider.getNormal());
+		if (distance < 0)
 		{
-			// TODO, fill CollisionData information
+			p_data->setPenetration(distance);
+			p_data->setContactNormal(p_boxCollider.getNormal());
+			p_data->setContactPoint(transformedCenter + p_boxCollider.getNormal() * (distance / 2.0));
 			return true;
 		}
 		return false;

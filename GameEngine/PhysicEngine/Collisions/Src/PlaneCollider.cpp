@@ -3,22 +3,22 @@
 
 namespace PhysicEngine::Collisions {
 
-	PlaneCollider::PlaneCollider(int p_flag, int p_mask, SceneGraph::CMeshObject* p_owner, Vector3 p_center, Vector3 p_normal) :
-		Collider(p_flag, p_mask, p_owner, PLANE_CODE),_center(p_center), _normal(p_normal){}
+	PlaneCollider::PlaneCollider(int p_flag, int p_mask, SceneGraph::CMeshObject* p_owner, Matrix3x4* p_transform, Vector3 p_center, Vector3 p_normal) :
+		Collider(p_flag, p_mask, p_owner, p_transform, PLANE_CODE),_center(p_center), _normal(p_normal){}
 
 	const Vector3 PlaneCollider::getCenter() const {
-		return _transform.transformPoint(_center);
+		return _transform->transformPoint(_center);
 	}
 
 	const Vector3 PlaneCollider::getNormal() const {
-		return _transform.transformDirection(_normal);
+		return _transform->transformDirection(_normal);
 	}
 
 	bool PlaneCollider::insideRegion(const GraphicEngine::SceneBase::BoundingBox& p_region) {
 	
 		// Gets property transformed
-		Vector3 transformedCenter = _transform.transformPoint(_center);
-		Vector3 transformedNormal = _transform.transformDirection(_normal);
+		Vector3 transformedCenter = _transform->transformPoint(_center);
+		Vector3 transformedNormal = _transform->transformDirection(_normal);
 
 		// Gets box center and dimension
 		Vector3 boxCenter = Vector3::convertGlm(p_region.center());

@@ -11,7 +11,7 @@ namespace PhysicEngine::Collisions {
 		float _radius;
 	public:
 		
-		SphereCollider(int p_flag, int p_mask, SceneGraph::CMeshObject* p_owner, Vector3 p_center, float p_radius);
+		SphereCollider(int p_flag, int p_mask, SceneGraph::CMeshObject* p_owner, Matrix3x4* p_transform, Vector3 p_center, float p_radius);
 
 		bool insideRegion(const GraphicEngine::SceneBase::BoundingBox& p_region) override;
 

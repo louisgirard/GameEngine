@@ -12,7 +12,7 @@ namespace PhysicEngine::Collisions {
 
 	public:
 		
-		PlaneCollider(int p_flag, int p_mask, SceneGraph::CMeshObject* p_owner, Vector3 p_center, Vector3 p_normal);
+		PlaneCollider(int p_flag, int p_mask, SceneGraph::CMeshObject* p_owner, Matrix3x4* p_transform, Vector3 p_center, Vector3 p_normal);
 
 		const Vector3 getCenter() const;
 

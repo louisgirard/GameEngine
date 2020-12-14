@@ -9,7 +9,7 @@ namespace SceneGraph {
 
 	CWall::CWall(const PhysicEngine::Vector3& p_center, const PhysicEngine::Vector3& p_normal, float p_length, float p_width, const PhysicEngine::Vector3& p_color, const PhysicEngine::Vector3& p_specularColor) {
 		_presentation = std::make_shared<GraphicEngine::PSceneGraph::PHorizontalPlane>(p_center, p_length, p_width, p_color, p_specularColor);
-		_colliders.push_back(new PhysicEngine::Collisions::PlaneCollider(FLAG, 1, this, p_center, p_normal ));
+		_colliders.push_back(new PhysicEngine::Collisions::PlaneCollider(FLAG, 1, this, nullptr, p_center, p_normal ));
 	}
 
 	void CWall::draw(std::string p_shaderName)

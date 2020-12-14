@@ -6,7 +6,7 @@ namespace PhysicEngine::Collisions {
 	const int Collider::PLANE_CODE = 0;
 	const int Collider::SPHERE_CODE = 1;
 
-	Collider::Collider(int p_flag, int p_mask, SceneGraph::CMeshObject* p_owner, int p_geometryCode): _flag(p_flag), _mask(p_mask), _owner(p_owner),_geometryCode(p_geometryCode), _transform(Matrix3x4::identity()) {}
+	Collider::Collider(int p_flag, int p_mask, SceneGraph::CMeshObject* p_owner, Matrix3x4* p_transform, int p_geometryCode): _flag(p_flag), _mask(p_mask), _owner(p_owner),_geometryCode(p_geometryCode), _transform(p_transform) {}
 
 	const int Collider::getFlag() const{
 		return _flag;
@@ -20,7 +20,7 @@ namespace PhysicEngine::Collisions {
 		return _owner;
 	}
 
-	void Collider::setTransform(const Matrix3x4& p_newTransform) {
+	void Collider::setTransform(Matrix3x4* p_newTransform) {
 		_transform = p_newTransform;
 	}
 

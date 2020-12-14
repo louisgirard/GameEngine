@@ -96,16 +96,13 @@ namespace SceneGraph {
 
 		//Init Colliders
 		for (std::vector< PhysicEngine::Vector3>::iterator it = vertices.begin(); it != vertices.end(); it++) { 
-			_colliders.push_back(new PhysicEngine::Collisions::SphereCollider(FLAG, 2, this, *it, p_collidersRadius));
+			_colliders.push_back(new PhysicEngine::Collisions::SphereCollider(FLAG, 2, this, &(_abstraction->_transformMatrix), *it, p_collidersRadius));
 		}
 
 	}
 
 	void CCube::physicUpdate(float p_dt) {
 		_abstraction->integrate(p_dt);
-		for (std::vector<PhysicEngine::Collisions::Collider*>::iterator it = _colliders.begin(); it != _colliders.end(); it++) {
-			(*it)->setTransform(_abstraction->_transformMatrix);
-		}
 	}
 
 	void CCube::draw(std::string p_shaderName)
