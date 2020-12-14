@@ -20,36 +20,42 @@ namespace Games::Game4 {
 		}
 
 		// 0 - Init Camera
-		Vector3 camera_position(0,10,60);
+		Vector3 camera_position(0,100,100);
 		_camera.setPosition(Vector3::toGlm(camera_position));
 
 		//Init 6 walls
 		float l = 50;
 		float w = 50;
 		_tabWall.push_back(SceneGraph::CWall (Vector3(0,0,0), Vector3(0,1,0),l,w));
-	/*	_tabWall.push_back(SceneGraph::CWall (Vector3(0,w,0), Vector3(0,-1,0),l,w));
+		_tabWall.push_back(SceneGraph::CWall (Vector3(0,w,0), Vector3(0,-1,0),l,w));
 		_tabWall.push_back(SceneGraph::CWall (Vector3(0,0,-l/2), Vector3(0,0,-1),l,w));
 		_tabWall.push_back(SceneGraph::CWall (Vector3(0,0,l/2), Vector3(0,0,1),l,w));
 		_tabWall.push_back(SceneGraph::CWall (Vector3(l/2,0,0), Vector3(-1,0,0),l,w));
-		_tabWall.push_back(SceneGraph::CWall (Vector3(-l/2,0,0), Vector3(1,0,0),l,w));*/
+		_tabWall.push_back(SceneGraph::CWall (Vector3(-l/2,0,0), Vector3(1,0,0),l,w));
 
 		//Init Cube
 		_cube = std::make_shared<SceneGraph::CCube>(Vector3(0, 10, 0), Vector3(10, 10, 10), 10, 3);
 
-		//Octree
-		//_octree = std::make_shared<PhysicEngine::Collisions::Octree>();
+		std::vector<PhysicEngine::Collisions::Collider*> colliders;
+		for (int i = 0; i < _tabWall.size(); i++)
+		{
+			colliders.insert(colliders.end(), _tabWall[i].getColliders().begin(), _tabWall[i].getColliders().end());
+		}
+		colliders.insert(colliders.end(), _cube->getColliders().begin(), _cube->getColliders().end());
 
-		//
+		//Octree
+		_octree = std::make_shared<PhysicEngine::Collisions::Octree>(20, 20, colliders);
 	}
 
 	void CollisionDemo::handleInput(double p_dt)
 	{
-		//R
+		GameBase::handleInput(p_dt);
 	}
 
 	void CollisionDemo::updatePhysic(double p_dt)
 	{
 		//Update Tree
+		//_octree->build()
 
 		//Get possible collisions
 
