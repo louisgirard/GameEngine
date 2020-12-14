@@ -441,9 +441,6 @@
     <ClCompile Include="..\GameEngine\PhysicEngine\Forces\Src\BodyGravity.cpp">
       <Filter>GameEngine\PhysicEngine\Forces\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\GameEngine\Games\Game4\Src\CollisionDemo.cpp">
-      <Filter>GameEngine\Games\Game4\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\GameEngine\PhysicEngine\Collisions\Src\CollisionData.cpp">
       <Filter>GameEngine\PhysicEngine\Collisions\Source Files</Filter>
     </ClCompile>
@@ -467,6 +464,9 @@
     </ClCompile>
     <ClCompile Include="..\GameEngine\GraphicEngine\SceneGraph\Src\PWall.cpp">
       <Filter>GameEngine\GraphicEngine\PSceneGraph\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\Games\Game4\Src\CollisionDemo.cpp">
+      <Filter>GameEngine\Games\Game4\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -2,6 +2,8 @@
 
 #include <Games/Header/GameBase.hpp>
 #include <PhysicEngine/Collisions/Header/Octree.hpp>
+#include <SceneGraph/Header/CCube.hpp>
+#include <SceneGraph/Header/CWall.hpp>
 
 namespace Games::Game4 {
 	class CollisionDemo : public GameBase
@@ -34,6 +36,10 @@ namespace Games::Game4 {
 		* @param p_possibleCollisions the possible collisions detected by the broad phase
 		*/
 		void narrowPhaseCollisions(std::vector<std::vector<PhysicEngine::Collisions::Collider*>>& p_possibleCollisions);
+
+		std::vector<SceneGraph::CWall> _tabWall;
+		std::shared_ptr<SceneGraph::CCube> _cube;
+		std::shared_ptr<PhysicEngine::Collisions::Octree> _octree;
 
 	public:
 		/* Default constructor */
