@@ -37,6 +37,7 @@ namespace Games {
 
 		/**Delta time between last and current frame**/
 		double _dt;
+		bool _gamePaused = false;
 
 		/**Time since last frame**/
 		std::chrono::steady_clock::time_point _lastFrameTime;
@@ -337,6 +338,12 @@ namespace Games {
 		* Add new actions for when the game will close
 		**/
 		void onClose(::std::function<void()> const& p_function);
+
+		/* Pause or nor the game */
+		void pauseGame(bool pause)
+		{
+			_gamePaused = pause;
+		}
 #pragma endregion
 	};
 }

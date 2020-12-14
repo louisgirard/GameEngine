@@ -124,7 +124,7 @@ namespace Games
 		std::chrono::steady_clock::time_point current = std::chrono::steady_clock::now();
 		double dt = std::chrono::duration_cast<std::chrono::nanoseconds> (current - _lastFrameTime).count() * NANO_TO_SECOND;
 		_lastFrameTime = current;
-		return dt;
+		return _gamePaused ? 0 : dt;
 	}
 
 #pragma region GETTERS

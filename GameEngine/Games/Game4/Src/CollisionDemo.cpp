@@ -8,7 +8,8 @@ namespace Games::Game4 {
 	
 	CollisionDemo::~CollisionDemo()
 	{
-
+		_cube = nullptr;
+		_octree = nullptr;
 	}
 
 	void CollisionDemo::initGame()
@@ -20,7 +21,7 @@ namespace Games::Game4 {
 		}
 
 		// 0 - Init Camera
-		Vector3 camera_position(0,100,100);
+		Vector3 camera_position(0,10,100);
 		_camera.setPosition(Vector3::toGlm(camera_position));
 
 		//Init 6 walls
@@ -39,9 +40,16 @@ namespace Games::Game4 {
 		std::vector<PhysicEngine::Collisions::Collider*> colliders;
 		for (int i = 0; i < _tabWall.size(); i++)
 		{
-			colliders.insert(colliders.end(), _tabWall[i].getColliders().begin(), _tabWall[i].getColliders().end());
+			for (int j = 0; j < _tabWall[i].getColliders().size(); j++)
+			{
+				colliders.push_back(_tabWall[i].getColliders()[j]);
+			}
 		}
-		colliders.insert(colliders.end(), _cube->getColliders().begin(), _cube->getColliders().end());
+
+		for (int i = 0; i < _cube->getColliders().size(); i++)
+		{
+			colliders.push_back(_cube->getColliders()[i]);
+		}
 
 		//Octree
 		_octree = std::make_shared<PhysicEngine::Collisions::Octree>(20, 20, colliders);
@@ -57,9 +65,11 @@ namespace Games::Game4 {
 		//Update Tree
 		//_octree->build()
 
-		//Get possible collisions
+		//Get possible collisions and pass it to NarrowPhaseCollisions
+		//auto possibleCollisions = _octree->getPossibleCollison();
+		//narrowPhaseCollisions(possibleCollisions);
 
-		//To NarrowPhaseCollisions
+		//_octree->clear();
 	}
 
 	void CollisionDemo::updateFrame()
@@ -120,5 +130,15 @@ namespace Games::Game4 {
 				}
 			}
 		}
+
+		std::cout << "-----Collision Data-----" << std::endl;
+		for (int i = 0; i < _collisionsData.size(); i++)
+		{
+			std::cout << _collisionsData[i].ToString() << std::endl;
+		}
+
+		_collisionsData.clear();
+
+		// Stop the demo
 	}
 }

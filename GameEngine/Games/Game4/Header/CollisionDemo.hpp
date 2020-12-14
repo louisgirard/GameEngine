@@ -38,7 +38,9 @@ namespace Games::Game4 {
 		void narrowPhaseCollisions(std::vector<std::vector<PhysicEngine::Collisions::Collider*>>& p_possibleCollisions);
 
 		std::vector<SceneGraph::CWall> _tabWall;
+
 		std::shared_ptr<SceneGraph::CCube> _cube;
+
 		std::shared_ptr<PhysicEngine::Collisions::Octree> _octree;
 
 	public:
