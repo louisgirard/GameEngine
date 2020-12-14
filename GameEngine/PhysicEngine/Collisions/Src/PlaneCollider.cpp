@@ -7,11 +7,11 @@ namespace PhysicEngine::Collisions {
 		Collider(p_flag, p_mask, p_owner, p_transform, PLANE_CODE),_center(p_center), _normal(p_normal){}
 
 	const Vector3 PlaneCollider::getCenter() const {
-		return _transform->transformPoint(_center);
+		return _center;
 	}
 
 	const Vector3 PlaneCollider::getNormal() const {
-		return _transform->transformDirection(_normal);
+		return _normal;
 	}
 
 	bool PlaneCollider::insideRegion(const GraphicEngine::SceneBase::BoundingBox& p_region) {
