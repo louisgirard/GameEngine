@@ -44,6 +44,7 @@ namespace PhysicEngine::Collisions {
 
 		// Check if point is on the same side of the normal
 		float distance = (transformedCenter - p_boxCollider.getCenter()).scalarProduct(p_boxCollider.getNormal());
+		//std::cout << distance << std::endl;
 		if (distance < 0)
 		{
 			p_data->setPenetration(distance);

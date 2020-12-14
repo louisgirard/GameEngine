@@ -1,7 +1,7 @@
 #include <Games/Game4/Header/CollisionDemo.hpp>
 
 namespace Games::Game4 {
-	CollisionDemo::CollisionDemo() : GameBase()
+	CollisionDemo::CollisionDemo() : GameBase(), _gravityAcceleration(-10), _gravity(Forces::BodyGravity(Vector3(0, _gravityAcceleration, 0)))
 	{
 
 	}
@@ -27,7 +27,7 @@ namespace Games::Game4 {
 
 		// 0 - Init Camera
 		//Vector3 camera_position = cubePos + Vector3(0,0,10);
-		Vector3 camera_position(0, 10, 100);
+		Vector3 camera_position(0, 30, 300);
 		_camera.setPosition(Vector3::toGlm(camera_position));
 
 		//Init 6 walls
@@ -50,6 +50,10 @@ namespace Games::Game4 {
 		//Init Cube
 		_cube = std::make_shared<SceneGraph::CCube>(cubePos, Vector3(10, 10, 10), 10, 3);
 
+		// 4 - Add force to registry
+		_registry.add((_cube->getRigidBody()), &_gravity);
+
+		// Octree
 		std::vector<PhysicEngine::Collisions::Collider*> colliders;
 		for (int i = 0; i < _tabWall.size(); i++)
 		{
@@ -64,8 +68,7 @@ namespace Games::Game4 {
 			colliders.push_back(_cube->getColliders()[i]);
 		}
 
-		//Octree
-		_octree = std::make_shared<PhysicEngine::Collisions::Octree>(20, 20, l + 10, colliders);
+		_octree = std::make_shared<PhysicEngine::Collisions::Octree>(20, 20, 400, colliders);
 	}
 
 	void CollisionDemo::handleInput(double p_dt)
@@ -75,6 +78,14 @@ namespace Games::Game4 {
 
 	void CollisionDemo::updatePhysic(double p_dt)
 	{
+		if (gamePaused()) return;
+
+		_cube->addForceAtLocalPoint(Vector3(1 / p_dt, 2 * (1 / p_dt), 0), Vector3(0.3, 0, 0));
+
+		//Physic Update
+		_registry.updatePhysic(p_dt);
+		_cube->physicUpdate(p_dt);
+
 		//Update Tree
 		_octree->build();
 
@@ -144,14 +155,18 @@ namespace Games::Game4 {
 			}
 		}
 
-		std::cout << "-----Collision Data-----" << std::endl;
-		for (int i = 0; i < _collisionsData.size(); i++)
+		if (_collisionsData.size() > 0)
 		{
-			std::cout << _collisionsData[i].ToString() << std::endl;
+			std::cout << "-----Collision Data-----" << std::endl;
+			for (int i = 0; i < _collisionsData.size(); i++)
+			{
+				std::cout << _collisionsData[i].ToString() << std::endl;
+			}
+
+			// Stop the demo
+			pauseGame(true);
 		}
 
 		_collisionsData.clear();
-
-		// Stop the demo
 	}
 }

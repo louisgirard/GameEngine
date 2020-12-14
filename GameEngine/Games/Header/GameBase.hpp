@@ -310,6 +310,8 @@ namespace Games {
 		**/
 		double getDt() const;
 
+		bool gamePaused() { return _gamePaused; }
+
 		/**
 		* Get the game current configuration
 		* @return the current configuration

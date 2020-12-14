@@ -17,8 +17,8 @@ namespace PhysicEngine::Collisions {
 	bool PlaneCollider::insideRegion(const GraphicEngine::SceneBase::BoundingBox& p_region) {
 	
 		// Gets property transformed
-		Vector3 transformedCenter = _transform->transformPoint(_center);
-		Vector3 transformedNormal = _transform->transformDirection(_normal);
+		Vector3 transformedCenter = getCenter();
+		Vector3 transformedNormal = getNormal();
 
 		// Gets box center and dimension
 		Vector3 boxCenter = Vector3::convertGlm(p_region.center());
@@ -30,13 +30,9 @@ namespace PhysicEngine::Collisions {
 		Vector3 projectedPoint = planToCenter - _normal*distance;
 
 		// We want distance along axis-aligned
-		if (_normal._x != 0 && std::abs(_center._x - projectedPoint._x) < dimension._x/2) {
-			return true;
-		}
-		else if (_normal._y != 0 && std::abs(_center._y - projectedPoint._y) < dimension._y / 2) {
-			return true;
-		}
-		else if (_normal._z != 0 && std::abs(_center._z - projectedPoint._z) < dimension._z / 2) {
+		if (((_normal._x != 0 && std::abs(_center._x - projectedPoint._x) < dimension._x / 2) || _normal._x == 0)
+			&& ((_normal._y != 0 && std::abs(_center._y - projectedPoint._y) < dimension._y / 2) || _normal._y == 0)
+			&& ((_normal._z != 0 && std::abs(_center._z - projectedPoint._z) < dimension._z / 2)) || _normal._z == 0) {
 			return true;
 		}
 
