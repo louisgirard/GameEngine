@@ -36,12 +36,13 @@ namespace PhysicEngine::Collisions {
 		Node* _root;
 		int _maxDepth;
 		int _maxPrimitive;
+		float _originalRegionSize;
 		std::vector<Collider*> _primitiveMarked;
 	public:
 		 
-		Octree(int p_maxDepth, int p_maxPrimitives, std::vector<Collider*> p_primitive);
+		Octree(int p_maxDepth, int p_maxPrimitives, float p_originalRegionSize, std::vector<Collider*> p_primitive);
 
-		void build(GraphicEngine::SceneBase::BoundingBox p_baseRegion);
+		void build();
 
 		std::vector<std::vector<Collider*>> getPossibleCollison();
 

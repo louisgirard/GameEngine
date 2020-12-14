@@ -114,7 +114,7 @@ namespace SceneGraph {
 		const PhysicEngine::Vector3 backSE(p_center._x + (width / 2), p_center._y - (height / 2), p_center._z - (depth / 2));
 
 		std::vector< PhysicEngine::Vector3> vertices = {
-			frontNW, backNW, frontNE, backNE, frontSW, backSW, frontNE, backSE
+			frontNW, backNW, frontNE, backNE, frontSW, backSW, frontSE, backSE
 		};
 
 		float inverseMass;

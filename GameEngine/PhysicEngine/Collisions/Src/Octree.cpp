@@ -2,11 +2,13 @@
 
 namespace PhysicEngine::Collisions {
 
-	Octree::Octree(int p_maxDepth, int p_maxPrimitives, std::vector<Collider*> p_primitive)
-		: _maxDepth(p_maxDepth), _maxPrimitive(p_maxPrimitives), _primitiveMarked(p_primitive), _root(nullptr){}
+	Octree::Octree(int p_maxDepth, int p_maxPrimitives, float p_originalRegionSize, std::vector<Collider*> p_primitive)
+		: _maxDepth(p_maxDepth), _maxPrimitive(p_maxPrimitives), _originalRegionSize(p_originalRegionSize),_primitiveMarked(p_primitive), _root(nullptr){}
 
-	void Octree::build(GraphicEngine::SceneBase::BoundingBox p_baseRegion) {
-		_root = new Node(0, _maxDepth, _maxPrimitive, p_baseRegion);
+	void Octree::build() {
+		float halfSize = _originalRegionSize / 2;
+		GraphicEngine::SceneBase::BoundingBox baseRegion(glm::vec3(-halfSize,-halfSize,-halfSize), glm::vec3(halfSize, halfSize, halfSize));
+		_root = new Node(0, _maxDepth, _maxPrimitive, baseRegion);
 		_root->tryAddingPrimitive(_primitiveMarked);
 	}
 

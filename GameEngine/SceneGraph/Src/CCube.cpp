@@ -4,7 +4,7 @@ namespace SceneGraph {
 
 	const int CCube::FLAG = 1;
 
-	void CCube::computeRigidBodyProperties(const PhysicEngine::Vector3& p_centerOfMass, const std::vector<PhysicEngine::Vector3> p_vertices, float& p_inverseMass, PhysicEngine::Matrix3x3& p_invInertiaTensor) {
+	void CCube::computeRigidBodyProperties(const std::vector<PhysicEngine::Vector3> p_vertices, float& p_inverseMass, PhysicEngine::Matrix3x3& p_invInertiaTensor) {
 
 		// Tensor 
 		//Init 
@@ -21,9 +21,9 @@ namespace SceneGraph {
 		//Compute
 		float mass_i = p_inverseMass / p_vertices.size();
 		for (int i = 0; i < p_vertices.size(); i++) {
-			float x_i = p_vertices[i]._x - p_centerOfMass._x;
-			float y_i = p_vertices[i]._y - p_centerOfMass._y;
-			float z_i = p_vertices[i]._z - p_centerOfMass._z;
+			float x_i = p_vertices[i]._x;
+			float y_i = p_vertices[i]._y;
+			float z_i = p_vertices[i]._z;
 
 			/* Diagonal is mass * square distance from axe (we can use pythagore which give us the addition of the square distance from the two other axes) */
 			i00 += mass_i * (y_i * y_i + z_i * z_i);
@@ -74,22 +74,22 @@ namespace SceneGraph {
 		float height = p_dimension[1];
 		float depth = p_dimension[2];
 
-		const PhysicEngine::Vector3 frontNW(p_center._x - (width / 2), p_center._y + (height / 2), p_center._z + (depth / 2));
-		const PhysicEngine::Vector3 frontNE(p_center._x + (width / 2), p_center._y + (height / 2), p_center._z + (depth / 2));
-		const PhysicEngine::Vector3 frontSW(p_center._x - (width / 2), p_center._y - (height / 2), p_center._z + (depth / 2));
-		const PhysicEngine::Vector3 frontSE(p_center._x + (width / 2), p_center._y - (height / 2), p_center._z + (depth / 2));
-		const PhysicEngine::Vector3 backNW(p_center._x - (width / 2), p_center._y + (height / 2), p_center._z - (depth / 2));
-		const PhysicEngine::Vector3 backNE(p_center._x + (width / 2), p_center._y + (height / 2), p_center._z - (depth / 2));
-		const PhysicEngine::Vector3 backSW(p_center._x - (width / 2), p_center._y - (height / 2), p_center._z - (depth / 2));
-		const PhysicEngine::Vector3 backSE(p_center._x + (width / 2), p_center._y - (height / 2), p_center._z - (depth / 2));
+		const PhysicEngine::Vector3 frontNW(-(width / 2), (height / 2), (depth / 2));
+		const PhysicEngine::Vector3 frontNE((width / 2), (height / 2), (depth / 2));
+		const PhysicEngine::Vector3 frontSW(-(width / 2), -(height / 2), (depth / 2));
+		const PhysicEngine::Vector3 frontSE((width / 2), -(height / 2), (depth / 2));
+		const PhysicEngine::Vector3 backNW(-(width / 2), (height / 2), -(depth / 2));
+		const PhysicEngine::Vector3 backNE((width / 2), (height / 2), -(depth / 2));
+		const PhysicEngine::Vector3 backSW(-(width / 2), -(height / 2), -(depth / 2));
+		const PhysicEngine::Vector3 backSE((width / 2), -(height / 2), -(depth / 2));
 
 		std::vector< PhysicEngine::Vector3> vertices = {
-			frontNW, backNW, frontNE, backNE, frontSW, backSW, frontNE, backSE
+			frontNW, backNW, frontNE, backNE, frontSW, backSW, frontSE, backSE
 		};
 
 		float inverseMass = p_mass;
 		PhysicEngine::Matrix3x3 invInertiaTensor;
-		computeRigidBodyProperties(p_center, vertices, inverseMass, invInertiaTensor);
+		computeRigidBodyProperties(vertices, inverseMass, invInertiaTensor);
 
 		_abstraction = std::make_shared< PhysicEngine::ARigidBody>(inverseMass, invInertiaTensor, p_center, p_orientation, p_velocity, p_angularVelocity, p_linearDamping, p_angularDamping);
 		_presentation = std::make_shared<GraphicEngine::PSceneGraph::PIrregularCube>(vertices, p_color, p_specularColor);

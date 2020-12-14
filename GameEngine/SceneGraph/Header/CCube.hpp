@@ -12,7 +12,7 @@ namespace SceneGraph {
 		/*Object abstraction*/
 		std::shared_ptr<PhysicEngine::ARigidBody> _abstraction;
 
-		void computeRigidBodyProperties(const PhysicEngine::Vector3& p_centerOfMass, const std::vector<PhysicEngine::Vector3> p_vertices, float& p_inverseMass, PhysicEngine::Matrix3x3& p_invInertiaTensor);
+		void computeRigidBodyProperties(const std::vector<PhysicEngine::Vector3> p_vertices, float& p_inverseMass, PhysicEngine::Matrix3x3& p_invInertiaTensor);
 	public:
 
 		static const int FLAG;

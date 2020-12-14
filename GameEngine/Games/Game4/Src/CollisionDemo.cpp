@@ -5,11 +5,14 @@ namespace Games::Game4 {
 	{
 
 	}
-	
+
 	CollisionDemo::~CollisionDemo()
 	{
 		_cube = nullptr;
 		_octree = nullptr;
+		ShaderServer::getSingleton()->clear();
+		TextureServer::getSingleton()->clear();
+		SceneServer::getSingleton()->clear();
 	}
 
 	void CollisionDemo::initGame()
@@ -20,24 +23,26 @@ namespace Games::Game4 {
 			ShaderServer::getSingleton()->init();
 		}
 
+		Vector3 cubePos(0, 10, 0);
+
 		// 0 - Init Camera
-		Vector3 camera_position(0,10,100);
+		Vector3 camera_position = cubePos + Vector3(0,0,10);
 		_camera.setPosition(Vector3::toGlm(camera_position));
 
 		//Init 6 walls
 		float l = 50;
 		float w = 50;
-		_tabWall.push_back(SceneGraph::CWall (Vector3(0,0,0), Vector3(0,1,0),l,w));
-		_tabWall.push_back(SceneGraph::CWall (Vector3(0,w,0), Vector3(0,-1,0),l,w));
-		_tabWall.push_back(SceneGraph::CWall (Vector3(0,0,-l/2), Vector3(0,0,-1),l,w));
-		_tabWall.push_back(SceneGraph::CWall (Vector3(0,0,l/2), Vector3(0,0,1),l,w));
-		_tabWall.push_back(SceneGraph::CWall (Vector3(l/2,0,0), Vector3(-1,0,0),l,w));
-		_tabWall.push_back(SceneGraph::CWall (Vector3(-l/2,0,0), Vector3(1,0,0),l,w));
+		_tabWall.push_back(SceneGraph::CWall(Vector3(0, 0, 0), Vector3(0, 1, 0), l, w));
+		_tabWall.push_back(SceneGraph::CWall(Vector3(0, w, 0), Vector3(0, -1, 0), l, w));
+		_tabWall.push_back(SceneGraph::CWall(Vector3(0, 0, -l / 2), Vector3(0, 0, -1), l, w));
+		_tabWall.push_back(SceneGraph::CWall(Vector3(0, 0, l / 2), Vector3(0, 0, 1), l, w));
+		_tabWall.push_back(SceneGraph::CWall(Vector3(l / 2, 0, 0), Vector3(-1, 0, 0), l, w));
+		_tabWall.push_back(SceneGraph::CWall(Vector3(-l / 2, 0, 0), Vector3(1, 0, 0), l, w));
 
 		//Init Cube
-		_cube = std::make_shared<SceneGraph::CCube>(Vector3(0, 10, 0), Vector3(10, 10, 10), 10, 3);
+		_cube = std::make_shared<SceneGraph::CCube>(cubePos, Vector3(10, 10, 10), 10, 3);
 
-		std::vector<PhysicEngine::Collisions::Collider*> colliders;
+		/*std::vector<PhysicEngine::Collisions::Collider*> colliders;
 		for (int i = 0; i < _tabWall.size(); i++)
 		{
 			for (int j = 0; j < _tabWall[i].getColliders().size(); j++)
@@ -52,7 +57,7 @@ namespace Games::Game4 {
 		}
 
 		//Octree
-		_octree = std::make_shared<PhysicEngine::Collisions::Octree>(20, 20, colliders);
+		_octree = std::make_shared<PhysicEngine::Collisions::Octree>(20, 20, colliders);*/
 	}
 
 	void CollisionDemo::handleInput(double p_dt)
@@ -75,7 +80,7 @@ namespace Games::Game4 {
 	void CollisionDemo::updateFrame()
 	{
 		GameBase::updateFrame();
-		
+
 		// 1 - Matrices and initialisations
 		ShaderProgram* currentShader = nullptr;
 		glm::mat4 projectionMatrix = glm::perspective(glm::radians<float>(_configuration.getFOV()), (float)getConfiguration().getWindowWidth() / (float)getConfiguration().getWindowHeight(), _configuration.getNearPlane(), _configuration.getFarPlane());
@@ -118,7 +123,7 @@ namespace Games::Game4 {
 			std::vector<PhysicEngine::Collisions::Collider*> colliders = p_possibleCollisions[i];
 			for (int j = 0; j < colliders.size(); j++)
 			{
-				for (int k = j+1; k < colliders.size(); k++)
+				for (int k = j + 1; k < colliders.size(); k++)
 				{
 					PhysicEngine::Collisions::CollisionData collisionData;
 					// Check if the two colliders are collected and resolve the collision
