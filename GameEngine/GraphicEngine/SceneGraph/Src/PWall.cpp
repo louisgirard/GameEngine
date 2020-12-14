@@ -1,4 +1,9 @@
 #include <GraphicEngine/SceneGraph/Header/PWall.hpp>
+#include <glm/gtc/matrix_access.hpp>
+using glm::vec3;
+using glm::vec4;
+using glm::mat3;
+using glm::mat4;
 
 namespace GraphicEngine::PSceneGraph {
 	PWall::PWall(Vector3 p_center, Vector3 p_normal, float p_length, float p_width, const Vector3& p_color, const Vector3& p_specularColor) :PSceneGraph::PMeshObject()
@@ -9,11 +14,38 @@ namespace GraphicEngine::PSceneGraph {
 		_shaderName = Servers::ShaderServer::getSingleton()->getDefaultMeshShader();
 
 
-		// Compute rotation looking at normal from up direction
-		//IF THERE IS AN ISSUE LOOK AT UP VECTOR
-		glm::mat4 transform = glm::lookAt(Vector3::toGlm(p_center), Vector3::toGlm(p_center+p_normal), -Vector3::toGlm(Vector3::FRONT));
-
+		//New Up direction
+		vec3 direction = Vector3::toGlm(p_normal); 
+		mat3 rotation = glm::identity<glm::mat3>();
+		mat4 transform = mat4(rotation);
+		//If up is inverse direction then rotate 180 degree
+		if (direction.x == 0 && direction.z == 0)
+		{
+			if (direction.y < 0) {
+				transform = glm::rotate(transform, glm::radians(180.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+			}
+			
+		}
+		else {
+			vec3 new_y = direction;
+			//Normalize cause these are direction
+			vec3 new_z = glm::normalize(glm::cross(new_y, vec3(0, 1, 0)));
+			vec3 new_x = glm::normalize(glm::cross(new_y, new_z));
+			rotation = mat3(new_x, new_y, new_z);
+		    transform = mat4(rotation);
+		}
+		std::cout << "Transform rotation " << transform << std::endl;
+		vec4 center = vec4(Vector3::toGlm(p_center),1);
+		transform = glm::column(transform, 3, center);
 		
+		std::cout << "Transform translated " << transform << std::endl;
+		
+		std::cout << "Plane center : " << p_center << ", Dim : (" << p_length << ", " << p_width << ") normal  : " << p_normal << std::endl;
+		std::cout << "First "<< transform * glm::vec4(-(p_length / 2), 0, -(p_width / 2), 1) << std::endl;
+		std::cout << "Second " << transform * glm::vec4(-(p_length / 2), 0, (p_width / 2), 1) << std::endl;
+		std::cout << "Third " << transform * glm::vec4((p_length / 2), 0, -(p_width / 2), 1) << std::endl;
+		std::cout << "Fourst " << transform * glm::vec4((p_length / 2), 0, (p_width / 2), 1) << std::endl;
+
 		/*
 		* Creating Mesh
 		*/
@@ -21,10 +53,10 @@ namespace GraphicEngine::PSceneGraph {
 		std::vector<glm::vec3> quadVertices =
 		{
 			// (positions)
-			transform*glm::vec4(p_center._x - (p_length / 2), p_center._y, p_center._z - (p_width / 2),1),
-			transform*glm::vec4(p_center._x - (p_length / 2), p_center._y, p_center._z + (p_width / 2),1),
-			transform*glm::vec4(p_center._x + (p_length / 2),  p_center._y, p_center._z - (p_width / 2),1),
-			transform*glm::vec4(p_center._x + (p_length / 2), p_center._y, p_center._z + (p_width / 2),1)
+			transform*glm::vec4(- (p_length / 2), 0, - (p_width / 2),1),
+			transform*glm::vec4(- (p_length / 2), 0, (p_width / 2),1),
+			transform*glm::vec4((p_length / 2),  0, -(p_width / 2),1),
+			transform*glm::vec4((p_length / 2), 0,  (p_width / 2),1)
 		};
 		//Normals
 		glm::vec3 normal = Vector3::toGlm(p_normal);
