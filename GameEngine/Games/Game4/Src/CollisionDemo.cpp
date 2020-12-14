@@ -20,20 +20,24 @@ namespace Games::Game4 {
 		}
 
 		// 0 - Init Camera
-		Vector3 camera_position(0,25,0);
+		Vector3 camera_position(0,10,60);
 		_camera.setPosition(Vector3::toGlm(camera_position));
+
 		//Init 6 walls
 		float l = 50;
 		float w = 50;
 		_tabWall.push_back(SceneGraph::CWall (Vector3(0,0,0), Vector3(0,1,0),l,w));
-		_tabWall.push_back(SceneGraph::CWall (Vector3(0,w,0), Vector3(0,-1,0),l,w));
+	/*	_tabWall.push_back(SceneGraph::CWall (Vector3(0,w,0), Vector3(0,-1,0),l,w));
 		_tabWall.push_back(SceneGraph::CWall (Vector3(0,0,-l/2), Vector3(0,0,-1),l,w));
 		_tabWall.push_back(SceneGraph::CWall (Vector3(0,0,l/2), Vector3(0,0,1),l,w));
 		_tabWall.push_back(SceneGraph::CWall (Vector3(l/2,0,0), Vector3(-1,0,0),l,w));
-		_tabWall.push_back(SceneGraph::CWall (Vector3(-l/2,0,0), Vector3(1,0,0),l,w));
+		_tabWall.push_back(SceneGraph::CWall (Vector3(-l/2,0,0), Vector3(1,0,0),l,w));*/
 
 		//Init Cube
+		_cube = std::make_shared<SceneGraph::CCube>(Vector3(0, 10, 0), Vector3(10, 10, 10), 10, 3);
+
 		//Octree
+		//_octree = std::make_shared<PhysicEngine::Collisions::Octree>();
 
 		//
 	}
@@ -86,6 +90,7 @@ namespace Games::Game4 {
 			{
 				_tabWall[i].draw(shaderUsed);
 			}
+			_cube->draw(shaderUsed);
 			ShaderServer::getSingleton()->unuse(currentShader);
 		}
 	}
