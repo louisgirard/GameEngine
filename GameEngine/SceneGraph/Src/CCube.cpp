@@ -105,6 +105,16 @@ namespace SceneGraph {
 		_abstraction->integrate(p_dt);
 	}
 
+	PhysicEngine::ARigidBody* CCube::getRigidBody()
+	{
+		return _abstraction.get();
+	}
+
+	void CCube::addForceAtLocalPoint(const PhysicEngine::Vector3& p_force, const PhysicEngine::Vector3& p_point)
+	{
+		_abstraction->addForceAtLocalPoint(p_force, p_point);
+	}
+
 	void CCube::draw(std::string p_shaderName)
 	{
 		PhysicEngine::Matrix3x4 transform = _abstraction->_transformMatrix;

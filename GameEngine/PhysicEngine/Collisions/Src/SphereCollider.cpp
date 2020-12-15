@@ -38,17 +38,18 @@ namespace PhysicEngine::Collisions {
 		return false;
 	}
 
-	bool SphereCollider::resolvePlaneCollision(const PlaneCollider& p_boxCollider, CollisionData* p_data) {
+	bool SphereCollider::resolvePlaneCollision(const PlaneCollider& p_planeCollider, CollisionData* p_data) {
 		// Gets the center transformed
 		Vector3 transformedCenter = _transform->transformPoint(_center);
 
 		// Check if point is on the same side of the normal
-		float distance = (transformedCenter - p_boxCollider.getCenter()).scalarProduct(p_boxCollider.getNormal());
+		float distance = (transformedCenter - p_planeCollider.getCenter()).scalarProduct(p_planeCollider.getNormal());
+		//std::cout << distance << std::endl;
 		if (distance < 0)
 		{
 			p_data->setPenetration(distance);
-			p_data->setContactNormal(p_boxCollider.getNormal());
-			p_data->setContactPoint(transformedCenter + p_boxCollider.getNormal() * (distance / 2.0));
+			p_data->setContactNormal(p_planeCollider.getNormal());
+			p_data->setContactPoint(transformedCenter + p_planeCollider.getNormal() * (distance / 2.0));
 			return true;
 		}
 		return false;

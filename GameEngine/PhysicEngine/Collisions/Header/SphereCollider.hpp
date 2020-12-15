@@ -17,7 +17,7 @@ namespace PhysicEngine::Collisions {
 
 		bool resolveCollision(Collider& const p_collider, CollisionData* p_data) override;
 
-		bool resolvePlaneCollision(const PlaneCollider& p_boxCollider, CollisionData* p_data);
+		bool resolvePlaneCollision(const PlaneCollider& p_planeCollider, CollisionData* p_data);
 	};
 }
 

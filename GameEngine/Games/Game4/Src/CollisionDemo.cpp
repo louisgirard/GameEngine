@@ -1,13 +1,16 @@
 #include <Games/Game4/Header/CollisionDemo.hpp>
 
 namespace Games::Game4 {
-	CollisionDemo::CollisionDemo() : GameBase()
+	CollisionDemo::CollisionDemo() : GameBase(), _gravityAcceleration(-10), _gravity(Forces::BodyGravity(Vector3(0, _gravityAcceleration, 0)))
 	{
 
 	}
 
 	CollisionDemo::~CollisionDemo()
 	{
+		std::cout << "Destroy" << std::endl;
+		_cube = nullptr;
+		_octree = nullptr;
 		ShaderServer::getSingleton()->clear();
 		TextureServer::getSingleton()->clear();
 		SceneServer::getSingleton()->clear();
@@ -24,32 +27,49 @@ namespace Games::Game4 {
 		Vector3 cubePos(0, 10, 0);
 
 		// 0 - Init Camera
-
-		Vector3 camera_position = cubePos + Vector3(0,0,10);
+		//Vector3 camera_position = cubePos + Vector3(0,0,10);
+		Vector3 camera_position(0, 30, 300);
 		_camera.setPosition(Vector3::toGlm(camera_position));
 
 		//Init 6 walls
-		float l = 50;
-		float w = 50;
+		//glDisable(GL_CULL_FACE);
+		float l = 100;
+		float w = 100;
+		// Down
 		_tabWall.push_back(SceneGraph::CWall(Vector3(0, 0, 0), Vector3(0, 1, 0), l, w));
+		// Up
 		_tabWall.push_back(SceneGraph::CWall(Vector3(0, w, 0), Vector3(0, -1, 0), l, w));
-		_tabWall.push_back(SceneGraph::CWall(Vector3(0, 0, -l / 2), Vector3(0, 0, -1), l, w));
-		_tabWall.push_back(SceneGraph::CWall(Vector3(0, 0, l / 2), Vector3(0, 0, 1), l, w));
-		_tabWall.push_back(SceneGraph::CWall(Vector3(l / 2, 0, 0), Vector3(-1, 0, 0), l, w));
-		_tabWall.push_back(SceneGraph::CWall(Vector3(-l / 2, 0, 0), Vector3(1, 0, 0), l, w));
+		// Front
+		_tabWall.push_back(SceneGraph::CWall(Vector3(0, l / 2, w / 2), Vector3(0, 0, -1), l, w));
+		// Back
+		_tabWall.push_back(SceneGraph::CWall(Vector3(0, l / 2, -w / 2), Vector3(0, 0, 1), l, w));
+		// Right
+		_tabWall.push_back(SceneGraph::CWall(Vector3(l / 2, w / 2, 0), Vector3(-1, 0, 0), l, w));
+		// Left
+		_tabWall.push_back(SceneGraph::CWall(Vector3(-l / 2, w / 2, 0), Vector3(1, 0, 0), l, w));
 
 		//Init Cube
 		_cube = std::make_shared<SceneGraph::CCube>(cubePos, Vector3(10, 10, 10), 10, 3);
 
-		/*std::vector<PhysicEngine::Collisions::Collider*> colliders;
+		// 4 - Add force to registry
+		_registry.add((_cube->getRigidBody()), &_gravity);
+
+		// Octree
+		std::vector<PhysicEngine::Collisions::Collider*> colliders;
 		for (int i = 0; i < _tabWall.size(); i++)
 		{
-			colliders.insert(colliders.end(), _tabWall[i].getColliders().begin(), _tabWall[i].getColliders().end());
+			for (int j = 0; j < _tabWall[i].getColliders().size(); j++)
+			{
+				colliders.push_back(_tabWall[i].getColliders()[j]);
+			}
 		}
-		colliders.insert(colliders.end(), _cube->getColliders().begin(), _cube->getColliders().end());
 
-		//Octree
-		_octree = std::make_shared<PhysicEngine::Collisions::Octree>(20, 20, colliders);*/
+		for (int i = 0; i < _cube->getColliders().size(); i++)
+		{
+			colliders.push_back(_cube->getColliders()[i]);
+		}
+
+		_octree = std::make_shared<PhysicEngine::Collisions::Octree>(3, 4, 400, colliders);
 	}
 
 	void CollisionDemo::handleInput(double p_dt)
@@ -59,12 +79,22 @@ namespace Games::Game4 {
 
 	void CollisionDemo::updatePhysic(double p_dt)
 	{
+		if (gamePaused()) return;
+
+		_cube->addForceAtLocalPoint(Vector3(1 / p_dt, 2 * (1 / p_dt), 0), Vector3(0.3, 0, 0));
+
+		//Physic Update
+		_registry.updatePhysic(p_dt);
+		_cube->physicUpdate(p_dt);
+
 		//Update Tree
-		//_octree->build()
+		_octree->build();
 
-		//Get possible collisions
+		//Get possible collisions and pass it to NarrowPhaseCollisions
+		auto possibleCollisions = _octree->getPossibleCollison();
+		narrowPhaseCollisions(possibleCollisions);
 
-		//To NarrowPhaseCollisions
+		_octree->clear();
 	}
 
 	void CollisionDemo::updateFrame()
@@ -108,6 +138,8 @@ namespace Games::Game4 {
 
 	void CollisionDemo::narrowPhaseCollisions(std::vector<std::vector<PhysicEngine::Collisions::Collider*>>& p_possibleCollisions)
 	{
+		std::vector<std::pair<PhysicEngine::Collisions::Collider*, PhysicEngine::Collisions::Collider*>> collisionTested;
+
 		for (int i = 0; i < p_possibleCollisions.size(); i++)
 		{
 			std::vector<PhysicEngine::Collisions::Collider*> colliders = p_possibleCollisions[i];
@@ -115,15 +147,38 @@ namespace Games::Game4 {
 			{
 				for (int k = j + 1; k < colliders.size(); k++)
 				{
-					PhysicEngine::Collisions::CollisionData collisionData;
-					// Check if the two colliders are collected and resolve the collision
-					bool collided = colliders[j]->resolveCollision(*colliders[k], &collisionData);
-					if (collided)
-					{
-						_collisionsData.push_back(collisionData);
+					std::pair<PhysicEngine::Collisions::Collider*, PhysicEngine::Collisions::Collider*> newCollisionTested = 
+						std::pair<PhysicEngine::Collisions::Collider*, PhysicEngine::Collisions::Collider*>(colliders[j], colliders[k]);
+					auto it = std::find(collisionTested.begin(), collisionTested.end(), newCollisionTested);
+					if (it == collisionTested.end()) {
+						PhysicEngine::Collisions::CollisionData collisionData;
+						// Check if the two colliders are collected and resolve the collision
+						bool collided = colliders[j]->resolveCollision(*colliders[k], &collisionData);
+						if (collided)
+						{
+							_collisionsData.push_back(collisionData);
+
+						}
+						collisionTested.push_back(newCollisionTested);
+						std::pair<PhysicEngine::Collisions::Collider*, PhysicEngine::Collisions::Collider*> collisionReciprocal =
+							std::pair<PhysicEngine::Collisions::Collider*, PhysicEngine::Collisions::Collider*>(colliders[k], colliders[j]);
 					}
 				}
 			}
 		}
+
+		if (_collisionsData.size() > 0)
+		{
+			std::cout << "-----Collision Data-----" << std::endl;
+			for (int i = 0; i < _collisionsData.size(); i++)
+			{
+				std::cout << _collisionsData[i].ToString() << std::endl;
+			}
+
+			// Stop the demo
+			pauseGame(true);
+		}
+
+		_collisionsData.clear();
 	}
 }

@@ -14,7 +14,7 @@ namespace PhysicEngine::Collisions {
 
 	std::vector<std::vector<Collider*>> Octree::getPossibleCollison() {
 		std::vector<std::vector<Collider*>> result;
-		_root->browse(result);
+		if(_root != nullptr) _root->browse(result);
 		return result;
 	}
 
@@ -90,8 +90,8 @@ namespace PhysicEngine::Collisions {
 	}
 
 	Octree::Node::~Node() {
-		for (std::vector<Node*>::iterator it = _childs.begin(); it != _childs.end(); it++) {
-			if((*it) != nullptr) delete (*it);
+		for (Node* node : _childs) {
+			if(node != nullptr) delete node;
 		}
 		_childs.clear();
 	}

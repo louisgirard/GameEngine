@@ -186,6 +186,11 @@ namespace Math {
 		* @return p_vec : the vector to convert
 		*/
 		static glm::vec3 toGlm(const Vector3& p_vec);
+
+		/* 
+		* @return a string version of the vector
+		*/
+		std::string ToString();
 	};
 
 	/*

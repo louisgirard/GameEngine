@@ -34,17 +34,9 @@ namespace GraphicEngine::PSceneGraph {
 			rotation = mat3(new_x, new_y, new_z);
 		    transform = mat4(rotation);
 		}
-		std::cout << "Transform rotation " << transform << std::endl;
 		vec4 center = vec4(Vector3::toGlm(p_center),1);
 		transform = glm::column(transform, 3, center);
 		
-		std::cout << "Transform translated " << transform << std::endl;
-		
-		std::cout << "Plane center : " << p_center << ", Dim : (" << p_length << ", " << p_width << ") normal  : " << p_normal << std::endl;
-		std::cout << "First "<< transform * glm::vec4(-(p_length / 2), 0, -(p_width / 2), 1) << std::endl;
-		std::cout << "Second " << transform * glm::vec4(-(p_length / 2), 0, (p_width / 2), 1) << std::endl;
-		std::cout << "Third " << transform * glm::vec4((p_length / 2), 0, -(p_width / 2), 1) << std::endl;
-		std::cout << "Fourst " << transform * glm::vec4((p_length / 2), 0, (p_width / 2), 1) << std::endl;
 
 		/*
 		* Creating Mesh

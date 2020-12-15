@@ -1,5 +1,5 @@
 #pragma once
-#include <PhysicEngine\Header\MathEnabler.hpp>
+#include <PhysicEngine/Header/MathEnabler.hpp>
 
 namespace PhysicEngine::Collisions {
 	class CollisionData
@@ -18,6 +18,8 @@ namespace PhysicEngine::Collisions {
 
 		float getPenetration();
 		void setPenetration(float p_penetration);
+
+		std::string ToString();
 	};
 }
 

@@ -30,6 +30,16 @@ namespace SceneGraph {
 
 		void physicUpdate(float p_dt);
 
+		/* @return the abstraction of the cube*/
+		PhysicEngine::ARigidBody* getRigidBody();
+
+		/*
+		* Adds a force at a given point of the body in local space coordinates
+		* @param p_force: the force to apply (world coordinates)
+		* @param p_point: the point to apply the force at (local coordinates)
+		*/
+		void addForceAtLocalPoint(const PhysicEngine::Vector3& p_force, const PhysicEngine::Vector3& p_point);
+
 		/*
 		* Draws this node
 		* @param p_shaderName : Name of the shader we are using now to render the node

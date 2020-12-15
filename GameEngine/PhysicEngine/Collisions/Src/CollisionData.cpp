@@ -30,4 +30,9 @@ namespace PhysicEngine::Collisions {
 	{
 		_penetration = p_penetration;
 	}
+
+	std::string CollisionData::ToString()
+	{
+		return "Point de contact = " + getContactPoint().ToString() + ", normal = " + getContactNormal().ToString() + ", interpenetration = " + std::to_string(getPenetration());
+	}
 }

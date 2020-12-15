@@ -177,5 +177,10 @@ namespace Math {
 		return glm::vec3(p_vec._x, p_vec._y, p_vec._z);
 	}
 
+	std::string Vector3::ToString()
+	{
+		return "(" + std::to_string(_x) + ", " + std::to_string(_y) + ", " + std::to_string(_z) + ")";
+	}
+
 }
 
