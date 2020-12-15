@@ -57,8 +57,10 @@ namespace Games::Game4 {
 		/* The force generator for gravity in the game */
 		Forces::BodyGravity _gravity;
 
+		/* Detect if the cube is launched or not */
 		bool _launched = false;
 
+		bool _impulseGiven = false;
 	public:
 		/* Default constructor */
 		CollisionDemo();

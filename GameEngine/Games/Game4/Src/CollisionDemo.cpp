@@ -26,10 +26,6 @@ namespace Games::Game4 {
 		// Binding Keys
 		_keyboard.bindActionToKey(KeyAction::MAINACTION, 13);
 
-		// 0 - Init Camera
-		//Vector3 camera_position = cubePos + Vector3(0,0,10);
-		Vector3 camera_position(0, 30, 200);
-		_camera.setPosition(Vector3::toGlm(camera_position));
 
 		//Init 6 walls
 		//glDisable(GL_CULL_FACE);
@@ -47,6 +43,10 @@ namespace Games::Game4 {
 		_tabWall.push_back(SceneGraph::CWall(Vector3(l / 2, w / 2, 0), Vector3(-1, 0, 0), l, w));
 		// Left
 		_tabWall.push_back(SceneGraph::CWall(Vector3(-l / 2, w / 2, 0), Vector3(1, 0, 0), l, w));
+
+		// Init Camera
+		Vector3 camera_position(0, l / 2, 120);
+		_camera.setPosition(Vector3::toGlm(camera_position));
 
 		//Init Cube
 		Vector3 cubePos(0, w / 2, 0);
@@ -85,32 +85,36 @@ namespace Games::Game4 {
 
 	void CollisionDemo::updatePhysic(double p_dt)
 	{
-		if (gamePaused()) return;
+		if (gamePaused() || !_launched) return;
 
 		srand(time((time_t*)NULL));
-		int range = 20;
-		float randomNumberX = rand() % (range + 1) - range / 2;
-		float randomNumberY = rand() % (range + 1) - range / 2;
-		float randomNumberZ = rand() % (range + 1) - range / 2;
+		int rangeX = 200;
+		int rangeY = 2000;
+		int rangeZ = 200;
+		float randomNumberX = rand() % (rangeX + 1) - rangeX / 2;
+		float randomNumberY = rand() % (rangeY + 1);
+		float randomNumberZ = rand() % (rangeZ + 1) - rangeZ / 2;
 
 		Vector3 localPoint(rand(), rand(), rand());
 
-		if (_launched){
+		if (!_impulseGiven)
+		{
 			_cube->addForceAtLocalPoint(Vector3(randomNumberX / p_dt, randomNumberY / p_dt, randomNumberZ / p_dt), localPoint);
-
-			//Physic Update
-			_registry.updatePhysic(p_dt);
-			_cube->physicUpdate(p_dt);
-
-			//Update Tree
-			_octree->build();
-
-			//Get possible collisions and pass it to NarrowPhaseCollisions
-			auto possibleCollisions = _octree->getPossibleCollison();
-			narrowPhaseCollisions(possibleCollisions);
-
-			_octree->clear();
+			_impulseGiven = true;
 		}
+
+		//Physic Update
+		_registry.updatePhysic(p_dt);
+		_cube->physicUpdate(p_dt);
+
+		//Update Tree
+		_octree->build();
+
+		//Get possible collisions and pass it to NarrowPhaseCollisions
+		auto possibleCollisions = _octree->getPossibleCollison();
+		narrowPhaseCollisions(possibleCollisions);
+
+		_octree->clear();
 	}
 
 
@@ -164,8 +168,7 @@ namespace Games::Game4 {
 			{
 				for (int k = j + 1; k < colliders.size(); k++)
 				{
-					std::pair<PhysicEngine::Collisions::Collider*, PhysicEngine::Collisions::Collider*> newCollisionTested = 
-						std::pair<PhysicEngine::Collisions::Collider*, PhysicEngine::Collisions::Collider*>(colliders[j].get(), colliders[k].get());
+					auto newCollisionTested = std::pair<Collider*, Collider*>(colliders[j].get(), colliders[k].get());
 					auto it = std::find(collisionTested.begin(), collisionTested.end(), newCollisionTested);
 					if (it == collisionTested.end()) {
 						PhysicEngine::Collisions::CollisionData collisionData;
@@ -174,11 +177,10 @@ namespace Games::Game4 {
 						if (collided)
 						{
 							_collisionsData.push_back(collisionData);
-
 						}
 						collisionTested.push_back(newCollisionTested);
-						std::pair<PhysicEngine::Collisions::Collider*, PhysicEngine::Collisions::Collider*> collisionReciprocal =
-							std::pair<PhysicEngine::Collisions::Collider*, PhysicEngine::Collisions::Collider*>(colliders[k].get(), colliders[j].get());
+						auto collisionReciprocal = std::pair<Collider*, Collider*>(colliders[k].get(), colliders[j].get());
+						collisionTested.push_back(collisionReciprocal);
 					}
 				}
 			}
