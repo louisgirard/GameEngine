@@ -29,8 +29,11 @@ namespace Games::Game4 {
 
 		// We create a sub menu for choosing the impulse
 		_impulseMenu->addItem("Axis X", [this]() {_impulseAxis = 0; });
-		_impulseMenu->addItem("Axis Y", [this]() {_impulseAxis = 1; });
-		_impulseMenu->addItem("Axis Z", [this]() {_impulseAxis = 2; });
+		_impulseMenu->addItem("Axis -X", [this]() {_impulseAxis = 1; });
+		_impulseMenu->addItem("Axis Y", [this]() {_impulseAxis = 2; });
+		_impulseMenu->addItem("Axis -Y", [this]() {_impulseAxis = 3; });
+		_impulseMenu->addItem("Axis Z", [this]() {_impulseAxis = 4; });
+		_impulseMenu->addItem("Axis -Z", [this]() {_impulseAxis = 5; });
 		getMenu()->addSubMenu(_impulseMenu);
 		// Add close function
 		onClose([this]() {
@@ -103,29 +106,57 @@ namespace Games::Game4 {
 		int rangeX = 0;
 		int rangeY = 0;
 		int rangeZ = 0;
+		float randomNumberX = 0;
+		float randomNumberY = 0;
+		float randomNumberZ = 0;
+
 		switch (_impulseAxis)
 		{
 		case 0:
-			rangeX = 2000;
-			rangeY = 200;
-			rangeZ = 200;
+			rangeY = 2;
+			rangeZ = 2;
+			randomNumberX = 2000;
+			randomNumberY = rand() % (rangeY + 1) - rangeY / 2;
+			randomNumberZ = rand() % (rangeZ + 1) - rangeZ / 2;
 			break;
 		case 1:
-			rangeX = 200;
-			rangeY = 2000;
-			rangeZ = 200;
+			rangeY = 2;
+			rangeZ = 2;
+			randomNumberX = -2000;
+			randomNumberY = rand() % (rangeY + 1) - rangeY / 2;
+			randomNumberZ = rand() % (rangeZ + 1) - rangeZ / 2;
 			break;
 		case 2:
-			rangeX = 200;
-			rangeY = 200;
-			rangeZ = 2000;
+			rangeX = 2;
+			rangeZ = 2;
+			randomNumberX = rand() % (rangeX + 1) - rangeX / 2;
+			randomNumberY = 2000;
+			randomNumberZ = rand() % (rangeZ + 1) - rangeZ / 2;
+			break;
+		case 3:
+			rangeX = 2;
+			rangeZ = 2;
+			randomNumberX = rand() % (rangeX + 1) - rangeX / 2;
+			randomNumberY = -2000;
+			randomNumberZ = rand() % (rangeZ + 1) - rangeZ / 2;
+			break;
+		case 4:
+			rangeX = 2;
+			rangeY = 2;
+			randomNumberX = rand() % (rangeX + 1) - rangeX / 2;
+			randomNumberY = rand() % (rangeY + 1) - rangeY / 2;
+			randomNumberZ = 2000;
+			break;
+		case 5:
+			rangeX = 2;
+			rangeY = 2;
+			randomNumberX = rand() % (rangeX + 1) - rangeX / 2;
+			randomNumberY = rand() % (rangeY + 1) - rangeY / 2;
+			randomNumberZ = -2000;
 			break;
 		default:
 			break;
 		}
-		float randomNumberX = rand() % (rangeX + 1) - rangeX / 2;
-		float randomNumberY = rand() % (rangeY + 1);
-		float randomNumberZ = rand() % (rangeZ + 1) - rangeZ / 2;
 
 		Vector3 localPoint(rand(), rand(), rand());
 

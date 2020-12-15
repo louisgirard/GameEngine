@@ -66,7 +66,7 @@ namespace Games::Game4 {
 		/* Menu used to choose impulse axis */
 		Games::GameMenu* _impulseMenu;
 
-		int _impulseAxis = 1;
+		int _impulseAxis = 2;
 	public:
 		/* Default constructor */
 		CollisionDemo();
