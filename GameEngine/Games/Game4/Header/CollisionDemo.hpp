@@ -57,6 +57,8 @@ namespace Games::Game4 {
 		/* The force generator for gravity in the game */
 		Forces::BodyGravity _gravity;
 
+		bool _launched = false;
+
 	public:
 		/* Default constructor */
 		CollisionDemo();
@@ -65,6 +67,3 @@ namespace Games::Game4 {
 		~CollisionDemo();
 	};
 }
-
-
-

@@ -23,6 +23,9 @@ namespace Games::Game4 {
 			ShaderServer::getSingleton()->init();
 		}
 
+		// Binding Keys
+		_keyboard.bindActionToKey(KeyAction::MAINACTION, 13);
+
 		// 0 - Init Camera
 		//Vector3 camera_position = cubePos + Vector3(0,0,10);
 		Vector3 camera_position(0, 30, 200);
@@ -73,6 +76,11 @@ namespace Games::Game4 {
 	void CollisionDemo::handleInput(double p_dt)
 	{
 		GameBase::handleInput(p_dt);
+
+		if (_keyboard.isPressed(KeyAction::MAINACTION))
+		{
+			_launched = true;
+		}
 	}
 
 	void CollisionDemo::updatePhysic(double p_dt)
@@ -87,7 +95,8 @@ namespace Games::Game4 {
 
 		Vector3 localPoint(rand(), rand(), rand());
 
-		_cube->addForceAtLocalPoint(Vector3(randomNumberX / p_dt, randomNumberY / p_dt, randomNumberZ / p_dt), localPoint);
+		if(_launched)
+			_cube->addForceAtLocalPoint(Vector3(randomNumberX / p_dt, randomNumberY / p_dt, randomNumberZ / p_dt), localPoint);
 
 		//Physic Update
 		_registry.updatePhysic(p_dt);
