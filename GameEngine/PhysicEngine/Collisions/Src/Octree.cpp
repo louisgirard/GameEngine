@@ -89,7 +89,7 @@ namespace PhysicEngine::Collisions {
 				_primitives.push_back(*it);
 			}
 		}
-		std::cout <<  std::endl << std::endl;
+		//std::cout <<  std::endl << std::endl;
 		subdivise();
 	}
 

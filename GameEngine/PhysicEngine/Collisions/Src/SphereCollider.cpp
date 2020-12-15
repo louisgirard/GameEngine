@@ -10,7 +10,7 @@ namespace PhysicEngine::Collisions {
 		// Gets the center transformed
 		Vector3 transformedCenter = _transform->transformPoint(_center) ;
 		
-		std::cout << "Sphere  " << transformedCenter << ", " << _radius << std::endl;
+		//std::cout << "Sphere  " << transformedCenter << ", " << _radius << std::endl;
 
 		// Gets box center and dimension
 		Vector3 boxCenter = Vector3::convertGlm(p_region.center());
