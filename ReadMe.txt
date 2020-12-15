@@ -7,6 +7,10 @@ Blob Game :
 - B : Séparer le blob
 - F : Reconstituer le blob
 
+Lancer du cube :
+- Toucher Enter pour lancer le cube
+- Clic droit pour accéder au menu à choisir l'axe du lancer
+
 Général :
 Requis :
 - Avoir une configuration qui supporte OpenGL 3
