@@ -84,7 +84,7 @@ namespace Games::Game4 {
 			colliders.push_back(_cube->getColliders()[i]);
 		}
 
-		_octree = std::make_shared<PhysicEngine::Collisions::Octree>(3, 4, 400, colliders);
+		_octree = std::make_shared<PhysicEngine::Collisions::Octree>(1, 4, 400, colliders);
 	}
 
 	void CollisionDemo::handleInput(double p_dt)

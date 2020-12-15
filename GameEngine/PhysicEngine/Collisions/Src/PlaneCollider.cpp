@@ -25,18 +25,14 @@ namespace PhysicEngine::Collisions {
 		Vector3 dimension = Vector3::convertGlm(p_region.extent());
 
 		// Project center onto plan
-		Vector3 planToCenter = boxCenter - _center;
-		float distance = planToCenter.scalarProduct(_normal);
-		Vector3 projectedPoint = planToCenter - _normal*distance;
+		Vector3 planToCenter = boxCenter - transformedCenter;
+		float distance = planToCenter.scalarProduct(transformedNormal);
+		Vector3 projectedPoint = boxCenter - transformedNormal *distance;
 
 		// We test if closest point is inside box
-		if (((_normal._x != 0 && std::abs(_center._x - projectedPoint._x) < dimension._x / 2) || _normal._x == 0)
-			&& ((_normal._y != 0 && std::abs(_center._y - projectedPoint._y) < dimension._y / 2) || _normal._y == 0)
-			&& ((_normal._z != 0 && std::abs(_center._z - projectedPoint._z) < dimension._z / 2)) || _normal._z == 0) {
-			return true;
-		}
-
-		return false;
+		return (((transformedNormal._x != 0 && std::abs(boxCenter._x - projectedPoint._x) <= dimension._x / 2) || transformedNormal._x == 0)
+			&& ((transformedNormal._y != 0 && std::abs(boxCenter._y - projectedPoint._y) <= dimension._y / 2) || transformedNormal._y == 0)
+			&& ((transformedNormal._z != 0 && std::abs(boxCenter._z - projectedPoint._z) <= dimension._z / 2) || transformedNormal._z == 0));
 	}
 
 	bool PlaneCollider::resolveCollision(Collider& const p_collider, CollisionData* p_data) {
