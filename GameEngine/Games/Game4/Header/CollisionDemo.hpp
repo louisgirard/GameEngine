@@ -60,7 +60,13 @@ namespace Games::Game4 {
 		/* Detect if the cube is launched or not */
 		bool _launched = false;
 
+		/* Detect if the cube has been given an impulse */
 		bool _impulseGiven = false;
+
+		/* Menu used to choose impulse axis */
+		Games::GameMenu* _impulseMenu;
+
+		int _impulseAxis = 1;
 	public:
 		/* Default constructor */
 		CollisionDemo();

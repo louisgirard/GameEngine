@@ -1,7 +1,7 @@
 #include <Games/Game4/Header/CollisionDemo.hpp>
 
 namespace Games::Game4 {
-	CollisionDemo::CollisionDemo() : GameBase(), _gravityAcceleration(-10), _gravity(Forces::BodyGravity(Vector3(0, _gravityAcceleration, 0)))
+	CollisionDemo::CollisionDemo() : GameBase(), _gravityAcceleration(-10), _gravity(Forces::BodyGravity(Vector3(0, _gravityAcceleration, 0))), _impulseMenu(new Games::GameMenu("Impulse"))
 	{
 
 	}
@@ -26,6 +26,17 @@ namespace Games::Game4 {
 		// Binding Keys
 		_keyboard.bindActionToKey(KeyAction::MAINACTION, 13);
 
+
+		// We create a sub menu for choosing the impulse
+		_impulseMenu->addItem("Axis X", [this]() {_impulseAxis = 0; });
+		_impulseMenu->addItem("Axis Y", [this]() {_impulseAxis = 1; });
+		_impulseMenu->addItem("Axis Z", [this]() {_impulseAxis = 2; });
+		getMenu()->addSubMenu(_impulseMenu);
+		// Add close function
+		onClose([this]() {
+			// We destroy the menus
+			delete _impulseMenu;
+		});
 
 		//Init 6 walls
 		//glDisable(GL_CULL_FACE);
@@ -88,9 +99,30 @@ namespace Games::Game4 {
 		if (gamePaused() || !_launched) return;
 
 		srand(time((time_t*)NULL));
-		int rangeX = 200;
-		int rangeY = 2000;
-		int rangeZ = 200;
+
+		int rangeX = 0;
+		int rangeY = 0;
+		int rangeZ = 0;
+		switch (_impulseAxis)
+		{
+		case 0:
+			rangeX = 2000;
+			rangeY = 200;
+			rangeZ = 200;
+			break;
+		case 1:
+			rangeX = 200;
+			rangeY = 2000;
+			rangeZ = 200;
+			break;
+		case 2:
+			rangeX = 200;
+			rangeY = 200;
+			rangeZ = 2000;
+			break;
+		default:
+			break;
+		}
 		float randomNumberX = rand() % (rangeX + 1) - rangeX / 2;
 		float randomNumberY = rand() % (rangeY + 1);
 		float randomNumberZ = rand() % (rangeZ + 1) - rangeZ / 2;
