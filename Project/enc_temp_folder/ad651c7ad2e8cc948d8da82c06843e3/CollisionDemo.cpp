@@ -64,7 +64,11 @@ namespace Games::Game4 {
 
 		//Init Cube
 		Vector3 cubePos(0, w / 2, 0);
+<<<<<<< HEAD
+		_cube = std::make_shared<SceneGraph::CCube>(cubePos, Vector3(10, 10, 10), 1, 2);
+=======
 		_cube = std::make_shared<SceneGraph::CCube>(cubePos, Vector3(10, 10, 10), 0.1, 2);
+>>>>>>> 8c63af6da1a695ee81b7fc0de1d4aa9f69491cf9
 
 		// 4 - Add force to registry
 		_registry.add((_cube->getRigidBody()), &_gravity);
@@ -110,6 +114,48 @@ namespace Games::Game4 {
 		switch (_impulseAxis)
 		{
 		case 0:
+<<<<<<< HEAD
+			rangeY = 2;
+			rangeZ = 2;
+			randomNumberX = 75;
+			randomNumberY = rand() % (rangeY + 1) - rangeY / 2;
+			randomNumberZ = rand() % (rangeZ + 1) - rangeZ / 2;
+			break;
+		case 1:
+			rangeY = 2;
+			rangeZ = 2;
+			randomNumberX = -75;
+			randomNumberY = rand() % (rangeY + 1) - rangeY / 2;
+			randomNumberZ = rand() % (rangeZ + 1) - rangeZ / 2;
+			break;
+		case 2:
+			rangeX = 2;
+			rangeZ = 2;
+			randomNumberX = rand() % (rangeX + 1) - rangeX / 2;
+			randomNumberY = 75;
+			randomNumberZ = rand() % (rangeZ + 1) - rangeZ / 2;
+			break;
+		case 3:
+			rangeX = 2;
+			rangeZ = 2;
+			randomNumberX = rand() % (rangeX + 1) - rangeX / 2;
+			randomNumberY = -75;
+			randomNumberZ = rand() % (rangeZ + 1) - rangeZ / 2;
+			break;
+		case 4:
+			rangeX = 2;
+			rangeY = 2;
+			randomNumberX = rand() % (rangeX + 1) - rangeX / 2;
+			randomNumberY = rand() % (rangeY + 1) - rangeY / 2;
+			randomNumberZ = 75;
+			break;
+		case 5:
+			rangeX = 2;
+			rangeY = 2;
+			randomNumberX = rand() % (rangeX + 1) - rangeX / 2;
+			randomNumberY = rand() % (rangeY + 1) - rangeY / 2;
+			randomNumberZ = -75;
+=======
 			impulseX = 5;
 			break;
 		case 1:
@@ -126,6 +172,7 @@ namespace Games::Game4 {
 			break;
 		case 5:
 			impulseZ = -5;
+>>>>>>> 8c63af6da1a695ee81b7fc0de1d4aa9f69491cf9
 			break;
 		default:
 			break;
