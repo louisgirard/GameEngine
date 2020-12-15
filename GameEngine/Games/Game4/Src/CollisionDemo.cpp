@@ -64,7 +64,7 @@ namespace Games::Game4 {
 
 		//Init Cube
 		Vector3 cubePos(0, w / 2, 0);
-		_cube = std::make_shared<SceneGraph::CCube>(cubePos, Vector3(10, 10, 10), 50, 2);
+		_cube = std::make_shared<SceneGraph::CCube>(cubePos, Vector3(10, 10, 10), 0.1, 2);
 
 		// 4 - Add force to registry
 		_registry.add((_cube->getRigidBody()), &_gravity);
@@ -103,66 +103,40 @@ namespace Games::Game4 {
 
 		srand(time((time_t*)NULL));
 
-		int rangeX = 0;
-		int rangeY = 0;
-		int rangeZ = 0;
-		float randomNumberX = 0;
-		float randomNumberY = 0;
-		float randomNumberZ = 0;
+		float impulseX = 0;
+		float impulseY = 0;
+		float impulseZ = 0;
 
 		switch (_impulseAxis)
 		{
 		case 0:
-			rangeY = 2;
-			rangeZ = 2;
-			randomNumberX = 2000;
-			randomNumberY = rand() % (rangeY + 1) - rangeY / 2;
-			randomNumberZ = rand() % (rangeZ + 1) - rangeZ / 2;
+			impulseX = 5;
 			break;
 		case 1:
-			rangeY = 2;
-			rangeZ = 2;
-			randomNumberX = -2000;
-			randomNumberY = rand() % (rangeY + 1) - rangeY / 2;
-			randomNumberZ = rand() % (rangeZ + 1) - rangeZ / 2;
+			impulseX = -5;
 			break;
 		case 2:
-			rangeX = 2;
-			rangeZ = 2;
-			randomNumberX = rand() % (rangeX + 1) - rangeX / 2;
-			randomNumberY = 2000;
-			randomNumberZ = rand() % (rangeZ + 1) - rangeZ / 2;
+			impulseY = 5;
 			break;
 		case 3:
-			rangeX = 2;
-			rangeZ = 2;
-			randomNumberX = rand() % (rangeX + 1) - rangeX / 2;
-			randomNumberY = -2000;
-			randomNumberZ = rand() % (rangeZ + 1) - rangeZ / 2;
+			impulseY = -5;
 			break;
 		case 4:
-			rangeX = 2;
-			rangeY = 2;
-			randomNumberX = rand() % (rangeX + 1) - rangeX / 2;
-			randomNumberY = rand() % (rangeY + 1) - rangeY / 2;
-			randomNumberZ = 2000;
+			impulseZ = 5;
 			break;
 		case 5:
-			rangeX = 2;
-			rangeY = 2;
-			randomNumberX = rand() % (rangeX + 1) - rangeX / 2;
-			randomNumberY = rand() % (rangeY + 1) - rangeY / 2;
-			randomNumberZ = -2000;
+			impulseZ = -5;
 			break;
 		default:
 			break;
 		}
 
-		Vector3 localPoint(rand(), rand(), rand());
+		Vector3 localPoint(((double)rand() / (RAND_MAX)), ((double)rand() / (RAND_MAX)), ((double)rand() / (RAND_MAX)));
+		localPoint *= 2;
 
 		if (!_impulseGiven)
 		{
-			_cube->addForceAtLocalPoint(Vector3(randomNumberX / p_dt, randomNumberY / p_dt, randomNumberZ / p_dt), localPoint);
+			_cube->addForceAtLocalPoint(Vector3(impulseX / p_dt, impulseY / p_dt, impulseZ / p_dt), localPoint);
 			_impulseGiven = true;
 		}
 
