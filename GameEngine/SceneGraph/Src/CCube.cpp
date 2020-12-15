@@ -96,7 +96,7 @@ namespace SceneGraph {
 
 		//Init Colliders
 		for (std::vector< PhysicEngine::Vector3>::iterator it = vertices.begin(); it != vertices.end(); it++) { 
-			_colliders.push_back(new PhysicEngine::Collisions::SphereCollider(FLAG, 2, this, &(_abstraction->_transformMatrix), *it, p_collidersRadius));
+			_colliders.push_back(std::make_shared<PhysicEngine::Collisions::SphereCollider>(PhysicEngine::Collisions::SphereCollider(FLAG, 2, this, &(_abstraction->_transformMatrix), *it, p_collidersRadius)));
 		}
 
 	}

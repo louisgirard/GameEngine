@@ -8,7 +8,6 @@ namespace Games::Game4 {
 
 	CollisionDemo::~CollisionDemo()
 	{
-		std::cout << "Destroy" << std::endl;
 		_cube = nullptr;
 		_octree = nullptr;
 		ShaderServer::getSingleton()->clear();
@@ -57,7 +56,7 @@ namespace Games::Game4 {
 		_registry.add((_cube->getRigidBody()), &_gravity);
 
 		// Octree
-		std::vector<PhysicEngine::Collisions::Collider*> colliders;
+		std::vector<std::shared_ptr<Collider>> colliders;
 		for (int i = 0; i < _tabWall.size(); i++)
 		{
 			for (int j = 0; j < _tabWall[i].getColliders().size(); j++)
@@ -88,7 +87,7 @@ namespace Games::Game4 {
 	{
 		if (gamePaused()) return;
 
-		srand(time(NULL));
+		srand(time((time_t*)NULL));
 		int range = 20;
 		float randomNumberX = rand() % (range + 1) - range / 2;
 		float randomNumberY = rand() % (range + 1) - range / 2;
@@ -96,21 +95,22 @@ namespace Games::Game4 {
 
 		Vector3 localPoint(rand(), rand(), rand());
 
-		if(_launched)
+		if (_launched){
 			_cube->addForceAtLocalPoint(Vector3(randomNumberX / p_dt, randomNumberY / p_dt, randomNumberZ / p_dt), localPoint);
 
-		//Physic Update
-		_registry.updatePhysic(p_dt);
-		_cube->physicUpdate(p_dt);
+			//Physic Update
+			_registry.updatePhysic(p_dt);
+			_cube->physicUpdate(p_dt);
 
-		//Update Tree
-		_octree->build();
+			//Update Tree
+			_octree->build();
 
-		//Get possible collisions and pass it to NarrowPhaseCollisions
-		auto possibleCollisions = _octree->getPossibleCollison();
-		narrowPhaseCollisions(possibleCollisions);
+			//Get possible collisions and pass it to NarrowPhaseCollisions
+			auto possibleCollisions = _octree->getPossibleCollison();
+			narrowPhaseCollisions(possibleCollisions);
 
-		_octree->clear();
+			_octree->clear();
+		}
 	}
 
 
@@ -153,19 +153,19 @@ namespace Games::Game4 {
 		}
 	}
 
-	void CollisionDemo::narrowPhaseCollisions(std::vector<std::vector<PhysicEngine::Collisions::Collider*>>& p_possibleCollisions)
+	void CollisionDemo::narrowPhaseCollisions(std::vector<std::vector<std::shared_ptr<Collider>>>& p_possibleCollisions)
 	{
 		std::vector<std::pair<PhysicEngine::Collisions::Collider*, PhysicEngine::Collisions::Collider*>> collisionTested;
 
 		for (int i = 0; i < p_possibleCollisions.size(); i++)
 		{
-			std::vector<PhysicEngine::Collisions::Collider*> colliders = p_possibleCollisions[i];
+			std::vector<std::shared_ptr<Collider>> colliders = p_possibleCollisions[i];
 			for (int j = 0; j < colliders.size(); j++)
 			{
 				for (int k = j + 1; k < colliders.size(); k++)
 				{
 					std::pair<PhysicEngine::Collisions::Collider*, PhysicEngine::Collisions::Collider*> newCollisionTested = 
-						std::pair<PhysicEngine::Collisions::Collider*, PhysicEngine::Collisions::Collider*>(colliders[j], colliders[k]);
+						std::pair<PhysicEngine::Collisions::Collider*, PhysicEngine::Collisions::Collider*>(colliders[j].get(), colliders[k].get());
 					auto it = std::find(collisionTested.begin(), collisionTested.end(), newCollisionTested);
 					if (it == collisionTested.end()) {
 						PhysicEngine::Collisions::CollisionData collisionData;
@@ -178,7 +178,7 @@ namespace Games::Game4 {
 						}
 						collisionTested.push_back(newCollisionTested);
 						std::pair<PhysicEngine::Collisions::Collider*, PhysicEngine::Collisions::Collider*> collisionReciprocal =
-							std::pair<PhysicEngine::Collisions::Collider*, PhysicEngine::Collisions::Collider*>(colliders[k], colliders[j]);
+							std::pair<PhysicEngine::Collisions::Collider*, PhysicEngine::Collisions::Collider*>(colliders[k].get(), colliders[j].get());
 					}
 				}
 			}

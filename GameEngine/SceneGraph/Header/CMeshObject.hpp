@@ -4,6 +4,7 @@
 #include <GraphicEngine/SceneGraph/Header/PMeshObject.hpp>
 
 namespace PhysicEngine::Collisions { class Collider;}
+using PhysicEngine::Collisions::Collider;
 
 namespace SceneGraph {
 	class CMeshObject : public EmptyNode
@@ -11,7 +12,7 @@ namespace SceneGraph {
 	protected:
 		std::shared_ptr<GraphicEngine::PSceneGraph::PMeshObject> _presentation;
 
-		std::vector<PhysicEngine::Collisions::Collider*> _colliders;
+		std::vector<std::shared_ptr<Collider>> _colliders;
 
 	public:
 
@@ -28,7 +29,7 @@ namespace SceneGraph {
 		*/
 		CMeshObject(GraphicEngine::PSceneGraph::Mesh* p_mesh, std::shared_ptr<GraphicEngine::Materials::PhongMaterial> p_material, std::string p_shaderName, bool p_forcesTexture = false);
 
-		std::vector<PhysicEngine::Collisions::Collider*> getColliders();
+		std::vector<std::shared_ptr<Collider>> getColliders();
 
 		/*
 		* Draws this node

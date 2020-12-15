@@ -37,7 +37,7 @@ namespace Games::Game4 {
 		* Detect the real collision among the possible ones, and resolve them
 		* @param p_possibleCollisions the possible collisions detected by the broad phase
 		*/
-		void narrowPhaseCollisions(std::vector<std::vector<PhysicEngine::Collisions::Collider*>>& p_possibleCollisions);
+		void narrowPhaseCollisions(std::vector<std::vector<std::shared_ptr<Collider>>>& p_possibleCollisions);
 
 		/* Vector containing all the walls in the scene */
 		std::vector<SceneGraph::CWall> _tabWall;

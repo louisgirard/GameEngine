@@ -2,7 +2,7 @@
 
 namespace PhysicEngine::Collisions {
 
-	Octree::Octree(int p_maxDepth, int p_maxPrimitives, float p_originalRegionSize, std::vector<Collider*> p_primitive)
+	Octree::Octree(int p_maxDepth, int p_maxPrimitives, float p_originalRegionSize, std::vector<std::shared_ptr<Collider>> p_primitive)
 		: _maxDepth(p_maxDepth), _maxPrimitive(p_maxPrimitives), _originalRegionSize(p_originalRegionSize),_primitiveMarked(p_primitive), _root(nullptr){}
 
 	void Octree::build() {
@@ -12,14 +12,15 @@ namespace PhysicEngine::Collisions {
 		_root->tryAddingPrimitive(_primitiveMarked);
 	}
 
-	std::vector<std::vector<Collider*>> Octree::getPossibleCollison() {
-		std::vector<std::vector<Collider*>> result;
+	std::vector<std::vector<std::shared_ptr<Collider>>> Octree::getPossibleCollison() {
+		std::vector<std::vector<std::shared_ptr<Collider>>> result;
 		if(_root != nullptr) _root->browse(result);
 		return result;
 	}
 
 	void Octree::clear() {
 		if (_root != nullptr) delete _root;
+		//Can't go Here  on end  whyy!!! 
 	}
 
 	Octree::~Octree() {
@@ -34,7 +35,7 @@ namespace PhysicEngine::Collisions {
 		return _childs.size() == 0;
 	}
 
-	void Octree::Node::browse(std::vector<std::vector<Collider*>>& const p_possibleCollisions) {
+	void Octree::Node::browse(std::vector<std::vector<std::shared_ptr<Collider>>>&  p_possibleCollisions) {
 		if (isLeaf()) {
 			if (_primitives.size() >1) {
 				p_possibleCollisions.push_back(_primitives);
@@ -48,7 +49,6 @@ namespace PhysicEngine::Collisions {
 
 	void Octree::Node::subdivise() {
 		if (_depth >= _maxDepth || _primitives.size() <= _maxPrimitive) return;
-
 		// Subdivide along the 3 Axis
 		GraphicEngine::SceneBase::BoundingBox region;
 		glm::vec3 max = glm::vec3(0);
@@ -80,8 +80,8 @@ namespace PhysicEngine::Collisions {
 		}
 	}
 
-	void Octree::Node::tryAddingPrimitive(std::vector<Collider*> p_primitives) {
-		for (std::vector<Collider*>::iterator it = p_primitives.begin(); it != p_primitives.end(); it++) {
+	void Octree::Node::tryAddingPrimitive(std::vector<std::shared_ptr<Collider>> p_primitives) {
+		for (std::vector<std::shared_ptr<Collider>>::iterator it = p_primitives.begin(); it != p_primitives.end(); it++) {
 			if ((*it)->insideRegion(_region)) {
 				_primitives.push_back(*it);
 			}
@@ -94,5 +94,6 @@ namespace PhysicEngine::Collisions {
 			if(node != nullptr) delete node;
 		}
 		_childs.clear();
+		//Problem happen between here and line 24
 	}
 }

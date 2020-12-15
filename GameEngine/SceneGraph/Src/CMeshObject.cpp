@@ -11,7 +11,7 @@ namespace SceneGraph {
 		EmptyNode::draw(p_shaderName);
 	}
 
-	std::vector<PhysicEngine::Collisions::Collider*>  CMeshObject::getColliders() {
+	std::vector<std::shared_ptr<Collider>>  CMeshObject::getColliders() {
 		return _colliders;
 	}
 
