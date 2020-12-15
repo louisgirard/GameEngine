@@ -19,7 +19,10 @@ namespace PhysicEngine::Collisions {
 	}
 
 	void Octree::clear() {
-		if (_root != nullptr) delete _root;
+		if (_root != nullptr) {
+			delete _root;
+			_root = nullptr;
+		}
 		//Can't go Here  on end  whyy!!! 
 	}
 
@@ -91,7 +94,7 @@ namespace PhysicEngine::Collisions {
 
 	Octree::Node::~Node() {
 		for (Node* node : _childs) {
-			if(node != nullptr) delete node;
+			if (node != nullptr) delete node;
 		}
 		_childs.clear();
 		//Problem happen between here and line 24
