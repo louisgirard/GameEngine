@@ -24,11 +24,12 @@ namespace Games::Game4 {
 			ShaderServer::getSingleton()->init();
 		}
 
-		Vector3 cubePos(0, 10, 0);
+		// Binding Keys
+		_keyboard.bindActionToKey(KeyAction::MAINACTION, 13);
 
 		// 0 - Init Camera
 		//Vector3 camera_position = cubePos + Vector3(0,0,10);
-		Vector3 camera_position(0, 30, 300);
+		Vector3 camera_position(0, 30, 200);
 		_camera.setPosition(Vector3::toGlm(camera_position));
 
 		//Init 6 walls
@@ -49,7 +50,8 @@ namespace Games::Game4 {
 		_tabWall.push_back(SceneGraph::CWall(Vector3(-l / 2, w / 2, 0), Vector3(1, 0, 0), l, w));
 
 		//Init Cube
-		_cube = std::make_shared<SceneGraph::CCube>(cubePos, Vector3(10, 10, 10), 10, 3);
+		Vector3 cubePos(0, w / 2, 0);
+		_cube = std::make_shared<SceneGraph::CCube>(cubePos, Vector3(10, 10, 10), 50, 2);
 
 		// 4 - Add force to registry
 		_registry.add((_cube->getRigidBody()), &_gravity);
@@ -75,13 +77,27 @@ namespace Games::Game4 {
 	void CollisionDemo::handleInput(double p_dt)
 	{
 		GameBase::handleInput(p_dt);
+
+		if (_keyboard.isPressed(KeyAction::MAINACTION))
+		{
+			_launched = true;
+		}
 	}
 
 	void CollisionDemo::updatePhysic(double p_dt)
 	{
 		if (gamePaused()) return;
 
-		_cube->addForceAtLocalPoint(Vector3(1 / p_dt, 2 * (1 / p_dt), 0), Vector3(0.3, 0, 0));
+		srand(time(NULL));
+		int range = 20;
+		float randomNumberX = rand() % (range + 1) - range / 2;
+		float randomNumberY = rand() % (range + 1) - range / 2;
+		float randomNumberZ = rand() % (range + 1) - range / 2;
+
+		Vector3 localPoint(rand(), rand(), rand());
+
+		if(_launched)
+			_cube->addForceAtLocalPoint(Vector3(randomNumberX / p_dt, randomNumberY / p_dt, randomNumberZ / p_dt), localPoint);
 
 		//Physic Update
 		_registry.updatePhysic(p_dt);
@@ -96,6 +112,7 @@ namespace Games::Game4 {
 
 		_octree->clear();
 	}
+
 
 	void CollisionDemo::updateFrame()
 	{
@@ -181,4 +198,5 @@ namespace Games::Game4 {
 
 		_collisionsData.clear();
 	}
+
 }

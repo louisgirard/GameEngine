@@ -39,10 +39,13 @@ namespace Games::Game4 {
 		*/
 		void narrowPhaseCollisions(std::vector<std::vector<PhysicEngine::Collisions::Collider*>>& p_possibleCollisions);
 
+		/* Vector containing all the walls in the scene */
 		std::vector<SceneGraph::CWall> _tabWall;
 
+		/* The cube */
 		std::shared_ptr<SceneGraph::CCube> _cube;
 
+		/* The octree */
 		std::shared_ptr<PhysicEngine::Collisions::Octree> _octree;
 
 		/* Holds all the forces and the Rigidbody they're associated with */
@@ -54,6 +57,8 @@ namespace Games::Game4 {
 		/* The force generator for gravity in the game */
 		Forces::BodyGravity _gravity;
 
+		bool _launched = false;
+
 	public:
 		/* Default constructor */
 		CollisionDemo();
@@ -62,6 +67,3 @@ namespace Games::Game4 {
 		~CollisionDemo();
 	};
 }
-
-
-
